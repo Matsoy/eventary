@@ -1,8 +1,10 @@
 # Eventary
+==================
 
 Application permettant de voir et organiser des événements au sein d'écoles.
 
 ## Noms des étudiants du groupe
+------------
 
 * Pierre Savatte
 * Neil Rittner
@@ -10,10 +12,12 @@ Application permettant de voir et organiser des événements au sein d'écoles.
 * Mathieu Soyer
 
 ## Nom et adresse e-mail de l’étudiant coordinateur du groupe
+------------
 
 * Neil Rittner: neil.rittner@etu.univ-nantes.fr
 
 ## Répartition des tâches
+------------
 
 * **Model**: Neil Rittner
 * **View**: Pierre Savatte
@@ -21,6 +25,7 @@ Application permettant de voir et organiser des événements au sein d'écoles.
 * **Database**: Mathieu Soyer
 
 ## Commandes utiles
+------------
 
 Merger sa branche avec master
 
