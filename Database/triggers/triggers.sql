@@ -32,3 +32,18 @@ BEGIN
 END; //
 
 DELIMITER ;
+
+
+-- #######################################################################
+-- la date de création de l'événement = la date actuelle de la forme 'YYYY-MM-DD HH:MM:SS'
+-- #######################################################################
+CREATE TRIGGER creaDate_is_current_date
+BEFORE INSERT
+   ON EVENT FOR EACH ROW
+BEGIN
+    IF new.creaDate IS NULL THEN
+        SET new.creaDate = NOW();
+    END IF;
+END; //
+
+DELIMITER ;
