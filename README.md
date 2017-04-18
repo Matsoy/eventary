@@ -1,8 +1,10 @@
 # Eventary
+------------
 
 Application permettant de voir et organiser des événements au sein d'écoles.
 
 ## Noms des étudiants du groupe
+------------
 
 * Pierre Savatte
 * Neil Rittner
@@ -10,109 +12,59 @@ Application permettant de voir et organiser des événements au sein d'écoles.
 * Mathieu Soyer
 
 ## Nom et adresse e-mail de l’étudiant coordinateur du groupe
+------------
 
 * Neil Rittner: neil.rittner@etu.univ-nantes.fr
 
 ## Répartition des tâches
+------------
 
 * **Model**: Neil Rittner
 * **View**: Pierre Savatte
 * **Controller**: Julien Triau
 * **Database**: Mathieu Soyer
 
+## Commandes utiles
+------------
 
+### Git
 
+Merger sa branche avec master
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Eventary
-
-Application permettant de voir et organiser des événements au sein d'écoles.
-
-## Noms des étudiants du groupe
-
-* Pierre Savatte
-* Neil Rittner
-* Julien Triau
-* Mathieu Soyer
-
-## Nom et adresse e-mail de l’étudiant coordinateur du groupe
-
-* Neil Rittner: neil.rittner@etu.univ-nantes.fr
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+``` sh
+$ git checkout master
+$ git merge nom_de_la_branche_a_merger
+$ git push -u origin master
 ```
 
-### And coding style tests
+### MySQL
 
-Explain what these tests test and why
+Installer MySQL sur Ubuntu
 
+``` sh
+$ sudo apt-get install mysql-server
 ```
-Give an example
+
+Démarrer
+
+``` sh
+$ sudo service mysql start
 ```
 
-## Deployment
+Ouvrir le prompt
 
-Add additional notes about how to deploy this on a live system
+``` sh
+$ mysql -u root -p
+```
 
-## Built With
+Sélectionner la base eventarydb
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+``` sh
+mysql> use eventarydb
+```
 
-## Contributing
+Exécuter un script sur la base
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
-0
+``` sh
+mysql -u root -p eventarydb < monscript.sql
+```
