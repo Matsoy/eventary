@@ -19,3 +19,13 @@ Application permettant de voir et organiser des événements au sein d'écoles.
 * **View**: Pierre Savatte
 * **Controller**: Julien Triau
 * **Database**: Mathieu Soyer
+
+## Commandes utiles
+
+Merger sa branche avec master
+
+``` sh
+$ git checkout master
+$ git merge nom_de_la_branche_a_merger
+$ git push -u origin master
+```
