@@ -75,5 +75,4 @@ Exécuter un script sur la base
 
 ``` sh
 mysql -u root -p eventarydb < monscript.sql
->>>>>>> Database
 ```
