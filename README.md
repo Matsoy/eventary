@@ -1,5 +1,5 @@
 # Eventary
-==================
+------------
 
 Application permettant de voir et organiser des événements au sein d'écoles.
 
