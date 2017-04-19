@@ -37,7 +37,7 @@ $ git merge nom_de_la_branche_a_merger
 $ git push -u origin master
 ```
 
-### MySQL
+### SQLite3
 
 Installer SQLite sur Ubuntu
 
@@ -60,5 +60,5 @@ sqlite3> .quit
 Exécuter un script sql sur la base. Par exemple: appliquer les triggers sur la base
 
 ``` sh
-sqlite3 eventary.db < Database/triggers/triggers.sql
+sqlite3 eventary.db < triggers/triggers.sql
 ```
