@@ -39,32 +39,26 @@ $ git push -u origin master
 
 ### MySQL
 
-Installer MySQL sur Ubuntu
+Installer SQLite sur Ubuntu
 
 ``` sh
-$ sudo apt-get install mysql-server
-```
-
-Démarrer
-
-``` sh
-$ sudo service mysql start
+$ sudo apt-get install sqlite3
 ```
 
 Ouvrir le prompt
 
 ``` sh
-$ mysql -u root -p
+$ sqlite3
 ```
 
-Sélectionner la base eventarydb
+Quitter le prompt
 
 ``` sh
-mysql> use eventarydb
+sqlite3> .quit
 ```
 
-Exécuter un script sur la base
+Exécuter un script sql sur la base. Par exemple: appliquer les triggers sur la base
 
 ``` sh
-mysql -u root -p eventarydb < monscript.sql
+sqlite3 eventary.db < Database/triggers/triggers.sql
 ```
