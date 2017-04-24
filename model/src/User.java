@@ -2,13 +2,13 @@ public class User {
 	String login;
 	String passwd;
 	Boolean moderator;
-	
+
 	public static void main(String[] args) {
 	}
-	
+
 	public User() {	//Constructeur vide
 	}
-	
+
 	public void init(String log, String passwd, Boolean modo) {
 		this.login = log;
 		this.passwd = passwd;
