@@ -2,6 +2,7 @@ package database;
 
 import java.sql.*;
 import java.util.*;
+import model.*;
 
 /**
 * @author Mathieu Soyer
@@ -92,8 +93,8 @@ public class SiteDAO{
         String query = "";
 
         //Recuperation des attributs de l'objet Site
-        String id = tuple.getId();
-        String school_id = tuple.getSchoolId();
+        int id = tuple.getId();
+        int school_id = tuple.getSchoolId();
         String name = tuple.getName();
 
         try {

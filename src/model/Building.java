@@ -1,6 +1,14 @@
-public abstract class Organization {
+package model;
+
+public class Building {
 	int id;
 	String name;
+	
+	public static void main(String[] args) {
+	}
+
+	public Building() {	//Constructeur vide
+	}
 	
 	public void init(int id, String name) {
 		this.id = id;
@@ -25,6 +33,6 @@ public abstract class Organization {
 
 	@Override
 	public String toString() {
-		return "Organization [id=" + id + ", name=" + name + "]";
+		return "Building [id=" + id + ", name=" + name + "]";
 	}
 }

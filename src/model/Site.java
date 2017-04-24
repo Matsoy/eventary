@@ -1,10 +1,12 @@
-public class School {
+package model;
+
+public class Site {
 	String name;
 	
 	public static void main(String[] args) {
 	}
 	
-	public School() {	//Constructeur vide
+	public Site() {	//Constructeur vide
 	}
 	
 	public void init(String name) {
@@ -21,6 +23,6 @@ public class School {
 
 	@Override
 	public String toString() {
-		return "School [name=" + name + "]";
+		return "Site [name=" + name + "]";
 	}
 }

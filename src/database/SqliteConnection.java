@@ -1,19 +1,20 @@
-package db;
+package database;
 
 import java.sql.*;
 import org.sqlite.*; //import SQLite JDBC
+import model.*;
 
 /**
 * Cette classe (type singleton) établit la connexion entre une
 * application Java et une BDD SQLite.
 */
 
-class SqliteConnection {
+class SQLiteConnection {
 	private String dsn;
 	private java.sql.Connection connect;
-	private static SqliteConnection theInst = null;
+	private static SQLiteConnection theInst = null;
 
-	private SqliteConnection(){
+	private SQLiteConnection(){
 		String path = System.getProperty("user.dir");
 		path+="/eventary.db";
 		this.dsn = "jdbc:sqlite:"+path;
@@ -27,12 +28,12 @@ class SqliteConnection {
 		}
 	}
 
-	public static SqliteConnection getInstance(){
-		if(SqliteConnection.theInst == null){
-			SqliteConnection.theInst = new SqliteConnection();
+	public static SQLiteConnection getInstance(){
+		if(SQLiteConnection.theInst == null){
+			SQLiteConnection.theInst = new SQLiteConnection();
 		}
 
-		return SqliteConnection.theInst;
+		return SQLiteConnection.theInst;
 	}
 
 	/**
@@ -61,7 +62,7 @@ class SqliteConnection {
 	* Lanceur qui teste la classe MySQLConnection
 	*/
 	public static void main(String[] args){
-		SqliteConnection theObj = SqliteConnection.getInstance();
+		SQLiteConnection theObj = SQLiteConnection.getInstance();
 		theObj.closeConnection();
 	}
 

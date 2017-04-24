@@ -2,21 +2,22 @@ package database;
 
 import java.sql.*;
 import java.util.*;
+import model.*;
 
 /**
 * @author Mathieu Soyer
 *
-* File: EventDAO.java
+* File: AssociationDAO.java
 *
-*Classe pour les objets Dao de Event
+*Classe pour les objets Dao de Association
 */
 
-public class EventDAO{
+public class AssociationDAO{
     //Methodes
     /**
     *Constructeur
     */
-    public EventDAO() {
+    public AssociationDAO() {
 
     }
 
@@ -35,7 +36,7 @@ public class EventDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM EVENT;";
+            query = "SELECT * FROM ASSOCIATION;";
 
             //Le resultat a retourner
             ret = stat.executeQuery(query);
@@ -50,12 +51,12 @@ public class EventDAO{
 
     /**
     *Permet de retrouver juste un tuple
-    *@param id_event id de l'Event a retrouver
+    *@param id_association id du Association a retrouver
     */
-    public Event find(int id_event) {
+    public Association find(int id_association) {
         Statement stat = null;
         String query = "";
-        Event ret = new Event();
+        Association ret = new Association();
 
         try {
             //Recuperation de la connexion
@@ -65,14 +66,14 @@ public class EventDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM EVENT WHERE id = " + id_event + ";";
+            query = "SELECT * FROM ASSOCIATION WHERE id = " + id_association + ";";
 
             //Retourne l'execution de la requete sous la forme d'un objet ResultSet
             ResultSet result = stat.executeQuery(query);
 
             //Si le resultat est bon, prends la premiere ligne
             if (result.first()) {
-                ret.init(id_event, result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), result.getInt(10), result.getInt(11), result.getString(12));
+                ret.init(id_association, result.getString(2));
             }
         }
         catch(SQLException e) {
@@ -85,32 +86,22 @@ public class EventDAO{
 
     /**
     *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type Event a inserer
+    *@param tuple Objet de type Association a inserer
     */
-    public void insert(Event tuple) {
+    public void insert(Association tuple) {
         Statement stat = null;
         String query = "";
 
-        //Recuperation des attributs de l'objet Event
+        //Recuperation des attributs de l'objet Association
         int id = tuple.getId();
-        String title = tuple.getTitle();
-        String desc = tuple.getDesc();
-        java.sql.Timestamp creaDate = tuple.getCreaDate();
-        java.sql.Timestamp startDate = tuple.getStartDate();
-        java.sql.Timestamp endDate = tuple.getEndDate();
-        java.sql.Timestamp modifDate = tuple.getModifDate();
-        java.sql.Timestamp cancelDate = tuple.getCancelDate();
-        int maxNbParticipant = tuple.getMaxNbParticipant();
-        int organizer = tuple.getOrganizer();
-        int school_id = tuple.getSchoolId();
-        String address = tuple.getAddress();
+        String name = tuple.getName();
 
         try {
             //Recuperation de la connexion
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "INSERT INTO EVENT VALUES("+ id +","+ title +","+ desc +","+ creaDate +","+ startDate +","+ endDate +","+ modifDate +","+ cancelDate +","+ maxNbParticipant +","+ organizer +","+ school_id +","+ address +");";
+            query = "INSERT INTO ASSOCIATION VALUES("+ id +","+ name +");";
 
             //Execute la requête
             stat.executeQuery(query);
@@ -123,9 +114,9 @@ public class EventDAO{
 
     /**
     * Permet de supprimer un tuple
-    *@param id_event id du tuple a supprimer
+    *@param id_association id du tuple a supprimer
     */
-    public void delete(int id_event) {
+    public void delete(int id_association) {
         Statement stat = null;
         String query = "";
 
@@ -133,16 +124,11 @@ public class EventDAO{
             //Recuperation de la connexion
             Connection con = SQLiteConnection.getInstance().getConnection();
 
-            //suppression de toutes les participations à cet Event
-            ParticipationDAO = new ParticipationDAO();
-            ParticipationDAO.delete("", id_event);
-
             //Preparation de la requete
-            query = "DELETE FROM EVENT WHERE id = " + id_event + ";";
+            query = "DELETE FROM ASSOCIATION WHERE id = " + id_association + ";";
 
             //Execute la requête
             stat.executeQuery(query);
-
         }
         catch(SQLException e) {
             System.out.println("ERREUR: " + e.getMessage());

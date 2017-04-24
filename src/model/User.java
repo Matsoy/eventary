@@ -1,3 +1,5 @@
+package model;
+
 public class User {
 	String login;
 	String passwd;

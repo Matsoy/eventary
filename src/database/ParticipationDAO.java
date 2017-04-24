@@ -2,6 +2,7 @@ package database;
 
 import java.sql.*;
 import java.util.*;
+import model.*;
 
 /**
 * @author Mathieu Soyer

@@ -1,10 +1,6 @@
-// J'ai fait tous les imports pour manipuler des dates,
-// mais ils ne seront peut être pas tous nécessaires
+package model;
+
 import java.util.Date;
-//import java.util.Calendar;
-//import java.util.TimeZone;
-//import java.text.DateFormat;
-//import java.text.DateFormatSymbols;
 
 public class Event {
 	int id;

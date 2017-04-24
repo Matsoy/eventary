@@ -2,21 +2,22 @@ package database;
 
 import java.sql.*;
 import java.util.*;
+import model.*;
 
 /**
 * @author Mathieu Soyer
 *
-* File: SchoolDAO.java
+* File: BuildingDAO.java
 *
-*Classe pour les objets Dao de School
+*Classe pour les objets Dao de Building
 */
 
-public class SchoolDAO{
+public class BuildingDAO{
     //Methodes
     /**
     *Constructeur
     */
-    public SchoolDAO() {
+    public BuildingDAO() {
 
     }
 
@@ -35,7 +36,7 @@ public class SchoolDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM SCHOOL;";
+            query = "SELECT * FROM BUILDING;";
 
             //Le resultat a retourner
             ret = stat.executeQuery(query);
@@ -50,12 +51,12 @@ public class SchoolDAO{
 
     /**
     *Permet de retrouver juste un tuple
-    *@param id_school id du School a retrouver
+    *@param id_building id du Building a retrouver
     */
-    public School find(int id_school) {
+    public Building find(int id_building) {
         Statement stat = null;
         String query = "";
-        School ret = new School();
+        Building ret = new Building();
 
         try {
             //Recuperation de la connexion
@@ -65,14 +66,14 @@ public class SchoolDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM SCHOOL WHERE id = " + id_school + ";";
+            query = "SELECT * FROM BUILDING WHERE id = " + id_building + ";";
 
             //Retourne l'execution de la requete sous la forme d'un objet ResultSet
             ResultSet result = stat.executeQuery(query);
 
             //Si le resultat est bon, prends la premiere ligne
             if (result.first()) {
-                ret.init(id_school, result.getString(2));
+                ret.init(id_building, result.getInt(2), result.getString(3));
             }
         }
         catch(SQLException e) {
@@ -85,14 +86,15 @@ public class SchoolDAO{
 
     /**
     *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type School a inserer
+    *@param tuple Objet de type Building a inserer
     */
-    public void insert(School tuple) {
+    public void insert(Building tuple) {
         Statement stat = null;
         String query = "";
 
-        //Recuperation des attributs de l'objet Site
-        String id = tuple.getId();
+        //Recuperation des attributs de l'objet Building
+        int id = tuple.getId();
+        int site_id = tuple.getSiteId();
         String name = tuple.getName();
 
         try {
@@ -100,7 +102,7 @@ public class SchoolDAO{
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "INSERT INTO SITE VALUES("+ id +","+ name +");";
+            query = "INSERT INTO BUILDING VALUES("+ id +","+ site_id +","+ name +");";
 
             //Execute la requête
             stat.executeQuery(query);
@@ -113,9 +115,9 @@ public class SchoolDAO{
 
     /**
     * Permet de supprimer un tuple
-    *@param id_school id du tuple a supprimer
+    *@param id_building id du tuple a supprimer
     */
-    public void delete(int id_school) {
+    public void delete(int id_building) {
         Statement stat = null;
         String query = "";
 
@@ -124,7 +126,7 @@ public class SchoolDAO{
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "DELETE FROM SCHOOL WHERE id = " + id_school + ";";
+            query = "DELETE FROM BUILDING WHERE id = " + id_building + ";";
 
             //Execute la requête
             stat.executeQuery(query);
