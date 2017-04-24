@@ -1,21 +1,17 @@
 // J'ai fait tous les imports pour manipuler des dates,
 // mais ils ne seront peut être pas tous nécessaires
-import java.util.Date;
-//import java.util.Calendar;
-//import java.util.TimeZone;
-//import java.text.DateFormat;
-//import java.text.DateFormatSymbols;
+import java.sql.Timestamp;
 
 public class Event {
 	int id;
 	String title;
 	String description;
-	Date createDate;
-	Date startDate;
-	Date endDate;
+	Timestamp createDate;
+	Timestamp startDate;
+	Timestamp endDate;
 	int duration;
-	// Date modifFate;
-	Date cancelDate;
+	// Timestamp modifFate;
+	Timestamp cancelDate;
 	int maxNbParticipant;
 	String address;
 	
@@ -25,7 +21,7 @@ public class Event {
 	public Event() {	//Constructeur vide
 	}
 	
-	public void init(int id, String title, String desc, Date createDate, Date startDate, Date endDate, int duration, int maxNbParticipant, String address, Date cancelDate) {
+	public void init(int id, String title, String desc, Timestamp createDate, Timestamp startDate, Timestamp endDate, int duration, int maxNbParticipant, String address, Timestamp cancelDate) {
 		this.id = id;
 		this.title = title;
 		this.description = desc;
@@ -63,27 +59,27 @@ public class Event {
 		this.description = description;
 	}
 
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
-	public Date getStartDate() {
+	public Timestamp getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public Timestamp getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(Timestamp endDate) {
 		this.endDate = endDate;
 	}
 
@@ -95,11 +91,11 @@ public class Event {
 		this.duration = duration;
 	}
 
-	public Date getCancelDate() {
+	public Timestamp getCancelDate() {
 		return cancelDate;
 	}
 
-	public void setCancelDate(Date cancelDate) {
+	public void setCancelDate(Timestamp cancelDate) {
 		this.cancelDate = cancelDate;
 	}
 

@@ -1,11 +1,6 @@
 public abstract class Organization {
 	int id;
 	String name;
-	
-	public void init(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
 
 	public int getId() {
 		return id;

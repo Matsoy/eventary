@@ -1,7 +1,7 @@
 public class User {
 	String login;
 	String passwd;
-	Boolean moderator;
+	boolean moderator;
 	
 	public static void main(String[] args) {
 	}
@@ -9,7 +9,7 @@ public class User {
 	public User() {	//Constructeur vide
 	}
 	
-	public void init(String log, String passwd, Boolean modo) {
+	public void init(String log, String passwd, boolean modo) {
 		this.login = log;
 		this.passwd = passwd;
 		this.moderator = modo;
@@ -31,11 +31,11 @@ public class User {
 		this.passwd = passwd;
 	}
 
-	public Boolean getModerator() {
+	public boolean getModerator() {
 		return moderator;
 	}
 
-	public void setModerator(Boolean moderator) {
+	public void setModerator(boolean moderator) {
 		this.moderator = moderator;
 	}
 
