@@ -37,6 +37,20 @@ $ git merge nom_de_la_branche_a_merger
 $ git push -u origin master
 ```
 
+Supprimer une branche
+
+``` sh
+$ git branch -d nom_de_la_branche_a_supprimer
+$ git push origin :nom_de_la_branche_supprimee
+```
+
+Créer une branche
+
+``` sh
+$ git checkout -b nom_de_la_branche_a_creer
+$ git push -u origin nom_de_la_branche_creee
+```
+
 ### SQLite3
 
 Installer SQLite sur Ubuntu
