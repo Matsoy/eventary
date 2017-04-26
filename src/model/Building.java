@@ -3,6 +3,7 @@ package model;
 public class Building {
 	int id;
 	String name;
+	int siteId;
 	
 	public static void main(String[] args) {
 	}
@@ -10,9 +11,10 @@ public class Building {
 	public Building() {	//Constructeur vide
 	}
 	
-	public void init(int id, String name) {
+	public void init(int id, String name, int siteId) {
 		this.id = id;
 		this.name = name;
+		this.siteId = siteId;
 	}
 
 	public int getId() {
@@ -31,8 +33,16 @@ public class Building {
 		this.name = name;
 	}
 
+	public int getSiteId() {
+		return siteId;
+	}
+
+	public void setSiteId(int siteId) {
+		this.siteId = siteId;
+	}
+
 	@Override
 	public String toString() {
-		return "Building [id=" + id + ", name=" + name + "]";
+		return "Building [id=" + id + ", name=" + name + ", siteId=" + siteId + "]";
 	}
 }

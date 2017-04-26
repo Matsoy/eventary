@@ -4,6 +4,7 @@ public class Room {
 	int id;
 	String name;
 	int nbPlaces;
+	int buildingId;
 	
 	public static void main(String[] args) {
 	}
@@ -11,10 +12,11 @@ public class Room {
 	public Room() {	// Constructeur vide
 	}
 	
-	public void init(int id, String name, int nbPlaces){
+	public void init(int id, String name, int nbPlaces, int buildingId){
 		this.id = id;
 		this.name = name;
 		this.nbPlaces = nbPlaces;
+		this.buildingId = buildingId;
 	}
 
 	public int getId() {
@@ -41,8 +43,16 @@ public class Room {
 		this.nbPlaces = nbPlaces;
 	}
 
+	public int getBuildingId() {
+		return buildingId;
+	}
+
+	public void setBuildingId(int buildingId) {
+		this.buildingId = buildingId;
+	}
+
 	@Override
 	public String toString() {
-		return "Room [id=" + id + ", name=" + name + ", nbPlaces=" + nbPlaces + "]";
+		return "Room [id=" + id + ", name=" + name + ", nbPlaces=" + nbPlaces + ", buildingId=" + buildingId + "]";
 	}
 }
