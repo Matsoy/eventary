@@ -9,26 +9,36 @@ public class Screen extends JFrame{
   private JPanel panel;
 
   public Screen(){
-    this.panel = new JPanel();
-    //DÃ©finit un titre pour notre fenÃªtre
+    //Définit un titre pour notre fenêtre
     this.setTitle("Eventary");
-    //DÃ©finit sa taille : 400 pixels de large et 100 pixels de haut
+    //Définit sa taille : 400 pixels de large et 100 pixels de haut
     this.setSize(1440,810);
-
-    this.setBackground(new Color(240,240,240));
-    //Nous demandons maintenant Ã  notre objet de se positionner au centre
+    //Nous demandons maintenant à notre objet de se positionner au centre
     this.setLocationRelativeTo(null);
     //Termine le processus lorsqu'on clique sur la croix rouge
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setLayout(new BorderLayout());
 
+
+    /*
+    this.setBackground(new Color(240,240,240));
     JButton bouton = new EventaryButton("Hello World");
     JButton bouton2 = new EventaryButton("Hello World");
     bouton.addMouseListener(new ListenerPrintHello());
-    panel.add(bouton, BorderLayout.CENTER);
-    panel.add(bouton2, BorderLayout.CENTER);
-    this.setContentPane(panel);
-
-
+    panel.add(bouton);
+    panel.add(bouton2);
+    */
+    JPanel panelGreen = new JPanel();
+    panelGreen.setBackground(new Color(191,169,120));
+    panelGreen.setPreferredSize(new Dimension(360, 810));
+    
+    this.panel = new JPanel();
+    panel.setBackground(Color.WHITE);
+    
+    this.getContentPane().add(panel,BorderLayout.CENTER);
+    //this.setContentPane(panelGreen);
+    this.getContentPane().add(panelGreen,BorderLayout.WEST);
+    //panelGreen.pack(true);
     //Et enfin, la rendre visible
     this.setVisible(true);
   }
