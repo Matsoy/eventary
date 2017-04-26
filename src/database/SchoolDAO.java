@@ -2,21 +2,22 @@ package database;
 
 import java.sql.*;
 import java.util.*;
+import model.*;
 
 /**
 * @author Mathieu Soyer
 *
-* File: AssociationDAO.java
+* File: SchoolDAO.java
 *
-*Classe pour les objets Dao de Association
+*Classe pour les objets Dao de School
 */
 
-public class AssociationDAO{
+public class SchoolDAO{
     //Methodes
     /**
     *Constructeur
     */
-    public AssociationDAO() {
+    public SchoolDAO() {
 
     }
 
@@ -35,7 +36,7 @@ public class AssociationDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM ASSOCIATION;";
+            query = "SELECT * FROM SCHOOL;";
 
             //Le resultat a retourner
             ret = stat.executeQuery(query);
@@ -50,12 +51,12 @@ public class AssociationDAO{
 
     /**
     *Permet de retrouver juste un tuple
-    *@param id_association id du Association a retrouver
+    *@param id_school id du School a retrouver
     */
-    public Association find(int id_association) {
+    public School find(int id_school) {
         Statement stat = null;
         String query = "";
-        Association ret = new Association();
+        School ret = new School();
 
         try {
             //Recuperation de la connexion
@@ -65,14 +66,14 @@ public class AssociationDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM ASSOCIATION WHERE id = " + id_association + ";";
+            query = "SELECT * FROM SCHOOL WHERE id = " + id_school + ";";
 
             //Retourne l'execution de la requete sous la forme d'un objet ResultSet
             ResultSet result = stat.executeQuery(query);
 
             //Si le resultat est bon, prends la premiere ligne
             if (result.first()) {
-                ret.init(id_association, result.getString(2));
+                ret.init(id_school, result.getString(2));
             }
         }
         catch(SQLException e) {
@@ -85,14 +86,14 @@ public class AssociationDAO{
 
     /**
     *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type Association a inserer
+    *@param tuple Objet de type School a inserer
     */
-    public void insert(Association tuple) {
+    public void insert(School tuple) {
         Statement stat = null;
         String query = "";
 
-        //Recuperation des attributs de l'objet Association
-        String id = tuple.getId();
+        //Recuperation des attributs de l'objet Site
+        int id = tuple.getId();
         String name = tuple.getName();
 
         try {
@@ -100,7 +101,7 @@ public class AssociationDAO{
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "INSERT INTO ASSOCIATION VALUES("+ id +","+ name +");";
+            query = "INSERT INTO SITE VALUES("+ id +","+ name +");";
 
             //Execute la requête
             stat.executeQuery(query);
@@ -113,9 +114,9 @@ public class AssociationDAO{
 
     /**
     * Permet de supprimer un tuple
-    *@param id_association id du tuple a supprimer
+    *@param id_school id du tuple a supprimer
     */
-    public void delete(int id_association) {
+    public void delete(int id_school) {
         Statement stat = null;
         String query = "";
 
@@ -124,7 +125,7 @@ public class AssociationDAO{
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "DELETE FROM ASSOCIATION WHERE id = " + id_association + ";";
+            query = "DELETE FROM SCHOOL WHERE id = " + id_school + ";";
 
             //Execute la requête
             stat.executeQuery(query);

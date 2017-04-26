@@ -2,21 +2,22 @@ package database;
 
 import java.sql.*;
 import java.util.*;
+import model.*;
 
 /**
 * @author Mathieu Soyer
 *
-* File: ParticipationDAO.java
+* File: RoomDAO.java
 *
-*Classe pour les objets Dao de Participation
+*Classe pour les objets Dao de Room
 */
 
-public class ParticipationDAO{
+public class RoomDAO{
     //Methodes
     /**
     *Constructeur
     */
-    public ParticipationDAO() {
+    public RoomDAO() {
 
     }
 
@@ -35,7 +36,7 @@ public class ParticipationDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM PARTICIPATION;";
+            query = "SELECT * FROM ROOM;";
 
             //Le resultat a retourner
             ret = stat.executeQuery(query);
@@ -49,13 +50,13 @@ public class ParticipationDAO{
     }
 
     /**
-    *Renvoie la list des User participant à un Event
-    *@param id_event id du Event
+    *Permet de retrouver juste un tuple
+    *@param id_room id de la Room a retrouver
     */
-    public ArrayList<User> participationsInAnEvent(int id_event) {
+    public Room find(int id_room) {
         Statement stat = null;
         String query = "";
-        ArrayList<User> ret = new ArrayList<User>();
+        Room ret = new Room();
 
         try {
             //Recuperation de la connexion
@@ -65,19 +66,14 @@ public class ParticipationDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT user_login FROM PARTICIPATION WHERE event_id = " + id_event + ";";
+            query = "SELECT * FROM ROOM WHERE id = " + id_room + ";";
 
             //Retourne l'execution de la requete sous la forme d'un objet ResultSet
             ResultSet result = stat.executeQuery(query);
 
             //Si le resultat est bon, prends la premiere ligne
             if (result.first()) {
-                //tant que le curseur n'est pas après le dernier élément du résultat de la requête
-                while(!result.isAfterLast()){
-                    UserDAO tmpDAO = new UserDAO(); //création du DAO pour récupérer l'objet User ayant le login de la ligne courante du curseur
-                    ret.add(tmpDAO.find(result.getString(2))); //ajout du User à l'ArrayList
-                    result.next(); //bouge le curseur d'une ligne depuis sa place courante
-                }
+                ret.init(id_room, result.getInt(2), result.getString(3));
             }
         }
         catch(SQLException e) {
@@ -90,19 +86,23 @@ public class ParticipationDAO{
 
     /**
     *Methode qui permet d'inserer un tuple
-    *@param user_login le login du User
-    *@param event_id l'id du Event
+    *@param tuple Objet de type Room a inserer
     */
-    public void insert(String user_login, int event_id) {
+    public void insert(Room tuple) {
         Statement stat = null;
         String query = "";
+
+        //Recuperation des attributs de l'objet Room
+        int id = tuple.getId();
+        int nbPlaces = tuple.getNbPlaces();
+        String name = tuple.getName();
 
         try {
             //Recuperation de la connexion
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "INSERT INTO PARTICIPATION VALUES("+ user_login +","+ event_id +");";
+            query = "INSERT INTO ROOM VALUES("+ id +","+ nbPlaces +","+ name +");";
 
             //Execute la requête
             stat.executeQuery(query);
@@ -115,10 +115,9 @@ public class ParticipationDAO{
 
     /**
     * Permet de supprimer un tuple
-    *@param user_login le login du User
-    *@param event_id l'id du Event
+    *@param id_room id du tuple a supprimer
     */
-    public void delete(String user_login, int event_id) {
+    public void delete(int id_room) {
         Statement stat = null;
         String query = "";
 
@@ -126,21 +125,8 @@ public class ParticipationDAO{
             //Recuperation de la connexion
             Connection con = SQLiteConnection.getInstance().getConnection();
 
-            // pas de User désigné -> suppression de toutes les participations de l'Event
-            if (user_login == null || user_login.isEmpty()) {
-                //Preparation de la requete
-                query = "DELETE FROM PARTICIPATION WHERE event_id = " + event_id + ";";
-            }
-            // pas de User désigné -> suppression de toutes les participations du User
-            else if(event_id == -1){
-                //Preparation de la requete
-                query = "DELETE FROM PARTICIPATION WHERE user_login = " + user_login + ";";
-            }
-            // sinon, on supprime la participation du User choisi pour l'Event choisi
-            else{
-                //Preparation de la requete
-                query = "DELETE FROM PARTICIPATION WHERE event_id = " + event_id + "AND user_login = " + user_login + ";";
-            }
+            //Preparation de la requete
+            query = "DELETE FROM ROOM WHERE id = " + id_room + ";";
 
             //Execute la requête
             stat.executeQuery(query);

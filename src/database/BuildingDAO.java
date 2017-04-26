@@ -2,21 +2,22 @@ package database;
 
 import java.sql.*;
 import java.util.*;
+import model.*;
 
 /**
 * @author Mathieu Soyer
 *
-* File: UserDAO.java
+* File: BuildingDAO.java
 *
-*Classe pour les objets Dao de User
+*Classe pour les objets Dao de Building
 */
 
-public class UserDAO{
+public class BuildingDAO{
     //Methodes
     /**
     *Constructeur
     */
-    public UserDAO() {
+    public BuildingDAO() {
 
     }
 
@@ -35,7 +36,7 @@ public class UserDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM USER;";
+            query = "SELECT * FROM BUILDING;";
 
             //Le resultat a retourner
             ret = stat.executeQuery(query);
@@ -50,12 +51,12 @@ public class UserDAO{
 
     /**
     *Permet de retrouver juste un tuple
-    *@param login_user login de l'User a retrouver
+    *@param id_building id du Building a retrouver
     */
-    public User find(String login_user) {
+    public Building find(int id_building) {
         Statement stat = null;
         String query = "";
-        User ret = new User();
+        Building ret = new Building();
 
         try {
             //Recuperation de la connexion
@@ -65,14 +66,14 @@ public class UserDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM USER WHERE login = " + login_user + ";";
+            query = "SELECT * FROM BUILDING WHERE id = " + id_building + ";";
 
             //Retourne l'execution de la requete sous la forme d'un objet ResultSet
             ResultSet result = stat.executeQuery(query);
 
             //Si le resultat est bon, prends la premiere ligne
             if (result.first()) {
-                ret.init(login_user, result.getString(2), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+                ret.init(id_building, result.getInt(2), result.getString(3));
             }
         }
         catch(SQLException e) {
@@ -85,27 +86,23 @@ public class UserDAO{
 
     /**
     *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type User a inserer
+    *@param tuple Objet de type Building a inserer
     */
-    public void insert(User tuple) {
+    public void insert(Building tuple) {
         Statement stat = null;
         String query = "";
 
-        //Recuperation des attributs de l'objet User
-        String login = tuple.getLogin();
-        String passwd = tuple.getPasswd();
-        String moderator = tuple.getModerator();
-        String fName = tuple.getFName();
-        String lName = tuple.getLName();
-        String branch = tuple.getBranch();
-        int year = tuple.getYear();
+        //Recuperation des attributs de l'objet Building
+        int id = tuple.getId();
+        int site_id = tuple.getSiteId();
+        String name = tuple.getName();
 
         try {
             //Recuperation de la connexion
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "INSERT INTO USER VALUES("+ login +","+ passwd +","+ moderator +","+ fName +","+ lName +","+ branch +","+ year +");";
+            query = "INSERT INTO BUILDING VALUES("+ id +","+ site_id +","+ name +");";
 
             //Execute la requête
             stat.executeQuery(query);
@@ -118,9 +115,9 @@ public class UserDAO{
 
     /**
     * Permet de supprimer un tuple
-    *@param login_user login du tuple a supprimer
+    *@param id_building id du tuple a supprimer
     */
-    public void delete(String login_user) {
+    public void delete(int id_building) {
         Statement stat = null;
         String query = "";
 
@@ -128,12 +125,8 @@ public class UserDAO{
             //Recuperation de la connexion
             Connection con = SQLiteConnection.getInstance().getConnection();
 
-            //suppression de toutes les participations du User à des Event
-            ParticipationDAO = new ParticipationDAO();
-            ParticipationDAO.delete(login_user, -1);
-
             //Preparation de la requete
-            query = "DELETE FROM USER WHERE login = " + login_user + ";";
+            query = "DELETE FROM BUILDING WHERE id = " + id_building + ";";
 
             //Execute la requête
             stat.executeQuery(query);

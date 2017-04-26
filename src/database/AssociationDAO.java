@@ -2,21 +2,22 @@ package database;
 
 import java.sql.*;
 import java.util.*;
+import model.*;
 
 /**
 * @author Mathieu Soyer
 *
-* File: BuildingDAO.java
+* File: AssociationDAO.java
 *
-*Classe pour les objets Dao de Building
+*Classe pour les objets Dao de Association
 */
 
-public class BuildingDAO{
+public class AssociationDAO{
     //Methodes
     /**
     *Constructeur
     */
-    public BuildingDAO() {
+    public AssociationDAO() {
 
     }
 
@@ -35,7 +36,7 @@ public class BuildingDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM BUILDING;";
+            query = "SELECT * FROM ASSOCIATION;";
 
             //Le resultat a retourner
             ret = stat.executeQuery(query);
@@ -50,12 +51,12 @@ public class BuildingDAO{
 
     /**
     *Permet de retrouver juste un tuple
-    *@param id_building id du Building a retrouver
+    *@param id_association id du Association a retrouver
     */
-    public Building find(int id_building) {
+    public Association find(int id_association) {
         Statement stat = null;
         String query = "";
-        Building ret = new Building();
+        Association ret = new Association();
 
         try {
             //Recuperation de la connexion
@@ -65,14 +66,14 @@ public class BuildingDAO{
             stat = con.createStatement();
 
             //Preparation de la requete
-            query = "SELECT * FROM BUILDING WHERE id = " + id_building + ";";
+            query = "SELECT * FROM ASSOCIATION WHERE id = " + id_association + ";";
 
             //Retourne l'execution de la requete sous la forme d'un objet ResultSet
             ResultSet result = stat.executeQuery(query);
 
             //Si le resultat est bon, prends la premiere ligne
             if (result.first()) {
-                ret.init(id_building, result.getInt(2), result.getString(3));
+                ret.init(id_association, result.getString(2));
             }
         }
         catch(SQLException e) {
@@ -85,15 +86,14 @@ public class BuildingDAO{
 
     /**
     *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type Building a inserer
+    *@param tuple Objet de type Association a inserer
     */
-    public void insert(Building tuple) {
+    public void insert(Association tuple) {
         Statement stat = null;
         String query = "";
 
-        //Recuperation des attributs de l'objet Building
-        String id = tuple.getId();
-        String site_id = tuple.getSiteId();
+        //Recuperation des attributs de l'objet Association
+        int id = tuple.getId();
         String name = tuple.getName();
 
         try {
@@ -101,7 +101,7 @@ public class BuildingDAO{
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "INSERT INTO BUILDING VALUES("+ id +","+ site_id +","+ name +");";
+            query = "INSERT INTO ASSOCIATION VALUES("+ id +","+ name +");";
 
             //Execute la requête
             stat.executeQuery(query);
@@ -114,9 +114,9 @@ public class BuildingDAO{
 
     /**
     * Permet de supprimer un tuple
-    *@param id_building id du tuple a supprimer
+    *@param id_association id du tuple a supprimer
     */
-    public void delete(int id_building) {
+    public void delete(int id_association) {
         Statement stat = null;
         String query = "";
 
@@ -125,7 +125,7 @@ public class BuildingDAO{
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "DELETE FROM BUILDING WHERE id = " + id_building + ";";
+            query = "DELETE FROM ASSOCIATION WHERE id = " + id_association + ";";
 
             //Execute la requête
             stat.executeQuery(query);

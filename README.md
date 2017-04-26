@@ -1,9 +1,9 @@
 # Eventary
 ------------
 
-Application permettant de voir et organiser des Ã©vÃ©nements au sein d'Ã©coles.
+Application permettant de voir et organiser des événements au sein d'écoles.
 
-## Noms des Ã©tudiants du groupe
+## Noms des étudiants du groupe
 ------------
 
 * Pierre Savatte
@@ -11,12 +11,12 @@ Application permettant de voir et organiser des Ã©vÃ©nements au sein d'Ã©coles.
 * Julien Triau
 * Mathieu Soyer
 
-## Nom et adresse e-mail de lâ€™Ã©tudiant coordinateur du groupe
+## Nom et adresse e-mail de l’étudiant coordinateur du groupe
 ------------
 
 * Neil Rittner: neil.rittner@etu.univ-nantes.fr
 
-## RÃ©partition des tÃ¢ches
+## Répartition des tâches
 ------------
 
 * **Model**: Neil Rittner
@@ -35,6 +35,20 @@ Merger sa branche avec master
 $ git checkout master
 $ git merge nom_de_la_branche_a_merger
 $ git push -u origin master
+```
+
+Supprimer une branche
+
+``` sh
+$ git branch -d nom_de_la_branche_a_supprimer
+$ git push origin :nom_de_la_branche_supprimee
+```
+
+Créer une branche
+
+``` sh
+$ git checkout -b nom_de_la_branche_a_creer
+$ git push -u origin nom_de_la_branche_creee
 ```
 
 ### SQLite3
@@ -57,7 +71,7 @@ Quitter le prompt
 sqlite3> .quit
 ```
 
-ExÃ©cuter un script sql sur la base. Par exemple: appliquer les triggers sur la base
+Exécuter un script sql sur la base. Par exemple: appliquer les triggers sur la base
 
 ``` sh
 sqlite3 eventary.db < triggers/triggers.sql
