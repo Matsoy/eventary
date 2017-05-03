@@ -5,24 +5,28 @@ import java.util.*;
 import model.*;
 
 /**
+ * The Class UserDAO.
+ *
  * @author Mathieu Soyer
- *
+ * 
  * File: UserDAO.java
- *
- *Classe pour les objets Dao de User
+ * 
+ * Classe pour les objets Dao de User
  */
 
 public class UserDAO{
 	//Methodes
 	/**
-	 *Constructeur
+	 * Constructeur.
 	 */
 	public UserDAO() {
 
 	}
 
 	/**
-	 *Pour retrouver tous les tuples
+	 * Pour retrouver tous les tuples.
+	 *
+	 * @return the result set
 	 */
 	public ResultSet findAll() {
 		Statement stat = null;
@@ -50,8 +54,10 @@ public class UserDAO{
 	}
 
 	/**
-	 *Permet de retrouver juste un tuple
-	 *@param login_user login de l'User a retrouver
+	 * Permet de retrouver juste un tuple.
+	 *
+	 * @param login_user login de l'User a retrouver
+	 * @return the user
 	 */
 	public User find(String login_user) {
 		Statement stat = null;
@@ -84,10 +90,11 @@ public class UserDAO{
 	}
 
 	/**
-	 * Vérifie si l'utilisateur ayant le login/mdp existe
-	 *@param login_user login de l'User a retrouver
-	 *@param passwd_user passwd de l'User a retrouver
-	 *@return l'utilisateur connecté, null sinon
+	 * Vérifie si l'utilisateur ayant le login/mdp existe.
+	 *
+	 * @param login_user login de l'User a retrouver
+	 * @param passwd_user passwd de l'User a retrouver
+	 * @return l'utilisateur connecté, null sinon
 	 */
 	public User connect(String login_user, String passwd_user) {
 		Statement stat = null;
@@ -124,8 +131,9 @@ public class UserDAO{
 
 
 	/**
-	 *Methode qui permet d'inserer un tuple
-	 *@param tuple Objet de type User a inserer
+	 * Methode qui permet d'inserer un tuple.
+	 *
+	 * @param tuple Objet de type User a inserer
 	 */
 	public void insert(User tuple) {
 		Statement stat = null;
@@ -135,8 +143,8 @@ public class UserDAO{
 		String login = tuple.getLogin();
 		String passwd = tuple.getPasswd();
 		boolean moderator = tuple.getModerator();
-		String fName = tuple.getFName();
-		String lName = tuple.getLName();
+		String fName = tuple.getfName();
+		String lName = tuple.getlName();
 		String branch = tuple.getBranch();
 		int year = tuple.getYear();
 
@@ -157,8 +165,9 @@ public class UserDAO{
 
 
 	/**
-	 * Permet de supprimer un tuple
-	 *@param login_user login du tuple a supprimer
+	 * Permet de supprimer un tuple.
+	 *
+	 * @param login_user login du tuple a supprimer
 	 */
 	public void delete(String login_user) {
 		Statement stat = null;

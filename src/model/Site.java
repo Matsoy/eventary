@@ -1,38 +1,109 @@
 package model;
 
+/**
+ * The Class Site.
+ */
 public class Site {
-	String name;
-	int schoolId;
 	
+	/** The id. */
+	int id;
+	
+	/** The school id. */
+	int school_id;
+	
+	/** The name. */
+	String name;
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 	}
 	
+	/**
+	 * Instantiates a new site.
+	 */
 	public Site() {	//Constructeur vide
 	}
 	
-	public void init(String name, int schoolId) {
+	
+	
+	/**
+	 * Inits the.
+	 *
+	 * @param id the id
+	 * @param school_id the school id
+	 * @param name the name
+	 */
+	public void init(int id, int school_id, String name) {
+		this.id = id;
+		this.school_id = school_id;
 		this.name = name;
-		this.schoolId = schoolId;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * Gets the school id.
+	 *
+	 * @return the school id
+	 */
+	public int getSchool_id() {
+		return school_id;
+	}
+
+	/**
+	 * Sets the school id.
+	 *
+	 * @param school_id the new school id
+	 */
+	public void setSchool_id(int school_id) {
+		this.school_id = school_id;
+	}
+
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public int getSchoolId() {
-		return schoolId;
-	}
-
-	public void setSchoolId(int schoolId) {
-		this.schoolId = schoolId;
-	}
-
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Site [name=" + name + ", schoolId=" + schoolId + "]";
+		return "Site [id=" + id + ", school_id=" + school_id + ", name=" + name + "]";
 	}
+
+
 }

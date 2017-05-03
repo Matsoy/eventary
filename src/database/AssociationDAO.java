@@ -5,25 +5,29 @@ import java.util.*;
 import model.*;
 
 /**
-* @author Mathieu Soyer
-*
-* File: AssociationDAO.java
-*
-*Classe pour les objets Dao de Association
-*/
+ * The Class AssociationDAO.
+ *
+ * @author Mathieu Soyer
+ * 
+ * File: AssociationDAO.java
+ * 
+ * Classe pour les objets Dao de Association
+ */
 
 public class AssociationDAO{
     //Methodes
     /**
-    *Constructeur
-    */
+     * Constructeur.
+     */
     public AssociationDAO() {
 
     }
 
     /**
-    *Pour retrouver tous les tuples
-    */
+     * Pour retrouver tous les tuples.
+     *
+     * @return the result set
+     */
     public ResultSet findAll() {
         Statement stat = null;
         String query = "";
@@ -50,9 +54,11 @@ public class AssociationDAO{
     }
 
     /**
-    *Permet de retrouver juste un tuple
-    *@param id_association id du Association a retrouver
-    */
+     * Permet de retrouver juste un tuple.
+     *
+     * @param id_association id du Association a retrouver
+     * @return the association
+     */
     public Association find(int id_association) {
         Statement stat = null;
         String query = "";
@@ -85,9 +91,10 @@ public class AssociationDAO{
 
 
     /**
-    *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type Association a inserer
-    */
+     * Methode qui permet d'inserer un tuple.
+     *
+     * @param tuple Objet de type Association a inserer
+     */
     public void insert(Association tuple) {
         Statement stat = null;
         String query = "";
@@ -113,9 +120,10 @@ public class AssociationDAO{
 
 
     /**
-    * Permet de supprimer un tuple
-    *@param id_association id du tuple a supprimer
-    */
+     * Permet de supprimer un tuple.
+     *
+     * @param id_association id du tuple a supprimer
+     */
     public void delete(int id_association) {
         Statement stat = null;
         String query = "";

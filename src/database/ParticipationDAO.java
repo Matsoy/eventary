@@ -5,25 +5,29 @@ import java.util.*;
 import model.*;
 
 /**
-* @author Mathieu Soyer
-*
-* File: ParticipationDAO.java
-*
-*Classe pour les objets Dao de Participation
-*/
+ * The Class ParticipationDAO.
+ *
+ * @author Mathieu Soyer
+ * 
+ * File: ParticipationDAO.java
+ * 
+ * Classe pour les objets Dao de Participation
+ */
 
 public class ParticipationDAO{
     //Methodes
     /**
-    *Constructeur
-    */
+     * Constructeur.
+     */
     public ParticipationDAO() {
 
     }
 
     /**
-    *Pour retrouver tous les tuples
-    */
+     * Pour retrouver tous les tuples.
+     *
+     * @return the result set
+     */
     public ResultSet findAll() {
         Statement stat = null;
         String query = "";
@@ -50,9 +54,11 @@ public class ParticipationDAO{
     }
 
     /**
-    *Renvoie la list des User participant à un Event
-    *@param id_event id du Event
-    */
+     * Renvoie la list des User participant à un Event.
+     *
+     * @param id_event id du Event
+     * @return the array list
+     */
     public ArrayList<User> participationsInAnEvent(int id_event) {
         Statement stat = null;
         String query = "";
@@ -90,10 +96,11 @@ public class ParticipationDAO{
 
 
     /**
-    *Methode qui permet d'inserer un tuple
-    *@param user_login le login du User
-    *@param event_id l'id du Event
-    */
+     * Methode qui permet d'inserer un tuple.
+     *
+     * @param user_login le login du User
+     * @param event_id l'id du Event
+     */
     public void insert(String user_login, int event_id) {
         Statement stat = null;
         String query = "";
@@ -115,10 +122,11 @@ public class ParticipationDAO{
 
 
     /**
-    * Permet de supprimer un tuple
-    *@param user_login le login du User
-    *@param event_id l'id du Event
-    */
+     * Permet de supprimer un tuple.
+     *
+     * @param user_login le login du User
+     * @param event_id l'id du Event
+     */
     public void delete(String user_login, int event_id) {
         Statement stat = null;
         String query = "";

@@ -5,25 +5,29 @@ import java.util.*;
 import model.*;
 
 /**
-* @author Mathieu Soyer
-*
-* File: RoomDAO.java
-*
-*Classe pour les objets Dao de Room
-*/
+ * The Class RoomDAO.
+ *
+ * @author Mathieu Soyer
+ * 
+ * File: RoomDAO.java
+ * 
+ * Classe pour les objets Dao de Room
+ */
 
 public class RoomDAO{
     //Methodes
     /**
-    *Constructeur
-    */
+     * Constructeur.
+     */
     public RoomDAO() {
 
     }
 
     /**
-    *Pour retrouver tous les tuples
-    */
+     * Pour retrouver tous les tuples.
+     *
+     * @return the result set
+     */
     public ResultSet findAll() {
         Statement stat = null;
         String query = "";
@@ -50,9 +54,11 @@ public class RoomDAO{
     }
 
     /**
-    *Permet de retrouver juste un tuple
-    *@param id_room id de la Room a retrouver
-    */
+     * Permet de retrouver juste un tuple.
+     *
+     * @param id_room id de la Room a retrouver
+     * @return the room
+     */
     public Room find(int id_room) {
         Statement stat = null;
         String query = "";
@@ -73,7 +79,7 @@ public class RoomDAO{
 
             //Si le resultat est bon, prends la premiere ligne
             if (result.first()) {
-                ret.init(id_room, result.getInt(2), result.getString(3));
+                ret.init(id_room, result.getInt(2), result.getInt(3), result.getString(4));
             }
         }
         catch(SQLException e) {
@@ -85,9 +91,10 @@ public class RoomDAO{
 
 
     /**
-    *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type Room a inserer
-    */
+     * Methode qui permet d'inserer un tuple.
+     *
+     * @param tuple Objet de type Room a inserer
+     */
     public void insert(Room tuple) {
         Statement stat = null;
         String query = "";
@@ -114,9 +121,10 @@ public class RoomDAO{
 
 
     /**
-    * Permet de supprimer un tuple
-    *@param id_room id du tuple a supprimer
-    */
+     * Permet de supprimer un tuple.
+     *
+     * @param id_room id du tuple a supprimer
+     */
     public void delete(int id_room) {
         Statement stat = null;
         String query = "";

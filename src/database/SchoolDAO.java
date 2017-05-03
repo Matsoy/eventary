@@ -5,25 +5,29 @@ import java.util.*;
 import model.*;
 
 /**
-* @author Mathieu Soyer
-*
-* File: SchoolDAO.java
-*
-*Classe pour les objets Dao de School
-*/
+ * The Class SchoolDAO.
+ *
+ * @author Mathieu Soyer
+ * 
+ * File: SchoolDAO.java
+ * 
+ * Classe pour les objets Dao de School
+ */
 
 public class SchoolDAO{
     //Methodes
     /**
-    *Constructeur
-    */
+     * Constructeur.
+     */
     public SchoolDAO() {
 
     }
 
     /**
-    *Pour retrouver tous les tuples
-    */
+     * Pour retrouver tous les tuples.
+     *
+     * @return the result set
+     */
     public ResultSet findAll() {
         Statement stat = null;
         String query = "";
@@ -50,9 +54,11 @@ public class SchoolDAO{
     }
 
     /**
-    *Permet de retrouver juste un tuple
-    *@param id_school id du School a retrouver
-    */
+     * Permet de retrouver juste un tuple.
+     *
+     * @param id_school id du School a retrouver
+     * @return the school
+     */
     public School find(int id_school) {
         Statement stat = null;
         String query = "";
@@ -85,9 +91,10 @@ public class SchoolDAO{
 
 
     /**
-    *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type School a inserer
-    */
+     * Methode qui permet d'inserer un tuple.
+     *
+     * @param tuple Objet de type School a inserer
+     */
     public void insert(School tuple) {
         Statement stat = null;
         String query = "";
@@ -113,9 +120,10 @@ public class SchoolDAO{
 
 
     /**
-    * Permet de supprimer un tuple
-    *@param id_school id du tuple a supprimer
-    */
+     * Permet de supprimer un tuple.
+     *
+     * @param id_school id du tuple a supprimer
+     */
     public void delete(int id_school) {
         Statement stat = null;
         String query = "";

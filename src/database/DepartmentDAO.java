@@ -4,25 +4,29 @@ import java.sql.*;
 import model.*;
 
 /**
-* @author Mathieu Soyer
-*
-* File: DepartmentDAO.java
-*
-*Classe pour les objets Dao de Department
-*/
+ * The Class DepartmentDAO.
+ *
+ * @author Mathieu Soyer
+ * 
+ * File: DepartmentDAO.java
+ * 
+ * Classe pour les objets Dao de Department
+ */
 
 public class DepartmentDAO{
     //Methodes
     /**
-    *Constructeur
-    */
+     * Constructeur.
+     */
     public DepartmentDAO() {
 
     }
 
     /**
-    *Pour retrouver tous les tuples
-    */
+     * Pour retrouver tous les tuples.
+     *
+     * @return the result set
+     */
     public ResultSet findAll() {
         Statement stat = null;
         String query = "";
@@ -49,9 +53,11 @@ public class DepartmentDAO{
     }
 
     /**
-    *Permet de retrouver juste un tuple
-    *@param id_department id du Department a retrouver
-    */
+     * Permet de retrouver juste un tuple.
+     *
+     * @param id_department id du Department a retrouver
+     * @return the department
+     */
     public Department find(int id_department) {
         Statement stat = null;
         String query = "";
@@ -84,9 +90,10 @@ public class DepartmentDAO{
 
 
     /**
-    *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type Department a inserer
-    */
+     * Methode qui permet d'inserer un tuple.
+     *
+     * @param tuple Objet de type Department a inserer
+     */
     public void insert(Department tuple) {
         Statement stat = null;
         String query = "";
@@ -112,9 +119,10 @@ public class DepartmentDAO{
 
 
     /**
-    * Permet de supprimer un tuple
-    *@param id_department id du tuple a supprimer
-    */
+     * Permet de supprimer un tuple.
+     *
+     * @param id_department id du tuple a supprimer
+     */
     public void delete(int id_department) {
         Statement stat = null;
         String query = "";

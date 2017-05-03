@@ -5,25 +5,29 @@ import java.util.*;
 import model.*;
 
 /**
-* @author Mathieu Soyer
-*
-* File: BuildingDAO.java
-*
-*Classe pour les objets Dao de Building
-*/
+ * The Class BuildingDAO.
+ *
+ * @author Mathieu Soyer
+ * 
+ * File: BuildingDAO.java
+ * 
+ * Classe pour les objets Dao de Building
+ */
 
 public class BuildingDAO{
     //Methodes
     /**
-    *Constructeur
-    */
+     * Constructeur.
+     */
     public BuildingDAO() {
 
     }
 
     /**
-    *Pour retrouver tous les tuples
-    */
+     * Pour retrouver tous les tuples.
+     *
+     * @return the result set
+     */
     public ResultSet findAll() {
         Statement stat = null;
         String query = "";
@@ -50,9 +54,11 @@ public class BuildingDAO{
     }
 
     /**
-    *Permet de retrouver juste un tuple
-    *@param id_building id du Building a retrouver
-    */
+     * Permet de retrouver juste un tuple.
+     *
+     * @param id_building id du Building a retrouver
+     * @return the building
+     */
     public Building find(int id_building) {
         Statement stat = null;
         String query = "";
@@ -85,16 +91,17 @@ public class BuildingDAO{
 
 
     /**
-    *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type Building a inserer
-    */
+     * Methode qui permet d'inserer un tuple.
+     *
+     * @param tuple Objet de type Building a inserer
+     */
     public void insert(Building tuple) {
         Statement stat = null;
         String query = "";
 
         //Recuperation des attributs de l'objet Building
         int id = tuple.getId();
-        int site_id = tuple.getSiteId();
+        int site_id = tuple.getSite_id();
         String name = tuple.getName();
 
         try {
@@ -114,9 +121,10 @@ public class BuildingDAO{
 
 
     /**
-    * Permet de supprimer un tuple
-    *@param id_building id du tuple a supprimer
-    */
+     * Permet de supprimer un tuple.
+     *
+     * @param id_building id du tuple a supprimer
+     */
     public void delete(int id_building) {
         Statement stat = null;
         String query = "";

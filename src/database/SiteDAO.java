@@ -5,25 +5,29 @@ import java.util.*;
 import model.*;
 
 /**
-* @author Mathieu Soyer
-*
-* File: SiteDAO.java
-*
-*Classe pour les objets Dao de Site
-*/
+ * The Class SiteDAO.
+ *
+ * @author Mathieu Soyer
+ * 
+ * File: SiteDAO.java
+ * 
+ * Classe pour les objets Dao de Site
+ */
 
 public class SiteDAO{
     //Methodes
     /**
-    *Constructeur
-    */
+     * Constructeur.
+     */
     public SiteDAO() {
 
     }
 
     /**
-    *Pour retrouver tous les tuples
-    */
+     * Pour retrouver tous les tuples.
+     *
+     * @return the result set
+     */
     public ResultSet findAll() {
         Statement stat = null;
         String query = "";
@@ -50,9 +54,11 @@ public class SiteDAO{
     }
 
     /**
-    *Permet de retrouver juste un tuple
-    *@param id_site id du Site a retrouver
-    */
+     * Permet de retrouver juste un tuple.
+     *
+     * @param id_site id du Site a retrouver
+     * @return the site
+     */
     public Site find(int id_site) {
         Statement stat = null;
         String query = "";
@@ -85,16 +91,17 @@ public class SiteDAO{
 
 
     /**
-    *Methode qui permet d'inserer un tuple
-    *@param tuple Objet de type Site a inserer
-    */
+     * Methode qui permet d'inserer un tuple.
+     *
+     * @param tuple Objet de type Site a inserer
+     */
     public void insert(Site tuple) {
         Statement stat = null;
         String query = "";
 
         //Recuperation des attributs de l'objet Site
         int id = tuple.getId();
-        int school_id = tuple.getSchoolId();
+        int school_id = tuple.getSchool_id();
         String name = tuple.getName();
 
         try {
@@ -114,9 +121,10 @@ public class SiteDAO{
 
 
     /**
-    * Permet de supprimer un tuple
-    *@param id_site id du tuple a supprimer
-    */
+     * Permet de supprimer un tuple.
+     *
+     * @param id_site id du tuple a supprimer
+     */
     public void delete(int id_site) {
         Statement stat = null;
         String query = "";

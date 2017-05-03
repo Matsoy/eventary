@@ -8,7 +8,6 @@ import model.*;
 * Cette classe (type singleton) établit la connexion entre une
 * application Java et une BDD SQLite.
 */
-
 class SQLiteConnection {
 	private String dsn;
 	private java.sql.Connection connect;
