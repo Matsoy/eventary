@@ -45,15 +45,13 @@ public class SiteDAO{
             //Le resultat de la requête
             ResultSet result = stat.executeQuery(query);
             
-            //Si le resultat est bon, prends la premiere ligne
-            if (result.first()) {
-                //tant que le curseur n'est pas aprÃ¨s le dernier Ã©lÃ©ment du rÃ©sultat de la requÃªte
-                while(!result.isAfterLast()){
+			if (result.next() ) {
+				do {
                 	ret.add(new Site()); //ajout du Site à l'ArrayList. Appel du constructeur vide
                     ret.get(ret.size()-1).init(result.getInt(1), result.getInt(2), result.getString(3)); //initialisaton de les paramètres du retour de la requête
-                    result.next(); //bouge le curseur d'une ligne depuis sa place courante
-                }
-            }
+				} 
+				while (result.next());
+			}
         }
         catch (SQLException e) {
             System.out.println("ERREUR: " + e.getMessage());
@@ -86,10 +84,12 @@ public class SiteDAO{
             //Retourne l'execution de la requete sous la forme d'un objet ResultSet
             ResultSet result = stat.executeQuery(query);
 
-            //Si le resultat est bon, prends la premiere ligne
-            if (result.first()) {
-                ret.init(id_site, result.getInt(2), result.getString(3));
-            }
+			if (result.next() ) {
+				do {
+	                ret.init(id_site, result.getInt(2), result.getString(3));
+				} 
+				while (result.next());
+			}
         }
         catch(SQLException e) {
             System.out.println("ERREUR: " + e.getMessage());

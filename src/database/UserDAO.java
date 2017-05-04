@@ -45,15 +45,13 @@ public class UserDAO{
             //Le resultat de la requête
             ResultSet result = stat.executeQuery(query);
             
-            //Si le resultat est bon, prends la premiere ligne
-            if (result.first()) {
-                //tant que le curseur n'est pas aprÃ¨s le dernier Ã©lÃ©ment du rÃ©sultat de la requÃªte
-                while(!result.isAfterLast()){
+			if (result.next() ) {
+				do {
                     ret.add(new User()); //ajout du User à l'ArrayList. Appel du constructeur vide
                     ret.get(ret.size()-1).init(result.getString(1), result.getString(2), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7)); //initialisaton de les paramètres du retour de la requête
-                    result.next(); //bouge le curseur d'une ligne depuis sa place courante
-                }
-            }
+				} 
+				while (result.next());
+			}
 		}
 		catch (SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
@@ -86,9 +84,11 @@ public class UserDAO{
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
 
-			//Si le resultat est bon, prends la premiere ligne
-			if (result.first()) {
-				ret.init(login_user, result.getString(2), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+			if (result.next() ) {
+				do {
+					ret.init(login_user, result.getString(2), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+				} 
+				while (result.next());
 			}
 		}
 		catch(SQLException e) {
@@ -124,8 +124,11 @@ public class UserDAO{
 			ResultSet result = stat.executeQuery(query);
 
 			//Si le resultat est bon, prends la premiere ligne
-			if (result.first()) {
-				ret.init(login_user, passwd_user, result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+			if (result.next() ) {
+				do {
+					ret.init(login_user, passwd_user, result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+				} 
+				while (result.next());
 			}
 			else{
 				ret = null;

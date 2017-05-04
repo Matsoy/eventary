@@ -45,15 +45,13 @@ public class SchoolDAO{
             //Le resultat de la requête
             ResultSet result = stat.executeQuery(query);
             
-            //Si le resultat est bon, prends la premiere ligne
-            if (result.first()) {
-                //tant que le curseur n'est pas aprÃ¨s le dernier Ã©lÃ©ment du rÃ©sultat de la requÃªte
-                while(!result.isAfterLast()){
+			if (result.next() ) {
+				do {
                     ret.add(new School()); //ajout du School à l'ArrayList. Appel du constructeur vide
-                    ret.get(ret.size()-1).init(result.getInt(1), result.getString(2)); //initialisaton de les paramètres du retour de la requête
-                    result.next(); //bouge le curseur d'une ligne depuis sa place courante
-                }
-            }
+                    ret.get(ret.size()-1).init(result.getInt(1), result.getString(2)); //initialisaton de les paramètres du retour de la requête		
+				} 
+				while (result.next());
+			}
         }
         catch (SQLException e) {
             System.out.println("ERREUR: " + e.getMessage());
@@ -86,10 +84,12 @@ public class SchoolDAO{
             //Retourne l'execution de la requete sous la forme d'un objet ResultSet
             ResultSet result = stat.executeQuery(query);
 
-            //Si le resultat est bon, prends la premiere ligne
-            if (result.first()) {
-                ret.init(id_school, result.getString(2));
-            }
+			if (result.next() ) {
+				do {
+					ret.init(id_school, result.getString(2));		
+				} 
+				while (result.next());
+			}
         }
         catch(SQLException e) {
             System.out.println("ERREUR: " + e.getMessage());

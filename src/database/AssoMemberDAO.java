@@ -48,14 +48,12 @@ public class AssoMemberDAO{
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
 
-			//Si le resultat est bon, prends la premiere ligne
-			if (result.first()) {
-				//tant que le curseur n'est pas après le dernier élément du résultat de la requête
-				while(!result.isAfterLast()){
+			if (result.next() ) {
+				do {
 					UserDAO tmpDAO = new UserDAO(); //création du DAO pour récupérer l'objet User ayant le login de la ligne courante du curseur
 					ret.add(tmpDAO.find(result.getString(2))); //ajout du User à l'ArrayList
-					result.next(); //bouge le curseur d'une ligne depuis sa place courante
-				}
+				} 
+				while (result.next());
 			}
 		}
 		catch(SQLException e) {

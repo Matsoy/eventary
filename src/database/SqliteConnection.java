@@ -23,8 +23,9 @@ class SQLiteConnection {
 	 */
 	private SQLiteConnection(){
 		String path = System.getProperty("user.dir");
-		path+="/eventary.db";
+		path+="/database/eventary.db";
 		this.dsn = "jdbc:sqlite:"+path;
+		System.out.println("BDD: "+ this.dsn);
 		try {
 			DriverManager.registerDriver(new org.sqlite.JDBC());
 			this.connect = DriverManager.getConnection(this.dsn);
