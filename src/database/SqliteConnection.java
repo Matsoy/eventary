@@ -5,14 +5,22 @@ import org.sqlite.*; //import SQLite JDBC
 import model.*;
 
 /**
-* Cette classe (type singleton) Ã©tablit la connexion entre une
-* application Java et une BDD SQLite.
-*/
+ * The Class SQLiteConnection.
+ *
+ * @author Mathieu Soyer
+ * 
+ * File: SQLiteConnection.java
+ * 
+ * Cette classe (type singleton) établit la connexion entre une application Java et une BDD SQLite.
+ */
 class SQLiteConnection {
 	private String dsn;
 	private java.sql.Connection connect;
 	private static SQLiteConnection theInst = null;
 
+	/**
+	 * constructeur privé
+	 */
 	private SQLiteConnection(){
 		String path = System.getProperty("user.dir");
 		path+="/eventary.db";
@@ -27,6 +35,11 @@ class SQLiteConnection {
 		}
 	}
 
+	/**
+	 * Renvoie l'instance static de type SQLiteConnection. Appel du constructeur privé si elle n'a pas encore été initialisée
+	 * 
+	 * @return l'instance static de type SQLiteConnection
+	 */
 	public static SQLiteConnection getInstance(){
 		if(SQLiteConnection.theInst == null){
 			SQLiteConnection.theInst = new SQLiteConnection();
@@ -36,17 +49,18 @@ class SQLiteConnection {
 	}
 
 	/**
-	* Renvoie l'objet qui a Ã©tabli la connexion avec la BDD.
-	* @return l'objet qui a Ã©tabli la connexion.
-	*/
+	 * Renvoie l'objet qui a établi la connexion avec la BDD.
+	 * 
+	 * @return l'objet qui a établi la connexion.
+	 */
 	public java.sql.Connection getConnection(){
 
 		return this.connect;
 	}
 
 	/**
-	* Ferme la connexion avec la BDD.
-	*/
+	 * Ferme la connexion avec la BDD.
+	 */
 	public void closeConnection(){
 		try {
 			this.connect.close();
@@ -58,8 +72,8 @@ class SQLiteConnection {
 
 
 	/**
-	* Lanceur qui teste la classe MySQLConnection
-	*/
+	 * Lanceur qui teste la classe SQLiteConnection
+	 */
 	public static void main(String[] args){
 		SQLiteConnection theObj = SQLiteConnection.getInstance();
 		theObj.closeConnection();

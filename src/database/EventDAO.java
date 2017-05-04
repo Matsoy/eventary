@@ -15,9 +15,9 @@ import model.*;
  */
 
 public class EventDAO{
-	//Methodes
+
 	/**
-	 * Constructeur.
+	 * Instantiates a new event DAO.
 	 */
 	public EventDAO() {
 
@@ -28,10 +28,11 @@ public class EventDAO{
 	 *
 	 * @return the result set
 	 */
-	public ResultSet findAll() {
+	public ArrayList<Event> findAll() {
 		Statement stat = null;
 		String query = "";
-		ResultSet ret = null;
+		ArrayList<Event> ret = new ArrayList<Event>();
+
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
@@ -42,14 +43,23 @@ public class EventDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM EVENT;";
 
-			//Le resultat a retourner
-			ret = stat.executeQuery(query);
+			//Le resultat de la requête
+			ResultSet result = stat.executeQuery(query);
+
+			//Si le resultat est bon, prends la premiere ligne
+			if (result.first()) {
+				//tant que le curseur n'est pas aprÃ¨s le dernier Ã©lÃ©ment du rÃ©sultat de la requÃªte
+				while(!result.isAfterLast()){
+					ret.add(new Event()); //ajout du Event à l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), result.getInt(10), result.getInt(11), result.getString(12)); //initialisaton de les paramètres du retour de la requête
+					result.next(); //bouge le curseur d'une ligne depuis sa place courante
+				}
+			}
 		}
 		catch (SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
 
-		//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 		return ret;
 	}
 
@@ -142,7 +152,7 @@ public class EventDAO{
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
-			//suppression de toutes les participations Ã  cet Event
+			//suppression de toutes les participations à  cet Event
 			ParticipationDAO dao = new ParticipationDAO();
 			dao.delete("", id_event);
 

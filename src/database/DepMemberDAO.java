@@ -5,31 +5,32 @@ import java.util.*;
 import model.*;
 
 /**
- * The Class ParticipationDAO.
+ * The Class DepMemberDAO.
  *
  * @author Mathieu Soyer
  * 
- * File: ParticipationDAO.java
+ * File: DepMemberDAO.java
  * 
- * Classe pour les objets Dao de représentant la participation d'un User à un Event
+ * Classe pour les objets Dao de représentant l'appartenance d'un User à un Department
  */
 
-public class ParticipationDAO{
+public class DepMemberDAO{
+
 
 	/**
-	 * Instantiates a new participation DAO.
+	 * Instantiates a new dep member DAO.
 	 */
-	public ParticipationDAO() {
+	public DepMemberDAO() {
 
 	}
 
 	/**
-	 * Renvoie la liste des User participant Ã  un Event.
+	 * Renvoie la liste des User membre d'un Department.
 	 *
-	 * @param id_event id du Event
+	 * @param department_id id du Department
 	 * @return the array list
 	 */
-	public ArrayList<User> participationsInAnEvent(int id_event) {
+	public ArrayList<User> participationsInAnEvent(int department_id) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -42,7 +43,7 @@ public class ParticipationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT user_login FROM PARTICIPATION WHERE event_id = " + id_event + ";";
+			query = "SELECT user_login FROM DEP_MEMBER WHERE department_id = " + department_id + ";";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -69,9 +70,9 @@ public class ParticipationDAO{
 	 * Methode qui permet d'inserer un tuple.
 	 *
 	 * @param user_login le login du User
-	 * @param event_id l'id du Event
+	 * @param department_id l'id du Department
 	 */
-	public void insert(String user_login, int event_id) {
+	public void insert(String user_login, int department_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -80,7 +81,7 @@ public class ParticipationDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO PARTICIPATION VALUES("+ user_login +","+ event_id +");";
+			query = "INSERT INTO DEP_MEMBER VALUES("+ department_id +","+ user_login +");";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);
@@ -95,9 +96,9 @@ public class ParticipationDAO{
 	 * Permet de supprimer un tuple.
 	 *
 	 * @param user_login le login du User
-	 * @param event_id l'id du Event
+	 * @param department_id l'id du Department
 	 */
-	public void delete(String user_login, int event_id) {
+	public void delete(String user_login, int department_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -105,21 +106,8 @@ public class ParticipationDAO{
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
-			// pas de User dÃ©signÃ© -> suppression de toutes les participations de l'Event
-			if (user_login == null || user_login.isEmpty()) {
-				//Preparation de la requete
-				query = "DELETE FROM PARTICIPATION WHERE event_id = " + event_id + ";";
-			}
-			// pas de User dÃ©signÃ© -> suppression de toutes les participations du User
-			else if(event_id == -1){
-				//Preparation de la requete
-				query = "DELETE FROM PARTICIPATION WHERE user_login = " + user_login + ";";
-			}
-			// sinon, on supprime la participation du User choisi pour l'Event choisi
-			else{
-				//Preparation de la requete
-				query = "DELETE FROM PARTICIPATION WHERE event_id = " + event_id + "AND user_login = " + user_login + ";";
-			}
+			//Preparation de la requete
+			query = "DELETE FROM DEP_MEMBER WHERE department_id = " + department_id + "AND user_login = " + user_login + ";";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);

@@ -15,9 +15,9 @@ import model.*;
  */
 
 public class BuildingDAO{
-    //Methodes
+
     /**
-     * Constructeur.
+     * Instantiates a new building DAO.
      */
     public BuildingDAO() {
 
@@ -28,10 +28,10 @@ public class BuildingDAO{
      *
      * @return the result set
      */
-    public ResultSet findAll() {
+    public ArrayList<Building> findAll() {
         Statement stat = null;
         String query = "";
-        ResultSet ret = null;
+        ArrayList<Building> ret = new ArrayList<Building>();
         try {
             //Recuperation de la connexion
             Connection con = SQLiteConnection.getInstance().getConnection();
@@ -42,14 +42,23 @@ public class BuildingDAO{
             //Preparation de la requete
             query = "SELECT * FROM BUILDING;";
 
-            //Le resultat a retourner
-            ret = stat.executeQuery(query);
+            //Le resultat de la requête
+            ResultSet result = stat.executeQuery(query);
+            
+            //Si le resultat est bon, prends la premiere ligne
+            if (result.first()) {
+                //tant que le curseur n'est pas aprÃ¨s le dernier Ã©lÃ©ment du rÃ©sultat de la requÃªte
+                while(!result.isAfterLast()){
+                    ret.add(new Building()); //ajout du Building à l'ArrayList. Appel du constructeur vide
+                    ret.get(ret.size()-1).init(result.getInt(1), result.getInt(2), result.getString(3)); //initialisaton de les paramètres du retour de la requête
+                    result.next(); //bouge le curseur d'une ligne depuis sa place courante
+                }
+            }
         }
         catch (SQLException e) {
             System.out.println("ERREUR: " + e.getMessage());
         }
 
-        //Retourne l'execution de la requete sous la forme d'un objet ResultSet
         return ret;
     }
 

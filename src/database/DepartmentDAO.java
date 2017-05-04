@@ -1,6 +1,8 @@
 package database;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import model.*;
 
 /**
@@ -14,131 +16,140 @@ import model.*;
  */
 
 public class DepartmentDAO{
-    //Methodes
-    /**
-     * Constructeur.
-     */
-    public DepartmentDAO() {
 
-    }
+	/**
+	 * Instantiates a new department DAO.
+	 */
+	public DepartmentDAO() {
 
-    /**
-     * Pour retrouver tous les tuples.
-     *
-     * @return the result set
-     */
-    public ResultSet findAll() {
-        Statement stat = null;
-        String query = "";
-        ResultSet ret = null;
-        try {
-            //Recuperation de la connexion
-            Connection con = SQLiteConnection.getInstance().getConnection();
+	}
 
-            //Preparation de la requete en ligne
-            stat = con.createStatement();
+	/**
+	 * Pour retrouver tous les tuples.
+	 *
+	 * @return the result set
+	 */
+	public ArrayList<Department> findAll() {
+		Statement stat = null;
+		String query = "";
+        ArrayList<Department> ret = new ArrayList<Department>();
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
 
-            //Preparation de la requete
-            query = "SELECT * FROM DEPARTMENT;";
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
-            //Le resultat a retourner
-            ret = stat.executeQuery(query);
-        }
-        catch (SQLException e) {
-            System.out.println("ERREUR: " + e.getMessage());
-        }
+			//Preparation de la requete
+			query = "SELECT * FROM DEPARTMENT;";
 
-        //Retourne l'execution de la requete sous la forme d'un objet ResultSet
-        return ret;
-    }
+			//Le resultat de la requ�te
+			ResultSet result = stat.executeQuery(query);
 
-    /**
-     * Permet de retrouver juste un tuple.
-     *
-     * @param id_department id du Department a retrouver
-     * @return the department
-     */
-    public Department find(int id_department) {
-        Statement stat = null;
-        String query = "";
-        Department ret = new Department();
+			//Si le resultat est bon, prends la premiere ligne
+			if (result.first()) {
+				//tant que le curseur n'est pas après le dernier élément du résultat de la requête
+				while(!result.isAfterLast()){
+					ret.add(new Department()); //ajout du Department � l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2)); //initialisaton de les param�tres du retour de la requ�te
+					result.next(); //bouge le curseur d'une ligne depuis sa place courante
+				}
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
 
-        try {
-            //Recuperation de la connexion
-            Connection con = SQLiteConnection.getInstance().getConnection();
+		return ret;
+	}
 
-            //Preparation de la requete en ligne
-            stat = con.createStatement();
+	/**
+	 * Permet de retrouver juste un tuple.
+	 *
+	 * @param id_department id du Department a retrouver
+	 * @return the department
+	 */
+	public Department find(int id_department) {
+		Statement stat = null;
+		String query = "";
+		Department ret = new Department();
 
-            //Preparation de la requete
-            query = "SELECT * FROM DEPARTMENT WHERE id = " + id_department + ";";
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
 
-            //Retourne l'execution de la requete sous la forme d'un objet ResultSet
-            ResultSet result = stat.executeQuery(query);
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
-            //Si le resultat est bon, prends la premiere ligne
-            if (result.first()) {
-                ret.init(id_department, result.getString(2));
-            }
-        }
-        catch(SQLException e) {
-            System.out.println("ERREUR: " + e.getMessage());
-        }
+			//Preparation de la requete
+			query = "SELECT * FROM DEPARTMENT WHERE id = " + id_department + ";";
 
-        return ret;
-    }
+			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
+			ResultSet result = stat.executeQuery(query);
 
+			//Si le resultat est bon, prends la premiere ligne
+			if (result.first()) {
+				ret.init(id_department, result.getString(2));
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
 
-    /**
-     * Methode qui permet d'inserer un tuple.
-     *
-     * @param tuple Objet de type Department a inserer
-     */
-    public void insert(Department tuple) {
-        Statement stat = null;
-        String query = "";
-
-        //Recuperation des attributs de l'objet Department
-        int id = tuple.getId();
-        String name = tuple.getName();
-
-        try {
-            //Recuperation de la connexion
-            Connection con = SQLiteConnection.getInstance().getConnection();
-
-            //Preparation de la requete
-            query = "INSERT INTO DEPARTMENT VALUES("+ id +","+ name +");";
-
-            //Execute la requête
-            stat.executeQuery(query);
-        }
-        catch(SQLException e) {
-            System.out.println("ERREUR: " + e.getMessage());
-        }
-    }
+		return ret;
+	}
 
 
-    /**
-     * Permet de supprimer un tuple.
-     *
-     * @param id_department id du tuple a supprimer
-     */
-    public void delete(int id_department) {
-        Statement stat = null;
-        String query = "";
+	/**
+	 * Methode qui permet d'inserer un tuple.
+	 *
+	 * @param tuple Objet de type Department a inserer
+	 */
+	public void insert(Department tuple) {
+		Statement stat = null;
+		String query = "";
 
-        try {
-            //Recuperation de la connexion
-            Connection con = SQLiteConnection.getInstance().getConnection();
+		//Recuperation des attributs de l'objet Department
+		int id = tuple.getId();
+		String name = tuple.getName();
 
-            //Preparation de la requete
-            query = "DELETE FROM DEPARTMENT WHERE id = " + id_department + ";";
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
 
-            //Execute la requête
-            stat.executeQuery(query);
-        }
-        catch(SQLException e) {
-            System.out.println("ERREUR: " + e.getMessage());
-        }
-    }
+			//Preparation de la requete
+			query = "INSERT INTO DEPARTMENT VALUES("+ id +","+ name +");";
+
+			//Execute la requête
+			stat.executeQuery(query);
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+	}
+
+
+	/**
+	 * Permet de supprimer un tuple.
+	 *
+	 * @param id_department id du tuple a supprimer
+	 */
+	public void delete(int id_department) {
+		Statement stat = null;
+		String query = "";
+
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete
+			query = "DELETE FROM DEPARTMENT WHERE id = " + id_department + ";";
+
+			//Execute la requête
+			stat.executeQuery(query);
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+	}
 }

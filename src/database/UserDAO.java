@@ -15,9 +15,9 @@ import model.*;
  */
 
 public class UserDAO{
-	//Methodes
+
 	/**
-	 * Constructeur.
+	 * Instantiates a new user DAO.
 	 */
 	public UserDAO() {
 
@@ -28,10 +28,10 @@ public class UserDAO{
 	 *
 	 * @return the result set
 	 */
-	public ResultSet findAll() {
+	public ArrayList<User> findAll() {
 		Statement stat = null;
 		String query = "";
-		ResultSet ret = null;
+        ArrayList<User> ret = new ArrayList<User>();
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
@@ -42,14 +42,23 @@ public class UserDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM USER;";
 
-			//Le resultat a retourner
-			ret = stat.executeQuery(query);
+            //Le resultat de la requête
+            ResultSet result = stat.executeQuery(query);
+            
+            //Si le resultat est bon, prends la premiere ligne
+            if (result.first()) {
+                //tant que le curseur n'est pas aprÃ¨s le dernier Ã©lÃ©ment du rÃ©sultat de la requÃªte
+                while(!result.isAfterLast()){
+                    ret.add(new User()); //ajout du User à l'ArrayList. Appel du constructeur vide
+                    ret.get(ret.size()-1).init(result.getString(1), result.getString(2), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7)); //initialisaton de les paramètres du retour de la requête
+                    result.next(); //bouge le curseur d'une ligne depuis sa place courante
+                }
+            }
 		}
 		catch (SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
 
-		//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 		return ret;
 	}
 
