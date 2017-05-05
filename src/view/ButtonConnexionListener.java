@@ -10,15 +10,22 @@ import javax.swing.*;
 public class ButtonConnexionListener implements ActionListener {
 	
 	private Screen screen;
+	boolean booleanConnexion;
 	
 	ButtonConnexionListener(Screen screen){
 		this.screen = screen;
+		this.booleanConnexion = false;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e){
-		System.out.println("Connexion");
-		this.screen.getConnected();
+		System.out.println("Error connexion");
+		if (booleanConnexion) {
+			this.screen.getConnected();
+		}else{
+			this.screen.errorConnexion();
+			booleanConnexion = true;
+		}
 	}
 	
 }
