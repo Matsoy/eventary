@@ -57,6 +57,7 @@ public class Screen extends JFrame{
 	}
   
 	void getConnected(){
+		repaint(); 
 		this.getContentPane().remove(mainPanel);
 		this.setLayout(new BorderLayout());
 		mainPanel = new JPanel();
@@ -66,19 +67,20 @@ public class Screen extends JFrame{
 		this.secondaryPanel = new JPanel();
 		secondaryPanel.setBackground(Color.WHITE);
 	    
-		this.getContentPane().add(mainPanel,BorderLayout.CENTER);
-		this.getContentPane().add(secondaryPanel,BorderLayout.WEST);
+		this.getContentPane().add(mainPanel,BorderLayout.WEST);
+		this.getContentPane().add(secondaryPanel,BorderLayout.CENTER);
 		
 		JButton bouton = new EventaryButton("Connexion");
 	    mainPanel.add(bouton);
+	    this.setVisible(true);
 	}
 }
 
-//class Main {
-//
-//  public static void main(String[] args){
-//
-//	  Screen screen = new Screen();
-//    //screen.getConnected();
-//  }
-//}
+class Main {
+
+  public static void main(String[] args){
+
+	  Screen screen = new Screen();
+    //screen.getConnected();
+  }
+}
