@@ -27,15 +27,6 @@ public class User {
 	int year;
 
 	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {
-	}
-
-
-	/**
 	 * Instantiates a new user.
 	 */
 	public User() {

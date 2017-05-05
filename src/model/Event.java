@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * The Class Event.
@@ -43,13 +44,8 @@ public class Event {
 	/** The address. */
 	String address;
 	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {
-	}
+	List<User> listeParticipants = new ArrayList<User>();
+	List<User> listeAttente = new ArrayList<User>();
 
 	/**
 	 * Instantiates a new event.
@@ -304,6 +300,22 @@ public class Event {
 	 */
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public List<User> getListeParticipants() {
+		return listeParticipants;
+	}
+
+	public void setListeParticipants(List<User> listeParticipants) {
+		this.listeParticipants = listeParticipants;
+	}
+
+	public List<User> getListeAttente() {
+		return listeAttente;
+	}
+
+	public void setListeAttente(List<User> listeAttente) {
+		this.listeAttente = listeAttente;
 	}
 
 	/* (non-Javadoc)

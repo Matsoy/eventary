@@ -1,5 +1,7 @@
 package model;
 
+import java.util.*;
+
 /**
  * The Class School.
  */
@@ -11,13 +13,7 @@ public class School {
 	/** The name. */
 	String name;
 	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {
-	}
+	List<Site> listeSites = new ArrayList<Site>();
 	
 	/**
 	 * Instantiates a new school.
@@ -70,6 +66,14 @@ public class School {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<Site> getListeSites() {
+		return listeSites;
+	}
+
+	public void setListeSites(List<Site> listeSites) {
+		this.listeSites = listeSites;
 	}
 
 	/* (non-Javadoc)

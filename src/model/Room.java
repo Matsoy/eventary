@@ -18,14 +18,6 @@ public class Room {
 	String name;
 	
 	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {
-	}
-	
-	/**
 	 * Instantiates a new room.
 	 */
 	public Room() {	// Constructeur vide

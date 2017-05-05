@@ -1,5 +1,7 @@
 package model;
 
+import java.util.*;
+
 /**
  * The Class Organization.
  */
@@ -10,6 +12,8 @@ public abstract class Organization {
 	
 	/** The name. */
 	String name;
+	
+	List<User> listeMembres = new ArrayList<User>();
 	
 	/**
 	 * Inits the.
@@ -56,6 +60,14 @@ public abstract class Organization {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<User> getListeMembres() {
+		return listeMembres;
+	}
+
+	public void setListeMembres(List<User> listeMembres) {
+		this.listeMembres = listeMembres;
 	}
 
 	/* (non-Javadoc)

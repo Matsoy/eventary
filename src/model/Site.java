@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The Class Site.
  */
@@ -14,13 +17,7 @@ public class Site {
 	/** The name. */
 	String name;
 	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {
-	}
+	List<Building> listeBatiments = new ArrayList<Building>();
 	
 	/**
 	 * Instantiates a new site.
@@ -95,6 +92,14 @@ public class Site {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public List<Building> getListeBatiments() {
+		return listeBatiments;
+	}
+
+	public void setListeBatiments(List<Building> listeBatiments) {
+		this.listeBatiments = listeBatiments;
 	}
 
 	/* (non-Javadoc)
