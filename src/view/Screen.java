@@ -1,3 +1,5 @@
+package view;
+
 import javax.swing.JFrame;
 import java.awt.event.*;
 import javax.swing.*;
@@ -20,11 +22,11 @@ public class Screen extends JFrame{
 	
 
 	public Screen(){
-		//Définit un titre pour notre fenêtre
+		//Dï¿½finit un titre pour notre fenï¿½tre
 		this.setTitle("Eventary");
-	    //Définit sa taille : 400 pixels de large et 100 pixels de haut
+	    //Dï¿½finit sa taille : 400 pixels de large et 100 pixels de haut
 	    this.setSize(widthScreen,heightScreen);
-	    //Nous demandons maintenant à notre objet de se positionner au centre
+	    //Nous demandons maintenant ï¿½ notre objet de se positionner au centre
 	    this.setLocationRelativeTo(null);
 	    //Termine le processus lorsqu'on clique sur la croix rouge
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,11 +74,11 @@ public class Screen extends JFrame{
 	}
 }
 
-class Main {
-
-  public static void main(String[] args){
-
-    Screen screen = new Screen();
-    //screen.getConnected();
-  }
-}
+//class Main {
+//
+//  public static void main(String[] args){
+//
+//	  Screen screen = new Screen();
+//    //screen.getConnected();
+//  }
+//}
