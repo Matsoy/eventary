@@ -1,5 +1,7 @@
 package database;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.*;
 import model.*;
@@ -202,5 +204,31 @@ public class UserDAO{
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+	}
+	
+	/**
+	 * Generate hash.
+	 *
+	 * @param passwd the passwd
+	 * @return the string
+	 */
+	public static String generateHash(String passwd) {
+		StringBuilder hash = new StringBuilder();
+
+		try {
+			MessageDigest sha = MessageDigest.getInstance("SHA-1");
+			byte[] hashedBytes = sha.digest(passwd.getBytes());
+			char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+					'a', 'b', 'c', 'd', 'e', 'f' };
+			for (int idx = 0; idx < hashedBytes.length; ++idx) {
+				byte b = hashedBytes[idx];
+				hash.append(digits[(b & 0xf0) >> 4]);
+				hash.append(digits[b & 0x0f]);
+			}
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return hash.toString();
 	}
 }
