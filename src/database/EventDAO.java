@@ -128,7 +128,7 @@ public class EventDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO EVENT VALUES("+ id +","+ title +","+ desc +","+ creaDate +","+ startDate +","+ endDate +","+ modifDate +","+ cancelDate +","+ maxNbParticipant +","+ organizer +","+ school_id +","+ address +");";
+			query = "INSERT INTO EVENT VALUES("+ id +",'"+ title +"','"+ desc +"',"+ creaDate +","+ startDate +","+ endDate +","+ modifDate +","+ cancelDate +","+ maxNbParticipant +","+ organizer +","+ school_id +",'"+ address +"');";
 
 			//Execute la requête
 			stat.executeQuery(query);

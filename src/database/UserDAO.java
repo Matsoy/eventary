@@ -33,7 +33,7 @@ public class UserDAO{
 	public ArrayList<User> findAll() {
 		Statement stat = null;
 		String query = "";
-        ArrayList<User> ret = new ArrayList<User>();
+		ArrayList<User> ret = new ArrayList<User>();
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
@@ -44,13 +44,13 @@ public class UserDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM USER;";
 
-            //Le resultat de la requête
-            ResultSet result = stat.executeQuery(query);
-            
+			//Le resultat de la requête
+			ResultSet result = stat.executeQuery(query);
+
 			if (result.next() ) {
 				do {
-                    ret.add(new User()); //ajout du User à l'ArrayList. Appel du constructeur vide
-                    ret.get(ret.size()-1).init(result.getString(1), result.getString(2), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7)); //initialisaton de les paramètres du retour de la requête
+					ret.add(new User()); //ajout du User à l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getString(1), result.getString(2), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -69,6 +69,7 @@ public class UserDAO{
 	 * @return the user
 	 */
 	public User find(String login_user) {
+		System.out.println("param = "+login_user);
 		Statement stat = null;
 		String query = "";
 		User ret = new User();
@@ -81,7 +82,8 @@ public class UserDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM USER WHERE login = " + login_user + ";";
+			query = "SELECT * FROM USER WHERE login = '" + login_user + "';";
+			System.out.println("query = "+query);
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -108,6 +110,7 @@ public class UserDAO{
 	 * @return l'utilisateur connecté, null sinon
 	 */
 	public User connect(String login_user, String passwd_user) {
+		System.out.println("dans connect, passwd_user = "+passwd_user);
 		Statement stat = null;
 		String query = "";
 		User ret = new User();
@@ -120,7 +123,7 @@ public class UserDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM USER WHERE login = " + login_user + " AND passwd = " + passwd_user + ";";
+			query = "SELECT * FROM USER WHERE login = '" + login_user + "' AND passwd = '" + passwd_user + "';";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -167,7 +170,7 @@ public class UserDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO USER VALUES("+ login +","+ passwd +","+ moderator +","+ fName +","+ lName +","+ branch +","+ year +");";
+			query = "INSERT INTO USER VALUES('"+ login +"','"+ passwd +"',"+ moderator +",'"+ fName +"','"+ lName +"','"+ branch +"',"+ year +");";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);
@@ -196,7 +199,7 @@ public class UserDAO{
 			dao.delete(login_user, -1);
 
 			//Preparation de la requete
-			query = "DELETE FROM USER WHERE login = " + login_user + ";";
+			query = "DELETE FROM USER WHERE login = '" + login_user + "';";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);
@@ -205,7 +208,7 @@ public class UserDAO{
 			System.out.println("ERREUR: " + e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Generate hash.
 	 *

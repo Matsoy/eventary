@@ -117,7 +117,7 @@ public class RoomDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO ROOM VALUES("+ id +","+ nbPlaces +","+ name +");";
+			query = "INSERT INTO ROOM VALUES("+ id +","+ nbPlaces +",'"+ name +"');";
 
 			//Execute la requête
 			stat.executeQuery(query);

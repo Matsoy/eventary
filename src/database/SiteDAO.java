@@ -118,7 +118,7 @@ public class SiteDAO{
             Connection con = SQLiteConnection.getInstance().getConnection();
 
             //Preparation de la requete
-            query = "INSERT INTO SITE VALUES("+ id +","+ school_id +","+ name +");";
+            query = "INSERT INTO SITE VALUES("+ id +","+ school_id +",'"+ name +"');";
 
             //Execute la requête
             stat.executeQuery(query);

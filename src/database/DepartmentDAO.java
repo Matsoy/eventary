@@ -118,7 +118,7 @@ public class DepartmentDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO DEPARTMENT VALUES("+ id +","+ name +");";
+			query = "INSERT INTO DEPARTMENT VALUES("+ id +",'"+ name +"');";
 
 			//Execute la requête
 			stat.executeQuery(query);

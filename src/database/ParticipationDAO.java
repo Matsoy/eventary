@@ -78,7 +78,7 @@ public class ParticipationDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO PARTICIPATION VALUES("+ user_login +","+ event_id +");";
+			query = "INSERT INTO PARTICIPATION VALUES('"+ user_login +"',"+ event_id +");";
 
 			//Execute la requête
 			stat.executeQuery(query);
@@ -111,12 +111,12 @@ public class ParticipationDAO{
 			// pas de User désigné -> suppression de toutes les participations du User
 			else if(event_id == -1){
 				//Preparation de la requete
-				query = "DELETE FROM PARTICIPATION WHERE user_login = " + user_login + ";";
+				query = "DELETE FROM PARTICIPATION WHERE user_login = '" + user_login + "';";
 			}
 			// sinon, on supprime la participation du User choisi pour l'Event choisi
 			else{
 				//Preparation de la requete
-				query = "DELETE FROM PARTICIPATION WHERE event_id = " + event_id + "AND user_login = " + user_login + ";";
+				query = "DELETE FROM PARTICIPATION WHERE event_id = " + event_id + "AND user_login = '" + user_login + "';";
 			}
 
 			//Execute la requête

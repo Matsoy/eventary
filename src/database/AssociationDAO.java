@@ -117,7 +117,7 @@ public class AssociationDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO ASSOCIATION VALUES("+ id +","+ name +");";
+			query = "INSERT INTO ASSOCIATION VALUES("+ id +",'"+ name +"');";
 
 			//Execute la requête
 			stat.executeQuery(query);

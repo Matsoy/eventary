@@ -79,7 +79,7 @@ public class DepMemberDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO DEP_MEMBER VALUES("+ department_id +","+ user_login +");";
+			query = "INSERT INTO DEP_MEMBER VALUES("+ department_id +",'"+ user_login +"');";
 
 			//Execute la requête
 			stat.executeQuery(query);
@@ -105,7 +105,7 @@ public class DepMemberDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "DELETE FROM DEP_MEMBER WHERE department_id = " + department_id + "AND user_login = " + user_login + ";";
+			query = "DELETE FROM DEP_MEMBER WHERE department_id = " + department_id + "AND user_login = '" + user_login + "';";
 
 			//Execute la requête
 			stat.executeQuery(query);

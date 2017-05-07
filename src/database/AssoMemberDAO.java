@@ -79,7 +79,7 @@ public class AssoMemberDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO ASSO_MEMBER VALUES("+ association_id +","+ user_login +");";
+			query = "INSERT INTO ASSO_MEMBER VALUES("+ association_id +",'"+ user_login +"');";
 
 			//Execute la requête
 			stat.executeQuery(query);
@@ -105,7 +105,7 @@ public class AssoMemberDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "DELETE FROM ASSO_MEMBER WHERE association_id = " + association_id + "AND user_login = " + user_login + ";";
+			query = "DELETE FROM ASSO_MEMBER WHERE association_id = " + association_id + "AND user_login = '" + user_login + "';";
 
 			//Execute la requête
 			stat.executeQuery(query);

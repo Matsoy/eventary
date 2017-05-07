@@ -118,7 +118,7 @@ public class BuildingDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO BUILDING VALUES("+ id +","+ site_id +","+ name +");";
+			query = "INSERT INTO BUILDING VALUES("+ id +","+ site_id +",'"+ name +"');";
 
 			//Execute la requête
 			stat.executeQuery(query);
