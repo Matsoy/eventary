@@ -319,6 +319,21 @@ public class Event {
 		this.listeAttente = listeAttente;
 	}
 	
+	public void ajouterParticipant(User newParticipant){
+		// Si il y a encore de la place, on ajoute l'utilisateur en tant que participant
+		if(this.listeParticipants.size() < this.maxNbParticipant){
+			ParticipationDAO participant = new ParticipationDAO();
+			participant.insert(newParticipant.getLogin(), this.id);
+			this.listeParticipants = participant.participationsInAnEvent(this.id);	
+		}
+		// Sinon, on l'ajoute dans la liste d'attente
+		else{
+			//AttenteDAO attente = new AttenteDAO();
+			//attente.insert(attente.getLogin(), this.id)
+			//this.listeAttente = attente.attenteInAnEvent(this.id);
+		}
+	}
+	
 	public void supprimerParticipant(User participant){
 		ParticipationDAO participation = new ParticipationDAO();
 		//AttenteDAO attente = new AttenteDAO();
