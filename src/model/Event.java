@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Timestamp;
 import java.util.*;
+import database.*;
 
 /**
  * The Class Event.
@@ -317,7 +318,21 @@ public class Event {
 	public void setListeAttente(List<User> listeAttente) {
 		this.listeAttente = listeAttente;
 	}
-
+	
+	public void supprimerParticipant(User participant){
+		ParticipationDAO participation = new ParticipationDAO();
+		//AttenteDAO attente = new AttenteDAO();
+		participation.delete(participant.getLogin(), this.id);
+		this.listeParticipants = participation.participationsInAnEvent(this.id);
+		//this.listeAttente = attente.attenteInAnEvent(this.id);
+	}
+	
+	public void supprimerAttente(User attente){
+		//AttenteDAO attente = new AttenteDAO();
+		//attente.delete(attente.getLogin(), this.id)
+		//this.listeAttente = attente.attenteInAnEvent(this.id);
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
