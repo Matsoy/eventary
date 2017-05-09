@@ -8,8 +8,8 @@ public class Room {
 	/** The id. */
 	int id;
 	
-	/** The building id. */
-	int building_id;
+	/** The building. */
+	Building building;
 	
 	/** The nb places. */
 	int nbPlaces;
@@ -28,13 +28,13 @@ public class Room {
 	 * Inits the.
 	 *
 	 * @param id the id
-	 * @param building_id the building id
+	 * @param building the building
 	 * @param nbPlaces the nb places
 	 * @param name the name
 	 */
-	public void init(int id, int building_id, int nbPlaces, String name) {
+	public void init(int id, Building building, int nbPlaces, String name) {
 		this.id = id;
-		this.building_id = building_id;
+		this.building = building;
 		this.nbPlaces = nbPlaces;
 		this.name = name;
 	}
@@ -58,21 +58,21 @@ public class Room {
 	}
 
 	/**
-	 * Gets the building id.
+	 * Gets the building.
 	 *
-	 * @return the building id
+	 * @return the building
 	 */
-	public int getBuilding_id() {
-		return building_id;
+	public Building getBuilding() {
+		return building;
 	}
 
 	/**
-	 * Sets the building id.
+	 * Sets the building.
 	 *
-	 * @param building_id the new building id
+	 * @param building the new building
 	 */
-	public void setBuilding_id(int building_id) {
-		this.building_id = building_id;
+	public void setBuilding(Building building) {
+		this.building = building;
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class Room {
 	 */
 	@Override
 	public String toString() {
-		return "Room [id=" + id + ", building_id=" + building_id + ", nbPlaces=" + nbPlaces + ", name=" + name + "]";
+		return "Room [id=" + id + ", building=" + building + ", nbPlaces=" + nbPlaces + ", name=" + name + "]";
 	}
 
 }

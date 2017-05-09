@@ -11,8 +11,8 @@ public class Site {
 	/** The id. */
 	int id;
 	
-	/** The school id. */
-	int school_id;
+	/** The school. */
+	School school;
 	
 	/** The name. */
 	String name;
@@ -31,12 +31,12 @@ public class Site {
 	 * Inits the.
 	 *
 	 * @param id the id
-	 * @param school_id the school id
+	 * @param school the school
 	 * @param name the name
 	 */
-	public void init(int id, int school_id, String name) {
+	public void init(int id, School school, String name) {
 		this.id = id;
-		this.school_id = school_id;
+		this.school = school;
 		this.name = name;
 	}
 
@@ -59,21 +59,21 @@ public class Site {
 	}
 
 	/**
-	 * Gets the school id.
+	 * Gets the school.
 	 *
-	 * @return the school id
+	 * @return the school
 	 */
-	public int getSchool_id() {
-		return school_id;
+	public School getSchool() {
+		return school;
 	}
 
 	/**
-	 * Sets the school id.
+	 * Sets the school.
 	 *
-	 * @param school_id the new school id
+	 * @param school_id the new school
 	 */
-	public void setSchool_id(int school_id) {
-		this.school_id = school_id;
+	public void setSchool(School school) {
+		this.school = school;
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class Site {
 	 */
 	@Override
 	public String toString() {
-		return "Site [id=" + id + ", school_id=" + school_id + ", name=" + name + "]";
+		return "Site [id=" + id + ", school=" + school + ", name=" + name + "]";
 	}
 
 

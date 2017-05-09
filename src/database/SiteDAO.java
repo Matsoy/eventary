@@ -48,7 +48,7 @@ public class SiteDAO{
 			if (result.next() ) {
 				do {
                 	ret.add(new Site()); //ajout du Site à l'ArrayList. Appel du constructeur vide
-                    ret.get(ret.size()-1).init(result.getInt(1), result.getInt(2), result.getString(3)); //initialisaton de les paramètres du retour de la requête
+                    ret.get(ret.size()-1).init(result.getInt(1), new SchoolDAO().find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -86,7 +86,7 @@ public class SiteDAO{
 
 			if (result.next() ) {
 				do {
-	                ret.init(id_site, result.getInt(2), result.getString(3));
+	                ret.init(id_site, new SchoolDAO().find(result.getInt(2)), result.getString(3));
 				} 
 				while (result.next());
 			}
@@ -110,7 +110,7 @@ public class SiteDAO{
 
         //Recuperation des attributs de l'objet Site
         int id = tuple.getId();
-        int school_id = tuple.getSchool_id();
+        int school_id = tuple.getSchool().getId();
         String name = tuple.getName();
 
         try {

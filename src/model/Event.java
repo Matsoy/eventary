@@ -37,10 +37,10 @@ public class Event {
 	int maxNbParticipant;
 	
 	/** The organizer. */
-	int organizer;
+	User organizer;
 	
-	/** The school id. */
-	int school_id;
+	/** The school. */
+	School school;
 	
 	/** The address. */
 	String address;
@@ -67,11 +67,11 @@ public class Event {
 	 * @param cancelDate the cancel date
 	 * @param maxNbParticipant the max nb participant
 	 * @param organizer the organizer
-	 * @param school_id the school id
+	 * @param school the school
 	 * @param address the address
 	 */
 	public void init(int id, String title, String description, Timestamp createDate, Timestamp startDate, Timestamp endDate,
-			Timestamp modifDate, Timestamp cancelDate, int maxNbParticipant, int organizer, int school_id,
+			Timestamp modifDate, Timestamp cancelDate, int maxNbParticipant, User organizer, School school,
 			String address) {
 		this.id = id;
 		this.title = title;
@@ -83,7 +83,7 @@ public class Event {
 		this.cancelDate = cancelDate;
 		this.maxNbParticipant = maxNbParticipant;
 		this.organizer = organizer;
-		this.school_id = school_id;
+		this.school = school;
 		this.address = address;
 	}
 
@@ -254,7 +254,7 @@ public class Event {
 	 *
 	 * @return the organizer
 	 */
-	public int getOrganizer() {
+	public User getOrganizer() {
 		return organizer;
 	}
 
@@ -263,26 +263,26 @@ public class Event {
 	 *
 	 * @param organizer the new organizer
 	 */
-	public void setOrganizer(int organizer) {
+	public void setOrganizer(User organizer) {
 		this.organizer = organizer;
 	}
 
 	/**
-	 * Gets the school id.
+	 * Gets the school.
 	 *
-	 * @return the school id
+	 * @return the school
 	 */
-	public int getSchool_id() {
-		return school_id;
+	public School getSchool() {
+		return school;
 	}
 
 	/**
-	 * Sets the school id.
+	 * Sets the school .
 	 *
-	 * @param school_id the new school id
+	 * @param school the new school
 	 */
-	public void setSchool_id(int school_id) {
-		this.school_id = school_id;
+	public void setSchool(School school) {
+		this.school = school;
 	}
 
 	/**
@@ -355,8 +355,8 @@ public class Event {
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", description=" + description + ", createDate=" + createDate
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", modifDate=" + modifDate + ", cancelDate="
-				+ cancelDate + ", maxNbParticipant=" + maxNbParticipant + ", organizer=" + organizer + ", school_id="
-				+ school_id + ", address=" + address + "]";
+				+ cancelDate + ", maxNbParticipant=" + maxNbParticipant + ", organizer=" + organizer + ", school="
+				+ school + ", address=" + address + "]";
 	}
 	
 }

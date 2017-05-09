@@ -49,7 +49,7 @@ public class EventDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new Event()); //ajout du Event à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), result.getInt(10), result.getInt(11), result.getString(12)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), new UserDAO().find(result.getString(10)), new SchoolDAO().find(result.getInt(11)), result.getString(12)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -87,7 +87,7 @@ public class EventDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(id_event, result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), result.getInt(10), result.getInt(11), result.getString(12));
+					ret.init(id_event, result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), new UserDAO().find(result.getString(10)), new SchoolDAO().find(result.getInt(11)), result.getString(12));
 				} 
 				while (result.next());
 			}
@@ -119,8 +119,8 @@ public class EventDAO{
 		java.sql.Timestamp modifDate = tuple.getModifDate();
 		java.sql.Timestamp cancelDate = tuple.getCancelDate();
 		int maxNbParticipant = tuple.getMaxNbParticipant();
-		int organizer = tuple.getOrganizer();
-		int school_id = tuple.getSchool_id();
+		String organizer = tuple.getOrganizer().getLogin();
+		int school_id = tuple.getSchool().getId();
 		String address = tuple.getAddress();
 
 		try {

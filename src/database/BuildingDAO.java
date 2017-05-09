@@ -48,7 +48,7 @@ public class BuildingDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new Building()); //ajout du Building à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getInt(2), result.getString(3)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), new SiteDAO().find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -86,7 +86,7 @@ public class BuildingDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(id_building, result.getInt(2), result.getString(3));
+					ret.init(id_building, new SiteDAO().find(result.getInt(2)), result.getString(3));
 				} 
 				while (result.next());
 			}
@@ -110,7 +110,7 @@ public class BuildingDAO{
 
 		//Recuperation des attributs de l'objet Building
 		int id = tuple.getId();
-		int site_id = tuple.getSite_id();
+		int site_id = tuple.getSite().getId();
 		String name = tuple.getName();
 
 		try {

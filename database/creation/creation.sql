@@ -8,7 +8,7 @@ CREATE TABLE EVENT( -- table des événements
     modifDate datetime, -- date de dernière modification
     cancelDate datetime, -- date d'annulation
     maxNbParticipant integer NOT NULL, -- nombre maximum de participants
-    organizer integer NOT NULL, -- id de l'organisateur
+    organizer text NOT NULL, -- id de l'organisateur
     school_id integer, -- id de l'école dans laquelle se déroule l'événement
     address text, -- adresse de l'événement, si il n'a pas lieu dans une école
     CONSTRAINT pk_id_EVENT PRIMARY KEY (id)
@@ -24,7 +24,6 @@ CREATE TABLE USER( -- table des utilisateurs
     branch text, -- spécialité
     year integer, -- mot de passe
     CONSTRAINT ck_moderator_USER CHECK (moderator IN (0, 1)), -- vérification que la moderator == 0 ou 1
-    CONSTRAINT ck_year_USER CHECK (year BETWEEN 2010 AND 2030), -- vérification que la date est entre 2010 et 2030 (bornes à définir).
     CONSTRAINT pk_login_USER PRIMARY KEY (login)
 );
 
@@ -32,6 +31,16 @@ CREATE TABLE USER( -- table des utilisateurs
 CREATE TABLE PARTICIPATION( -- table associative, entre EVENT et USER, des participations
     event_id integer NOT NULL, -- id de l'événement
     user_login text NOT NULL, -- login de l'utilisateur
+    CONSTRAINT fk_event_id_PARTICIPATION FOREIGN KEY (event_id) REFERENCES EVENT(id),
+    CONSTRAINT fk_user_login_PARTICIPATION FOREIGN KEY (user_login) REFERENCES USER(login),
+    CONSTRAINT pk_PARTICIPATION PRIMARY KEY (event_id, user_login) -- clé primaire constituée de 2 clés étrangères
+);
+
+
+CREATE TABLE WAITING( -- table associative, entre EVENT et USER, des USER sur la liste d'attente d'un EVENT
+    event_id integer NOT NULL, -- id de l'événement
+    user_login text NOT NULL, -- login de l'utilisateur
+    waiting_date datetime NOT NULL, -- date de rentr�e dans la liste d'attente
     CONSTRAINT fk_event_id_PARTICIPATION FOREIGN KEY (event_id) REFERENCES EVENT(id),
     CONSTRAINT fk_user_login_PARTICIPATION FOREIGN KEY (user_login) REFERENCES USER(login),
     CONSTRAINT pk_PARTICIPATION PRIMARY KEY (event_id, user_login) -- clé primaire constituée de 2 clés étrangères

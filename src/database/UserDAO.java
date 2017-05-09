@@ -69,7 +69,6 @@ public class UserDAO{
 	 * @return the user
 	 */
 	public User find(String login_user) {
-		System.out.println("param = "+login_user);
 		Statement stat = null;
 		String query = "";
 		User ret = new User();
@@ -83,7 +82,6 @@ public class UserDAO{
 
 			//Preparation de la requete
 			query = "SELECT * FROM USER WHERE login = '" + login_user + "';";
-			System.out.println("query = "+query);
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -110,7 +108,6 @@ public class UserDAO{
 	 * @return l'utilisateur connecté, null sinon
 	 */
 	public User connect(String login_user, String passwd_user) {
-		System.out.println("dans connect, passwd_user = "+passwd_user);
 		Statement stat = null;
 		String query = "";
 		User ret = new User();

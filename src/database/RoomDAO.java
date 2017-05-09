@@ -47,7 +47,7 @@ public class RoomDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new Room()); //ajout du Room à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getInt(2), result.getInt(3), result.getString(4)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), new BuildingDAO().find(result.getInt(2)), result.getInt(3), result.getString(4)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -85,7 +85,7 @@ public class RoomDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(id_room, result.getInt(2), result.getInt(3), result.getString(4));
+					ret.init(id_room, new BuildingDAO().find(result.getInt(2)), result.getInt(3), result.getString(4));
 				} 
 				while (result.next());
 			}
@@ -108,7 +108,7 @@ public class RoomDAO{
 		String query = "";
 
 		//Recuperation des attributs de l'objet Room
-		int id = tuple.getId();
+		int id = tuple.getBuilding().getId();
 		int nbPlaces = tuple.getNbPlaces();
 		String name = tuple.getName();
 

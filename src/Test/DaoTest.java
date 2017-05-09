@@ -1,7 +1,5 @@
 package Test;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import database.*;
 import model.*;
@@ -17,7 +15,9 @@ public class DaoTest {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-		System.out.println("\n\t########## test de RoomDAO");
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de RoomDAO");
+		System.out.println("\t########################################");
 		RoomDAO dao1 = new RoomDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<Room> rooms = new ArrayList<Room>();
@@ -30,7 +30,9 @@ public class DaoTest {
 		System.out.println(room55.toString());
 
 
-		System.out.println("\n\t########## test de BuildingDAO");
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de BuildingDAO");
+		System.out.println("\t########################################");
 		BuildingDAO dao2 = new BuildingDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<Building> buildings = new ArrayList<Building>();
@@ -43,7 +45,9 @@ public class DaoTest {
 		System.out.println(building2.toString());
 
 
-		System.out.println("\n\t########## test de SiteDAO");
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de SiteDAO");
+		System.out.println("\t########################################");
 		SiteDAO dao3 = new SiteDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<Site> sites = new ArrayList<Site>();
@@ -56,7 +60,9 @@ public class DaoTest {
 		System.out.println(site3.toString());
 
 
-		System.out.println("\n\t########## test de SchoolDAO");
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de SchoolDAO");
+		System.out.println("\t########################################");
 		SchoolDAO dao4 = new SchoolDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<School> schools = new ArrayList<School>();
@@ -68,7 +74,10 @@ public class DaoTest {
 		School school1 = dao4.find(1);
 		System.out.println(school1.toString());
 
-		System.out.println("\n\t########## test de UserDAO");
+
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de UserDAO");
+		System.out.println("\t########################################");
 		UserDAO dao5 = new UserDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<User> users = new ArrayList<User>();

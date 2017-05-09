@@ -11,8 +11,8 @@ public class Building {
 	/** The id. */
 	int id;
 	
-	/** The site id. */
-	int site_id;
+	/** The site. */
+	Site site;
 	
 	/** The name. */
 	String name;
@@ -29,13 +29,13 @@ public class Building {
 	 * Inits the.
 	 *
 	 * @param id the id
-	 * @param site_id the site id
+	 * @param site the site
 	 * @param name the name
 	 */
-	public void init(int id, int site_id, String name) {
+	public void init(int id, Site site, String name) {
 		this.id = id;
 		this.name = name;
-		this.site_id = site_id;
+		this.site = site;
 	}
 
 	/**
@@ -57,21 +57,21 @@ public class Building {
 	}
 
 	/**
-	 * Gets the site id.
+	 * Gets the site.
 	 *
 	 * @return the site id
 	 */
-	public int getSite_id() {
-		return site_id;
+	public Site getSite() {
+		return site;
 	}
 
 	/**
-	 * Sets the site id.
+	 * Sets the site.
 	 *
 	 * @param site_id the new site id
 	 */
-	public void setSite_id(int site_id) {
-		this.site_id = site_id;
+	public void setSite(Site site) {
+		this.site = site;
 	}
 
 	/**
@@ -105,6 +105,6 @@ public class Building {
 	 */
 	@Override
 	public String toString() {
-		return "Building [id=" + id + ", site_id=" + site_id + ", name=" + name + "]";
+		return "Building [id=" + id + ", site=" + site + ", name=" + name + "]";
 	}
 }
