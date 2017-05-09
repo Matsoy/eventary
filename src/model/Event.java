@@ -39,8 +39,8 @@ public class Event {
 	/** The organizer. */
 	User organizer;
 	
-	/** The school. */
-	School school;
+	/** The room. */
+	Room room;
 	
 	/** The address. */
 	String address;
@@ -67,11 +67,11 @@ public class Event {
 	 * @param cancelDate the cancel date
 	 * @param maxNbParticipant the max nb participant
 	 * @param organizer the organizer
-	 * @param school the school
+	 * @param room the room
 	 * @param address the address
 	 */
 	public void init(int id, String title, String description, Timestamp createDate, Timestamp startDate, Timestamp endDate,
-			Timestamp modifDate, Timestamp cancelDate, int maxNbParticipant, User organizer, School school,
+			Timestamp modifDate, Timestamp cancelDate, int maxNbParticipant, User organizer, Room room,
 			String address) {
 		this.id = id;
 		this.title = title;
@@ -83,7 +83,7 @@ public class Event {
 		this.cancelDate = cancelDate;
 		this.maxNbParticipant = maxNbParticipant;
 		this.organizer = organizer;
-		this.school = school;
+		this.room = room;
 		this.address = address;
 	}
 
@@ -268,21 +268,21 @@ public class Event {
 	}
 
 	/**
-	 * Gets the school.
+	 * Gets the room.
 	 *
-	 * @return the school
+	 * @return the room
 	 */
-	public School getSchool() {
-		return school;
+	public Room getRoom() {
+		return room;
 	}
 
 	/**
-	 * Sets the school .
+	 * Sets the room .
 	 *
-	 * @param school the new school
+	 * @param room the new room
 	 */
-	public void setSchool(School school) {
-		this.school = school;
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 	/**
@@ -355,8 +355,8 @@ public class Event {
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", description=" + description + ", createDate=" + createDate
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", modifDate=" + modifDate + ", cancelDate="
-				+ cancelDate + ", maxNbParticipant=" + maxNbParticipant + ", organizer=" + organizer + ", school="
-				+ school + ", address=" + address + "]";
+				+ cancelDate + ", maxNbParticipant=" + maxNbParticipant + ", organizer=" + organizer + ", room="
+				+ room + ", address=" + address + "]";
 	}
 	
 }

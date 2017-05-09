@@ -10,7 +10,7 @@ CREATE TABLE EVENT( -- table des événements
     cancelDate datetime, -- date d'annulation
     maxNbParticipant integer NOT NULL, -- nombre maximum de participants
     organizer integer NOT NULL, -- id de l'organisateur
-    school_id integer, -- id de l'école dans laquelle se déroule l'événement
+    room_id integer, -- id de la salle ( > batiment > site > �cole)
     address text, -- adresse de l'événement, si il n'a pas lieu dans une école
     CONSTRAINT pk_id_EVENT PRIMARY KEY (id)
 );

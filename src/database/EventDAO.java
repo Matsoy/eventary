@@ -49,7 +49,7 @@ public class EventDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new Event()); //ajout du Event à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), new UserDAO().find(result.getString(10)), new SchoolDAO().find(result.getInt(11)), result.getString(12)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -87,7 +87,7 @@ public class EventDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(id_event, result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), new UserDAO().find(result.getString(10)), new SchoolDAO().find(result.getInt(11)), result.getString(12));
+					ret.init(id_event, result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12));
 				} 
 				while (result.next());
 			}
@@ -120,7 +120,7 @@ public class EventDAO{
 		java.sql.Timestamp cancelDate = tuple.getCancelDate();
 		int maxNbParticipant = tuple.getMaxNbParticipant();
 		String organizer = tuple.getOrganizer().getLogin();
-		int school_id = tuple.getSchool().getId();
+		int room_id = tuple.getRoom().getId();
 		String address = tuple.getAddress();
 
 		try {
@@ -128,7 +128,7 @@ public class EventDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO EVENT VALUES("+ id +",'"+ title +"','"+ desc +"',"+ creaDate +","+ startDate +","+ endDate +","+ modifDate +","+ cancelDate +","+ maxNbParticipant +","+ organizer +","+ school_id +",'"+ address +"');";
+			query = "INSERT INTO EVENT VALUES("+ id +",'"+ title +"','"+ desc +"',"+ creaDate +","+ startDate +","+ endDate +","+ modifDate +","+ cancelDate +","+ maxNbParticipant +","+ organizer +","+ room_id +",'"+ address +"');";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);

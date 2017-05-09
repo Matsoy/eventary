@@ -56,8 +56,8 @@ public class DaoTest {
 			System.out.println(s.toString());
 		}
 		System.out.println("\n\t##### test de find");
-		Site site3 = dao3.find(3);
-		System.out.println(site3.toString());
+		Site site2 = dao3.find(2);
+		System.out.println(site2.toString());
 
 
 		System.out.println("\n\t########################################");
@@ -91,5 +91,20 @@ public class DaoTest {
 		System.out.println("\n\t##### test de connect");
 		user2 = dao5.connect("E168011W", UserDAO.generateHash("petitkiwi"));
 		System.out.println(user2.toString());
+		
+		
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de EventDAO");
+		System.out.println("\t########################################");
+		EventDAO dao6 = new EventDAO();
+		System.out.println("\n\t##### test de findAll");
+		ArrayList<Event> events = new ArrayList<Event>();
+		events = dao6.findAll();
+		for(Event e: events){
+			System.out.println(e.toString());
+		}
+		System.out.println("\n\t##### test de find");
+		Event event1 = dao6.find(1);
+		System.out.println(event1.toString());
 	}
 }

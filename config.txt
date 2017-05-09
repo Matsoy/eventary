@@ -1,1 +1,2 @@
 DurationBeforeDeletion: 120
+moderatorLogins: admin, E168011W
