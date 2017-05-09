@@ -5,31 +5,31 @@ import java.util.*;
 import model.*;
 
 /**
- * The Class ParticipationDAO.
+ * The Class WaitingDAO.
  *
  * @author Mathieu Soyer
  * 
- * File: ParticipationDAO.java
+ * File: WaitingDAO.java
  * 
- * Classe pour les objets Dao de représentant la participation d'un User à un Event
+ * Classe pour les objets Dao de représentant la participation d'un User à un Event (sur liste d'attente)
  */
 
-public class ParticipationDAO{
+public class WaitingDAO{
 
 	/**
-	 * Instantiates a new participation DAO.
+	 * Instantiates a new waiting DAO.
 	 */
-	public ParticipationDAO() {
+	public WaitingDAO() {
 
 	}
 
 	/**
-	 * Renvoie la liste des User participant Ã  un Event.
+	 * Renvoie la liste des User participant Ã  un Event (sur liste d'attente)
 	 *
 	 * @param id_event id du Event
 	 * @return the array list
 	 */
-	public ArrayList<User> participationsInAnEvent(int id_event) {
+	public ArrayList<User> WaitingsForAnEvent(int id_event) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -42,7 +42,7 @@ public class ParticipationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT user_login FROM PARTICIPATION WHERE event_id = " + id_event + ";";
+			query = "SELECT user_login FROM WAITING WHERE event_id = " + id_event + ";";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -78,7 +78,7 @@ public class ParticipationDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO PARTICIPATION VALUES('"+ user_login +"',"+ event_id +");";
+			query = "INSERT INTO WAITING VALUES('"+ user_login +"',"+ event_id +");";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);
@@ -103,24 +103,15 @@ public class ParticipationDAO{
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
-			// pas de User dÃ©signÃ© -> suppression de toutes les participations pour cet Event
-			if (user_login.equals("") || user_login.isEmpty()) {
+			// pas de User dÃ©signÃ© -> suppression de toutes les participations à cet Event (sur liste d'attente)
+			if (user_login == null || user_login.isEmpty()) {
 				//Preparation de la requete
-				query = "DELETE FROM PARTICIPATION WHERE event_id = " + event_id + ";";
+				query = "DELETE FROM WAITING WHERE event_id = " + event_id + ";";
 			}
+			// sinon, on supprime la participation du User choisi pour l'Event choisi
 			else{
 				//Preparation de la requete
-				query = "DELETE FROM PARTICIPATION WHERE user_login = '" + user_login + "' and event_id = " + event_id + ";";
-				// récupération du premier User sur liste d'attente
-				WaitingDAO waitingDAO = new WaitingDAO();
-				String firstWaitingLogin = waitingDAO.getFirstWaiting(event_id);
-				// s'il y a un User en attente
-				if (firstWaitingLogin.equals("") || firstWaitingLogin.isEmpty()) {
-					// on le supprime de la liste d'attente
-					waitingDAO.delete(firstWaitingLogin, event_id);
-					//et on le rajoute à la liste des participants
-					this.insert(firstWaitingLogin, event_id);
-				}
+				query = "DELETE FROM WAITING WHERE event_id = " + event_id + "AND user_login = '" + user_login + "';";
 			}
 
 			//Execute la requÃªte
@@ -129,5 +120,39 @@ public class ParticipationDAO{
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+	}
+
+	/**
+	 * Renvoie le premier qui est sur la liste d'attente d'un événement
+	 *
+	 * @param event_id l'id du Event
+	 * @return user_login the user login
+	 */
+	public String getFirstWaiting(int event_id) {
+		Statement stat = null;
+		String query = "";
+		String ret = "";
+
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			query = "SELECT * FROM WAITING WHERE event_id = " + event_id + " ORDER  BY datetime(waiting_date) ASC LIMIT 1;";
+			
+			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					ret = result.getString(2); //ret = le login du USER qui est sur la liste d'attente depuis le plus longtemps	
+				} 
+				while (result.next());
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+		
+		return ret;
 	}
 }

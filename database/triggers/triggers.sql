@@ -1,6 +1,7 @@
 DROP TRIGGER startDate_after_creatDate;
 DROP TRIGGER event_at_a_school_or_at_a_given_address;
 DROP TRIGGER creaDate_is_current_date;
+DROP TRIGGER waiting_date_is_current_date;
 
 
 -- #######################################################################
@@ -37,5 +38,17 @@ WHEN (creaDate IS NULL)
 BEGIN
     UPDATE EVENT
     SET creaDate = now()
+    WHERE id = NEW.id;
+END;
+
+-- #######################################################################
+-- la date de rentrée dans une liste d'attente = la date actuelle de la forme 'YYYY-MM-DD HH:MM:SS'
+-- #######################################################################
+CREATE TRIGGER waiting_date_is_current_date
+BEFORE INSERT ON WAITING
+WHEN (waiting_date IS NULL)
+BEGIN
+    UPDATE WAITING
+    SET waiting_date = now()
     WHERE id = NEW.id;
 END;
