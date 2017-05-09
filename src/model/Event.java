@@ -328,24 +328,24 @@ public class Event {
 		}
 		// Sinon, on l'ajoute dans la liste d'attente
 		else{
-			//AttenteDAO attente = new AttenteDAO();
-			//attente.insert(attente.getLogin(), this.id)
-			//this.listeAttente = attente.attenteInAnEvent(this.id);
+			WaitingDAO attente = new WaitingDAO();
+			attente.insert(newParticipant.getLogin(), this.id);
+			this.listeAttente = attente.WaitingsForAnEvent(this.id);
 		}
 	}
 	
 	public void supprimerParticipant(User participant){
 		ParticipationDAO participation = new ParticipationDAO();
-		//AttenteDAO attente = new AttenteDAO();
+		WaitingDAO attente = new WaitingDAO();
 		participation.delete(participant.getLogin(), this.id);
 		this.listeParticipants = participation.participationsInAnEvent(this.id);
-		//this.listeAttente = attente.attenteInAnEvent(this.id);
+		this.listeAttente = attente.WaitingsForAnEvent(this.id);
 	}
 	
-	public void supprimerAttente(User attente){
-		//AttenteDAO attente = new AttenteDAO();
-		//attente.delete(attente.getLogin(), this.id)
-		//this.listeAttente = attente.attenteInAnEvent(this.id);
+	public void supprimerAttente(User participant){
+		WaitingDAO attente = new WaitingDAO();
+		attente.delete(participant.getLogin(), this.id);
+		this.listeAttente = attente.WaitingsForAnEvent(this.id);
 	}
 	
 	/* (non-Javadoc)
