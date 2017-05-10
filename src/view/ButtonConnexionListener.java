@@ -23,7 +23,7 @@ public class ButtonConnexionListener implements ActionListener {
 		if (booleanConnexion) {
 			this.screen.getConnected();
 		}else{
-			this.screen.errorConnexion();
+			this.screen.displayError("Connexion Failed : error in login or password ");
 			booleanConnexion = true;
 		}
 	}

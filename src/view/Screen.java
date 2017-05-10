@@ -67,9 +67,8 @@ public class Screen extends JFrame{
 	    this.setVisible(true);
 	}
 	
-	void errorConnexion(){
-	    
-	    JLabel labelError = new JLabel("Connexion Failed : error in login or password ",(Icon) new ImageIcon("i.png"),SwingConstants.LEFT);
+	void displayError(String message){
+	    JLabel labelError = new JLabel(message,(Icon) new ImageIcon("i.png"),SwingConstants.LEFT);
 	    labelError.setBounds(widthScreen/10,0,widthScreen,70);
 	    mainPanel.add(labelError);
 	    
@@ -90,15 +89,16 @@ public class Screen extends JFrame{
 	    
 		this.secondaryPanel = new JPanel();
 		secondaryPanel.setBackground(Color.WHITE);
+	    mainPanel.setLayout(new FlowLayout());
 	    
 		this.getContentPane().add(mainPanel,BorderLayout.WEST);
 		this.getContentPane().add(secondaryPanel,BorderLayout.CENTER);
 		
-		JButton bouton = new EventaryButton("Connexion");
+		JButton bouton = new EventaryButton("Quitter");
 	    mainPanel.add(bouton);
 
 	    JLabel labelConnected = new JLabel("Welcome Home!");
-	    secondaryPanel.add(labelConnected,BorderLayout.CENTER);
+	    secondaryPanel.add(labelConnected);
 	    this.setVisible(true);
 	}
 }
