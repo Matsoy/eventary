@@ -19,11 +19,10 @@ public class ButtonConnexionListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e){
-		System.out.println("Error connexion");
 		if (booleanConnexion) {
-			this.screen.getConnected();
+			this.screen.displayHome();
 		}else{
-			this.screen.displayError("Connexion Failed : error in login or password ");
+			this.screen.displayMessage("Connexion Failed : error in login or password ",Screen.colorEventaryError);
 			booleanConnexion = true;
 		}
 	}

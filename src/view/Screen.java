@@ -8,38 +8,46 @@ import java.lang.*;
 
 public class Screen extends JFrame{
 	
-	private static int widthScreen = 1440;
-	private static int heightScreen = 810;
-	private static int widthText = 150;
-	private static int heightText = 25;
-
-	private static int widthButton = 95;
-	private static int heightButton = 25;
+	public static final int widthScreen = 1440;
+	private static final int heightScreen = 810;
 	
-	private static Color colorEventary = new Color(191,169,120);
-	private static Color colorEventaryError = new Color(214,56,45);
+	private static final int widthText = 150;
+	private static final int heightText = 25;
+
+	private static final int widthButton = 95;
+	private static final int heightButton = 25;
+	
+	private static final int widthMainPanel = 360;
+	
+	public static final Color colorEventary = new Color(191,169,120);
+	public static final Color colorEventaryError = new Color(214,56,45);
 	
 	private JFrame frame;
 	private JPanel mainPanel;
 	private JPanel secondaryPanel;
+	private JPanel messagePanel;
 	
 
 	public Screen(){
-		//Definit un titre pour notre fenetre
 		this.setTitle("Eventary");
-	    //Definit sa taille : 400 pixels de large et 100 pixels de haut
 	    this.setSize(widthScreen,heightScreen);
-	    //Nous demandons maintenant a notre objet de se positionner au centre
 	    this.setLocationRelativeTo(null);
-	    //Termine le processus lorsqu'on clique sur la croix rouge
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setLayout(new BorderLayout());
+	    this.setLayout(null);
+	    this.displayLogin(true);
+	}
+	
+	void displayLogin(boolean firstLogin){
+		if (!(firstLogin)){
+			getContentPane().remove(messagePanel);
+			getContentPane().remove(mainPanel);
+		}
+		
 	    mainPanel = new JPanel();
 	    mainPanel.setBackground(colorEventary);
+	    mainPanel.setBounds(0,0,widthScreen, heightScreen);
 	    mainPanel.setLayout(null);
-	    this.getContentPane().add(mainPanel);
-    
-    
+	    
 	    JTextField login = new JTextField();
 	    login.setHorizontalAlignment(JTextField.CENTER);
 	    login.setBounds((int) (widthScreen/2 - widthText/2),(int) ((heightScreen/2 - heightText/2)-20),widthText,heightText);
@@ -63,42 +71,48 @@ public class Screen extends JFrame{
 		bouton.addActionListener(new ButtonConnexionListener(this));
 	    mainPanel.add(bouton);
 	    
-	    //Et enfin, la rendre visible
+	    mainPanel.setBounds(0,0,widthScreen,heightScreen);
+	    this.getContentPane().add(mainPanel);
 	    this.setVisible(true);
+		repaint();
 	}
 	
-	void displayError(String message){
-	    JLabel labelError = new JLabel(message,(Icon) new ImageIcon("i.png"),SwingConstants.LEFT);
-	    labelError.setBounds(widthScreen/10,0,widthScreen,70);
-	    mainPanel.add(labelError);
+	void displayMessage(String message, Color color){
+		messagePanel = new JPanel();
+		messagePanel.setLayout(null);
+		messagePanel.setBackground(color);
+		messagePanel.setBounds(0,0,widthScreen,40);
 	    
-		JPanel panelError = new JPanel();
-		panelError.setBackground(colorEventaryError);
-		panelError.setBounds(0,0,widthScreen,70);
-	    this.mainPanel.add(panelError);
-	    repaint();
+	    JLabel labelError = new JLabel(message,(Icon) new ImageIcon("i.png"),SwingConstants.LEFT);
+	    labelError.setBounds(50,10,widthScreen,20);
+	    messagePanel.add(labelError);
+	    mainPanel.add(messagePanel);
+		repaint();
 	}
   
-	void getConnected(){
-		repaint(); 
+	void displayHome(){
+		repaint();
+		this.getContentPane().remove(messagePanel);
 		this.getContentPane().remove(mainPanel);
-		this.setLayout(new BorderLayout());
 		mainPanel = new JPanel();
+	    mainPanel.setLayout(null);
 		mainPanel.setBackground(colorEventary);
-		mainPanel.setPreferredSize(new Dimension(360, 810));
+	    mainPanel.setBounds(0,0,widthMainPanel, heightScreen);
 	    
-		this.secondaryPanel = new JPanel();
+		secondaryPanel = new JPanel();
+		secondaryPanel.setBounds(widthMainPanel,0,widthScreen-widthMainPanel, heightScreen);
 		secondaryPanel.setBackground(Color.WHITE);
-	    mainPanel.setLayout(new FlowLayout());
 	    
-		this.getContentPane().add(mainPanel,BorderLayout.WEST);
-		this.getContentPane().add(secondaryPanel,BorderLayout.CENTER);
 		
 		JButton bouton = new EventaryButton("Quitter");
-	    mainPanel.add(bouton);
+		bouton.setBounds((int) (widthMainPanel/2 - widthButton/2),(int) (heightScreen*.87),widthButton,heightButton);
+		bouton.addActionListener(new ButtonDisconnection(this));
+		mainPanel.add(bouton);
 
 	    JLabel labelConnected = new JLabel("Welcome Home!");
 	    secondaryPanel.add(labelConnected);
+		this.getContentPane().add(mainPanel,BorderLayout.WEST);
+		this.getContentPane().add(secondaryPanel,BorderLayout.CENTER);
 	    this.setVisible(true);
 	}
 }
