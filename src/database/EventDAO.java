@@ -1,8 +1,15 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import model.Event;
 
 /**
  * The Class EventDAO.
@@ -15,12 +22,14 @@ import model.*;
  */
 
 public class EventDAO{
+	
+	private java.text.SimpleDateFormat parser;
 
 	/**
 	 * Instantiates a new event DAO.
 	 */
 	public EventDAO() {
-
+		this.parser = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	}
 
 	/**
@@ -48,6 +57,20 @@ public class EventDAO{
 
 			if (result.next() ) {
 				do {
+//					try {
+//						String creatDate
+//						String creatDate
+//						String creatDate
+//						String creatDate
+//						String creatDate
+//						System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+//						java.util.Date today = this.parser.parse(result.getString(5));
+//						System.out.println("Today String = " + this.parser.format(today));
+//						System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+//					} catch (ParseException e) {
+//						e.printStackTrace();
+//					}
+
 					ret.add(new Event()); //ajout du Event à l'ArrayList. Appel du constructeur vide
 					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12)); //initialisaton de les paramètres du retour de la requête
 				} 
@@ -108,16 +131,18 @@ public class EventDAO{
 	public void insert(Event tuple) {
 		Statement stat = null;
 		String query = "";
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 		//Recuperation des attributs de l'objet Event
 		int id = tuple.getId();
 		String title = tuple.getTitle();
 		String desc = tuple.getDescription();
-		java.sql.Timestamp creaDate = tuple.getCreateDate();
-		java.sql.Timestamp startDate = tuple.getStartDate();
-		java.sql.Timestamp endDate = tuple.getEndDate();
-		java.sql.Timestamp modifDate = tuple.getModifDate();
-		java.sql.Timestamp cancelDate = tuple.getCancelDate();
+
+		java.util.Date creaDate = tuple.getCreateDate();
+		java.util.Date startDate = tuple.getStartDate();
+		java.util.Date endDate = tuple.getEndDate();
+		java.util.Date modifDate = tuple.getModifDate();
+		java.util.Date cancelDate = tuple.getCancelDate();
 		int maxNbParticipant = tuple.getMaxNbParticipant();
 		String organizer = tuple.getOrganizer().getLogin();
 		int room_id = tuple.getRoom().getId();
@@ -128,7 +153,7 @@ public class EventDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO EVENT VALUES("+ id +",'"+ title +"','"+ desc +"',"+ creaDate +","+ startDate +","+ endDate +","+ modifDate +","+ cancelDate +","+ maxNbParticipant +","+ organizer +","+ room_id +",'"+ address +"');";
+			query = "INSERT INTO EVENT VALUES("+ id +",'"+ title +"','"+ desc +"',"+ sdf.format(creaDate) +","+ sdf.format(startDate) +","+ sdf.format(endDate) +","+ sdf.format(modifDate) +","+ sdf.format(cancelDate) +","+ maxNbParticipant +","+ organizer +","+ room_id +",'"+ address +"');";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);

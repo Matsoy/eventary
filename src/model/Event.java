@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Timestamp;
 import java.util.*;
 import database.*;
 
@@ -19,19 +18,19 @@ public class Event {
 	String description;
 	
 	/** The create date. */
-	Timestamp createDate;
+	Date createDate;
 	
 	/** The start date. */
-	Timestamp startDate;
+	Date startDate;
 	
 	/** The end date. */
-	Timestamp endDate;
+	Date endDate;
 	
 	/** The modif date. */
-	Timestamp modifDate;
+	Date modifDate;
 	
 	/** The cancel date. */
-	Timestamp cancelDate;	
+	Date cancelDate;	
 	
 	/** The max nb participant. */
 	int maxNbParticipant;
@@ -70,8 +69,8 @@ public class Event {
 	 * @param room the room
 	 * @param address the address
 	 */
-	public void init(int id, String title, String description, Timestamp createDate, Timestamp startDate, Timestamp endDate,
-			Timestamp modifDate, Timestamp cancelDate, int maxNbParticipant, User organizer, Room room,
+	public void init(int id, String title, String description, Date createDate, Date startDate, Date endDate,
+			Date modifDate, Date cancelDate, int maxNbParticipant, User organizer, Room room,
 			String address) {
 		this.id = id;
 		this.title = title;
@@ -146,7 +145,7 @@ public class Event {
 	 *
 	 * @return the creates the date
 	 */
-	public Timestamp getCreateDate() {
+	public Date getCreateDate() {
 		return createDate;
 	}
 
@@ -155,7 +154,7 @@ public class Event {
 	 *
 	 * @param createDate the new creates the date
 	 */
-	public void setCreateDate(Timestamp createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
@@ -164,7 +163,7 @@ public class Event {
 	 *
 	 * @return the start date
 	 */
-	public Timestamp getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
@@ -173,7 +172,7 @@ public class Event {
 	 *
 	 * @param startDate the new start date
 	 */
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -182,7 +181,7 @@ public class Event {
 	 *
 	 * @return the end date
 	 */
-	public Timestamp getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
@@ -191,7 +190,7 @@ public class Event {
 	 *
 	 * @param endDate the new end date
 	 */
-	public void setEndDate(Timestamp endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -200,7 +199,7 @@ public class Event {
 	 *
 	 * @return the modif date
 	 */
-	public Timestamp getModifDate() {
+	public Date getModifDate() {
 		return modifDate;
 	}
 
@@ -209,7 +208,7 @@ public class Event {
 	 *
 	 * @param modifDate the new modif date
 	 */
-	public void setModifDate(Timestamp modifDate) {
+	public void setModifDate(Date modifDate) {
 		this.modifDate = modifDate;
 	}
 
@@ -218,7 +217,7 @@ public class Event {
 	 *
 	 * @return the cancel date
 	 */
-	public Timestamp getCancelDate() {
+	public Date getCancelDate() {
 		return cancelDate;
 	}
 
@@ -227,7 +226,7 @@ public class Event {
 	 *
 	 * @param cancelDate the new cancel date
 	 */
-	public void setCancelDate(Timestamp cancelDate) {
+	public void setCancelDate(Date cancelDate) {
 		this.cancelDate = cancelDate;
 	}
 
