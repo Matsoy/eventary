@@ -76,13 +76,6 @@ public class EventDAO{
 						}
 					}
 
-
-					//						System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
-					//						java.util.Date today = this.parser.parse(result.getString(5));
-					//						System.out.println("Today String = " + this.parser.format(today));
-					//						System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
-
-
 					ret.add(new Event()); //ajout du Event à l'ArrayList. Appel du constructeur vide
 					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12)); //initialisaton de les paramètres du retour de la requête
 				} 
@@ -163,17 +156,20 @@ public class EventDAO{
 		Statement stat = null;
 		String query = "";
 
+		String[] datesStr = new String[5];
 		Date[] dates = new Date[5];
+		dates[0] = tuple.getCreateDate();
+		dates[1] = tuple.getStartDate();
+		dates[2] = tuple.getEndDate();
+		dates[3] = tuple.getModifDate();
+		dates[4] = tuple.getCancelDate();
+
 		for (int i = 0; i < dates.length; i++) {
 			if(dates[i] != null){
-				try {
-					dates[i] = this.parser.parse(datesStr[i]); //TODO
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
+				datesStr[i] = "datetime('" + this.parser.format(dates[i]) + "')";
 			}
 			else{
-				dates[i] = null;
+				datesStr[i] = null;
 			}
 		}
 
@@ -184,13 +180,14 @@ public class EventDAO{
 		String organizer = tuple.getOrganizer().getLogin();
 		int room_id = tuple.getRoom().getId();
 		String address = tuple.getAddress();
+		int maxNbParticipant = tuple.getMaxNbParticipant();
 
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO EVENT VALUES("+ id +",'"+ title +"','"+ desc +"',"+ sdf.format(creaDate) +","+ sdf.format(startDate) +","+ sdf.format(endDate) +","+ sdf.format(modifDate) +","+ sdf.format(cancelDate) +","+ maxNbParticipant +","+ organizer +","+ room_id +",'"+ address +"');";
+			query = "INSERT INTO EVENT VALUES("+ id +",'"+ title +"','"+ desc +"',"+ dates[0] +","+ dates[1] +","+ dates[2] +","+ dates[3] +","+ dates[4] +","+ maxNbParticipant +","+ organizer +","+ room_id +",'"+ address +"');";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);

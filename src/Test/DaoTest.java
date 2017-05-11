@@ -106,5 +106,6 @@ public class DaoTest {
 		System.out.println("\n\t##### test de find");
 		Event event1 = dao6.find(1);
 		System.out.println(event1.toString());
+		System.out.println(event1.getCreateDate().toString());
 	}
 }

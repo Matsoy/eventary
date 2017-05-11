@@ -1,54 +1,70 @@
 DROP TRIGGER startDate_after_creatDate;
 DROP TRIGGER event_at_a_school_or_at_a_given_address;
-DROP TRIGGER creaDate_is_current_date;
+DROP TRIGGER creatDate_is_current_date;
+DROP TRIGGER modifDate_is_current_date;
 DROP TRIGGER waiting_date_is_current_date;
-
-
--- #######################################################################
--- la date de début de l'événemet est après la date de création
--- #######################################################################
-CREATE TRIGGER startDate_after_creatDate
-AFTER UPDATE ON EVENT
-FOR EACH ROW
-BEGIN
-    SELECT CASE
-    WHEN ((SELECT EVENT.id FROM EVENT WHERE (strftime('%s', creaDate) > strftime('%s', startDate))) IS NOT NULL)
-        THEN RAISE(ABORT, 'startDate_after_creatDateERROR: new.creatDate > new.startDate')
-    END;
-END;
-
+DROP TRIGGER endDate_after_startDate;
 
 -- #######################################################################
--- l'événement à lieu dans une école ou à une adresse donnée
+-- avant insertion d'un evenement:: check que l'evenement a lieu dans une ecole o� a une adresse donnee
 -- #######################################################################
 CREATE TRIGGER event_at_a_school_or_at_a_given_address
 BEFORE INSERT ON EVENT
-WHEN ((address IS NULL AND room_id) OR (address IS NOT NULL AND room_id))
+WHEN ((NEW.address IS NULL AND NEW.room_id IS NULL) OR (NEW.address AND NEW.room_id))
 BEGIN
-    SELECT RAISE(ABORT,'event_at_a_school_or_at_a_given_addressERROR: (address and room_id are null) or (address and room_id are not null)');
+    SELECT RAISE(ABORT,'TRIGGER ERROR: (address and room_id are null) or (address and room_id are not null)');
 END;
 
-
 -- #######################################################################
--- la date de création de l'événement = la date actuelle de la forme 'YYYY-MM-DD HH:MM:SS'
+-- apres insertion d'un evenement: la date de creation de l'evenementt = la date actuelle de la forme 'YYYY-MM-DD HH:MM:SS'
 -- #######################################################################
-CREATE TRIGGER creaDate_is_current_date
-BEFORE INSERT ON EVENT
-WHEN (creaDate IS NULL)
+CREATE TRIGGER creatDate_is_current_date
+AFTER INSERT ON EVENT
 BEGIN
     UPDATE EVENT
-    SET creaDate = now()
+    SET creatDate = datetime('NOW')
     WHERE id = NEW.id;
 END;
 
 -- #######################################################################
--- la date de rentr�e dans une liste d'attente = la date actuelle de la forme 'YYYY-MM-DD HH:MM:SS'
+-- apres MAJ d'un evenement:: check que sa date de debut est apres sa date de creation
+-- #######################################################################
+CREATE TRIGGER startDate_after_creatDate
+AFTER UPDATE ON EVENT
+WHEN ( strftime('%s', NEW.creatDate) > strftime('%s',  NEW.startDate) )
+BEGIN
+    SELECT RAISE(ABORT, 'TRIGGER ERROR: creatDate > startDate');
+END;
+
+-- #######################################################################
+-- apres MAJ d'un evenement:: check que sa date de fin est apres sa date de debut
+-- #######################################################################
+CREATE TRIGGER endDate_after_startDate
+AFTER UPDATE ON EVENT
+WHEN ( strftime('%s', NEW.startDate) > strftime('%s',  NEW.endDate) )
+BEGIN
+    SELECT RAISE(ABORT, 'TRIGGER ERROR: startDate > endDate');
+END;
+
+-- #######################################################################
+-- apres MAJ d'un �v�nement: sauvegarde de la date courante de la forme 'YYYY-MM-DD HH:MM:SS'
+-- #######################################################################
+CREATE TRIGGER modifDate_is_current_date
+AFTER UPDATE ON EVENT
+BEGIN
+    UPDATE EVENT
+    SET modifDate = datetime('NOW')
+    WHERE id = NEW.id;
+END;
+
+-- #######################################################################
+-- avant insertion sur liste d'attente: la date de rentree dans une liste d'attente = la date actuelle de la forme 'YYYY-MM-DD HH:MM:SS'
 -- #######################################################################
 CREATE TRIGGER waiting_date_is_current_date
 BEFORE INSERT ON WAITING
 WHEN (waiting_date IS NULL)
 BEGIN
     UPDATE WAITING
-    SET waiting_date = now()
+    SET waiting_date = datetime('NOW')
     WHERE id = NEW.id;
 END;
