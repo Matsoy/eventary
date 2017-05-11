@@ -22,7 +22,7 @@ import model.Event;
  */
 
 public class EventDAO{
-	
+
 	private java.text.SimpleDateFormat parser;
 
 	/**
@@ -57,22 +57,34 @@ public class EventDAO{
 
 			if (result.next() ) {
 				do {
-//					try {
-//						String creatDate
-//						String creatDate
-//						String creatDate
-//						String creatDate
-//						String creatDate
-//						System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
-//						java.util.Date today = this.parser.parse(result.getString(5));
-//						System.out.println("Today String = " + this.parser.format(today));
-//						System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
-//					} catch (ParseException e) {
-//						e.printStackTrace();
-//					}
+					String[] datesStr = new String[5];
+					Date[] dates = new Date[5];
+					for (int i = 0; i < datesStr.length; i++) {
+						datesStr[i] = result.getString(4+i);
+					}
+
+					for (int i = 0; i < datesStr.length; i++) {
+						if(datesStr[i] != null){
+							try {
+								dates[i] = this.parser.parse(datesStr[i]);
+							} catch (ParseException e) {
+								e.printStackTrace();
+							}
+						}
+						else{
+							dates[i] = null;
+						}
+					}
+
+
+					//						System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+					//						java.util.Date today = this.parser.parse(result.getString(5));
+					//						System.out.println("Today String = " + this.parser.format(today));
+					//						System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+
 
 					ret.add(new Event()); //ajout du Event à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -110,7 +122,26 @@ public class EventDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(id_event, result.getString(2), result.getString(3), result.getTimestamp(4), result.getTimestamp(5), result.getTimestamp(6), result.getTimestamp(7), result.getTimestamp(8), result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12));
+					String[] datesStr = new String[5];
+					Date[] dates = new Date[5];
+					for (int i = 0; i < datesStr.length; i++) {
+						datesStr[i] = result.getString(4+i);
+					}
+
+					for (int i = 0; i < datesStr.length; i++) {
+						if(datesStr[i] != null){
+							try {
+								dates[i] = this.parser.parse(datesStr[i]);
+							} catch (ParseException e) {
+								e.printStackTrace();
+							}
+						}
+						else{
+							dates[i] = null;
+						}
+					}
+
+					ret.init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12)); 
 				} 
 				while (result.next());
 			}
@@ -131,19 +162,25 @@ public class EventDAO{
 	public void insert(Event tuple) {
 		Statement stat = null;
 		String query = "";
-		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		Date[] dates = new Date[5];
+		for (int i = 0; i < dates.length; i++) {
+			if(dates[i] != null){
+				try {
+					dates[i] = this.parser.parse(datesStr[i]); //TODO
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			else{
+				dates[i] = null;
+			}
+		}
 
 		//Recuperation des attributs de l'objet Event
 		int id = tuple.getId();
 		String title = tuple.getTitle();
 		String desc = tuple.getDescription();
-
-		java.util.Date creaDate = tuple.getCreateDate();
-		java.util.Date startDate = tuple.getStartDate();
-		java.util.Date endDate = tuple.getEndDate();
-		java.util.Date modifDate = tuple.getModifDate();
-		java.util.Date cancelDate = tuple.getCancelDate();
-		int maxNbParticipant = tuple.getMaxNbParticipant();
 		String organizer = tuple.getOrganizer().getLogin();
 		int room_id = tuple.getRoom().getId();
 		String address = tuple.getAddress();

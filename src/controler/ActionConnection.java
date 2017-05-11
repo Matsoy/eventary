@@ -1,15 +1,17 @@
 package controler;
 
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
+import model.Context;
+import view.Screen;
+
 
 public class ActionConnection extends AbstractAction {
-	model.Context model;
-	view.Screen view;
+	Context model;
+	Screen view;
 	ConnectionControler controler;
 	
-	ActionConnection(model.Context context, view.Screen view, ConnectionControler controler){
+	ActionConnection(Context context, Screen view, ConnectionControler controler){
 		this.model = context;
 		this.view = view;
 		this.controler = controler;

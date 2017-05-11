@@ -7,43 +7,43 @@ import database.*;
  * The Class Event.
  */
 public class Event {
-	
+
 	/** The id. */
 	int id;
-	
+
 	/** The title. */
 	String title;
-	
+
 	/** The description. */
 	String description;
-	
+
 	/** The create date. */
 	Date createDate;
-	
+
 	/** The start date. */
 	Date startDate;
-	
+
 	/** The end date. */
 	Date endDate;
-	
+
 	/** The modif date. */
 	Date modifDate;
-	
+
 	/** The cancel date. */
 	Date cancelDate;	
-	
+
 	/** The max nb participant. */
 	int maxNbParticipant;
-	
+
 	/** The organizer. */
 	User organizer;
-	
+
 	/** The room. */
 	Room room;
-	
+
 	/** The address. */
 	String address;
-	
+
 	List<User> listeParticipants = new ArrayList<User>();
 	List<User> listeAttente = new ArrayList<User>();
 
@@ -52,7 +52,7 @@ public class Event {
 	 */
 	public Event() {	//Constructeur vide
 	}
-	
+
 	/**
 	 * Inits the.
 	 *
@@ -301,7 +301,7 @@ public class Event {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public List<User> getListeParticipants() {
 		return listeParticipants;
 	}
@@ -317,7 +317,7 @@ public class Event {
 	public void setListeAttente(List<User> listeAttente) {
 		this.listeAttente = listeAttente;
 	}
-	
+
 	public void ajouterParticipant(User newParticipant){
 		// Si il y a encore de la place, on ajoute l'utilisateur en tant que participant
 		if(this.listeParticipants.size() < this.maxNbParticipant){
@@ -332,7 +332,7 @@ public class Event {
 			this.listeAttente = attente.WaitingsForAnEvent(this.id);
 		}
 	}
-	
+
 	public void supprimerParticipant(User participant){
 		ParticipationDAO participation = new ParticipationDAO();
 		WaitingDAO attente = new WaitingDAO();
@@ -340,13 +340,13 @@ public class Event {
 		this.listeParticipants = participation.participationsInAnEvent(this.id);
 		this.listeAttente = attente.WaitingsForAnEvent(this.id);
 	}
-	
+
 	public void supprimerAttente(User participant){
 		WaitingDAO attente = new WaitingDAO();
 		attente.delete(participant.getLogin(), this.id);
 		this.listeAttente = attente.WaitingsForAnEvent(this.id);
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -357,5 +357,5 @@ public class Event {
 				+ cancelDate + ", maxNbParticipant=" + maxNbParticipant + ", organizer=" + organizer + ", room="
 				+ room + ", address=" + address + "]";
 	}
-	
+
 }

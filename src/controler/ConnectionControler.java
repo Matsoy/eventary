@@ -1,10 +1,12 @@
 package controler;
 
 import java.util.Observable;
+import model.*;
+import view.*;
 
 public class ConnectionControler implements java.util.Observer{
-	model.Context model;
-	view.Screen view;
+	Context model;
+	Screen view;
 	
 	ConnectionControler(view.Screen view){
 		this.model = new model.Context();
@@ -15,7 +17,7 @@ public class ConnectionControler implements java.util.Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		if(this.model.getAuthentification){
+		if(this.model.getAuthentification()){
 			view.setPanelHome();
 		}else{
 			view.displayConnectionError();
