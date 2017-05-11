@@ -1,19 +1,19 @@
 package model;
 
 import database.*;
-import java.io.*;
+import java.io.File;
 
 public class Context {
 	User currentUser;
 	boolean authentification;	//Sert à savoir si l'authentification à réussi
 	int tempsAvantSuppression;
-
+	
 	public Context(){
 		this.currentUser = null;
 		this.authentification = false;
 		this.tempsAvantSuppression = lireTempsAvantSupp();
 	}
-
+	
 	public int getTempsAvantSuppression() {
 		return tempsAvantSuppression;
 	}
@@ -24,34 +24,12 @@ public class Context {
 
 	public int lireTempsAvantSupp(){
 		int temps = 0;
-		String currentLine = "";	// ligne courante
-		String S = "DurationBeforeDeletion";	// Chaine à retrouver pour avoir le temps
-		int ctr = 0;	// Variable de controle
-
-		try {     
-			BufferedReader br = new BufferedReader(new FileReader("config.txt"));	// Ouverture du fichier pour lecture
-			//lecture du fichier texte 
-			while (((currentLine = br.readLine()) != null) || ctr == 0){
-				if (currentLine.startsWith(S)){   // on a la ligne qui indique le tempsAvantSuppression
-					int index = currentLine.indexOf(":");
-					temps = Integer.parseInt(currentLine.substring(index +2));
-					System.out.println(temps);
-					ctr++;
-				}  
-			}
-
-			if(ctr == 0){
-				System.out.println("ERROR : pas de ligne DurationBeforeDeletion");
-			}
-			br.close();	// On ferme le flux
-		}
-		catch (IOException e)
-		{
-			System.out.println(e.toString());
-		}
+		File config = new File("../../config.txt");
+		System.out.println("Chemin absolu du fichier : " + config.getAbsolutePath());
+		
 		return temps;
 	}
-
+	
 	public boolean connexion(String login, String passwd){
 		UserDAO user = new UserDAO();
 		this.currentUser = user.connect(login, passwd);
@@ -62,8 +40,9 @@ public class Context {
 		this.authentification = true;
 		return this.authentification;
 	}
-
-//	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config
-//		Context context = new Context();
-//	}
+	
+	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config
+		
+	}
+	
 }
