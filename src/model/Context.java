@@ -1,7 +1,7 @@
 package model;
 
 import database.*;
-import java.io.File;
+import java.io.*;
 
 /**
  * The Class Context.
@@ -12,7 +12,7 @@ public class Context {
 	User currentUser;
 	
 	/** The authentification. */
-	boolean authentification;	//Sert à savoir si l'authentification à réussi
+	boolean authentificated;	//Sert à savoir si l'authentification à réussi
 	
 	/** The temps avant suppression. */
 	int tempsAvantSuppression;
@@ -22,8 +22,8 @@ public class Context {
 	 */
 	public Context(){
 		this.currentUser = null;
-		this.authentification = false;
-		this.tempsAvantSuppression = lireTempsAvantSupp();
+		this.authentificated = false;
+		this.tempsAvantSuppression = lireEntier("DurationBeforeDeletion");
 	}
 	
 	
@@ -55,8 +55,8 @@ public class Context {
 	 *
 	 * @return true, if is authentificated
 	 */
-	public boolean getAuthentification() {
-		return authentification;
+	public boolean getAuthentificated() {
+		return authentificated;
 	}
 
 
@@ -66,8 +66,8 @@ public class Context {
 	 *
 	 * @param authentification the new authentification
 	 */
-	public void setAuthentification(boolean authentification) {
-		this.authentification = authentification;
+	public void setAuthentificated(boolean authentification) {
+		this.authentificated = authentification;
 	}
 
 
@@ -95,12 +95,33 @@ public class Context {
 	 *
 	 * @return the int
 	 */
-	public int lireTempsAvantSupp(){
-		int temps = 0;
-		File config = new File("../../config.txt");
-		System.out.println("Chemin absolu du fichier : " + config.getAbsolutePath());
-		
-		return temps;
+	public int lireEntier(String S){	// On passe la chaine à reconnaitre dans le fichier pour m'extraction de donnée
+		int entier = 0;
+		String currentLine = "";	// ligne courante
+		int ctr = 0;	// Variable de controle
+
+		try {     
+			BufferedReader br = new BufferedReader(new FileReader("config.txt"));	// Ouverture du fichier pour lecture
+			//lecture du fichier texte 
+			while (((currentLine = br.readLine()) != null) || ctr == 0){
+				if (currentLine.startsWith(S)){   // on a la ligne qui indique le tempsAvantSuppression
+					int index = (currentLine.indexOf(":")+1);
+					// On supprime les caractères blancs entre les ":" et l'entier à lire 
+					currentLine = currentLine.replaceAll("\\s", "");
+					entier = Integer.parseInt(currentLine.substring(index));
+					System.out.println(entier);
+					ctr++;
+				}  
+			}
+			if(ctr == 0){
+				System.out.println("ERROR : pas de ligne DurationBeforeDeletion");
+			}
+			br.close();	// On ferme le flux
+		} catch (IOException e){
+			System.out.println(e.toString());
+	
+		}
+		return entier;
 	}
 	
 	/**
@@ -114,11 +135,11 @@ public class Context {
 		UserDAO user = new UserDAO();
 		this.currentUser = user.connect(login, passwd);
 		if(null == this.currentUser){	// Si les logs ne sont pas bon, on récupère un user null
-			this.authentification = false;
-			return this.authentification;
+			this.authentificated = false;
+			return this.authentificated;
 		}
-		this.authentification = true;
-		return this.authentification;
+		this.authentificated = true;
+		return this.authentificated;
 	}
 	
 	/**
@@ -127,7 +148,7 @@ public class Context {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config
-		
+		Context context = new Context();
 	}
 	
 }
