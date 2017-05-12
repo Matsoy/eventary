@@ -1,6 +1,7 @@
 -- insertion des User avec les mots de passe en clair
 -- ils seront hashés par la suite 
 --delete from user;
+PRAGMA encoding="UTF-8";
 INSERT INTO USER --mdp = admin
 VALUES ('admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'PrenomAdmin', 'NomAdmin', '', '2019');
 

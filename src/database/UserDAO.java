@@ -2,9 +2,13 @@ package database;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.User;
 
 /**
  * The Class UserDAO.
@@ -30,7 +34,7 @@ public class UserDAO{
 	 *
 	 * @return the result set
 	 */
-	public ArrayList<User> findAll() {
+	public static ArrayList<User> findAll() {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -68,7 +72,7 @@ public class UserDAO{
 	 * @param login_user login de l'User a retrouver
 	 * @return the user
 	 */
-	public User find(String login_user) {
+	public static User find(String login_user) {
 		Statement stat = null;
 		String query = "";
 		User ret = new User();
@@ -107,7 +111,7 @@ public class UserDAO{
 	 * @param passwd_user passwd de l'User a retrouver
 	 * @return l'utilisateur connecté, null sinon
 	 */
-	public User connect(String login_user, String passwd_user) {
+	public static User connect(String login_user, String passwd_user) {
 		Statement stat = null;
 		String query = "";
 		User ret = new User();
@@ -149,7 +153,7 @@ public class UserDAO{
 	 *
 	 * @param tuple Objet de type User a inserer
 	 */
-	public void insert(User tuple) {
+	public static void insert(User tuple) {
 		Statement stat = null;
 		String query = "";
 
@@ -183,7 +187,7 @@ public class UserDAO{
 	 *
 	 * @param login_user login du tuple a supprimer
 	 */
-	public void delete(String login_user) {
+	public static void delete(String login_user) {
 		Statement stat = null;
 		String query = "";
 
@@ -192,8 +196,7 @@ public class UserDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//suppression de toutes les participations du User Ã  des Event
-			ParticipationDAO dao = new ParticipationDAO();
-			dao.delete(login_user, -1);
+			ParticipationDAO.delete(login_user, -1);
 
 			//Preparation de la requete
 			query = "DELETE FROM USER WHERE login = '" + login_user + "';";

@@ -1,4 +1,5 @@
 --DROP TABLE USER;
+PRAGMA encoding="UTF-8";
 CREATE TABLE USER( -- table des utilisateurs
     login text NOT NULL, -- identifiant
     passwd text NOT NULL, -- mot de passe

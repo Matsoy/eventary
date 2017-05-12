@@ -1,4 +1,5 @@
 -- DROP TABLE SITE;
+PRAGMA encoding="UTF-8";
 CREATE TABLE SITE( -- table des sites des écoles
     id integer,
     school_id integer NOT NULL, -- id de l'école où se trouve le site

@@ -1,8 +1,12 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.Building;
 
 /**
  * The Class BuildingDAO.
@@ -28,7 +32,7 @@ public class BuildingDAO{
 	 *
 	 * @return the result set
 	 */
-	public ArrayList<Building> findAll() {
+	public static ArrayList<Building> findAll() {
 		Statement stat = null;
 		String query = "";
 		ArrayList<Building> ret = new ArrayList<Building>();
@@ -48,7 +52,7 @@ public class BuildingDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new Building()); //ajout du Building à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), new SiteDAO().find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), SiteDAO.find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -66,7 +70,7 @@ public class BuildingDAO{
 	 * @param id_building id du Building a retrouver
 	 * @return the building
 	 */
-	public Building find(int id_building) {
+	public static Building find(int id_building) {
 		Statement stat = null;
 		String query = "";
 		Building ret = new Building();
@@ -104,7 +108,7 @@ public class BuildingDAO{
 	 *
 	 * @param tuple Objet de type Building a inserer
 	 */
-	public void insert(Building tuple) {
+	public static void insert(Building tuple) {
 		Statement stat = null;
 		String query = "";
 
@@ -134,7 +138,7 @@ public class BuildingDAO{
 	 *
 	 * @param id_building id du tuple a supprimer
 	 */
-	public void delete(int id_building) {
+	public static void delete(int id_building) {
 		Statement stat = null;
 		String query = "";
 

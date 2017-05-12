@@ -1,8 +1,12 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.User;
 
 /**
  * The Class DepMemberDAO.
@@ -30,7 +34,7 @@ public class DepMemberDAO{
 	 * @param department_id id du Department
 	 * @return the array list
 	 */
-	public ArrayList<User> participationsInAnEvent(int department_id) {
+	public static ArrayList<User> participationsInAnEvent(int department_id) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -50,8 +54,7 @@ public class DepMemberDAO{
 
 			if (result.next() ) {
 				do {
-					UserDAO tmpDAO = new UserDAO(); //création du DAO pour récupérer l'objet User ayant le login de la ligne courante du curseur
-					ret.add(tmpDAO.find(result.getString(2))); //ajout du User à l'ArrayList
+					ret.add(UserDAO.find(result.getString(2))); //ajout du User à l'ArrayList
 				} 
 				while (result.next());
 			}
@@ -70,7 +73,7 @@ public class DepMemberDAO{
 	 * @param user_login le login du User
 	 * @param department_id l'id du Department
 	 */
-	public void insert(String user_login, int department_id) {
+	public static void insert(String user_login, int department_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -96,7 +99,7 @@ public class DepMemberDAO{
 	 * @param user_login le login du User
 	 * @param department_id l'id du Department
 	 */
-	public void delete(String user_login, int department_id) {
+	public static void delete(String user_login, int department_id) {
 		Statement stat = null;
 		String query = "";
 

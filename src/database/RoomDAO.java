@@ -1,8 +1,12 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.Room;
 
 /**
  * The Class RoomDAO.
@@ -28,7 +32,7 @@ public class RoomDAO{
 	 *
 	 * @return the result set
 	 */
-	public ArrayList<Room> findAll() {
+	public static ArrayList<Room> findAll() {
 		Statement stat = null;
 		String query = "";
 		ArrayList<Room> ret = new ArrayList<Room>();
@@ -47,7 +51,7 @@ public class RoomDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new Room()); //ajout du Room à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), new BuildingDAO().find(result.getInt(2)), result.getInt(3), result.getString(4)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), BuildingDAO.find(result.getInt(2)), result.getInt(3), result.getString(4)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -65,7 +69,7 @@ public class RoomDAO{
 	 * @param id_room id de la Room a retrouver
 	 * @return the room
 	 */
-	public Room find(int id_room) {
+	public static Room find(int id_room) {
 		Statement stat = null;
 		String query = "";
 		Room ret = new Room();
@@ -85,7 +89,7 @@ public class RoomDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(id_room, new BuildingDAO().find(result.getInt(2)), result.getInt(3), result.getString(4));
+					ret.init(id_room, BuildingDAO.find(result.getInt(2)), result.getInt(3), result.getString(4));
 				} 
 				while (result.next());
 			}
@@ -103,7 +107,7 @@ public class RoomDAO{
 	 *
 	 * @param tuple Objet de type Room a inserer
 	 */
-	public void insert(Room tuple) {
+	public static void insert(Room tuple) {
 		Statement stat = null;
 		String query = "";
 
@@ -133,7 +137,7 @@ public class RoomDAO{
 	 *
 	 * @param id_room id du tuple a supprimer
 	 */
-	public void delete(int id_room) {
+	public static void delete(int id_room) {
 		Statement stat = null;
 		String query = "";
 

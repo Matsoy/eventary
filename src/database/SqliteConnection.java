@@ -1,14 +1,14 @@
 package database;
 
-import java.sql.*;
-import org.sqlite.*; //import SQLite JDBC
-import model.*;
+import java.sql.DriverManager;
+
+import org.sqlite.SQLiteConfig;
 
 /**
  * The Class SQLiteConnection.
  *
  * @author Mathieu Soyer
- * 
+ * config
  * File: SQLiteConnection.java
  * 
  * Cette classe (type singleton) établit la connexion entre une application Java et une BDD SQLite.
@@ -26,9 +26,13 @@ class SQLiteConnection {
 		path+="/database/eventary.db";
 		this.dsn = "jdbc:sqlite:"+path;
 		System.out.println("BDD: "+ this.dsn);
+		// encoding UTF8
+		SQLiteConfig config = new SQLiteConfig();
+		config.setEncoding(SQLiteConfig.Encoding.UTF8);
 		try {
 			DriverManager.registerDriver(new org.sqlite.JDBC());
-			this.connect = DriverManager.getConnection(this.dsn);
+			this.connect = DriverManager.getConnection(this.dsn, config.toProperties());
+			this.connect.createStatement().executeQuery("SET client_encoding = 'UTF8';");
 			System.out.println( "Connexion reussie" );
 		}
 		catch ( Exception e ) {

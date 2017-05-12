@@ -1,4 +1,5 @@
-DROP TABLE ROOM;
+--DROP TABLE ROOM;
+PRAGMA encoding="UTF-8";
 CREATE TABLE ROOM( -- table des salles
     id integer,
     building_id integer NOT NULL, -- id du batiment où se trouve la salle

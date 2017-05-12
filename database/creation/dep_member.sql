@@ -1,4 +1,5 @@
 -- DROP TABLE DEP_MEMBER;
+PRAGMA encoding="UTF-8";
 CREATE TABLE DEP_MEMBER( -- table associative, entre DEPARTMENT et USER, des membres des départements
     department_id integer NOT NULL, -- id de l'association
     user_login text NOT NULL, -- login de l'utilisateur

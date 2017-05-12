@@ -1,8 +1,12 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.User;
 
 /**
  * The Class WaitingDAO.
@@ -29,7 +33,7 @@ public class WaitingDAO{
 	 * @param id_event id du Event
 	 * @return the array list
 	 */
-	public ArrayList<User> WaitingsForAnEvent(int id_event) {
+	public static ArrayList<User> WaitingsForAnEvent(int id_event) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -49,8 +53,7 @@ public class WaitingDAO{
 
 			if (result.next() ) {
 				do {
-					UserDAO tmpDAO = new UserDAO(); //création du DAO pour récupérer l'objet User ayant le login de la ligne courante du curseur
-					ret.add(tmpDAO.find(result.getString(2))); //ajout du User à l'ArrayList			
+					ret.add(UserDAO.find(result.getString(2))); //ajout du User à l'ArrayList			
 				} 
 				while (result.next());
 			}
@@ -69,7 +72,7 @@ public class WaitingDAO{
 	 * @param user_login le login du User
 	 * @param event_id l'id du Event
 	 */
-	public void insert(String user_login, int event_id) {
+	public static void insert(String user_login, int event_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -95,7 +98,7 @@ public class WaitingDAO{
 	 * @param user_login le login du User
 	 * @param event_id l'id du Event
 	 */
-	public void delete(String user_login, int event_id) {
+	public static void delete(String user_login, int event_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -128,7 +131,7 @@ public class WaitingDAO{
 	 * @param event_id l'id du Event
 	 * @return user_login the user login
 	 */
-	public String getFirstWaiting(int event_id) {
+	public static String getFirstWaiting(int event_id) {
 		Statement stat = null;
 		String query = "";
 		String ret = "";

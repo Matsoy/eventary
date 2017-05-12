@@ -1,9 +1,12 @@
 package database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.*;
+import model.Department;
 
 /**
  * The Class DepartmentDAO.
@@ -29,7 +32,7 @@ public class DepartmentDAO{
 	 *
 	 * @return the result set
 	 */
-	public ArrayList<Department> findAll() {
+	public static ArrayList<Department> findAll() {
 		Statement stat = null;
 		String query = "";
         ArrayList<Department> ret = new ArrayList<Department>();
@@ -67,7 +70,7 @@ public class DepartmentDAO{
 	 * @param id_department id du Department a retrouver
 	 * @return the department
 	 */
-	public Department find(int id_department) {
+	public static Department find(int id_department) {
 		Statement stat = null;
 		String query = "";
 		Department ret = new Department();
@@ -105,7 +108,7 @@ public class DepartmentDAO{
 	 *
 	 * @param tuple Objet de type Department a inserer
 	 */
-	public void insert(Department tuple) {
+	public static void insert(Department tuple) {
 		Statement stat = null;
 		String query = "";
 
@@ -134,7 +137,7 @@ public class DepartmentDAO{
 	 *
 	 * @param id_department id du tuple a supprimer
 	 */
-	public void delete(int id_department) {
+	public static void delete(int id_department) {
 		Statement stat = null;
 		String query = "";
 

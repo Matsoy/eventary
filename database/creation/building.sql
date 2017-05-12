@@ -1,4 +1,5 @@
 -- DROP TABLE BUILDING;
+PRAGMA encoding="UTF-8";
 CREATE TABLE BUILDING( -- table des bâtiments des écoles
     id integer,
     site_id integer NOT NULL, -- id du site où se trouve le bâtiment

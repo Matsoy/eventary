@@ -1,8 +1,12 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.User;
 
 /**
  * The Class ParticipationDAO.
@@ -29,7 +33,7 @@ public class ParticipationDAO{
 	 * @param id_event id du Event
 	 * @return the array list
 	 */
-	public ArrayList<User> participationsInAnEvent(int id_event) {
+	public static ArrayList<User> participationsInAnEvent(int id_event) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -49,8 +53,7 @@ public class ParticipationDAO{
 
 			if (result.next() ) {
 				do {
-					UserDAO tmpDAO = new UserDAO(); //cr√©ation du DAO pour r√©cup√©rer l'objet User ayant le login de la ligne courante du curseur
-					ret.add(tmpDAO.find(result.getString(2))); //ajout du User √† l'ArrayList			
+					ret.add(UserDAO.find(result.getString(2))); //ajout du User √† l'ArrayList			
 				} 
 				while (result.next());
 			}
@@ -69,7 +72,7 @@ public class ParticipationDAO{
 	 * @param user_login le login du User
 	 * @param event_id l'id du Event
 	 */
-	public void insert(String user_login, int event_id) {
+	public static void insert(String user_login, int event_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -95,7 +98,7 @@ public class ParticipationDAO{
 	 * @param user_login le login du User
 	 * @param event_id l'id du Event
 	 */
-	public void delete(String user_login, int event_id) {
+	public static void delete(String user_login, int event_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -112,14 +115,13 @@ public class ParticipationDAO{
 				//Preparation de la requete
 				query = "DELETE FROM PARTICIPATION WHERE user_login = '" + user_login + "' and event_id = " + event_id + ";";
 				// rÈcupÈration du premier User sur liste d'attente
-				WaitingDAO waitingDAO = new WaitingDAO();
-				String firstWaitingLogin = waitingDAO.getFirstWaiting(event_id);
+				String firstWaitingLogin = WaitingDAO.getFirstWaiting(event_id);
 				// s'il y a un User en attente
 				if (firstWaitingLogin.equals("") || firstWaitingLogin.isEmpty()) {
 					// on le supprime de la liste d'attente
-					waitingDAO.delete(firstWaitingLogin, event_id);
+					WaitingDAO.delete(firstWaitingLogin, event_id);
 					//et on le rajoute ‡ la liste des participants
-					this.insert(firstWaitingLogin, event_id);
+					insert(firstWaitingLogin, event_id);
 				}
 			}
 

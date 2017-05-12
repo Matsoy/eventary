@@ -1,4 +1,5 @@
 -- DROP TABLE PARTICIPATION;
+PRAGMA encoding="UTF-8";
 CREATE TABLE PARTICIPATION( -- table associative, entre EVENT et USER, des participations
     event_id integer NOT NULL, -- id de l'événement
     user_login text NOT NULL, -- login de l'utilisateur

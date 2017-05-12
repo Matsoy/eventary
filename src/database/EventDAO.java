@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,13 +22,13 @@ import model.Event;
 
 public class EventDAO{
 
-	private java.text.SimpleDateFormat parser;
+	private static java.text.SimpleDateFormat parser = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	/**
 	 * Instantiates a new event DAO.
 	 */
 	public EventDAO() {
-		this.parser = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
 	}
 
 	/**
@@ -37,7 +36,7 @@ public class EventDAO{
 	 *
 	 * @return the result set
 	 */
-	public ArrayList<Event> findAll() {
+	public static ArrayList<Event> findAll() {
 		Statement stat = null;
 		String query = "";
 		ArrayList<Event> ret = new ArrayList<Event>();
@@ -66,7 +65,7 @@ public class EventDAO{
 					for (int i = 0; i < datesStr.length; i++) {
 						if(datesStr[i] != null){
 							try {
-								dates[i] = this.parser.parse(datesStr[i]);
+								dates[i] = parser.parse(datesStr[i]);
 							} catch (ParseException e) {
 								e.printStackTrace();
 							}
@@ -77,7 +76,7 @@ public class EventDAO{
 					}
 
 					ret.add(new Event()); //ajout du Event à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), RoomDAO.find(result.getInt(11)), result.getString(12)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -95,7 +94,7 @@ public class EventDAO{
 	 * @param id_event id de l'Event a retrouver
 	 * @return the event
 	 */
-	public Event find(int id_event) {
+	public static Event find(int id_event) {
 		Statement stat = null;
 		String query = "";
 		Event ret = new Event();
@@ -124,7 +123,7 @@ public class EventDAO{
 					for (int i = 0; i < datesStr.length; i++) {
 						if(datesStr[i] != null){
 							try {
-								dates[i] = this.parser.parse(datesStr[i]);
+								dates[i] = parser.parse(datesStr[i]);
 							} catch (ParseException e) {
 								e.printStackTrace();
 							}
@@ -134,7 +133,7 @@ public class EventDAO{
 						}
 					}
 
-					ret.init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), new UserDAO().find(result.getString(10)), new RoomDAO().find(result.getInt(11)), result.getString(12)); 
+					ret.init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), RoomDAO.find(result.getInt(11)), result.getString(12)); 
 				} 
 				while (result.next());
 			}
@@ -152,7 +151,7 @@ public class EventDAO{
 	 *
 	 * @param tuple Objet de type Event a inserer
 	 */
-	public void insert(Event tuple) {
+	public static void insert(Event tuple) {
 		Statement stat = null;
 		String query = "";
 
@@ -166,7 +165,7 @@ public class EventDAO{
 
 		for (int i = 0; i < dates.length; i++) {
 			if(dates[i] != null){
-				datesStr[i] = "datetime('" + this.parser.format(dates[i]) + "')";
+				datesStr[i] = "datetime('" + parser.format(dates[i]) + "')";
 			}
 			else{
 				datesStr[i] = null;
@@ -203,7 +202,7 @@ public class EventDAO{
 	 *
 	 * @param id_event id du tuple a supprimer
 	 */
-	public void delete(int id_event) {
+	public static void delete(int id_event) {
 		Statement stat = null;
 		String query = "";
 
@@ -212,8 +211,7 @@ public class EventDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//suppression de toutes les participations à  cet Event
-			ParticipationDAO dao = new ParticipationDAO();
-			dao.delete("", id_event);
+			ParticipationDAO.delete("", id_event);
 
 			//Preparation de la requete
 			query = "DELETE FROM EVENT WHERE id = " + id_event + ";";

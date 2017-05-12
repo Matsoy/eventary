@@ -1,4 +1,5 @@
--- DROP TABLE EVENT;
+--DROP TABLE EVENT;
+PRAGMA encoding="UTF-8";
 CREATE TABLE EVENT( -- table des événements
     id integer,
     title text NOT NULL, -- titre

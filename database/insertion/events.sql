@@ -1,3 +1,5 @@
+--delete from event;
+PRAGMA encoding="UTF-8";
 INSERT INTO EVENT (title, descr, startDate, endDate, maxNbParticipant, organizer, room_id) --dans Ireste
 VALUES ('Premier evenement!', 'Ceci est une courte description de ce premier evenement. Voila, rien de plus', datetime('2017-05-12 10:30:00'), datetime('2017-05-14 16:15:00'), 4, 'E168011W', 31);
 
@@ -9,6 +11,7 @@ VALUES ('3eme evenement!', 'Ceci est une courte description de ce 3eme evenement
 
 INSERT INTO EVENT (title, descr, startDate, endDate, maxNbParticipant, organizer, address) --à une adresse extérieure à une école
 VALUES ('4eme evenement!', 'Ceci est une courte description de ce 3eme evenement. Jamais 3 sans 4!', datetime('2017-05-12 21:30:00'), datetime('2017-05-13 00:30:00'), 25, 'E167998G', '4 Rue Lebrun, 44000 Nantes');
+
 
 --TRIGGER ERROR: creatDate > startDate
 --

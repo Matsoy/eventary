@@ -1,8 +1,12 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.Association;
 
 /**
  * The Class AssociationDAO.
@@ -28,7 +32,7 @@ public class AssociationDAO{
 	 *
 	 * @return the result set
 	 */
-	public ArrayList<Association> findAll() {
+	public static ArrayList<Association> findAll() {
 		Statement stat = null;
 		String query = "";
 		ArrayList<Association> ret = new ArrayList<Association>();
@@ -66,7 +70,7 @@ public class AssociationDAO{
 	 * @param id_association id du Association a retrouver
 	 * @return the association
 	 */
-	public Association find(int id_association) {
+	public static Association find(int id_association) {
 		Statement stat = null;
 		String query = "";
 		Association ret = new Association();
@@ -104,7 +108,7 @@ public class AssociationDAO{
 	 *
 	 * @param tuple Objet de type Association a inserer
 	 */
-	public void insert(Association tuple) {
+	public static void insert(Association tuple) {
 		Statement stat = null;
 		String query = "";
 
@@ -133,7 +137,7 @@ public class AssociationDAO{
 	 *
 	 * @param id_association id du tuple a supprimer
 	 */
-	public void delete(int id_association) {
+	public static void delete(int id_association) {
 		Statement stat = null;
 		String query = "";
 

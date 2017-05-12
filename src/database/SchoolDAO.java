@@ -1,8 +1,12 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.School;
 
 /**
  * The Class SchoolDAO.
@@ -28,7 +32,7 @@ public class SchoolDAO{
      *
      * @return the result set
      */
-    public ArrayList<School> findAll() {
+    public static ArrayList<School> findAll() {
         Statement stat = null;
         String query = "";
         ArrayList<School> ret = new ArrayList<School>();
@@ -66,7 +70,7 @@ public class SchoolDAO{
      * @param id_school id du School a retrouver
      * @return the school
      */
-    public School find(int id_school) {
+    public static School find(int id_school) {
         Statement stat = null;
         String query = "";
         School ret = new School();
@@ -104,7 +108,7 @@ public class SchoolDAO{
      *
      * @param tuple Objet de type School a inserer
      */
-    public void insert(School tuple) {
+    public static void insert(School tuple) {
         Statement stat = null;
         String query = "";
 
@@ -133,7 +137,7 @@ public class SchoolDAO{
      *
      * @param id_school id du tuple a supprimer
      */
-    public void delete(int id_school) {
+    public static void delete(int id_school) {
         Statement stat = null;
         String query = "";
 

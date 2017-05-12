@@ -88,8 +88,7 @@ public class Context {
 	 * @return true, if successful
 	 */
 	public boolean connexion(String login, String passwd){
-		UserDAO user = new UserDAO();
-		this.currentUser = user.connect(login, passwd);
+		this.currentUser = UserDAO.connect(login, passwd);
 		if(null == this.currentUser){	// Si les logs ne sont pas bon, on récupère un user null
 			this.authentificated = false;
 			return this.authentificated;

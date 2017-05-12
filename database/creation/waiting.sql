@@ -1,4 +1,5 @@
 --DROP TABLE WAITING;
+PRAGMA encoding="UTF-8";
 CREATE TABLE WAITING( -- table associative, entre EVENT et USER, des USER sur la liste d'attente d'un EVENT
     event_id integer NOT NULL, -- id de l'événement
     user_login text NOT NULL, -- login de l'utilisateur

@@ -1,4 +1,5 @@
 -- DROP TABLE ASSO_MEMBER;
+PRAGMA encoding="UTF-8";
 CREATE TABLE ASSO_MEMBER( -- table associative, entre ASSOCIATION et USER, des membres des associations
     association_id integer NOT NULL, -- id de l'association
     user_login text NOT NULL, -- login de l'utilisateur

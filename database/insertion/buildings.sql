@@ -1,3 +1,4 @@
+PRAGMA encoding="UTF-8";
 INSERT INTO BUILDING (site_id, name)
 VALUES (1, 'IHT');
 

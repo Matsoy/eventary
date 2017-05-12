@@ -1,8 +1,12 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.Site;
 
 /**
  * The Class SiteDAO.
@@ -28,7 +32,7 @@ public class SiteDAO{
      *
      * @return the result set
      */
-    public ArrayList<Site> findAll() {
+    public static ArrayList<Site> findAll() {
         Statement stat = null;
         String query = "";
         ArrayList<Site> ret = new ArrayList<Site>();
@@ -48,7 +52,7 @@ public class SiteDAO{
 			if (result.next() ) {
 				do {
                 	ret.add(new Site()); //ajout du Site à l'ArrayList. Appel du constructeur vide
-                    ret.get(ret.size()-1).init(result.getInt(1), new SchoolDAO().find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
+                    ret.get(ret.size()-1).init(result.getInt(1), SchoolDAO.find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -66,7 +70,7 @@ public class SiteDAO{
      * @param id_site id du Site a retrouver
      * @return the site
      */
-    public Site find(int id_site) {
+    public static Site find(int id_site) {
         Statement stat = null;
         String query = "";
         Site ret = new Site();
@@ -86,7 +90,7 @@ public class SiteDAO{
 
 			if (result.next() ) {
 				do {
-	                ret.init(id_site, new SchoolDAO().find(result.getInt(2)), result.getString(3));
+	                ret.init(id_site, SchoolDAO.find(result.getInt(2)), result.getString(3));
 				} 
 				while (result.next());
 			}
@@ -104,7 +108,7 @@ public class SiteDAO{
      *
      * @param tuple Objet de type Site a inserer
      */
-    public void insert(Site tuple) {
+    public static void insert(Site tuple) {
         Statement stat = null;
         String query = "";
 
@@ -134,7 +138,7 @@ public class SiteDAO{
      *
      * @param id_site id du tuple a supprimer
      */
-    public void delete(int id_site) {
+    public static void delete(int id_site) {
         Statement stat = null;
         String query = "";
 

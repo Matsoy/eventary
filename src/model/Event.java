@@ -321,30 +321,25 @@ public class Event {
 	public void ajouterParticipant(User newParticipant){
 		// Si il y a encore de la place, on ajoute l'utilisateur en tant que participant
 		if(this.listeParticipants.size() < this.maxNbParticipant){
-			ParticipationDAO participant = new ParticipationDAO();
-			participant.insert(newParticipant.getLogin(), this.id);
-			this.listeParticipants = participant.participationsInAnEvent(this.id);	
+			ParticipationDAO.insert(newParticipant.getLogin(), this.id);
+			this.listeParticipants = ParticipationDAO.participationsInAnEvent(this.id);	
 		}
 		// Sinon, on l'ajoute dans la liste d'attente
 		else{
-			WaitingDAO attente = new WaitingDAO();
-			attente.insert(newParticipant.getLogin(), this.id);
-			this.listeAttente = attente.WaitingsForAnEvent(this.id);
+			WaitingDAO.insert(newParticipant.getLogin(), this.id);
+			this.listeAttente = WaitingDAO.WaitingsForAnEvent(this.id);
 		}
 	}
 
 	public void supprimerParticipant(User participant){
-		ParticipationDAO participation = new ParticipationDAO();
-		WaitingDAO attente = new WaitingDAO();
-		participation.delete(participant.getLogin(), this.id);
-		this.listeParticipants = participation.participationsInAnEvent(this.id);
-		this.listeAttente = attente.WaitingsForAnEvent(this.id);
+		ParticipationDAO.delete(participant.getLogin(), this.id);
+		this.listeParticipants = ParticipationDAO.participationsInAnEvent(this.id);
+		this.listeAttente = WaitingDAO.WaitingsForAnEvent(this.id);
 	}
 
 	public void supprimerAttente(User participant){
-		WaitingDAO attente = new WaitingDAO();
-		attente.delete(participant.getLogin(), this.id);
-		this.listeAttente = attente.WaitingsForAnEvent(this.id);
+		WaitingDAO.delete(participant.getLogin(), this.id);
+		this.listeAttente = WaitingDAO.WaitingsForAnEvent(this.id);
 	}
 
 	/* (non-Javadoc)

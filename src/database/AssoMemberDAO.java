@@ -1,8 +1,12 @@
 package database;
 
-import java.sql.*;
-import java.util.*;
-import model.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.User;
 
 /**
  * The Class AssoMemberDAO.
@@ -50,8 +54,7 @@ public class AssoMemberDAO{
 
 			if (result.next() ) {
 				do {
-					UserDAO tmpDAO = new UserDAO(); //création du DAO pour récupérer l'objet User ayant le login de la ligne courante du curseur
-					ret.add(tmpDAO.find(result.getString(2))); //ajout du User à l'ArrayList
+					ret.add(UserDAO.find(result.getString(2))); //ajout du User à l'ArrayList
 				} 
 				while (result.next());
 			}
@@ -70,7 +73,7 @@ public class AssoMemberDAO{
 	 * @param user_login le login du User
 	 * @param association_id id du Association
 	 */
-	public void insert(String user_login, int association_id) {
+	public static void insert(String user_login, int association_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -96,7 +99,7 @@ public class AssoMemberDAO{
 	 * @param user_login le login du User
 	 * @param association_id id du Association
 	 */
-	public void delete(String user_login, int association_id) {
+	public static void delete(String user_login, int association_id) {
 		Statement stat = null;
 		String query = "";
 

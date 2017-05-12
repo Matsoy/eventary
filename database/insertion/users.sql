@@ -1,3 +1,4 @@
+PRAGMA encoding="UTF-8";
 -- insertion des User avec les mots de passe en clair
 -- ils seront hashés par la suite 
 --delete from user;
