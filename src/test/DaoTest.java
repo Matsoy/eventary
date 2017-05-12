@@ -1,8 +1,23 @@
 package test;
 
 import java.util.ArrayList;
-import database.*;
-import model.*;
+
+import database.AssociationDAO;
+import database.BuildingDAO;
+import database.DepartmentDAO;
+import database.EventDAO;
+import database.RoomDAO;
+import database.SchoolDAO;
+import database.SiteDAO;
+import database.UserDAO;
+import model.Association;
+import model.Building;
+import model.Department;
+import model.Event;
+import model.Room;
+import model.School;
+import model.Site;
+import model.User;
 
 /**
  * The Class DaoTest.
@@ -18,94 +33,115 @@ public class DaoTest {
 		System.out.println("\n\t########################################");
 		System.out.println("\t########## test de RoomDAO");
 		System.out.println("\t########################################");
-		RoomDAO dao1 = new RoomDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<Room> rooms = new ArrayList<Room>();
-		rooms = dao1.findAll();
+		rooms = RoomDAO.findAll();
 		for(Room r: rooms){
 			System.out.println(r.toString());
 		}
 		System.out.println("\n\t##### test de find");
-		Room room55 = dao1.find(55);
+		Room room55 = RoomDAO.find(55);
 		System.out.println(room55.toString());
 
 
 		System.out.println("\n\t########################################");
 		System.out.println("\t########## test de BuildingDAO");
 		System.out.println("\t########################################");
-		BuildingDAO dao2 = new BuildingDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<Building> buildings = new ArrayList<Building>();
-		buildings = dao2.findAll();
+		buildings = BuildingDAO.findAll();
 		for(Building b: buildings){
 			System.out.println(b.toString());
 		}
 		System.out.println("\n\t##### test de find");
-		Building building2 = dao2.find(2);
+		Building building2 = BuildingDAO.find(2);
 		System.out.println(building2.toString());
 
 
 		System.out.println("\n\t########################################");
 		System.out.println("\t########## test de SiteDAO");
 		System.out.println("\t########################################");
-		SiteDAO dao3 = new SiteDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<Site> sites = new ArrayList<Site>();
-		sites = dao3.findAll();
+		sites = SiteDAO.findAll();
 		for(Site s: sites){
 			System.out.println(s.toString());
 		}
 		System.out.println("\n\t##### test de find");
-		Site site2 = dao3.find(2);
+		Site site2 = SiteDAO.find(2);
 		System.out.println(site2.toString());
 
 
 		System.out.println("\n\t########################################");
 		System.out.println("\t########## test de SchoolDAO");
 		System.out.println("\t########################################");
-		SchoolDAO dao4 = new SchoolDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<School> schools = new ArrayList<School>();
-		schools = dao4.findAll();
+		schools = SchoolDAO.findAll();
 		for(School s: schools){
 			System.out.println(s.toString());
 		}
 		System.out.println("\n\t##### test de find");
-		School school1 = dao4.find(1);
+		School school1 = SchoolDAO.find(1);
 		System.out.println(school1.toString());
 
 
 		System.out.println("\n\t########################################");
 		System.out.println("\t########## test de UserDAO");
 		System.out.println("\t########################################");
-		UserDAO dao5 = new UserDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<User> users = new ArrayList<User>();
-		users = dao5.findAll();
+		users = UserDAO.findAll();
 		for(User u: users){
 			System.out.println(u.toString());
 		}
 		System.out.println("\n\t##### test de find");
-		User user2 = dao5.find("E168011W");
+		User user2 = UserDAO.find("E168011W");
 		System.out.println(user2.toString());
 		System.out.println("\n\t##### test de connect");
-		user2 = dao5.connect("E168011W", UserDAO.generateHash("petitkiwi"));
+		user2 = UserDAO.connect("E168011W", UserDAO.generateHash("petitkiwi"));
 		System.out.println(user2.toString());
-		
-		
+
+
 		System.out.println("\n\t########################################");
 		System.out.println("\t########## test de EventDAO");
 		System.out.println("\t########################################");
-		EventDAO dao6 = new EventDAO();
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<Event> events = new ArrayList<Event>();
-		events = dao6.findAll();
+		events = EventDAO.findAll();
 		for(Event e: events){
 			System.out.println(e.toString());
 		}
 		System.out.println("\n\t##### test de find");
-		Event event1 = dao6.find(1);
+		Event event1 = EventDAO.find(1);
 		System.out.println(event1.toString());
-		System.out.println(event1.getCreateDate().toString());
+
+
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de DepartmentDAO");
+		System.out.println("\t########################################");
+		System.out.println("\n\t##### test de findAll");
+		ArrayList<Department> departments = new ArrayList<Department>();
+		departments = DepartmentDAO.findAll();
+		for(Department d: departments){
+			System.out.println(d.toString());
+		}
+		System.out.println("\n\t##### test de find");
+		Department dep1 = DepartmentDAO.find(1);
+		System.out.println(dep1.toString());
+
+
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de AssociationDAO");
+		System.out.println("\t########################################");
+		System.out.println("\n\t##### test de findAll");
+		ArrayList<Association> associations = new ArrayList<Association>();
+		associations = AssociationDAO.findAll();
+		for(Association a: associations){
+			System.out.println(a.toString());
+		}
+		System.out.println("\n\t##### test de find");
+		Association association4 = AssociationDAO.find(4);
+		System.out.println(association4.toString());
 	}
 }
