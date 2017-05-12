@@ -1,7 +1,7 @@
 package model;
 
 import database.*;
-import java.io.*;
+import input_output.*;
 
 /**
  * The Class Context.
@@ -23,11 +23,9 @@ public class Context {
 	public Context(){
 		this.currentUser = null;
 		this.authentificated = false;
-		this.tempsAvantSuppression = lireEntier("DurationBeforeDeletion");
+		this.tempsAvantSuppression = Reader.readInteger("DurationBeforeDeletion");
 	}
-	
-	
-	
+
 	/**
 	 * Gets the current user.
 	 *
@@ -36,8 +34,6 @@ public class Context {
 	public User getCurrentUser() {
 		return currentUser;
 	}
-
-
 
 	/**
 	 * Sets the current user.
@@ -48,8 +44,6 @@ public class Context {
 		this.currentUser = currentUser;
 	}
 
-
-
 	/**
 	 * Checks if is authentification.
 	 *
@@ -59,8 +53,6 @@ public class Context {
 		return authentificated;
 	}
 
-
-
 	/**
 	 * Sets the authentification.
 	 *
@@ -69,8 +61,6 @@ public class Context {
 	public void setAuthentificated(boolean authentification) {
 		this.authentificated = authentification;
 	}
-
-
 
 	/**
 	 * Gets the temps avant suppression.
@@ -88,40 +78,6 @@ public class Context {
 	 */
 	public void setTempsAvantSuppression(int tempsAvantSuppression) {
 		this.tempsAvantSuppression = tempsAvantSuppression;
-	}
-
-	/**
-	 * Lire temps avant supp.
-	 *
-	 * @return the int
-	 */
-	public int lireEntier(String S){	// On passe la chaine à reconnaitre dans le fichier pour m'extraction de donnée
-		int entier = 0;
-		String currentLine = "";	// ligne courante
-		int ctr = 0;	// Variable de controle
-
-		try {     
-			BufferedReader br = new BufferedReader(new FileReader("config.txt"));	// Ouverture du fichier pour lecture
-			//lecture du fichier texte 
-			while (((currentLine = br.readLine()) != null) || ctr == 0){
-				if (currentLine.startsWith(S)){   // on a la ligne qui indique le tempsAvantSuppression
-					int index = (currentLine.indexOf(":")+1);
-					// On supprime les caractères blancs entre les ":" et l'entier à lire 
-					currentLine = currentLine.replaceAll("\\s", "");
-					entier = Integer.parseInt(currentLine.substring(index));
-					System.out.println(entier);
-					ctr++;
-				}  
-			}
-			if(ctr == 0){
-				System.out.println("ERROR : pas de ligne DurationBeforeDeletion");
-			}
-			br.close();	// On ferme le flux
-		} catch (IOException e){
-			System.out.println(e.toString());
-	
-		}
-		return entier;
 	}
 	
 	/**
@@ -142,13 +98,7 @@ public class Context {
 		return this.authentificated;
 	}
 	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config
-		Context context = new Context();
-	}
-	
+//	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config
+//		Context context = new Context();
+//	}
 }
