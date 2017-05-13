@@ -46,7 +46,7 @@ public class ParticipationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT user_login FROM PARTICIPATION WHERE event_id = " + id_event + ";";
+			query = "SELECT * FROM PARTICIPATION WHERE event_id = " + id_event + ";";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);

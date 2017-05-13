@@ -8,10 +8,12 @@ import database.BuildingDAO;
 import database.DepMemberDAO;
 import database.DepartmentDAO;
 import database.EventDAO;
+import database.ParticipationDAO;
 import database.RoomDAO;
 import database.SchoolDAO;
 import database.SiteDAO;
 import database.UserDAO;
+import database.WaitingDAO;
 import model.Association;
 import model.Building;
 import model.Department;
@@ -145,8 +147,8 @@ public class DaoTest {
 		System.out.println("\n\t##### test de find");
 		Association association4 = AssociationDAO.find(4);
 		System.out.println(association4.toString());
-		
-		
+
+
 		System.out.println("\n\t########################################");
 		System.out.println("\t########## test de AssoMemberDAO");
 		System.out.println("\t########################################");
@@ -156,8 +158,8 @@ public class DaoTest {
 		for(User am: assomembers2){
 			System.out.println(am.toString());
 		}
-		
-		
+
+
 		System.out.println("\n\t########################################");
 		System.out.println("\t########## test de DepMemberDAO");
 		System.out.println("\t########################################");
@@ -167,8 +169,30 @@ public class DaoTest {
 		for(User dm: depmembers1){
 			System.out.println(dm.toString());
 		}
+
+
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de ParticipationDAO");
+		System.out.println("\t########################################");
+		System.out.println("\n\t##### test de participationsInAnEvent");
+		ArrayList<User> participation1 = new ArrayList<User>();
+		participation1 = ParticipationDAO.participationsInAnEvent(1);
+		for(User p: participation1){
+			System.out.println(p.toString());
+		}
 		
 		
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de WaitingDAO");
+		System.out.println("\t########################################");
+		System.out.println("\n\t##### test de WaitingsForAnEvent");
+		ArrayList<User> waitings1 = new ArrayList<User>();
+		waitings1 = WaitingDAO.waitingsForAnEvent(1);
+		for(User w: waitings1){
+			System.out.println(w.toString());
+		}
+
+
 
 	}
 }

@@ -47,6 +47,3 @@ VALUES (4, 'E999979F');
 INSERT INTO PARTICIPATION
 VALUES (4, 'E114111A');
 
-inserer ca + faire le DAO + faire pareil pour WAITING
-
-

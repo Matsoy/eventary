@@ -327,19 +327,19 @@ public class Event {
 		// Sinon, on l'ajoute dans la liste d'attente
 		else{
 			WaitingDAO.insert(newParticipant.getLogin(), this.id);
-			this.listeAttente = WaitingDAO.WaitingsForAnEvent(this.id);
+			this.listeAttente = WaitingDAO.waitingsForAnEvent(this.id);
 		}
 	}
 
 	public void supprimerParticipant(User participant){
 		ParticipationDAO.delete(participant.getLogin(), this.id);
 		this.listeParticipants = ParticipationDAO.participationsInAnEvent(this.id);
-		this.listeAttente = WaitingDAO.WaitingsForAnEvent(this.id);
+		this.listeAttente = WaitingDAO.waitingsForAnEvent(this.id);
 	}
 
 	public void supprimerAttente(User participant){
 		WaitingDAO.delete(participant.getLogin(), this.id);
-		this.listeAttente = WaitingDAO.WaitingsForAnEvent(this.id);
+		this.listeAttente = WaitingDAO.waitingsForAnEvent(this.id);
 	}
 
 	/* (non-Javadoc)

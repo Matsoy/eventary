@@ -33,7 +33,7 @@ public class WaitingDAO{
 	 * @param id_event id du Event
 	 * @return the array list
 	 */
-	public static ArrayList<User> WaitingsForAnEvent(int id_event) {
+	public static ArrayList<User> waitingsForAnEvent(int id_event) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -46,7 +46,7 @@ public class WaitingDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT user_login FROM WAITING WHERE event_id = " + id_event + ";";
+			query = "SELECT * FROM WAITING WHERE event_id = " + id_event + ";";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
