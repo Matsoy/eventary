@@ -317,8 +317,17 @@ public class Event {
 	public void setListeAttente(List<User> listeAttente) {
 		this.listeAttente = listeAttente;
 	}
-
-	public void ajouterParticipant(User newParticipant){
+	
+	public static void removeEvent(User remover, Event eventToDelete){	// Prévoir qu'une orga peut supprimer un event
+		if(remover == eventToDelete.getOrganizer()){	//Si un organisateur supprimer son événement
+			EventDAO.delete(eventToDelete.getId());
+		} else if(remover.getModerator() == true){	// Si un modérateur supprime un événement
+			EventDAO.delete(eventToDelete.getId());
+			System.out.println("Suppression de l'event par le modérateur " + remover.getLogin());
+		}
+	}
+	
+	public void addParticipant(User newParticipant){
 		// Si il y a encore de la place, on ajoute l'utilisateur en tant que participant
 		if(this.listeParticipants.size() < this.maxNbParticipant){
 			ParticipationDAO.insert(newParticipant.getLogin(), this.id);
@@ -331,13 +340,13 @@ public class Event {
 		}
 	}
 
-	public void supprimerParticipant(User participant){
+	public void removeParticipant(User participant){
 		ParticipationDAO.delete(participant.getLogin(), this.id);
 		this.listeParticipants = ParticipationDAO.participationsInAnEvent(this.id);
 		this.listeAttente = WaitingDAO.waitingsForAnEvent(this.id);
 	}
 
-	public void supprimerAttente(User participant){
+	public void removePendingParticipant(User participant){
 		WaitingDAO.delete(participant.getLogin(), this.id);
 		this.listeAttente = WaitingDAO.waitingsForAnEvent(this.id);
 	}
