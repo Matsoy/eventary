@@ -54,7 +54,7 @@ public class UserDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new User()); //ajout du User à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getString(1), result.getString(2), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getString(1), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7)); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -92,7 +92,7 @@ public class UserDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(login_user, result.getString(2), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+					ret.init(login_user, result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
 				} 
 				while (result.next());
 			}
@@ -132,7 +132,7 @@ public class UserDAO{
 			//Si le resultat est bon, prends la premiere ligne
 			if (result.next() ) {
 				do {
-					ret.init(login_user, passwd_user, result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+					ret.init(login_user, result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
 				} 
 				while (result.next());
 			}
@@ -152,14 +152,14 @@ public class UserDAO{
 	 * Methode qui permet d'inserer un tuple.
 	 *
 	 * @param tuple Objet de type User a inserer
+	 * @param passwd le mdp de l'utilisateur
 	 */
-	public static void insert(User tuple) {
+	public static void insert(User tuple, String passwd) {
 		Statement stat = null;
 		String query = "";
 
 		//Recuperation des attributs de l'objet User
 		String login = tuple.getLogin();
-		String passwd = tuple.getPasswd();
 		boolean moderator = tuple.getModerator();
 		String fName = tuple.getfName();
 		String lName = tuple.getlName();

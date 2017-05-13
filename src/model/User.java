@@ -8,9 +8,6 @@ public class User {
 	/** The login. */
 	String login;
 	
-	/** The passwd. */
-	String passwd;
-	
 	/** The moderator. */
 	boolean moderator;
 	
@@ -36,16 +33,14 @@ public class User {
 	 * Inits the.
 	 *
 	 * @param login the login
-	 * @param passwd the passwd
 	 * @param moderator the moderator
 	 * @param fName the f name
 	 * @param lName the l name
 	 * @param branch the branch
 	 * @param year the year
 	 */
-	public void init(String login, String passwd, Boolean moderator, String fName, String lName, String branch, int year) {
+	public void init(String login, Boolean moderator, String fName, String lName, String branch, int year) {
 		this.login = login;
-		this.passwd = passwd;
 		this.moderator = moderator;
 		this.fName = fName;
 		this.lName = lName;
@@ -70,24 +65,6 @@ public class User {
 	 */
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	/**
-	 * Gets the passwd.
-	 *
-	 * @return the passwd
-	 */
-	public String getPasswd() {
-		return passwd;
-	}
-
-	/**
-	 * Sets the passwd.
-	 *
-	 * @param passwd the new passwd
-	 */
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
 	}
 
 	/**
@@ -185,7 +162,7 @@ public class User {
 	 */
 	@Override
 	public String toString() {
-		return "User [login=" + login + ", passwd=" + passwd + ", moderator=" + moderator + ", fName=" + fName
+		return "User [login=" + login + ", moderator=" + moderator + ", fName=" + fName
 				+ ", lName=" + lName + ", branch=" + branch + ", year=" + year + "]";
 	}
 
