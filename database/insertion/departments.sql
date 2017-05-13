@@ -1,5 +1,3 @@
-INSERT INTO DEP_MEMBER
-VALUES (2, 'E161658G');PRAGMA encoding="UTF-8";
 INSERT INTO DEPARTMENT (name, in_charge)
 VALUES ('INFO', 'E114111A'); --Georges Tatami
 

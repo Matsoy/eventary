@@ -7,32 +7,34 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.Association;
+import model.Department;
+import model.Organization;
 
 /**
- * The Class AssociationDAO.
+ * The Class OrganizationDAO.
  *
  * @author Mathieu Soyer
  * 
- * File: AssociationDAO.java
+ * File: OrganizationDAO.java
  * 
- * Classe pour les objets Dao de Association
+ * Classe pour les objets Dao de Organization (Association et Department)
  */
 
-public class AssociationDAO{
+public class OrganizationDAO{
 
 	/**
-	 * Instantiates a new association DAO.
+	 * Instantiates a new Organization DAO.
 	 */
-	public AssociationDAO() {
+	public OrganizationDAO() {
 
 	}
 
 	/**
-	 * Pour retrouver tous les tuples.
+	 * Pour retrouver tous les tuples des associations
 	 *
 	 * @return the result set
 	 */
-	public static ArrayList<Association> findAll() {
+	public static ArrayList<Association> findAllAsso() {
 		Statement stat = null;
 		String query = "";
 		ArrayList<Association> ret = new ArrayList<Association>();
@@ -44,7 +46,7 @@ public class AssociationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM ASSOCIATION;";
+			query = "SELECT * FROM ORGANIZATION	WHERE type_orga = 'asso';";
 
 			//Le resultat de la requête
 			ResultSet result = stat.executeQuery(query);
@@ -63,18 +65,17 @@ public class AssociationDAO{
 
 		return ret;
 	}
-
+	
+	
 	/**
-	 * Permet de retrouver juste un tuple.
+	 * Pour retrouver tous les tuples des departements
 	 *
-	 * @param id_association id du Association a retrouver
-	 * @return the association
+	 * @return the result set
 	 */
-	public static Association find(int id_association) {
+	public static ArrayList<Department> findAllDpt() {
 		Statement stat = null;
 		String query = "";
-		Association ret = new Association();
-
+		ArrayList<Department> ret = new ArrayList<Department>();
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
@@ -83,32 +84,33 @@ public class AssociationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM ASSOCIATION WHERE id = " + id_association + ";";
+			query = "SELECT * FROM ORGANIZATION	WHERE type_orga = 'dpt';";
 
-			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
+			//Le resultat de la requête
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.init(id_association, result.getString(2), UserDAO.find(result.getString(3)));
+					ret.add(new Department()); //ajout du Department à l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3))); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
 		}
-		catch(SQLException e) {
+		catch (SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
 
 		return ret;
 	}
 
-
+	
 	/**
 	 * Methode qui permet d'inserer un tuple.
 	 *
 	 * @param tuple Objet de type Association a inserer
 	 */
-	public static void insert(Association tuple) {
+	public static void insert(Organization tuple) {
 		Statement stat = null;
 		String query = "";
 
@@ -121,7 +123,7 @@ public class AssociationDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO ASSOCIATION VALUES("+ id +",'"+ name +"');";
+			query = "INSERT INTO ORGANIZATION VALUES("+ id +",'"+ name +"');";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);
@@ -137,7 +139,7 @@ public class AssociationDAO{
 	 *
 	 * @param id_association id du tuple a supprimer
 	 */
-	public static void delete(int id_association) {
+	public static void delete(int id_orga) {
 		Statement stat = null;
 		String query = "";
 
@@ -146,7 +148,7 @@ public class AssociationDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "DELETE FROM ASSOCIATION WHERE id = " + id_association + ";";
+			query = "DELETE FROM ORGANIZATION WHERE id = " + id_orga + ";";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);

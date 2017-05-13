@@ -9,32 +9,32 @@ import java.util.ArrayList;
 import model.User;
 
 /**
- * The Class DepMemberDAO.
+ * The Class OrgaMemberDAO.
  *
  * @author Mathieu Soyer
  * 
- * File: DepMemberDAO.java
+ * File: OrgaMemberDAO.java
  * 
- * Classe pour les objets Dao de représentant l'appartenance d'un User à un Department
+ * Classe pour les objets Dao de représentant l'appartenance d'un User à une organisation
  */
 
-public class DepMemberDAO{
+public class OrgaMemberDAO{
 
 
 	/**
-	 * Instantiates a new dep member DAO.
+	 * Instantiates a new organization DAO.
 	 */
-	public DepMemberDAO() {
+	public OrgaMemberDAO() {
 
 	}
 
 	/**
-	 * Renvoie la liste des User membre d'un Department.
+	 * Renvoie la liste des User membre d'une Association
 	 *
-	 * @param department_id id du Department
+	 * @param orga_id id de l'organisation
 	 * @return the array list
 	 */
-	public static ArrayList<User> find(int department_id) {
+	public static ArrayList<User> find(int orga_id) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -47,7 +47,7 @@ public class DepMemberDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM DEP_MEMBER WHERE department_id = " + department_id + ";";
+			query = "SELECT * FROM ORGA_MEMBER WHERE orga_id = " + orga_id + ";";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -71,9 +71,9 @@ public class DepMemberDAO{
 	 * Methode qui permet d'inserer un tuple.
 	 *
 	 * @param user_login le login du User
-	 * @param department_id l'id du Department
+	 * @param association_id id du Association
 	 */
-	public static void insert(String user_login, int department_id) {
+	public static void insert(String user_login, int association_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -82,7 +82,7 @@ public class DepMemberDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO DEP_MEMBER VALUES("+ department_id +",'"+ user_login +"');";
+			query = "INSERT INTO ASSO_MEMBER VALUES("+ association_id +",'"+ user_login +"');";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);
@@ -97,9 +97,9 @@ public class DepMemberDAO{
 	 * Permet de supprimer un tuple.
 	 *
 	 * @param user_login le login du User
-	 * @param department_id l'id du Department
+	 * @param association_id id du Association
 	 */
-	public static void delete(String user_login, int department_id) {
+	public static void delete(String user_login, int association_id) {
 		Statement stat = null;
 		String query = "";
 
@@ -108,7 +108,7 @@ public class DepMemberDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "DELETE FROM DEP_MEMBER WHERE department_id = " + department_id + "AND user_login = '" + user_login + "';";
+			query = "DELETE FROM ASSO_MEMBER WHERE association_id = " + association_id + "AND user_login = '" + user_login + "';";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);

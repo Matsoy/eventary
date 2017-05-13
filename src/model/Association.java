@@ -1,6 +1,6 @@
 package model;
 
-import database.*;
+import database.OrgaMemberDAO;
 
 /**
  * The Class Association.
@@ -14,7 +14,7 @@ public class Association extends Organization {
 	}
 	
 	public void addMember(User nouveauMembre){
-		AssoMemberDAO.insert(nouveauMembre.getLogin(), this.id);
-		this.listeMembres = AssoMemberDAO.find(this.id);
+		OrgaMemberDAO.insert(nouveauMembre.getLogin(), this.id);
+		this.listeMembres = OrgaMemberDAO.find(this.id);
 	}
 }

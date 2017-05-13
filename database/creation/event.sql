@@ -15,3 +15,5 @@ CREATE TABLE EVENT( -- table des événements
     address text, -- adresse de l'événement, si il n'a pas lieu dans une école
     CONSTRAINT pk_id_EVENT PRIMARY KEY (id)
 );
+
+--    type_orga text CHECK (type_orga IN ('dpt', 'asso') OR type_orga IS NULL) -- type d'organisation (asso, dpt ou null)
