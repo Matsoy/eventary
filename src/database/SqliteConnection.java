@@ -32,7 +32,6 @@ class SQLiteConnection {
 		try {
 			DriverManager.registerDriver(new org.sqlite.JDBC());
 			this.connect = DriverManager.getConnection(this.dsn, config.toProperties());
-			this.connect.createStatement().executeQuery("SET client_encoding = 'UTF8';");
 			System.out.println( "Connexion reussie" );
 		}
 		catch ( Exception e ) {

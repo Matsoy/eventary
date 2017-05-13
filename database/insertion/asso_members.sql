@@ -1,23 +1,64 @@
--- insertion des User avec les mots de passe en clair
--- ils seront hashés par la suite 
---delete from user;
 PRAGMA encoding="UTF-8";
-INSERT INTO USER --mdp = admin
-VALUES ('admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'PrenomAdmin', 'NomAdmin', '', '2019');
 
-INSERT INTO USER --mdp = petitkiwi
-VALUES ('E168011W', '383489914769684bc1ff9b567aff05fc8ee02519', 0, 'Mathieu', 'Soyer', 'INFO', '2019');
+-- ##############################
+-- membres du BDS
+-- ##############################
+INSERT INTO ASSO_MEMBER
+VALUES (1, 'E111198Z');
 
-INSERT INTO USER --mdp = neil
-VALUES ('E147093J', '822ec91a7ef82248fd36162ca8ac3283eba70848', 0, 'Neil', 'Rittner', 'INFO', '2019');
+INSERT INTO ASSO_MEMBER
+VALUES (1, 'E168011W');
 
-INSERT INTO USER --mdp = azerty
-VALUES ('E148834B', '9cf95dacd226dcf43da376cdb6cbba7035218921 ', 0, 'Pierre', 'Savatte', 'INFO', '2019');
+INSERT INTO ASSO_MEMBER
+VALUES (1, 'E999999F');
 
-INSERT INTO USER --mdp = motdepasse
-VALUES ('E167998G', '940c0f26fd5a30775bb1cbd1f6840398d39bb813', 0, 'Julien', 'Triau', 'INFO', '2019');
+INSERT INTO ASSO_MEMBER
+VALUES (1, 'E999979F');
 
+-- ##############################
+-- membres du BDD
+-- ##############################
+INSERT INTO ASSO_MEMBER
+VALUES (2, 'E167999Z');
 
+INSERT INTO ASSO_MEMBER
+VALUES (2, 'E147093J');
 
+INSERT INTO ASSO_MEMBER
+VALUES (2, 'E982413F');
 
+INSERT INTO ASSO_MEMBER
+VALUES (2, 'E164558G');
 
+-- ##############################
+-- membres du BDE
+-- ##############################
+INSERT INTO ASSO_MEMBER
+VALUES (3, 'E161658G');
+
+INSERT INTO ASSO_MEMBER
+VALUES (3, 'E168011W');
+
+INSERT INTO ASSO_MEMBER
+VALUES (3, 'E147093J');
+
+INSERT INTO ASSO_MEMBER
+VALUES (3, 'E148834B');
+
+INSERT INTO ASSO_MEMBER
+VALUES (3, 'E167998G');
+
+-- ##############################
+-- membres du BDA
+-- ##############################
+INSERT INTO ASSO_MEMBER
+VALUES (4, 'E711198Z');
+
+INSERT INTO ASSO_MEMBER
+VALUES (4, 'E148834B');
+
+INSERT INTO ASSO_MEMBER
+VALUES (4, 'E167998G');
+
+INSERT INTO ASSO_MEMBER
+VALUES (4, 'E161658G');

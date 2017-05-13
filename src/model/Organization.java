@@ -1,6 +1,7 @@
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Class Organization.
@@ -13,6 +14,9 @@ public abstract class Organization {
 	/** The name. */
 	String name;
 	
+	/** Le reponsable de l'organisation */
+	User inCharge;
+	
 	List<User> listeMembres = new ArrayList<User>();
 	
 	/**
@@ -21,9 +25,10 @@ public abstract class Organization {
 	 * @param id the id
 	 * @param name the name
 	 */
-	public void init(int id, String name) {
+	public void init(int id, String name, User inCharge) {
 		this.id = id;
 		this.name = name;
+		this.inCharge = inCharge;
 	}
 
 	/**
@@ -62,6 +67,24 @@ public abstract class Organization {
 		this.name = name;
 	}
 	
+	/**
+	 * Gets the in charge.
+	 *
+	 * @return the in charge
+	 */
+	public User getInCharge() {
+		return inCharge;
+	}
+
+	/**
+	 * Sets the in charge.
+	 *
+	 * @param id the new in charge
+	 */
+	public void setInCharge(User inCharge) {
+		this.inCharge = inCharge;
+	}
+	
 	public List<User> getListeMembres() {
 		return listeMembres;
 	}
@@ -70,11 +93,9 @@ public abstract class Organization {
 		this.listeMembres = listeMembres;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Organization [id=" + id + ", name=" + name + "]";
+		return "Organization [id=" + id + ", name=" + name + ", inCharge=" + inCharge + ", listeMembres=" + listeMembres
+				+ "]";
 	}
 }

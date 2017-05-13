@@ -1,23 +1,70 @@
--- insertion des User avec les mots de passe en clair
--- ils seront hashés par la suite 
---delete from user;
 PRAGMA encoding="UTF-8";
-INSERT INTO USER --mdp = admin
-VALUES ('admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'PrenomAdmin', 'NomAdmin', '', '2019');
 
-INSERT INTO USER --mdp = petitkiwi
-VALUES ('E168011W', '383489914769684bc1ff9b567aff05fc8ee02519', 0, 'Mathieu', 'Soyer', 'INFO', '2019');
+-- ##############################
+-- membres INFO
+-- ##############################
+INSERT INTO DEP_MEMBER
+VALUES (1, 'E168011W');
 
-INSERT INTO USER --mdp = neil
-VALUES ('E147093J', '822ec91a7ef82248fd36162ca8ac3283eba70848', 0, 'Neil', 'Rittner', 'INFO', '2019');
+INSERT INTO DEP_MEMBER
+VALUES (1, 'E147093J');
 
-INSERT INTO USER --mdp = azerty
-VALUES ('E148834B', '9cf95dacd226dcf43da376cdb6cbba7035218921 ', 0, 'Pierre', 'Savatte', 'INFO', '2019');
+INSERT INTO DEP_MEMBER
+VALUES (1, 'E148834B');
 
-INSERT INTO USER --mdp = motdepasse
-VALUES ('E167998G', '940c0f26fd5a30775bb1cbd1f6840398d39bb813', 0, 'Julien', 'Triau', 'INFO', '2019');
+INSERT INTO DEP_MEMBER
+VALUES (1, 'E167998G');
 
+INSERT INTO DEP_MEMBER
+VALUES (1, 'E912413A');
 
+INSERT INTO DEP_MEMBER
+VALUES (1, 'E111111A');
 
+INSERT INTO DEP_MEMBER
+VALUES (1, 'E114111A');
 
+-- ##############################
+-- membres ETN
+-- ##############################
+INSERT INTO DEP_MEMBER
+VALUES (2, 'E161658G');
 
+INSERT INTO DEP_MEMBER
+VALUES (2, 'E164558G');
+
+INSERT INTO DEP_MEMBER
+VALUES (2, 'E777778G');
+
+INSERT INTO DEP_MEMBER
+VALUES (2, 'E717778G');
+
+-- ##############################
+-- membres MAT
+-- ##############################
+INSERT INTO DEP_MEMBER
+VALUES (3, 'E167999Z');
+
+INSERT INTO DEP_MEMBER
+VALUES (3, 'E167998Z');
+
+INSERT INTO DEP_MEMBER
+VALUES (3, 'E111198Z');
+
+INSERT INTO DEP_MEMBER
+VALUES (3, 'E711198Z');
+
+-- ##############################
+-- membres TE
+-- ##############################
+INSERT INTO DEP_MEMBER
+VALUES (4, 'E982413F');
+
+INSERT INTO DEP_MEMBER
+VALUES (4, 'E912413F');
+
+INSERT INTO DEP_MEMBER
+VALUES (3, 'E999999F');
+
+INSERT INTO DEP_MEMBER
+VALUES (3, 'E999979F');

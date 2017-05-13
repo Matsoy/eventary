@@ -29,12 +29,12 @@ public class AssoMemberDAO{
 	}
 
 	/**
-	 * Renvoie la liste des User membre d'une AssoMember
+	 * Renvoie la liste des User membre d'une Association
 	 *
 	 * @param association_id id du Association
 	 * @return the array list
 	 */
-	public ArrayList<User> participationsInAnEvent(int association_id) {
+	public static ArrayList<User> find(int association_id) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -47,7 +47,7 @@ public class AssoMemberDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT user_login FROM ASSO_MEMBER WHERE association_id = " + association_id + ";";
+			query = "SELECT * FROM ASSO_MEMBER WHERE association_id = " + association_id + ";";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);

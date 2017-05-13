@@ -2,8 +2,10 @@ package test;
 
 import java.util.ArrayList;
 
+import database.AssoMemberDAO;
 import database.AssociationDAO;
 import database.BuildingDAO;
+import database.DepMemberDAO;
 import database.DepartmentDAO;
 import database.EventDAO;
 import database.RoomDAO;
@@ -143,5 +145,30 @@ public class DaoTest {
 		System.out.println("\n\t##### test de find");
 		Association association4 = AssociationDAO.find(4);
 		System.out.println(association4.toString());
+		
+		
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de AssoMemberDAO");
+		System.out.println("\t########################################");
+		System.out.println("\n\t##### test de find");
+		ArrayList<User> assomembers2 = new ArrayList<User>();
+		assomembers2 = AssoMemberDAO.find(2);
+		for(User am: assomembers2){
+			System.out.println(am.toString());
+		}
+		
+		
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de DepMemberDAO");
+		System.out.println("\t########################################");
+		System.out.println("\n\t##### test de find");
+		ArrayList<User> depmembers1 = new ArrayList<User>();
+		depmembers1 = DepMemberDAO.find(2);
+		for(User dm: depmembers1){
+			System.out.println(dm.toString());
+		}
+		
+		
+
 	}
 }

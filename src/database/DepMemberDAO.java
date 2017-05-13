@@ -34,7 +34,7 @@ public class DepMemberDAO{
 	 * @param department_id id du Department
 	 * @return the array list
 	 */
-	public static ArrayList<User> participationsInAnEvent(int department_id) {
+	public static ArrayList<User> find(int department_id) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -47,7 +47,7 @@ public class DepMemberDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT user_login FROM DEP_MEMBER WHERE department_id = " + department_id + ";";
+			query = "SELECT * FROM DEP_MEMBER WHERE department_id = " + department_id + ";";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);

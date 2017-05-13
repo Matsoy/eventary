@@ -52,7 +52,7 @@ public class DepartmentDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new Department()); //ajout du Department à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2)); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3))); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -90,7 +90,7 @@ public class DepartmentDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(id_department, result.getString(2));
+					ret.init(id_department, result.getString(2), UserDAO.find(result.getString(3)));
 				} 
 				while (result.next());
 			}
@@ -115,13 +115,14 @@ public class DepartmentDAO{
 		//Recuperation des attributs de l'objet Department
 		int id = tuple.getId();
 		String name = tuple.getName();
+		String inCharge = tuple.getInCharge().getLogin();
 
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO DEPARTMENT VALUES("+ id +",'"+ name +"');";
+			query = "INSERT INTO DEPARTMENT VALUES("+ id +",'"+ name +"','"+ inCharge +"');";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);

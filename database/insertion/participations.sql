@@ -1,23 +1,52 @@
--- insertion des User avec les mots de passe en clair
--- ils seront hashés par la suite 
---delete from user;
 PRAGMA encoding="UTF-8";
-INSERT INTO USER --mdp = admin
-VALUES ('admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 'PrenomAdmin', 'NomAdmin', '', '2019');
 
-INSERT INTO USER --mdp = petitkiwi
-VALUES ('E168011W', '383489914769684bc1ff9b567aff05fc8ee02519', 0, 'Mathieu', 'Soyer', 'INFO', '2019');
+-- ##############################
+-- participations à l'evenement 1
+-- ##############################
+INSERT INTO PARTICIPATION
+VALUES (1, 'E168011W');
 
-INSERT INTO USER --mdp = neil
-VALUES ('E147093J', '822ec91a7ef82248fd36162ca8ac3283eba70848', 0, 'Neil', 'Rittner', 'INFO', '2019');
+INSERT INTO PARTICIPATION
+VALUES (1, 'E147093J');
 
-INSERT INTO USER --mdp = azerty
-VALUES ('E148834B', '9cf95dacd226dcf43da376cdb6cbba7035218921 ', 0, 'Pierre', 'Savatte', 'INFO', '2019');
+INSERT INTO PARTICIPATION
+VALUES (1, 'E148834B');
 
-INSERT INTO USER --mdp = motdepasse
-VALUES ('E167998G', '940c0f26fd5a30775bb1cbd1f6840398d39bb813', 0, 'Julien', 'Triau', 'INFO', '2019');
+INSERT INTO PARTICIPATION
+VALUES (1, 'E167998G');
 
+-- ##############################
+-- participations à l'evenement 2
+-- ##############################
 
+-- personne ne participe
 
+-- ##############################
+-- participations à l'evenement 3
+-- ##############################
+INSERT INTO PARTICIPATION
+VALUES (3, 'E167998G');
+
+-- le createur de l'evenement ne participe pas
+
+-- ##############################
+-- participations à l'evenement 4
+-- ##############################
+INSERT INTO PARTICIPATION
+VALUES (4, 'E167998G');
+
+INSERT INTO PARTICIPATION
+VALUES (4, 'E111198Z');
+
+INSERT INTO PARTICIPATION
+VALUES (4, 'E711198Z');
+
+INSERT INTO PARTICIPATION
+VALUES (4, 'E999979F');
+
+INSERT INTO PARTICIPATION
+VALUES (4, 'E114111A');
+
+inserer ca + faire le DAO + faire pareil pour WAITING
 
 
