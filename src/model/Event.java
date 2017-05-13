@@ -1,7 +1,12 @@
 package model;
 
-import java.util.*;
-import database.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import database.EventDAO;
+import database.ParticipationDAO;
+import database.WaitingDAO;
 
 /**
  * The Class Event.
@@ -38,6 +43,9 @@ public class Event {
 	/** The organizer. */
 	User organizer;
 
+	/** The organization. */
+	Organization organization;
+
 	/** The room. */
 	Room room;
 
@@ -66,11 +74,12 @@ public class Event {
 	 * @param cancelDate the cancel date
 	 * @param maxNbParticipant the max nb participant
 	 * @param organizer the organizer
+	 * @param organization the organization
 	 * @param room the room
 	 * @param address the address
 	 */
 	public void init(int id, String title, String description, Date createDate, Date startDate, Date endDate,
-			Date modifDate, Date cancelDate, int maxNbParticipant, User organizer, Room room,
+			Date modifDate, Date cancelDate, int maxNbParticipant, User organizer, Organization organization, Room room,
 			String address) {
 		this.id = id;
 		this.title = title;
@@ -82,6 +91,7 @@ public class Event {
 		this.cancelDate = cancelDate;
 		this.maxNbParticipant = maxNbParticipant;
 		this.organizer = organizer;
+		this.organization = organization; //null si Event cree par un simple User
 		this.room = room;
 		this.address = address;
 	}
@@ -265,6 +275,24 @@ public class Event {
 	public void setOrganizer(User organizer) {
 		this.organizer = organizer;
 	}
+	
+	/**
+	 * Gets the organization.
+	 *
+	 * @return the organization
+	 */
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	/**
+	 * Sets the organization.
+	 *
+	 * @param organization the new organization
+	 */
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
 
 	/**
 	 * Gets the room.
@@ -351,15 +379,13 @@ public class Event {
 		this.listeAttente = WaitingDAO.waitingsForAnEvent(this.id);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", description=" + description + ", createDate=" + createDate
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", modifDate=" + modifDate + ", cancelDate="
-				+ cancelDate + ", maxNbParticipant=" + maxNbParticipant + ", organizer=" + organizer + ", room="
-				+ room + ", address=" + address + "]";
+				+ cancelDate + ", maxNbParticipant=" + maxNbParticipant + ", organizer=" + organizer + ", organization="
+				+ organization + ", room=" + room + ", address=" + address + ", listeParticipants=" + listeParticipants
+				+ ", listeAttente=" + listeAttente + "]";
 	}
 
 }

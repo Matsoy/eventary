@@ -103,6 +103,118 @@ public class OrganizationDAO{
 
 		return ret;
 	}
+	
+	
+	/**
+	 * Pour retrouver l'association recherchee
+	 *
+	 * @return the result set
+	 */
+	public static Association findAsso(int id_asso) {
+		Statement stat = null;
+		String query = "";
+		Association ret = new Association();
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT * FROM ORGANIZATION	WHERE id = "+ id_asso +";";
+
+			//Le resultat de la requête
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3))); //initialisaton de les paramètres du retour de la requête
+				} 
+				while (result.next());
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
+	
+	
+	/**
+	 * Pour retrouver le departement recherche
+	 *
+	 * @return the result set
+	 */
+	public static Department findDpt(int id_dpt) {
+		Statement stat = null;
+		String query = "";
+		Department ret = new Department();
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT * FROM ORGANIZATION	WHERE id = "+ id_dpt +";";
+
+			//Le resultat de la requête
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3))); //initialisaton de les paramètres du retour de la requête
+				} 
+				while (result.next());
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
+	
+	
+	/**
+	 * Retourne le type d'organisation ("asso" pour une association, "dpt" pour un departement)
+	 *
+	 * @param id_orga l'id de l'organisation 
+	 * @return the result set
+	 */
+	public static String getOrganizationType(int id_orga) {
+		Statement stat = null;
+		String query = "";
+		String ret = null;
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT type_orga FROM ORGANIZATION	WHERE id = "+ id_orga +";";
+
+			//Le resultat de la requête
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					ret = result.getString(1);
+				} 
+				while (result.next());
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("ERREUR_getOrganizationType: " + e.getMessage());
+		}
+
+		return ret;
+	}
 
 	
 	/**

@@ -1,8 +1,3 @@
-drop table dep_member;
-drop table asso_member;
-drop table department;
-drop table association;
-
 -- DROP TABLE ORGA_MEMBER;
 PRAGMA encoding="UTF-8";
 

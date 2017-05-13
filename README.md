@@ -71,8 +71,8 @@ Quitter le prompt
 sqlite3> .quit
 ```
 
-Exécuter un script sql sur la base. Par exemple: appliquer les triggers sur la base
+Rebuilder toute la BDD (ps: passer script du format "Windows" au format "Unix" avec la commande: dos2unix build.sh)
 
 ``` sh
-sqlite3 eventary.db < triggers/triggers.sql
+$ ./build.sh
 ```

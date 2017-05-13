@@ -1,12 +1,12 @@
-DROP TRIGGER startDate_after_creatDate;
-DROP TRIGGER event_at_a_school_or_at_a_given_address;
-DROP TRIGGER creatDate_is_current_date;
-DROP TRIGGER modifDate_is_current_date;
-DROP TRIGGER waiting_date_is_current_date;
-DROP TRIGGER endDate_after_startDate;
+--DROP TRIGGER startDate_after_creatDate;
+--DROP TRIGGER event_at_a_school_or_at_a_given_address;
+--DROP TRIGGER creatDate_is_current_date;
+--DROP TRIGGER modifDate_is_current_date;
+--DROP TRIGGER waiting_date_is_current_date;
+--DROP TRIGGER endDate_after_startDate;
 
 -- #######################################################################
--- avant insertion d'un evenement:: check que l'evenement a lieu dans une ecole où a une adresse donnee
+-- avant insertion d'un evenement:: check que l'evenement a lieu dans une ecole oï¿½ a une adresse donnee
 -- #######################################################################
 CREATE TRIGGER event_at_a_school_or_at_a_given_address
 BEFORE INSERT ON EVENT
@@ -47,7 +47,7 @@ BEGIN
 END;
 
 -- #######################################################################
--- apres MAJ d'un événement: sauvegarde de la date courante de la forme 'YYYY-MM-DD HH:MM:SS'
+-- apres MAJ d'un ï¿½vï¿½nement: sauvegarde de la date courante de la forme 'YYYY-MM-DD HH:MM:SS'
 -- #######################################################################
 CREATE TRIGGER modifDate_is_current_date
 AFTER UPDATE ON EVENT
@@ -61,9 +61,9 @@ END;
 -- apres insertion sur liste d'attente: la date de rentree dans une liste d'attente = la date actuelle de la forme 'YYYY-MM-DD HH:MM:SS'
 -- #######################################################################
 CREATE TRIGGER waiting_date_is_current_date
-AFTER INSERT ON EVENT
+AFTER INSERT ON WAITING
 BEGIN
     UPDATE WAITING
     SET waiting_date = datetime('NOW')
-    WHERE id = NEW.id;
+    WHERE (event_id = NEW.event_id AND user_login = NEW.user_login);
 END;
