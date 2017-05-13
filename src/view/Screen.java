@@ -39,9 +39,13 @@ public class Screen extends JFrame{
 	
 	void displayLogin(boolean firstLogin){
 		if (!(firstLogin)){
-			getContentPane().remove(messagePanel);
-			getContentPane().remove(mainPanel);
+			this.getContentPane().remove(messagePanel);
+			this.getContentPane().remove(mainPanel);
+			this.getContentPane().remove(secondaryPanel);
+			messagePanel = new JPanel();
+			secondaryPanel = new JPanel();
 		}
+		repaint();
 		
 	    mainPanel = new JPanel();
 	    mainPanel.setBackground(colorEventary);
