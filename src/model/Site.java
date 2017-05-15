@@ -26,7 +26,6 @@ public class Site {
 	}
 	
 	
-	
 	/**
 	 * Inits the.
 	 *

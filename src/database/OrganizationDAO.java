@@ -54,7 +54,7 @@ public class OrganizationDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new Association()); //ajout du Association à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3))); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -92,7 +92,7 @@ public class OrganizationDAO{
 			if (result.next() ) {
 				do {
 					ret.add(new Department()); //ajout du Department à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3))); //initialisaton de les paramètres du retour de la requête
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -129,7 +129,7 @@ public class OrganizationDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3))); //initialisaton de les paramètres du retour de la requête
+					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}
@@ -166,7 +166,7 @@ public class OrganizationDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3))); //initialisaton de les paramètres du retour de la requête
+					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramètres du retour de la requête
 				} 
 				while (result.next());
 			}

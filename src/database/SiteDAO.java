@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.Room;
 import model.Site;
 
 /**
@@ -101,6 +102,45 @@ public class SiteDAO{
 
         return ret;
     }
+    
+    
+	/**
+	 * Pour retrouver les sites d'une ecole.
+	 *
+	 * @param school_id the school id
+	 * @return the result set
+	 */
+	public static ArrayList<Site> findSchoolSites(int school_id) {
+		Statement stat = null;
+		String query = "";
+		ArrayList<Site> ret = new ArrayList<Site>();
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT * FROM SITE WHERE school_id = "+ school_id +";";
+
+			//Le resultat de la requête
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+                	ret.add(new Site()); //ajout du Site à l'ArrayList. Appel du constructeur vide
+                    ret.get(ret.size()-1).init(result.getInt(1), SchoolDAO.find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
+				} 
+				while (result.next());
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
 
 
     /**

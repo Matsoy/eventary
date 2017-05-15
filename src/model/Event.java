@@ -80,7 +80,7 @@ public class Event {
 	 */
 	public void init(int id, String title, String description, Date createDate, Date startDate, Date endDate,
 			Date modifDate, Date cancelDate, int maxNbParticipant, User organizer, Organization organization, Room room,
-			String address) {
+			String address, List<User> listeParticipants, List<User> listeAttente) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -94,6 +94,8 @@ public class Event {
 		this.organization = organization; //null si Event cree par un simple User
 		this.room = room;
 		this.address = address;
+		this.listeParticipants = listeParticipants;
+		this.listeAttente = listeAttente;
 	}
 
 	/**

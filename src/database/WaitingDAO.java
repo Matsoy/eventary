@@ -28,7 +28,7 @@ public class WaitingDAO{
 	}
 
 	/**
-	 * Renvoie la liste des User participant Ã  un Event (sur liste d'attente)
+	 * Renvoie la liste des User participant Ã  un Event (sur liste d'attente) triée de celui qui attend depuis le + longtemps à celui qui attend depuis le moins longtemps
 	 *
 	 * @param id_event id du Event
 	 * @return the array list
@@ -46,7 +46,7 @@ public class WaitingDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM WAITING WHERE event_id = " + id_event + ";";
+			query = "SELECT * FROM WAITING WHERE event_id = " + id_event + " ORDER BY datetime(waiting_date) ASC;";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);

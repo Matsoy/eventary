@@ -63,7 +63,8 @@ public class BuildingDAO{
 
 		return ret;
 	}
-
+	
+	
 	/**
 	 * Permet de retrouver juste un tuple.
 	 *
@@ -90,12 +91,51 @@ public class BuildingDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(id_building, new SiteDAO().find(result.getInt(2)), result.getString(3));
+					ret.init(id_building, SiteDAO.find(result.getInt(2)), result.getString(3));
 				} 
 				while (result.next());
 			}
 		}
 		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
+	
+	
+	/**
+	 * Pour retrouver les batiments d'un site.
+	 *
+	 * @param site_id the site id
+	 * @return the result set
+	 */
+	public static ArrayList<Building> findSiteBuildings(int site_id) {
+		Statement stat = null;
+		String query = "";
+		ArrayList<Building> ret = new ArrayList<Building>();
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT * FROM BUILDING WHERE site_id = "+ site_id +";";
+
+			//Le resultat de la requête
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					ret.add(new Building()); //ajout du Building à l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), SiteDAO.find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
+				} 
+				while (result.next());
+			}
+		}
+		catch (SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
 

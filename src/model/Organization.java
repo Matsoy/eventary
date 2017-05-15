@@ -25,10 +25,11 @@ public abstract class Organization {
 	 * @param id the id
 	 * @param name the name
 	 */
-	public void init(int id, String name, User inCharge) {
+	public void init(int id, String name, User inCharge, List<User> listeMembres) {
 		this.id = id;
 		this.name = name;
 		this.inCharge = inCharge;
+		this.listeMembres = listeMembres;
 	}
 
 	/**

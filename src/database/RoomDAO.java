@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.Building;
 import model.Room;
 
 /**
@@ -102,6 +103,45 @@ public class RoomDAO{
 	}
 
 
+	/**
+	 * Pour retrouver les salles d'un batiment.
+	 *
+	 * @param building_id the building id
+	 * @return the result set
+	 */
+	public static ArrayList<Room> findBuildingRooms(int building_id) {
+		Statement stat = null;
+		String query = "";
+		ArrayList<Room> ret = new ArrayList<Room>();
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT * FROM ROOM WHERE building_id = "+ building_id +";";
+
+			//Le resultat de la requête
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					ret.add(new Room()); //ajout du Room à l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), BuildingDAO.find(result.getInt(2)), result.getInt(3), result.getString(4)); //initialisaton de les paramètres du retour de la requête
+				} 
+				while (result.next());
+			}
+		}
+		catch (SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
+	
+	
 	/**
 	 * Methode qui permet d'inserer un tuple.
 	 *

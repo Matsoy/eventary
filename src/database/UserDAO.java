@@ -124,7 +124,7 @@ public class UserDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM USER WHERE login = '" + login_user + "' AND passwd = '" + passwd_user + "';";
+			query = "SELECT * FROM USER WHERE UPPER(login) = UPPER('" + login_user + "') AND passwd = '" + passwd_user + "';";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
