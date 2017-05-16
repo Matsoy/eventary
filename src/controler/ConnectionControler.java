@@ -2,6 +2,8 @@ package controler;
 
 import java.util.Observable;
 
+import database.UserDAO;
+
 import java.awt.Color;
 
 import model.Context;
@@ -19,6 +21,7 @@ public class ConnectionControler implements java.util.Observer{
 		this.view = connectionPanel;
 		//this.view.getBouton().setAction(actionConnection);
 		this.model.addObserver(this); //On observe le model pour que lorsque authentification est true on load setPanelHome();
+		//this.model.connexion("E167998G", UserDAO.generateHash("motdepasse"));
 	}
 	
 	@Override

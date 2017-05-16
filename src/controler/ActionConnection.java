@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import model.Context;
 import view.ConnectionPanel;
+import database.UserDAO;
 
 
 public class ActionConnection extends AbstractAction {
@@ -20,7 +21,7 @@ public class ActionConnection extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		this.model.connexion(this.view.getLogin(), this.view.getPassword());
+		this.model.connexion(this.view.getLogin(), UserDAO.generateHash(this.view.getPassword()));
 	}
 
 }
