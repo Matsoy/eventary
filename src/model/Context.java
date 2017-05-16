@@ -8,16 +8,16 @@ import input_output.Reader;
  * The Class Context.
  */
 public class Context extends Observable{
-	
+
 	/** The current user. */
 	User currentUser;
-	
+
 	/** The authentification. */
 	boolean authentificated;	//Sert � savoir si l'authentification � r�ussi
-	
+
 	/** The temps avant suppression. */
 	int tempsAvantSuppression;
-	
+
 	/**
 	 * Instantiates a new context.
 	 */
@@ -63,6 +63,7 @@ public class Context extends Observable{
 		this.authentificated = authentification;
 		this.setChanged();
 		this.notifyObservers();
+		System.out.println(this);
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class Context extends Observable{
 	public void setTempsAvantSuppression(int tempsAvantSuppression) {
 		this.tempsAvantSuppression = tempsAvantSuppression;
 	}
-	
+
 	/**
 	 * Connexion.
 	 *
@@ -98,8 +99,12 @@ public class Context extends Observable{
 			setAuthentificated(true);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Context [currentUser=" + currentUser + ", authentificated=" + authentificated
+				+ ", tempsAvantSuppression=" + tempsAvantSuppression + "]";
+	}
 	
-//	public static void main(String[] args) {	// Servira � tester la lecture dans le fichier de config
-//		Context context = new Context();
-//	}
+	
 }

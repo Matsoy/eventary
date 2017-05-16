@@ -2,38 +2,47 @@ package controler;
 
 import java.util.Observable;
 
-import database.UserDAO;
-
-import java.awt.Color;
-
 import model.Context;
 import view.ConnectionPanel;
 import view.Frame;
 
+/**
+ * The Class ConnectionControler.
+ */
 public class ConnectionControler implements java.util.Observer{
+	
+	/** The model. */
 	Context model;
+	
+	/** The view. */
 	ConnectionPanel view;
-	ActionConnection actionConnection;
-	
-	ConnectionControler(ConnectionPanel connectionPanel){
-		this.actionConnection = new ActionConnection(model, view, this);
-		this.model = new model.Context();
+
+	/**
+	 * Instantiates a new connection controler.
+	 *
+	 * @param connectionPanel the connection panel
+	 * @param model the model
+	 */
+	ConnectionControler(ConnectionPanel connectionPanel, Context model){
+		this.model = model;
 		this.view = connectionPanel;
-		//this.view.getBouton().setAction(actionConnection);
-		this.model.addObserver(this); //On observe le model pour que lorsque authentification est true on load setPanelHome();
-		//this.model.connexion("E167998G", UserDAO.generateHash("motdepasse"));
+		this.model.addObserver(this);
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		System.out.println("dans update de ConnectionControler");
 		if(this.model.getAuthentificated()){
 			view.setHomePanel();
 			System.out.println("Connecté");
 		}else{
-			view.displayMessage("Erreur de connexion", Color.RED);
+			view.displayError();
 			System.out.println("Pas connecté");
 		}
 	}
-	
+
 }

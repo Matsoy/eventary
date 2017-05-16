@@ -1,74 +1,148 @@
 package view;
 
-import java.awt.Color;
+import java.awt.BorderLayout;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
-import controler.ActionConnection;
-
+/**
+ * The Class ConnectionPanel.
+ */
 public class ConnectionPanel extends JPanel {
+	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+	
+	/** The login. */
 	JTextField login;
+	
+	/** The label login. */
 	JLabel labelLogin;
+	
+	/** The password. */
 	JPasswordField password;
+	
+	/** The password login. */
 	JLabel passwordLogin;
+	
+	/** The bouton. */
 	JButton bouton;
-	ActionConnection action;
+	
+	/** The frame. */
 	Frame frame;
 	
+	/** The message panel. */
+	JPanel messagePanel;
+	
+	/** The label error. */
+	JLabel labelError;
+
+	/**
+	 * Instantiates a new connection panel.
+	 *
+	 * @param frame the frame
+	 */
 	ConnectionPanel(Frame frame){
 		this.frame = frame;
-	    this.setBackground(Frame.colorEventary);
-	    this.setBounds(0,0,Frame.widthScreen, Frame.heightScreen);
-	    this.setLayout(null);
-	    
-		JTextField login = new JTextField();
-	    login.setHorizontalAlignment(JTextField.CENTER);
-	    login.setBounds((int) (Frame.widthScreen/2 - Frame.widthText/2),(int) ((Frame.heightScreen/2 - Frame.heightText/2)-20), Frame.widthText, Frame.heightText);
-	    this.add(login);
+		this.setBackground(Frame.colorEventary);
+		this.setBounds(0,0,Frame.widthScreen, Frame.heightScreen);
+		this.setLayout(new BorderLayout());
 
-	    JLabel labelLogin = new JLabel("Login : ");
-	    labelLogin.setBounds((int) (Frame.widthScreen/2 - Frame.widthText*.9),(int) ((Frame.heightScreen/2 - Frame.heightText/2)-20), Frame.widthText, Frame.heightText);
-	    this.add(labelLogin);
+		// panel qui contient le formulaire de connexion avec les differents champs et le bouton
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(null);
+		mainPanel.setBackground(Frame.colorEventary);
+		
+		// panel qui contiendra le message d'erreur
+		this.messagePanel = new JPanel();
+		this.messagePanel.setBackground(Frame.colorEventaryError);
+		this.messagePanel.setBounds(0,0,Frame.widthScreen,40);
+		this.labelError = new JLabel("Connexion Failed : error in login or password",(Icon) new ImageIcon("i.png"),SwingConstants.LEFT);
+		this.labelError.setBounds(50,10,Frame.widthScreen,20);
+		this.messagePanel.add(this.labelError);
+		this.add(this.messagePanel, BorderLayout.NORTH);
+		// message d'erreur invisible par défaut
+		this.messagePanel.setVisible(false);
 
-	    JPasswordField password = new JPasswordField();
-	    password.setHorizontalAlignment(JTextField.CENTER);
-	    password.setBounds((int) (Frame.widthScreen/2 - Frame.widthText/2),(int) ((Frame.heightScreen/2 - Frame.heightText/2)+20), Frame.widthText, Frame.heightText);
-	    this.add(password);
+		
+		this.login = new JTextField();
+		this.login.setHorizontalAlignment(JTextField.CENTER);
+		this.login.setBounds((int) (Frame.widthScreen/2 - Frame.widthText/2),(int) ((Frame.heightScreen/2 - Frame.heightText/2)-20), Frame.widthText, Frame.heightText);
+		mainPanel.add(login);
 
-	    JLabel passwordLogin = new JLabel("Password : ");
-	    passwordLogin.setBounds((int) (Frame.widthScreen/2 - Frame.widthText),(int) ((Frame.heightScreen/2 - Frame.heightText/2)+20),Frame.widthText,Frame.heightText);
-	    this.add(passwordLogin);
+		this.labelLogin = new JLabel("Login : ");
+		this.labelLogin.setBounds((int) (Frame.widthScreen/2 - Frame.widthText*.9),(int) ((Frame.heightScreen/2 - Frame.heightText/2)-20), Frame.widthText, Frame.heightText);
+		mainPanel.add(labelLogin);
 
-	    JButton bouton = new EventaryButton("Connexion");
-	    bouton.setBounds((int) (Frame.widthScreen/2 - Frame.widthButton/2),(int) (Frame.heightScreen/2 + 60),Frame.widthButton,Frame.heightButton);
-		//bouton.setAction(action);
-	    this.add(bouton);
+		this.password = new JPasswordField();
+		password.setHorizontalAlignment(JTextField.CENTER);
+		password.setBounds((int) (Frame.widthScreen/2 - Frame.widthText/2),(int) ((Frame.heightScreen/2 - Frame.heightText/2)+20), Frame.widthText, Frame.heightText);
+		mainPanel.add(password);
+
+		this.passwordLogin = new JLabel("Password : ");
+		passwordLogin.setBounds((int) (Frame.widthScreen/2 - Frame.widthText),(int) ((Frame.heightScreen/2 - Frame.heightText/2)+20),Frame.widthText,Frame.heightText);
+		mainPanel.add(passwordLogin);
+
+		this.bouton = new EventaryButton();
+
+		this.bouton.setBounds((int) (Frame.widthScreen/2 - Frame.widthButton/2),(int) (Frame.heightScreen/2 + 60),Frame.widthButton,Frame.heightButton);
+		mainPanel.add(bouton);
+		
+		// ajout du pannel principal au centre du JPanel ConnectionPanel
+		this.add(mainPanel, BorderLayout.CENTER);
+		
 	}
-	
+
+	/**
+	 * Gets the bouton.
+	 *
+	 * @return the bouton
+	 */
 	public JButton getBouton() {
-		return bouton;
+		return this.bouton;
 	}
 
+	/**
+	 * Gets the login.
+	 *
+	 * @return the login
+	 */
 	public String getLogin(){
 		return this.login.getText();
 	}
-	
+
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
 	@SuppressWarnings("deprecation")
 	public String getPassword(){
 		return this.password.getText();
 	}
 
+	/**
+	 * Sets the home panel.
+	 */
 	public void setHomePanel() {
+		System.out.println("setHomePanel de ConnectionPanel");
 		// TODO Auto-generated method stub
-		this.frame.setHomePanel();
+		this.frame.setHomePanel();	
 	}
 
-	public void displayMessage(String string, Color color) {
-		// TODO Auto-generated method stub
-		this.frame.displayMessage(string, color);
+	/**
+	 * Display error.
+	 */
+	public void displayError() {
+		this.messagePanel.setVisible(true);
+		// rafraichissement de la JFrame
+		SwingUtilities.updateComponentTreeUI(frame);
 	}
 }

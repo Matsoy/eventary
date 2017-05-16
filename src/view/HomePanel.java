@@ -2,40 +2,57 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * The Class HomePanel.
+ */
 public class HomePanel extends JPanel{
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 	
+	/** The main panel. */
 	JPanel mainPanel;
-	JPanel secondaryPanel;
-	Frame frame;
 	
+	/** The left panel. */
+	JPanel leftPanel;
+	
+	/** The frame. */
+	Frame frame;
+
+	/**
+	 * Instantiates a new home panel.
+	 *
+	 * @param frame the frame
+	 */
 	HomePanel(Frame frame){
 		this.frame = frame;
-		repaint();
-		//this.getContentPane().remove(messagePanel);
-		//this.getContentPane().remove(mainPanel);
-		mainPanel = new JPanel();
-	    mainPanel.setLayout(null);
-		mainPanel.setBackground(Frame.colorEventary);
-	    mainPanel.setBounds(0,0,Frame.widthMainPanel, Frame.heightScreen);
+		this.setLayout(new BorderLayout());
 
-		secondaryPanel = new JPanel();
-		secondaryPanel.setBounds(Frame.widthMainPanel,0,Frame.widthScreen-Frame.widthMainPanel, Frame.heightScreen);
-		secondaryPanel.setBackground(Color.WHITE);
+		// panel central
+		this.mainPanel = new JPanel();
+		this.mainPanel.setBackground(Color.WHITE);
 
+		JLabel labelConnected = new JLabel("Welcome Home!");
+		this.mainPanel.add(labelConnected);
+
+		this.add(this.mainPanel,BorderLayout.CENTER);
+
+		// sidebar de gauche
+		this.leftPanel = new JPanel();
+		this.leftPanel.setLayout(null);
+		this.leftPanel.setBackground(Frame.colorEventary);
+		this.leftPanel.setPreferredSize(new Dimension(Frame.sidebarWidth, Frame.heightScreen));
 
 		JButton bouton = new EventaryButton("Quitter");
-		bouton.setBounds((int) (Frame.widthMainPanel/2 - Frame.widthButton/2),(int) (Frame.heightScreen*.87),Frame.widthButton,Frame.heightButton);
-		//bouton.addActionListener(new ButtonDisconnection(this));
-		mainPanel.add(bouton);
-	    JLabel labelConnected = new JLabel("Welcome Home!");
-	    secondaryPanel.add(labelConnected);
-		//this.getContentPane().add(mainPanel,BorderLayout.WEST);
-		//this.getContentPane().add(secondaryPanel,BorderLayout.CENTER);
-	    this.setVisible(true);
+		bouton.setBounds((int) (Frame.sidebarWidth/2 - Frame.widthButton/2),(int) (Frame.heightScreen*.87),Frame.widthButton,Frame.heightButton);
+		this.leftPanel.add(bouton);
+
+		this.add(this.leftPanel,BorderLayout.WEST);
 	}
 }

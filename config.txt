@@ -7,4 +7,4 @@ TextWidth: 150
 TextHeight: 25
 ButtonWidth: 95
 ButtonHeight: 25
-MainPanelWidth: 360
+SidebarWidth: 360

@@ -11,7 +11,7 @@ import org.sqlite.SQLiteConfig;
  * config
  * File: SQLiteConnection.java
  * 
- * Cette classe (type singleton) établit la connexion entre une application Java et une BDD SQLite.
+ * Cette classe (type singleton) ï¿½tablit la connexion entre une application Java et une BDD SQLite.
  */
 class SQLiteConnection {
 	private String dsn;
@@ -19,7 +19,7 @@ class SQLiteConnection {
 	private static SQLiteConnection theInst = null;
 
 	/**
-	 * constructeur privé
+	 * constructeur privï¿½
 	 */
 	private SQLiteConnection(){
 		String path = System.getProperty("user.dir");
@@ -32,7 +32,6 @@ class SQLiteConnection {
 		try {
 			DriverManager.registerDriver(new org.sqlite.JDBC());
 			this.connect = DriverManager.getConnection(this.dsn, config.toProperties());
-			System.out.println( "Connexion reussie" );
 		}
 		catch ( Exception e ) {
 			System.err.println( "Erreur de connexion : " + e.getMessage() );
@@ -40,7 +39,7 @@ class SQLiteConnection {
 	}
 
 	/**
-	 * Renvoie l'instance static de type SQLiteConnection. Appel du constructeur privé si elle n'a pas encore été initialisée
+	 * Renvoie l'instance static de type SQLiteConnection. Appel du constructeur privï¿½ si elle n'a pas encore ï¿½tï¿½ initialisï¿½e
 	 * 
 	 * @return l'instance static de type SQLiteConnection
 	 */
@@ -53,9 +52,9 @@ class SQLiteConnection {
 	}
 
 	/**
-	 * Renvoie l'objet qui a établi la connexion avec la BDD.
+	 * Renvoie l'objet qui a ï¿½tabli la connexion avec la BDD.
 	 * 
-	 * @return l'objet qui a établi la connexion.
+	 * @return l'objet qui a ï¿½tabli la connexion.
 	 */
 	public java.sql.Connection getConnection(){
 
