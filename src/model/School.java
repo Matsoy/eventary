@@ -1,11 +1,13 @@
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
 
 /**
  * The Class School.
  */
-public class School {
+public class School extends Observable {
 	
 	/** The id. */
 	int id;

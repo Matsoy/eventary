@@ -2,11 +2,12 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * The Class Organization.
  */
-public abstract class Organization {
+public abstract class Organization extends Observable{
 	
 	/** The id. */
 	int id;

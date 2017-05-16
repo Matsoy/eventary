@@ -1,9 +1,11 @@
 package model;
 
+import java.util.Observable;
+
 /**
  * The Class User.
  */
-public class User {
+public class User extends Observable {
 	
 	/** The login. */
 	String login;

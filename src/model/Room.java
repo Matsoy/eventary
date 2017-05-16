@@ -1,9 +1,11 @@
 package model;
 
+import java.util.Observable;
+
 /**
  * The Class Room.
  */
-public class Room {
+public class Room extends Observable {
 	
 	/** The id. */
 	int id;

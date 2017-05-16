@@ -2,11 +2,12 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * The Class Building.
  */
-public class Building {
+public class Building extends Observable{
 	
 	/** The id. */
 	int id;

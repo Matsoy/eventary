@@ -1,12 +1,13 @@
 package model;
 
-import database.*;
-import input_output.*;
+import java.util.Observable;
+import database.UserDAO;
+import input_output.Reader;
 
 /**
  * The Class Context.
  */
-public class Context {
+public class Context extends Observable{
 	
 	/** The current user. */
 	User currentUser;

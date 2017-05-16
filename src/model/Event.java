@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Observable;
 
 import database.EventDAO;
 import database.ParticipationDAO;
@@ -11,7 +12,7 @@ import database.WaitingDAO;
 /**
  * The Class Event.
  */
-public class Event {
+public class Event extends Observable{
 
 	/** The id. */
 	int id;

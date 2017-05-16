@@ -1,20 +1,20 @@
 package view;
 import javax.swing.JFrame;
+
+import input_output.Reader;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
-import model.*;
+
 public class Screen extends JFrame{
 
-	public static final int widthScreen = 1440;
-	private static final int heightScreen = 810;
-
-	private static final int widthText = 150;
-	private static final int heightText = 25;
-	private static final int widthButton = 95;
-	private static final int heightButton = 25;
-
-	private static final int widthMainPanel = 360;
+	public static final int widthScreen = Reader.readInteger("ScreenWidth");
+	private static final int heightScreen = Reader.readInteger("ScreenHeight");
+	private static final int widthText = Reader.readInteger("TextWidth");
+	private static final int heightText = Reader.readInteger("TextHeight");
+	private static final int widthButton = Reader.readInteger("ButtonWidth");
+	private static final int heightButton = Reader.readInteger("ButtonHeight");
+	private static final int widthMainPanel = Reader.readInteger("MainPanelWidth");
 
 	public static final Color colorEventary = new Color(191,169,120);
 	public static final Color colorEventaryError = new Color(214,56,45);
