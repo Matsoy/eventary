@@ -134,6 +134,18 @@ public class DaoTest {
 		for(Department d: departments){
 			System.out.println(d.toString());
 		}
+		System.out.println("\n\t##### test de assoInWhichUserIsMember");
+		ArrayList<Association> associations2 = new ArrayList<Association>();
+		associations2 = OrganizationDAO.assoInWhichUserIsMember("E168011W");
+		for(Association a: associations2){
+			System.out.println(a.toString());
+		}
+		System.out.println("\n\t##### test de dptInWhichUserIsMember");
+		ArrayList<Department> departments2 = new ArrayList<Department>();
+		departments2 = OrganizationDAO.dptInWhichUserIsMember("E168011W");
+		for(Department d: departments2){
+			System.out.println(d.toString());
+		}
 
 
 		System.out.println("\n\t########################################");

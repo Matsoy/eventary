@@ -65,8 +65,8 @@ public class OrganizationDAO{
 
 		return ret;
 	}
-	
-	
+
+
 	/**
 	 * Pour retrouver tous les tuples des departements
 	 *
@@ -103,8 +103,8 @@ public class OrganizationDAO{
 
 		return ret;
 	}
-	
-	
+
+
 	/**
 	 * Pour retrouver l'association recherchee
 	 *
@@ -122,7 +122,7 @@ public class OrganizationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM ORGANIZATION	WHERE id = "+ id_asso +";";
+			query = "SELECT * FROM ORGANIZATION	WHERE id = "+ id_asso +" AND type_orga = 'asso';";
 
 			//Le resultat de la requête
 			ResultSet result = stat.executeQuery(query);
@@ -140,8 +140,8 @@ public class OrganizationDAO{
 
 		return ret;
 	}
-	
-	
+
+
 	/**
 	 * Pour retrouver le departement recherche
 	 *
@@ -159,7 +159,7 @@ public class OrganizationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM ORGANIZATION	WHERE id = "+ id_dpt +";";
+			query = "SELECT * FROM ORGANIZATION	WHERE id = "+ id_dpt +" AND type_orga = 'dpt';";
 
 			//Le resultat de la requête
 			ResultSet result = stat.executeQuery(query);
@@ -177,8 +177,88 @@ public class OrganizationDAO{
 
 		return ret;
 	}
+
+
+	/**
+	 * Pour retrouver les liste des associations dans lesquelles un User est membre
+	 *
+	 * @return the result set
+	 */
+	public static ArrayList<Association> assoInWhichUserIsMember(String user_login) {
+		Statement stat = null;
+		String query = "";
+		ArrayList<Association> ret = new ArrayList<Association>();
+
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT orga_id FROM ORGA_MEMBER WHERE user_login = '" + user_login + "';";
+
+			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					if (getOrganizationType(result.getInt(1)).equals("asso")) {
+						ret.add(findAsso(result.getInt(1))); //ajout de l'Association Ã  l'ArrayList
+					}
+				} 
+				while (result.next());
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
 	
 	
+	/**
+	 * Pour retrouver les liste des departements dans lesquelles un User est membre
+	 *
+	 * @return the result set
+	 */
+	public static ArrayList<Department> dptInWhichUserIsMember(String user_login) {
+		Statement stat = null;
+		String query = "";
+		ArrayList<Department> ret = new ArrayList<Department>();
+
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT orga_id FROM ORGA_MEMBER WHERE user_login = '" + user_login + "';";
+
+			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					if (getOrganizationType(result.getInt(1)).equals("dpt")) {
+						ret.add(findDpt(result.getInt(1))); //ajout du Department Ã  l'ArrayList
+					}
+				} 
+				while (result.next());
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
+
+
 	/**
 	 * Retourne le type d'organisation ("asso" pour une association, "dpt" pour un departement)
 	 *
@@ -216,7 +296,7 @@ public class OrganizationDAO{
 		return ret;
 	}
 
-	
+
 	/**
 	 * Methode qui permet d'inserer un tuple.
 	 *
