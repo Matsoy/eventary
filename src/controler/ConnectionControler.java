@@ -1,26 +1,33 @@
 package controler;
 
 import java.util.Observable;
-import model.*;
-import view.*;
+
+import java.awt.Color;
+
+import model.Context;
+import view.ConnectionPanel;
+import view.Frame;
 
 public class ConnectionControler implements java.util.Observer{
 	Context model;
-	Screen view;
+	ConnectionPanel view;
+	ActionConnection actionConnection;
 	
-	ConnectionControler(view.Screen view){
+	ConnectionControler(ConnectionPanel connectionPanel){
+		this.actionConnection = new ActionConnection(model, view, this);
 		this.model = new model.Context();
-		this.view = view;
+		this.view = connectionPanel;
+		this.view.getBouton().setAction(actionConnection);
 		this.model.addObserver(this); //On observe le model pour que lorsque authentification est true on load setPanelHome();
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		if(this.model.getAuthentification()){
-			view.setPanelHome();
+		if(this.model.getAuthentificated()){
+			view.setHomePanel();
 		}else{
-			view.displayConnectionError();
+			view.displayMessage("Erreur de connexion", Color.RED);
 		}
 	}
 	

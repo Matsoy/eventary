@@ -1,7 +1,10 @@
 package view;
+
 import javax.swing.*;
 import java.awt.*;
+
 public class EventaryButton extends JButton{
+	
   EventaryButton(String str){
     super(str);
     this.setBackground(new Color(225,225,225));
@@ -13,4 +16,5 @@ public class EventaryButton extends JButton{
     //this.setRolloverEnabled(false);
       //Enleve l'effet hoover
   }
+  
 }
