@@ -21,9 +21,9 @@ public class ActionConnection extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(this.model.connexion(this.view.getLogin(), this.view.getPassword())){
-			this.model.setAuthentification(true);
+			this.model.setAuthentificated(true);
 		}else{
-			this.model.setAuthentification(false);
+			this.model.setAuthentificated(false);
 		}
 	}
 
