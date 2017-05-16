@@ -15,6 +15,6 @@ public class Association extends Organization {
 	
 	public void addMember(User nouveauMembre){
 		OrgaMemberDAO.insert(nouveauMembre.getLogin(), this.id);
-		this.listeMembres = OrgaMemberDAO.find(this.id);
+		this.setListeMembres(OrgaMemberDAO.find(this.id));
 	}
 }

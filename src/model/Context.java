@@ -61,6 +61,8 @@ public class Context extends Observable{
 	 */
 	public void setAuthentificated(boolean authentification) {
 		this.authentificated = authentification;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	/**
@@ -88,14 +90,13 @@ public class Context extends Observable{
 	 * @param passwd the passwd
 	 * @return true, if successful
 	 */
-	public boolean connexion(String login, String passwd){
+	public void connexion(String login, String passwd){
 		this.currentUser = UserDAO.connect(login, passwd);
 		if(null == this.currentUser){	// Si les logs ne sont pas bon, on récupère un user null
-			this.authentificated = false;
-			return this.authentificated;
+			setAuthentificated(false);
+		}else{
+			setAuthentificated(true);
 		}
-		this.authentificated = true;
-		return this.authentificated;
 	}
 	
 //	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config

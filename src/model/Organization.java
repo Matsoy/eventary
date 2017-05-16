@@ -93,6 +93,8 @@ public abstract class Organization extends Observable{
 
 	public void setListeMembres(List<User> listeMembres) {
 		this.listeMembres = listeMembres;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	@Override

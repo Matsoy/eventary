@@ -339,6 +339,8 @@ public class Event extends Observable{
 
 	public void setListeParticipants(List<User> listeParticipants) {
 		this.listeParticipants = listeParticipants;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	public List<User> getListeAttente() {
@@ -347,9 +349,11 @@ public class Event extends Observable{
 
 	public void setListeAttente(List<User> listeAttente) {
 		this.listeAttente = listeAttente;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
-	public static void removeEvent(User remover, Event eventToDelete){	// Prévoir qu'une orga peut supprimer un event
+	public static void removeEvent(User remover, Event eventToDelete){	//Prévoir qu'un membre d'orga peut supprimer un event
 		if(remover == eventToDelete.getOrganizer()){	//Si un organisateur supprimer son événement
 			EventDAO.delete(eventToDelete.getId());
 		} else if(remover.getModerator() == true){	// Si un modérateur supprime un événement
@@ -362,24 +366,24 @@ public class Event extends Observable{
 		// Si il y a encore de la place, on ajoute l'utilisateur en tant que participant
 		if(this.listeParticipants.size() < this.maxNbParticipant){
 			ParticipationDAO.insert(newParticipant.getLogin(), this.id);
-			this.listeParticipants = ParticipationDAO.participationsInAnEvent(this.id);	
+			this.setListeParticipants(ParticipationDAO.participationsInAnEvent(this.id));	
 		}
 		// Sinon, on l'ajoute dans la liste d'attente
 		else{
 			WaitingDAO.insert(newParticipant.getLogin(), this.id);
-			this.listeAttente = WaitingDAO.waitingsForAnEvent(this.id);
+			this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
 		}
 	}
 
 	public void removeParticipant(User participant){
 		ParticipationDAO.delete(participant.getLogin(), this.id);
-		this.listeParticipants = ParticipationDAO.participationsInAnEvent(this.id);
-		this.listeAttente = WaitingDAO.waitingsForAnEvent(this.id);
+		this.setListeParticipants(ParticipationDAO.participationsInAnEvent(this.id));
+		this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
 	}
 
 	public void removePendingParticipant(User participant){
 		WaitingDAO.delete(participant.getLogin(), this.id);
-		this.listeAttente = WaitingDAO.waitingsForAnEvent(this.id);
+		this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
 	}
 
 	@Override
