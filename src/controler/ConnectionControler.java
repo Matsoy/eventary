@@ -17,7 +17,7 @@ public class ConnectionControler implements java.util.Observer{
 		this.actionConnection = new ActionConnection(model, view, this);
 		this.model = new model.Context();
 		this.view = connectionPanel;
-		this.view.getBouton().setAction(actionConnection);
+		//this.view.getBouton().setAction(actionConnection);
 		this.model.addObserver(this); //On observe le model pour que lorsque authentification est true on load setPanelHome();
 	}
 	
@@ -26,8 +26,10 @@ public class ConnectionControler implements java.util.Observer{
 		// TODO Auto-generated method stub
 		if(this.model.getAuthentificated()){
 			view.setHomePanel();
+			System.out.println("Connecté");
 		}else{
 			view.displayMessage("Erreur de connexion", Color.RED);
+			System.out.println("Pas connecté");
 		}
 	}
 	

@@ -13,7 +13,7 @@ public class Context extends Observable{
 	User currentUser;
 	
 	/** The authentification. */
-	boolean authentificated;	//Sert à savoir si l'authentification à réussi
+	boolean authentificated;	//Sert ï¿½ savoir si l'authentification ï¿½ rï¿½ussi
 	
 	/** The temps avant suppression. */
 	int tempsAvantSuppression;
@@ -92,14 +92,14 @@ public class Context extends Observable{
 	 */
 	public void connexion(String login, String passwd){
 		this.currentUser = UserDAO.connect(login, passwd);
-		if(null == this.currentUser){	// Si les logs ne sont pas bon, on récupère un user null
+		if(null == this.currentUser){	// Si les logs ne sont pas bon, on rï¿½cupï¿½re un user null
 			setAuthentificated(false);
 		}else{
 			setAuthentificated(true);
 		}
 	}
 	
-//	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config
+//	public static void main(String[] args) {	// Servira ï¿½ tester la lecture dans le fichier de config
 //		Context context = new Context();
 //	}
 }
