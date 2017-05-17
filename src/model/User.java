@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -24,7 +26,11 @@ public class User extends Observable {
 	
 	/** The year. */
 	int year;
-
+	
+	List<Association> listeAsso = new ArrayList<Association>();
+	
+	List<Department> listeDpt = new ArrayList<Department>();
+	
 	/**
 	 * Instantiates a new user.
 	 */
@@ -41,13 +47,16 @@ public class User extends Observable {
 	 * @param branch the branch
 	 * @param year the year
 	 */
-	public void init(String login, Boolean moderator, String fName, String lName, String branch, int year) {
+	public void init(String login, Boolean moderator, String fName, String lName, String branch, int year, 
+			List<Association> listeAsso, List<Department> listeDpt) {
 		this.login = login;
 		this.moderator = moderator;
 		this.fName = fName;
 		this.lName = lName;
 		this.branch = branch;
 		this.year = year;
+		this.listeAsso = listeAsso;
+		this.listeDpt = listeDpt;
 	}
 
 	
@@ -158,7 +167,32 @@ public class User extends Observable {
 	public void setYear(int year) {
 		this.year = year;
 	}
+	
+	public List<Association> getListeAsso() {
+		return listeAsso;
+	}
 
+	public void setListeAsso(List<Association> listeAsso) {
+		this.listeAsso = listeAsso;
+	}
+
+	public List<Department> getListeDpt() {
+		return listeDpt;
+	}
+
+	public void setListeDpt(List<Department> listeDpt) {
+		this.listeDpt = listeDpt;
+	}
+	
+	public boolean isInAsso(Organization association){
+		for(Association asso : listeAsso){
+			if(asso.equals(association)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

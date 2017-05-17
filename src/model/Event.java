@@ -353,12 +353,25 @@ public class Event extends Observable{
 		this.notifyObservers();
 	}
 	
-	public static void removeEvent(User remover, Event eventToDelete){	//Prévoir qu'un membre d'orga peut supprimer un event
-		if(remover == eventToDelete.getOrganizer()){	//Si un organisateur supprimer son événement
+	public static void removeEvent(User remover, Event eventToDelete){	//PrÃ©voir qu'un membre d'orga peut supprimer un event
+		if(canRemove(remover, eventToDelete)){
 			EventDAO.delete(eventToDelete.getId());
-		} else if(remover.getModerator() == true){	// Si un modérateur supprime un événement
-			EventDAO.delete(eventToDelete.getId());
-			System.out.println("Suppression de l'event par le modérateur " + remover.getLogin());
+			if(remover.getModerator() == true){	//Si c'est un modÃ©rateur qui supprime l'Ã©vÃ©nement
+				//Ã  modifier pour que notifie un message Ã  l'organisateur
+				System.out.println("Suppression de l'event par le modÃ©rateur " + remover.getLogin());
+			}
+		}
+	}
+	
+	public static boolean canRemove(User remover, Event eventToDelete){
+		if(remover == eventToDelete.getOrganizer()){
+			return true;
+		}else if(remover.isInAsso(eventToDelete.getOrganization()) == true){
+			return true;
+		}else if(remover.getModerator() == true){
+			return true;
+		}else{
+			return false;
 		}
 	}
 	
