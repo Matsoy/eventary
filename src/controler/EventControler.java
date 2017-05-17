@@ -20,7 +20,6 @@ public class EventControler implements java.util.Observer{
 		this.event = context.getCurrentEvent();
 		this.context = context;
 		this.view = eventPanel;
-		this.event.addObserver(this);
 	}
 	
 	@Override
