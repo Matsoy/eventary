@@ -2,9 +2,12 @@ package view;
 
 import java.awt.Color;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import input_output.Reader;
@@ -53,14 +56,11 @@ public class Frame extends JFrame{
 	/** The main panel. */
 	JPanel mainPanel;
 	
-	/** The secondary panel. */
-	JPanel secondaryPanel;
-	
 	/** The message panel. */
 	JPanel messagePanel;
 	
 	/** The label error. */
-	JLabel labelError;
+	JLabel labelMessage;
 
 	/**
 	 * Instantiates a new frame.
@@ -74,6 +74,12 @@ public class Frame extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
+		
+		this.messagePanel = new JPanel();
+		//messagePanel.setLayout(null);
+		this.messagePanel.setBounds(0,0,Frame.widthScreen,25);
+		this.add(this.messagePanel);
+		this.messagePanel.setVisible(false);
 
 		setConnectionPanel();
 		this.setVisible(true);
@@ -114,6 +120,23 @@ public class Frame extends JFrame{
 		// on enleve le ConnectionPanel
 		this.getContentPane().removeAll();
 		this.getContentPane().add(homePanel);
+		SwingUtilities.updateComponentTreeUI(this);
+	}
+
+	/**
+	 * Display error.
+	 */
+	public void displayMessage(String str, Color color) {
+		// panel qui contiendra le message d'erreur
+		this.messagePanel.removeAll();
+		this.messagePanel.setBackground(color);
+		this.labelMessage = new JLabel(str);
+		//this.labelMessage.setBounds(20,15,Frame.widthScreen,10);
+		messagePanel.add(this.labelMessage);
+		this.messagePanel.repaint();
+		// message d'erreur invisible par défaut
+		this.messagePanel.setVisible(true);
+		// rafraichissement de la JFrame
 		SwingUtilities.updateComponentTreeUI(this);
 	}
 }

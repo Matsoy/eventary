@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -38,9 +39,6 @@ public class ConnectionPanel extends JPanel {
 	/** The frame. */
 	Frame frame;
 	
-	/** The message panel. */
-	JPanel messagePanel;
-	
 	/** The label error. */
 	JLabel labelError;
 
@@ -59,17 +57,6 @@ public class ConnectionPanel extends JPanel {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(null);
 		mainPanel.setBackground(Frame.colorEventary);
-		
-		// panel qui contiendra le message d'erreur
-		this.messagePanel = new JPanel();
-		this.messagePanel.setBackground(Frame.colorEventaryError);
-		this.messagePanel.setBounds(0,0,Frame.widthScreen,40);
-		this.labelError = new JLabel("Connexion Failed : error in login or password",(Icon) new ImageIcon("i.png"),SwingConstants.LEFT);
-		this.labelError.setBounds(50,10,Frame.widthScreen,20);
-		this.messagePanel.add(this.labelError);
-		this.add(this.messagePanel, BorderLayout.NORTH);
-		// message d'erreur invisible par défaut
-		this.messagePanel.setVisible(false);
 
 		
 		this.login = new JTextField();
@@ -140,9 +127,7 @@ public class ConnectionPanel extends JPanel {
 	/**
 	 * Display error.
 	 */
-	public void displayError() {
-		this.messagePanel.setVisible(true);
-		// rafraichissement de la JFrame
-		SwingUtilities.updateComponentTreeUI(frame);
+	public void displayError(String str, Color color) {
+		this.frame.displayMessage(str, color);
 	}
 }

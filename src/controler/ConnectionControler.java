@@ -40,7 +40,7 @@ public class ConnectionControler implements java.util.Observer{
 			view.setHomePanel();
 			System.out.println("Connecté");
 		}else{
-			view.displayError();
+			view.displayError("Connexion Failed : error in login or password",Frame.colorEventaryError);
 			System.out.println("Pas connecté");
 		}
 	}
