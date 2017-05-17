@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
+import database.EventDAO;
 import model.Context;
 import view.HomePanel;
 
@@ -41,7 +42,7 @@ public class ActionDisplayMyEvents extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.view.displayEvents(UserDAO.findAll());
+		this.view.displayEvents(EventDAO.findAll());
 	}
 
 }

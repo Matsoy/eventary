@@ -41,7 +41,7 @@ public class Controler {
 		//page d'accueil
 		this.homeControler = new HomeControler(this.frame.getHomePanel(), this.context);
 		this.actionDisplayMyEvents = new ActionDisplayMyEvents(this.context, this.frame.getHomePanel());
-		this.frame.getHomePanel().getMyEvents().setAction(this.actionDisplayMyEvents);
+		this.frame.getHomePanel().getMyEventsButton().setAction(this.actionDisplayMyEvents);
 		
 	}
 

@@ -1,14 +1,12 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /**
  * The Class HomePanel.
@@ -59,6 +57,9 @@ public class HomePanel extends JPanel{
 		this.leftPanel.setLayout(null);
 		this.leftPanel.setBackground(Frame.colorEventary);
 		this.leftPanel.setPreferredSize(new Dimension(Frame.sidebarWidth, Frame.heightScreen));
+
+		ImageIcon profilImage = new ImageIcon("nerd.png");
+		this.leftPanel.add(new JLabel(profilImage));
 		
 		myEventsButton = new EventaryMenuButton("Mes evenements");
 		myEventsButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),10,widthMenuButton,heightMenuButton);
@@ -81,5 +82,9 @@ public class HomePanel extends JPanel{
 			mainPanel.add(panelEvent);
 		}
 		mainPanel.repaint();
+	}
+	
+	public JButton getMyEventsButton(){
+		return myEventsButton;
 	}
 }
