@@ -10,6 +10,8 @@ import java.util.Date;
 
 import model.Event;
 import model.Organization;
+import model.Room;
+import model.User;
 
 /**
  * The Class EventDAO.
@@ -52,7 +54,7 @@ public class EventDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM EVENT;";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
@@ -83,9 +85,9 @@ public class EventDAO{
 					else if (orga_type!= null && orga_type.equals("dpt")){
 						organization = OrganizationDAO.findDpt(result.getInt(11));
 					}
-					
-					ret.add(new Event()); //ajout du Event à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), organization, RoomDAO.find(result.getInt(12)), result.getString(13), ParticipationDAO.participationsInAnEvent(result.getInt(1)), WaitingDAO.waitingsForAnEvent(result.getInt(1))); //initialisaton de les paramètres du retour de la requête
+
+					ret.add(new Event()); //ajout du Event ï¿½ l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), organization, RoomDAO.find(result.getInt(12)), result.getString(13), ParticipationDAO.participationsInAnEvent(result.getInt(1)), WaitingDAO.waitingsForAnEvent(result.getInt(1))); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}
@@ -141,7 +143,7 @@ public class EventDAO{
 							dates[i] = null;
 						}
 					}
-					
+
 					String orga_type = OrganizationDAO.getOrganizationType(result.getInt(11)); //recuperation type de l'orga de l'evenement ("asso" pour une association, "dpt" pour un departement)
 					Organization organization = null;
 					if (orga_type.equals("asso")) {
@@ -169,42 +171,41 @@ public class EventDAO{
 	 *
 	 * @param tuple Objet de type Event a inserer
 	 */
-	public static void insert(Event tuple) {
+	public static void insert(String title, String description, Date startDate, Date endDate, int maxNbParticipant, User organizer, Organization organization, Room room, String address) {
 		Statement stat = null;
 		String query = "";
 
-		String[] datesStr = new String[5];
-		Date[] dates = new Date[5];
-		dates[0] = tuple.getCreateDate();
-		dates[1] = tuple.getStartDate();
-		dates[2] = tuple.getEndDate();
-		dates[3] = tuple.getModifDate();
-		dates[4] = tuple.getCancelDate();
+		String organizer_login = null;
+		if (organizer != null) {
+			organizer_login = organizer.getLogin();		
+		}
+		
+		int room_id = 0;
+		if (room != null) {
+			room_id = room.getId();	
+		}
+
+		String[] datesStr = new String[2];
+		Date[] dates = new Date[2];
+		dates[0] = startDate;
+		dates[1] = endDate;
 
 		for (int i = 0; i < dates.length; i++) {
 			if(dates[i] != null){
 				datesStr[i] = "datetime('" + parser.format(dates[i]) + "')";
 			}
 			else{
-				datesStr[i] = null;
+				System.out.println("ERREUR: "+dates[i] +"== null");
 			}
 		}
-
-		//Recuperation des attributs de l'objet Event
-		int id = tuple.getId();
-		String title = tuple.getTitle();
-		String desc = tuple.getDescription();
-		String organizer = tuple.getOrganizer().getLogin();
-		int room_id = tuple.getRoom().getId();
-		String address = tuple.getAddress();
-		int maxNbParticipant = tuple.getMaxNbParticipant();
 
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "INSERT INTO EVENT VALUES("+ id +",'"+ title +"','"+ desc +"',"+ dates[0] +","+ dates[1] +","+ dates[2] +","+ dates[3] +","+ dates[4] +","+ maxNbParticipant +","+ organizer +","+ room_id +",'"+ address +"');";
+			query = "INSERT INTO EVENT (title, descr, startDate, endDate, maxNbParticipant, organizer, orga_id, room_id, address)"
+					+ " VALUES("+ title +"','"+ description +"',"+ dates[0] +","+ dates[1] +","+ maxNbParticipant +","+ organizer_login +","+ room_id +",'"+ address +"');";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);
@@ -228,7 +229,7 @@ public class EventDAO{
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
-			//suppression de toutes les participations à  cet Event
+			//suppression de toutes les participations ï¿½ cet Event
 			ParticipationDAO.delete("", id_event);
 
 			//Preparation de la requete

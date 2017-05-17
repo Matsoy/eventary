@@ -68,7 +68,7 @@ public class HomePanel extends JPanel{
 		ImageIcon profilImage = new ImageIcon("nerd.png");
 		this.leftPanel.add(new JLabel(profilImage));
 		
-		myEventsButton = new EventaryMenuButton("Mes evenements");
+		myEventsButton = new EventaryMenuButton("Mes événements");
 		myEventsButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),10,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(myEventsButton);
 
@@ -109,5 +109,13 @@ public class HomePanel extends JPanel{
 	 */
 	public JButton getMyEventsButton(){
 		return myEventsButton;
+	}
+	
+	public JButton getQuitButton(){
+		return quitButton;
+	}
+	
+	public void setConnectionPanel(){
+		this.frame.setConnectionPanel();
 	}
 }

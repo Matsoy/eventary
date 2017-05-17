@@ -19,46 +19,46 @@ public class Frame extends JFrame{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The Constant widthScreen. */
 	static final int widthScreen = Reader.readInteger("ScreenWidth");
-	
+
 	/** The Constant heightScreen. */
 	static final int heightScreen = Reader.readInteger("ScreenHeight");
-	
+
 	/** The Constant widthText. */
 	static final int widthText = Reader.readInteger("TextWidth");
-	
+
 	/** The Constant heightText. */
 	static final int heightText = Reader.readInteger("TextHeight");
-	
+
 	/** The Constant widthButton. */
 	static final int widthButton = Reader.readInteger("ButtonWidth");
-	
+
 	/** The Constant heightButton. */
 	static final int heightButton = Reader.readInteger("ButtonHeight");
-	
+
 	/** The Constant sidebarWidth. */
 	static final int sidebarWidth = Reader.readInteger("SidebarWidth");
 
 	/** The Constant colorEventary. */
 	public static final Color colorEventary = new Color(191,169,120);
-	
+
 	/** The Constant colorEventaryError. */
 	public static final Color colorEventaryError = new Color(214,56,45);
 
 	/** The connection panel. */
 	ConnectionPanel connectionPanel;
-	
+
 	/** The home panel. */
 	HomePanel homePanel;
-	
+
 	/** The main panel. */
 	JPanel mainPanel;
-	
+
 	/** The message panel. */
 	JPanel messagePanel;
-	
+
 	/** The label error. */
 	JLabel labelMessage;
 
@@ -75,7 +75,7 @@ public class Frame extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
-		
+
 		this.messagePanel = new JPanel();
 		//messagePanel.setLayout(null);
 		this.messagePanel.setBounds(0,0,Frame.widthScreen,25);
@@ -108,6 +108,7 @@ public class Frame extends JFrame{
 	 * Sets the connection panel.
 	 */
 	public void setConnectionPanel(){
+		this.getContentPane().removeAll();
 		connectionPanel.setBounds(0,0,widthScreen,heightScreen);
 		this.getContentPane().add(connectionPanel);
 		repaint();
@@ -117,9 +118,9 @@ public class Frame extends JFrame{
 	 * Sets the home panel.
 	 */
 	public void setHomePanel(){
-		homePanel.setBounds(0,0,widthScreen,heightScreen);
 		// on enleve le ConnectionPanel
 		this.getContentPane().removeAll();
+		homePanel.setBounds(0,0,widthScreen,heightScreen);
 		this.getContentPane().add(homePanel);
 		SwingUtilities.updateComponentTreeUI(this);
 	}
@@ -128,6 +129,7 @@ public class Frame extends JFrame{
 	 * Display error.
 	 */
 	public void displayMessage(String str, Color color) {
+		System.out.println("dans displayMEssage");
 		// panel qui contiendra le message d'erreur
 		this.messagePanel.removeAll();
 		this.messagePanel.setBackground(color);

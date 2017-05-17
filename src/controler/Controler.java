@@ -25,6 +25,8 @@ public class Controler {
 
 	/** The action connection. */
 	ActionDisplayMyEvents actionDisplayMyEvents;
+	
+	ActionQuit actionQuit;
 
 	/**
 	 * Instantiates a new controler.
@@ -42,6 +44,9 @@ public class Controler {
 		this.homeControler = new HomeControler(this.frame.getHomePanel(), this.context);
 		this.actionDisplayMyEvents = new ActionDisplayMyEvents(this.context, this.frame.getHomePanel());
 		this.frame.getHomePanel().getMyEventsButton().setAction(this.actionDisplayMyEvents);
+		
+		this.actionQuit = new ActionQuit(this.context, this.frame.getHomePanel());
+		this.frame.getHomePanel().getQuitButton().setAction(this.actionQuit);
 		
 	}
 
