@@ -1,6 +1,8 @@
 package model;
 
 import java.util.Observable;
+
+import database.EventDAO;
 import database.UserDAO;
 import input_output.Reader;
 
@@ -17,7 +19,9 @@ public class Context extends Observable{
 
 	/** The temps avant suppression. */
 	int tempsAvantSuppression;
-
+	
+	Event currentEvent;
+	
 	/**
 	 * Instantiates a new context.
 	 */
@@ -25,6 +29,7 @@ public class Context extends Observable{
 		this.currentUser = null;
 		this.authentificated = false;
 		this.tempsAvantSuppression = Reader.readInteger("DurationBeforeDeletion");
+		this.currentEvent = null;
 	}
 
 	/**
@@ -43,6 +48,8 @@ public class Context extends Observable{
 	 */
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	/**
@@ -63,7 +70,6 @@ public class Context extends Observable{
 		this.authentificated = authentification;
 		this.setChanged();
 		this.notifyObservers();
-		System.out.println(this);
 	}
 
 	/**
@@ -83,6 +89,16 @@ public class Context extends Observable{
 	public void setTempsAvantSuppression(int tempsAvantSuppression) {
 		this.tempsAvantSuppression = tempsAvantSuppression;
 	}
+	
+	public Event getCurrentEvent() {
+		return currentEvent;
+	}
+
+	public void setCurrentEvent(Event currentEvent) {
+		this.currentEvent = currentEvent;
+		this.setChanged();
+		this.notifyObservers();
+	}
 
 	/**
 	 * Connexion.
@@ -92,12 +108,16 @@ public class Context extends Observable{
 	 * @return true, if successful
 	 */
 	public void connexion(String login, String passwd){
-		this.currentUser = UserDAO.connect(login, passwd);
+		setCurrentUser(UserDAO.connect(login, passwd));
 		if(null == this.currentUser){	// Si les logs ne sont pas bon, on r�cup�re un user null
 			setAuthentificated(false);
 		}else{
 			setAuthentificated(true);
 		}
+	}
+	
+	public void displayEvent(int eventId){
+		setCurrentEvent(EventDAO.find(eventId));
 	}
 
 	@Override

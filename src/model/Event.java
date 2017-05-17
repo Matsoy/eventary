@@ -375,17 +375,18 @@ public class Event extends Observable{
 		}
 	}
 	
-	public void addParticipant(User newParticipant){
+	public boolean addParticipant(User newParticipant){
 		// Si il y a encore de la place, on ajoute l'utilisateur en tant que participant
 		if(this.listeParticipants.size() < this.maxNbParticipant){
 			ParticipationDAO.insert(newParticipant.getLogin(), this.id);
-			this.setListeParticipants(ParticipationDAO.participationsInAnEvent(this.id));	
+			this.setListeParticipants(ParticipationDAO.participationsInAnEvent(this.id));
 		}
 		// Sinon, on l'ajoute dans la liste d'attente
 		else{
 			WaitingDAO.insert(newParticipant.getLogin(), this.id);
 			this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
 		}
+		return true;
 	}
 
 	public void removeParticipant(User participant){

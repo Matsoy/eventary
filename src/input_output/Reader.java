@@ -1,11 +1,13 @@
 package input_output;
 
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Reader {
 
-	public static int readInteger(String S){	// On passe la chaine à reconnaitre dans le fichier pour m'extraction de donnée
+	public static int readInteger(String S){	//On passe la chaine Ã  reconnaitre dans le fichier pour m'extraction de donnÃ©es
 		int entier = 0;
 		String currentLine = "";	// ligne courante
 		int ctr = 0;	// Variable de controle
@@ -16,7 +18,7 @@ public class Reader {
 			//lecture du fichier texte 
 			while (((currentLine = br.readLine()) != null) && ctr == 0){
 				if (currentLine.startsWith(S)){   // on a la ligne qui indique le tempsAvantSuppression
-					// On supprime les caractères blancs qui sont sur la ligne
+					// On supprime les caractÃ¨res blancs qui sont sur la ligne
 					currentLine = currentLine.replaceAll("\\s", "");
 					index = (currentLine.indexOf(":")+1);
 					entier = Integer.parseInt(currentLine.substring(index));
@@ -33,10 +35,9 @@ public class Reader {
 		return entier;
 	}
 
-	public static ArrayList<String> readModo(){
-		ArrayList<String> listeModo = new ArrayList<String>();
+	public static ArrayList<String> readLogs(String S){
+		ArrayList<String> listeUsers = new ArrayList<String>();
 		String currentLine = "";	// ligne courante
-		String S = "moderatorLogins";
 		String[] splitLine;
 		int index = 0;
 		int ctr = 0; // Variable de controle
@@ -46,13 +47,14 @@ public class Reader {
 			//lecture du fichier texte 
 			while (((currentLine = br.readLine()) != null) && ctr == 0){
 				if (currentLine.startsWith(S)){   // on a la ligne qui indique le tempsAvantSuppression
-					// On supprime les caractères blancs qui sont sur la ligne
+					// On supprime les caractÃ¨res blancs qui sont sur la ligne
 					currentLine = currentLine.replaceAll("\\s", "");
 					index = (currentLine.indexOf(":")+1);
 					currentLine = currentLine.substring(index);
 					splitLine = currentLine.split(",");
 					for(String str : splitLine){
-						listeModo.add(str);
+						listeUsers.add(str);
+						System.out.println(str);
 					}
 				}
 			}
@@ -60,11 +62,11 @@ public class Reader {
 		} catch(IOException e){
 			System.out.println(e.toString());
 		}
-		return listeModo;
+		return listeUsers;
 	}
 
-//	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config
-//		readModo();
-//	}
+	public static void main(String[] args) {	// Servira Ã  tester la lecture dans le fichier de config
+		readLogs("moderatorLogins");
+	}
 
 }
