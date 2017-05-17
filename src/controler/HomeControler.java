@@ -15,6 +15,8 @@ public class HomeControler implements java.util.Observer{
 
 	/** The view. */
 	HomePanel view;
+	
+	ActionDisplayMyEvents actionDisplayMyEvents;
 
 	/**
 	 * Instantiates a new home controler.
@@ -26,6 +28,8 @@ public class HomeControler implements java.util.Observer{
 		this.model = model;
 		this.view = homePanel;
 		this.model.addObserver(this);
+		this.actionDisplayMyEvents = new ActionDisplayMyEvents(this.model, this.view);
+		this.view.getMyEventsButton().setAction(this.actionDisplayMyEvents);
 	}
 
 	/* (non-Javadoc)

@@ -14,17 +14,15 @@ public class Controler {
 	/** The home controler. */
 	HomeControler homeControler;
 	
+	EventControler eventControler;
+	
 	/** The frame. */
 	Frame frame;
 	
 	/** The context. */
-	Context context;
-	
-	/** The action connection. */
-	ActionConnection actionConnection;
+	Context context;	
 
-	/** The action connection. */
-	ActionDisplayMyEvents actionDisplayMyEvents;
+	
 	
 	ActionQuit actionQuit;
 
@@ -37,16 +35,16 @@ public class Controler {
 		
 		// page de connexion
 		this.connectionControler = new ConnectionControler(this.frame.getConnectionPanel(), this.context);
-		this.actionConnection = new ActionConnection(this.context, this.frame.getConnectionPanel());
-		this.frame.getConnectionPanel().getBouton().setAction(this.actionConnection);
 		
 		//page d'accueil
 		this.homeControler = new HomeControler(this.frame.getHomePanel(), this.context);
-		this.actionDisplayMyEvents = new ActionDisplayMyEvents(this.context, this.frame.getHomePanel());
-		this.frame.getHomePanel().getMyEventsButton().setAction(this.actionDisplayMyEvents);
 		
 		this.actionQuit = new ActionQuit(this.context, this.frame.getHomePanel());
 		this.frame.getHomePanel().getQuitButton().setAction(this.actionQuit);
+		
+		//page d'un event
+		//this.eventControler = new EventControler(this.frame.getEventPanel(), this.context);
+		
 		
 	}
 

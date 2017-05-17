@@ -17,6 +17,9 @@ public class ConnectionControler implements java.util.Observer{
 	
 	/** The view. */
 	ConnectionPanel view;
+	
+	/** The action connection. */
+	ActionConnection actionConnection;
 
 	/**
 	 * Instantiates a new connection controler.
@@ -28,6 +31,8 @@ public class ConnectionControler implements java.util.Observer{
 		this.model = model;
 		this.view = connectionPanel;
 		this.model.addObserver(this);
+		this.actionConnection = new ActionConnection(this.model, this.view);
+		this.view.getBouton().setAction(this.actionConnection);
 	}
 
 	/* (non-Javadoc)
