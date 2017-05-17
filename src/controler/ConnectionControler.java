@@ -40,8 +40,6 @@ public class ConnectionControler implements java.util.Observer{
 		if(this.model.getAuthentificated()){
 			// on passe à la page d'accueil
 			view.setHomePanel();
-			// affichage de tous les événements
-			view.displayEvents(UserDAO.findAll());
 			System.out.println("Connecté");
 		}else{
 			view.displayError("Connexion Failed : error in login or password",Frame.colorEventaryError);
