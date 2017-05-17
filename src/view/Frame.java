@@ -70,6 +70,7 @@ public class Frame extends JFrame{
 		this.homePanel = new HomePanel(this);
 
 		this.setTitle("Eventary");
+		this.setResizable(false);
 		this.setSize(widthScreen,heightScreen);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

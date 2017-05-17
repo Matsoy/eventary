@@ -59,7 +59,7 @@ public class ConnectionPanel extends JPanel {
 		mainPanel.setBackground(Frame.colorEventary);
 
 		
-		this.login = new JTextField();
+		this.login = new JTextField("admin");
 		this.login.setHorizontalAlignment(JTextField.CENTER);
 		this.login.setBounds((int) (Frame.widthScreen/2 - Frame.widthText/2),(int) ((Frame.heightScreen/2 - Frame.heightText/2)-20), Frame.widthText, Frame.heightText);
 		mainPanel.add(login);
@@ -68,7 +68,7 @@ public class ConnectionPanel extends JPanel {
 		this.labelLogin.setBounds((int) (Frame.widthScreen/2 - Frame.widthText*.9),(int) ((Frame.heightScreen/2 - Frame.heightText/2)-20), Frame.widthText, Frame.heightText);
 		mainPanel.add(labelLogin);
 
-		this.password = new JPasswordField();
+		this.password = new JPasswordField("admin");
 		password.setHorizontalAlignment(JTextField.CENTER);
 		password.setBounds((int) (Frame.widthScreen/2 - Frame.widthText/2),(int) ((Frame.heightScreen/2 - Frame.heightText/2)+20), Frame.widthText, Frame.heightText);
 		mainPanel.add(password);
