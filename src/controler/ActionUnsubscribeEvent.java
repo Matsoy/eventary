@@ -26,15 +26,12 @@ public class ActionUnsubscribeEvent extends AbstractAction{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		//Une méthode pour se désincrire NEIL ???
-		
-//		if(event.addParticipant(context.getCurrentUser())){ //true pour inscrit
-//			view.displayMessage("Vous êtes maintenant inscrit à l'événément", Color.GREEN);
-//		}else{ //false pour liste d'attente
-//			view.displayMessage("Vous êtes maintenant sur la liste d'attente de l'événément", Color.YELLOW);
-//		}
+		this.event = context.getCurrentEvent();
+		if(event.removeParticipant(context.getCurrentUser())){ //true pour removed
+			view.displayMessage("Vous êtes maintenant inscrit à l'événément", Color.GREEN);
+		}else{ //false pour not removed
+			view.displayMessage("Vous êtes maintenant sur la liste d'attente de l'événément", Color.YELLOW);
+		}
 	}
 
 }

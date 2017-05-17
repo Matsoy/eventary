@@ -29,6 +29,7 @@ public class ActionSubscribeEvent extends AbstractAction{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		this.event = context.getCurrentEvent();
 		if(event.addParticipant(context.getCurrentUser())){ //true pour inscrit
 			view.displayMessage("Vous êtes maintenant inscrit à l'événément", Color.GREEN);
 		}else{ //false pour liste d'attente
