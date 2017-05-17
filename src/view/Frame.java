@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 
 import input_output.Reader;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Frame.
  */
@@ -73,6 +74,9 @@ public class Frame extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
 
+		this.messagePanel = new JPanel();
+		this.messagePanel.setBounds(0,0,Frame.widthScreen,25);
+		
 		setConnectionPanel();
 		this.setVisible(true);
 	}
@@ -95,11 +99,22 @@ public class Frame extends JFrame{
 		return homePanel;
 	}
 
+
+	/**
+	 * Sets the message panel.
+	 */
+	public void setMessagePanel(){
+		this.add(this.messagePanel);
+		this.messagePanel.setVisible(false);
+	}
+
+
 	/**
 	 * Sets the connection panel.
 	 */
 	public void setConnectionPanel(){
 		this.getContentPane().removeAll();
+		setMessagePanel();
 		connectionPanel.setBounds(0,0,widthScreen,heightScreen);
 		this.getContentPane().add(connectionPanel);
 		SwingUtilities.updateComponentTreeUI(this);
@@ -112,6 +127,7 @@ public class Frame extends JFrame{
 	public void setHomePanel(){
 		// on enleve le ConnectionPanel
 		this.getContentPane().removeAll();
+		setMessagePanel();
 		homePanel.setBounds(0,0,widthScreen,heightScreen);
 		this.getContentPane().add(homePanel);
 		SwingUtilities.updateComponentTreeUI(this);
@@ -119,21 +135,20 @@ public class Frame extends JFrame{
 
 	/**
 	 * Display error.
+	 *
+	 * @param str the str
+	 * @param color the color
 	 */
 	public void displayMessage(String str, Color color) {
 		System.out.println("dans displayMEssage");
 		// panel qui contiendra le message d'erreur
-
-		messagePanel = new JPanel();
-		messagePanel.setBounds(0,0,Frame.widthScreen,25);
-		//this.messagePanel.removeAll();
-		messagePanel.setBackground(color);
+		this.messagePanel.removeAll();
+		this.messagePanel.setBackground(color);
+		//this.labelMessage.setBounds(20,15,Frame.widthScreen,10);
 		messagePanel.add(new JLabel(str));
-		messagePanel.repaint();
-		messagePanel.setVisible(true);
-		this.getContentPane().add(messagePanel);
+		// message d'erreur invisible par défaut
+		this.messagePanel.setVisible(true);
 		// rafraichissement de la JFrame
 		SwingUtilities.updateComponentTreeUI(this);
-		this.repaint();
 	}
 }
