@@ -1,7 +1,8 @@
-package controler;
+package controller;
 
 import java.util.Observable;
 
+import database.EventDAO;
 import model.Context;
 import view.ConnectionPanel;
 import view.Frame;
@@ -9,7 +10,7 @@ import view.Frame;
 /**
  * The Class ConnectionControler.
  */
-public class ConnectionControler implements java.util.Observer{
+public class ConnectionController implements java.util.Observer{
 	
 	/** The model. */
 	Context model;
@@ -26,7 +27,7 @@ public class ConnectionControler implements java.util.Observer{
 	 * @param connectionPanel the connection panel
 	 * @param model the model
 	 */
-	ConnectionControler(ConnectionPanel connectionPanel, Context model){
+	ConnectionController(ConnectionPanel connectionPanel, Context model){
 		this.model = model;
 		this.view = connectionPanel;
 		this.model.addObserver(this);
@@ -43,7 +44,7 @@ public class ConnectionControler implements java.util.Observer{
 		System.out.println("dans update de ConnectionControler");
 		if(this.model.getAuthentificated()){
 			// on passe à la page d'accueil
-			view.setHomePanel();
+			view.setHomePanel(EventDAO.findAll());
 			System.out.println("Connecté");
 		}else{
 			view.displayError("Connexion Failed : error in login or password",Frame.colorEventaryError);

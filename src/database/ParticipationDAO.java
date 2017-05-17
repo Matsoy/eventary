@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.Event;
 import model.User;
 
 /**
@@ -15,7 +16,7 @@ import model.User;
  * 
  * File: ParticipationDAO.java
  * 
- * Classe pour les objets Dao de représentant la participation d'un User à un Event
+ * Classe pour les objets Dao de reprï¿½sentant la participation d'un User ï¿½ un Event
  */
 
 public class ParticipationDAO{
@@ -26,14 +27,15 @@ public class ParticipationDAO{
 	public ParticipationDAO() {
 
 	}
-
+	
+	
 	/**
 	 * Renvoie la liste des User participant Ã  un Event.
 	 *
 	 * @param id_event id du Event
 	 * @return the array list
 	 */
-	public static ArrayList<User> participationsInAnEvent(int id_event) {
+	public static ArrayList<User> eventParticipants(int id_event) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<User> ret = new ArrayList<User>();
@@ -54,6 +56,45 @@ public class ParticipationDAO{
 			if (result.next() ) {
 				do {
 					ret.add(UserDAO.find(result.getString(2))); //ajout du User Ã  l'ArrayList			
+				} 
+				while (result.next());
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
+	
+	
+	/**
+	 * Renvoie la liste des Event auxquels participe un User.
+	 *
+	 * @param user_login the user login
+	 * @return the array list
+	 */
+	public static ArrayList<Event> participationsInAnEvent(String user_login) {
+		Statement stat = null;
+		String query = "";
+		ArrayList<Event> ret = new ArrayList<Event>();
+
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT * FROM PARTICIPATION WHERE user_login = '" + user_login + "';";
+
+			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					ret.add(EventDAO.find(result.getInt(1))); //ajout du Event Ã  l'ArrayList			
 				} 
 				while (result.next());
 			}
@@ -114,13 +155,13 @@ public class ParticipationDAO{
 			else{
 				//Preparation de la requete
 				query = "DELETE FROM PARTICIPATION WHERE user_login = '" + user_login + "' and event_id = " + event_id + ";";
-				// récupération du premier User sur liste d'attente
+				// rï¿½cupï¿½ration du premier User sur liste d'attente
 				String firstWaitingLogin = WaitingDAO.getFirstWaiting(event_id);
 				// s'il y a un User en attente
 				if (firstWaitingLogin.equals("") || firstWaitingLogin.isEmpty()) {
 					// on le supprime de la liste d'attente
 					WaitingDAO.delete(firstWaitingLogin, event_id);
-					//et on le rajoute à la liste des participants
+					//et on le rajoute ï¿½ la liste des participants
 					insert(firstWaitingLogin, event_id);
 				}
 			}

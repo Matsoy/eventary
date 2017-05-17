@@ -87,7 +87,7 @@ public class EventDAO{
 					}
 
 					ret.add(new Event()); //ajout du Event � l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), organization, RoomDAO.find(result.getInt(12)), result.getString(13), ParticipationDAO.participationsInAnEvent(result.getInt(1)), WaitingDAO.waitingsForAnEvent(result.getInt(1))); //initialisaton de les param�tres du retour de la requ�te
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), organization, RoomDAO.find(result.getInt(12)), result.getString(13), ParticipationDAO.eventParticipants(result.getInt(1)), WaitingDAO.waitingsForAnEvent(result.getInt(1))); //initialisaton de les param�tres du retour de la requ�te
 				} 
 				while (result.next());
 			}
@@ -146,14 +146,14 @@ public class EventDAO{
 
 					String orga_type = OrganizationDAO.getOrganizationType(result.getInt(11)); //recuperation type de l'orga de l'evenement ("asso" pour une association, "dpt" pour un departement)
 					Organization organization = null;
-					if (orga_type.equals("asso")) {
+					if (orga_type != null && orga_type.equals("asso")) {
 						organization = OrganizationDAO.findAsso(result.getInt(11));
 					} 
-					else if (orga_type.equals("dpt")){
+					else if (orga_type != null && orga_type.equals("dpt")){
 						organization = OrganizationDAO.findDpt(result.getInt(11));
 					}
 
-					ret.init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), organization, RoomDAO.find(result.getInt(12)), result.getString(13), ParticipationDAO.participationsInAnEvent(result.getInt(1)), WaitingDAO.waitingsForAnEvent(result.getInt(1)));
+					ret.init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), organization, RoomDAO.find(result.getInt(12)), result.getString(13), ParticipationDAO.eventParticipants(result.getInt(1)), WaitingDAO.waitingsForAnEvent(result.getInt(1)));
 				} 
 				while (result.next());
 			}
@@ -179,7 +179,7 @@ public class EventDAO{
 		if (organizer != null) {
 			organizer_login = organizer.getLogin();		
 		}
-		
+
 		int room_id = 0;
 		if (room != null) {
 			room_id = room.getId();	

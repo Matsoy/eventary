@@ -11,7 +11,7 @@ public class Main {
 	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
-		new controler.Controler();
+		new controller.Controller();
 	}
 
 }

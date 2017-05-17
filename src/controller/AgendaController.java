@@ -1,4 +1,4 @@
-package controler;
+package controller;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -6,7 +6,7 @@ import java.util.Observer;
 import model.Context;
 import view.AgendaPanel;
 
-public class AgendaControler implements Observer{
+public class AgendaController implements Observer{
 	
 	/** The model. */
 	Context context;
@@ -14,7 +14,7 @@ public class AgendaControler implements Observer{
 	/** The view. */
 	AgendaPanel agendaPanel;
 	
-	AgendaControler(AgendaPanel agendaPanel, Context context){
+	AgendaController(AgendaPanel agendaPanel, Context context){
 		this.context = context;
 		this.agendaPanel = agendaPanel;
 	}

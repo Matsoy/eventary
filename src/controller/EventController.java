@@ -1,11 +1,11 @@
-package controler;
+package controller;
 
 import java.util.Observable;
 import model.Context;
 import model.Event;
 import view.EventPanel;
 
-public class EventControler implements java.util.Observer{
+public class EventController implements java.util.Observer{
 	
 	/** The event. */
 	Event event;
@@ -16,7 +16,7 @@ public class EventControler implements java.util.Observer{
 	/** The view. */
 	EventPanel view;
 	
-	EventControler(EventPanel eventPanel, Context context){
+	EventController(EventPanel eventPanel, Context context){
 		this.event = context.getCurrentEvent();
 		this.context = context;
 		this.view = eventPanel;

@@ -1,4 +1,4 @@
-package controler;
+package controller;
 
 import java.util.Observable;
 
@@ -8,7 +8,7 @@ import view.HomePanel;
 /**
  * The Class HomeControler.
  */
-public class HomeControler implements java.util.Observer{
+public class HomeController implements java.util.Observer{
 
 	/** The model. */
 	Context model;
@@ -25,7 +25,7 @@ public class HomeControler implements java.util.Observer{
 	 * @param homePanel the home panel
 	 * @param model the model
 	 */
-	HomeControler(HomePanel homePanel, Context model){
+	HomeController(HomePanel homePanel, Context model){
 		this.model = model;
 		this.view = homePanel;
 		this.model.addObserver(this);

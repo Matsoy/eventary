@@ -1,4 +1,4 @@
-package controler;
+package controller;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

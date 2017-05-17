@@ -9,7 +9,7 @@ INSERT INTO EVENT (title, descr, startDate, endDate, maxNbParticipant, organizer
 VALUES ('3eme evenement!', 'Ceci est une courte description de ce 3eme evenement. Passe ton chemin maintenant', datetime('2017-05-22 22:30:00'), datetime('2017-05-23 03:00:00'), 100, 'E148834B', '19 Rue L�on Blum, 44000 Nantes');
 
 INSERT INTO EVENT (title, descr, startDate, endDate, maxNbParticipant, organizer, address) --� une adresse ext�rieure � une �cole, cree par un utilisateur simple E167998G
-VALUES ('4eme evenement!', 'Ceci est une courte description de ce 3eme evenement. Jamais 3 sans 4!', datetime('2017-05-23 21:30:00'), datetime('2017-05-24 00:30:00'), 25, 'E167998G', '4 Rue Lebrun, 44000 Nantes');
+VALUES ('4eme evenement!', 'Ceci est une courte description de ce 3eme evenement. Jamais 3 sans 4!', datetime('2017-05-23 21:30:00'), datetime('2017-05-24 00:30:00'), 5, 'E167998G', '4 Rue Lebrun, 44000 Nantes');
 
 
 --TRIGGER ERROR: creatDate > startDate

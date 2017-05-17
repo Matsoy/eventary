@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.Event;
 import model.User;
 
 /**
@@ -15,7 +16,7 @@ import model.User;
  * 
  * File: WaitingDAO.java
  * 
- * Classe pour les objets Dao de représentant la participation d'un User à un Event (sur liste d'attente)
+ * Classe pour les objets Dao de reprï¿½sentant la participation d'un User ï¿½ un Event (sur liste d'attente)
  */
 
 public class WaitingDAO{
@@ -28,7 +29,7 @@ public class WaitingDAO{
 	}
 
 	/**
-	 * Renvoie la liste des User participant Ã  un Event (sur liste d'attente) triée de celui qui attend depuis le + longtemps à celui qui attend depuis le moins longtemps
+	 * Renvoie la liste des User participant Ã  un Event (sur liste d'attente) triï¿½e de celui qui attend depuis le + longtemps ï¿½ celui qui attend depuis le moins longtemps
 	 *
 	 * @param id_event id du Event
 	 * @return the array list
@@ -54,6 +55,45 @@ public class WaitingDAO{
 			if (result.next() ) {
 				do {
 					ret.add(UserDAO.find(result.getString(2))); //ajout du User Ã  l'ArrayList			
+				} 
+				while (result.next());
+			}
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
+	
+	
+	/**
+	 * Renvoie la liste des Event auxquels attend un User
+	 *
+	 * @param id_event id du Event
+	 * @return the array list
+	 */
+	public static ArrayList<Event> waitingEvents(String user_login) {
+		Statement stat = null;
+		String query = "";
+		ArrayList<Event> ret = new ArrayList<Event>();
+
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT * FROM WAITING WHERE user_login = '" + user_login + "' ORDER BY datetime(waiting_date) ASC;";
+
+			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					ret.add(EventDAO.find(result.getInt(1))); //ajout du Event Ã  l'ArrayList			
 				} 
 				while (result.next());
 			}
@@ -106,7 +146,7 @@ public class WaitingDAO{
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
-			// pas de User dÃ©signÃ© -> suppression de toutes les participations à cet Event (sur liste d'attente)
+			// pas de User dÃ©signÃ© -> suppression de toutes les participations ï¿½ cet Event (sur liste d'attente)
 			if (user_login == null || user_login.isEmpty()) {
 				//Preparation de la requete
 				query = "DELETE FROM WAITING WHERE event_id = " + event_id + ";";
@@ -126,7 +166,7 @@ public class WaitingDAO{
 	}
 
 	/**
-	 * Renvoie le premier qui est sur la liste d'attente d'un événement
+	 * Renvoie le premier qui est sur la liste d'attente d'un ï¿½vï¿½nement
 	 *
 	 * @param event_id l'id du Event
 	 * @return user_login the user login

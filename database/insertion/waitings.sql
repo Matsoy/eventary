@@ -14,3 +14,6 @@ VALUES (1, 'E912413F');
 
 INSERT INTO WAITING (event_id, user_login)
 VALUES (1, 'E114111A');
+
+INSERT INTO WAITING (event_id, user_login)
+VALUES (4, 'E168011W');

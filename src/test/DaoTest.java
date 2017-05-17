@@ -162,9 +162,9 @@ public class DaoTest {
 		System.out.println("\n\t########################################");
 		System.out.println("\t########## test de ParticipationDAO");
 		System.out.println("\t########################################");
-		System.out.println("\n\t##### test de participationsInAnEvent");
+		System.out.println("\n\t##### test de eventParticipants");
 		ArrayList<User> participation1 = new ArrayList<User>();
-		participation1 = ParticipationDAO.participationsInAnEvent(1);
+		participation1 = ParticipationDAO.eventParticipants(1);
 		for(User p: participation1){
 			System.out.println(p.toString());
 		}

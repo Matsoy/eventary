@@ -1,47 +1,49 @@
-package controler;
+package controller;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
-import database.UserDAO;
+import database.ParticipationDAO;
+import database.WaitingDAO;
 import model.Context;
-import view.ConnectionPanel;
+import view.HomePanel;
 
 
 /**
- * The Class ActionConnection.
+ * The Class ActionDisplayMyEvents.
  */
-public class ActionConnection extends AbstractAction {
-	
+public class ActionDisplayMyEvents extends AbstractAction {
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The model. */
 	Context model;
-	
+
 	/** The view. */
-	ConnectionPanel view;
-	
+	HomePanel view;
+
+
 	/**
-	 * Instantiates a new action connection.
+	 * Instantiates a new action display my events.
 	 *
 	 * @param model the model
 	 * @param view the view
 	 */
-	ActionConnection(Context model, ConnectionPanel view){
+	ActionDisplayMyEvents(Context model, HomePanel view){
 		this.model = model;
 		this.view = view;
-		this.putValue(Action.NAME, "Se connecter");
+		this.putValue(Action.NAME, "Mes evenements");
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.model.connexion(this.view.getLogin(), UserDAO.generateHash(this.view.getPassword()));
+		this.view.displayMyEvents(ParticipationDAO.participationsInAnEvent(model.getCurrentUser().getLogin()), WaitingDAO.waitingEvents(model.getCurrentUser().getLogin()));
 	}
 
 }

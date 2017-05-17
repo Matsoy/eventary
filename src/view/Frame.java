@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -8,7 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import input_output.Reader;
+import model.Event;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Frame.
  */
@@ -56,8 +59,10 @@ public class Frame extends JFrame{
 	/** The message panel. */
 	JPanel messagePanel;
 	
+	/** The event panel. */
 	EventPanel eventPanel;
 	
+	/** The agenda panel. */
 	AgendaPanel agendaPanel;
 
 	/**
@@ -99,10 +104,20 @@ public class Frame extends JFrame{
 		return homePanel;
 	}
 	
+	/**
+	 * Gets the event panel.
+	 *
+	 * @return the event panel
+	 */
 	public EventPanel getEventPanel() {
 		return eventPanel;
 	}
 
+	/**
+	 * Gets the agenda panel.
+	 *
+	 * @return the agenda panel
+	 */
 	public AgendaPanel getAgendaPanel() {
 		return agendaPanel;
 	}
@@ -131,13 +146,16 @@ public class Frame extends JFrame{
 
 	/**
 	 * Sets the home panel.
+	 *
+	 * @param events la liste des evenements
 	 */
-	public void setHomePanel(){
+	public void setHomePanel(ArrayList<Event> events){
 		// on enleve le ConnectionPanel
 		this.getContentPane().removeAll();
 		setMessagePanel();
 		homePanel.setBounds(0,0,widthScreen,heightScreen);
 		this.getContentPane().add(homePanel);
+		homePanel.displayAllEvents(events);
 		SwingUtilities.updateComponentTreeUI(this);
 	}
 
