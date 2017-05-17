@@ -6,10 +6,12 @@ import java.awt.Dimension;
 import java.awt.Event;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -43,6 +45,9 @@ public class HomePanel extends JPanel{
 	
 	/** The Quit button. */
 	JButton quitButton;
+	
+	/** The panel for the creation of a new event */
+	JPanel newEventPanel;
 
 	/**
 	 * Instantiates a new home panel.
@@ -68,7 +73,7 @@ public class HomePanel extends JPanel{
 		ImageIcon profilImage = new ImageIcon("nerd.png");
 		this.leftPanel.add(new JLabel(profilImage));
 		
-		myEventsButton = new EventaryMenuButton("Mes événements");
+		myEventsButton = new EventaryMenuButton("Mes evenements");
 		myEventsButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),10,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(myEventsButton);
 
@@ -87,19 +92,22 @@ public class HomePanel extends JPanel{
 	 * @param eventsList the events list
 	 */
 	public void displayEvents(ArrayList<model.Event> eventsList){
-		System.out.println("dans displayEvents");
-		for (model.Event event : eventsList) {
-			System.out.println(event);
-		}
-		JPanel panelEvent;
+		//JPanel panelEvent;
 		mainPanel.removeAll();
+		newEventPanel = new JPanel();
+		newEventPanel.setPreferredSize(new Dimension(800,160));
+		newEventPanel.add(new JLabel("New Event"));
+		ImageIcon icon = new ImageIcon("i.png");
+		newEventPanel.setBorder(BorderFactory.createMatteBorder(10,20,5,1, icon));
+		mainPanel.add(newEventPanel);
 		for (model.Event event : eventsList) {
-			panelEvent = new JPanel();
+			JPanel panelEvent = new JPanel();
+			panelEvent.setPreferredSize(new Dimension(800,160));
 			panelEvent.add(new JLabel(event.getTitle()));
 			panelEvent.add(new JLabel(event.getStartDate().toString()));
 			mainPanel.add(panelEvent);
 		}
-		mainPanel.repaint();
+		SwingUtilities.updateComponentTreeUI(mainPanel);
 	}
 	
 	/**

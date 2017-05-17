@@ -59,9 +59,6 @@ public class Frame extends JFrame{
 	/** The message panel. */
 	JPanel messagePanel;
 
-	/** The label error. */
-	JLabel labelMessage;
-
 	/**
 	 * Instantiates a new frame.
 	 */
@@ -75,12 +72,6 @@ public class Frame extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
-
-		this.messagePanel = new JPanel();
-		//messagePanel.setLayout(null);
-		this.messagePanel.setBounds(0,0,Frame.widthScreen,25);
-		this.add(this.messagePanel);
-		this.messagePanel.setVisible(false);
 
 		setConnectionPanel();
 		this.setVisible(true);
@@ -111,6 +102,7 @@ public class Frame extends JFrame{
 		this.getContentPane().removeAll();
 		connectionPanel.setBounds(0,0,widthScreen,heightScreen);
 		this.getContentPane().add(connectionPanel);
+		SwingUtilities.updateComponentTreeUI(this);
 		repaint();
 	}
 
@@ -131,15 +123,17 @@ public class Frame extends JFrame{
 	public void displayMessage(String str, Color color) {
 		System.out.println("dans displayMEssage");
 		// panel qui contiendra le message d'erreur
-		this.messagePanel.removeAll();
-		this.messagePanel.setBackground(color);
-		this.labelMessage = new JLabel(str);
-		//this.labelMessage.setBounds(20,15,Frame.widthScreen,10);
-		messagePanel.add(this.labelMessage);
-		this.messagePanel.repaint();
-		// message d'erreur invisible par défaut
-		this.messagePanel.setVisible(true);
+
+		messagePanel = new JPanel();
+		messagePanel.setBounds(0,0,Frame.widthScreen,25);
+		//this.messagePanel.removeAll();
+		messagePanel.setBackground(color);
+		messagePanel.add(new JLabel(str));
+		messagePanel.repaint();
+		messagePanel.setVisible(true);
+		this.getContentPane().add(messagePanel);
 		// rafraichissement de la JFrame
 		SwingUtilities.updateComponentTreeUI(this);
+		this.repaint();
 	}
 }

@@ -34,7 +34,7 @@ public class ActionDisplayMyEvents extends AbstractAction {
 	ActionDisplayMyEvents(Context model, HomePanel view){
 		this.model = model;
 		this.view = view;
-		this.putValue(Action.NAME, "Mes événements");
+		this.putValue(Action.NAME, "Mes evenements");
 	}
 
 	/* (non-Javadoc)
