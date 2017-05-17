@@ -1,5 +1,6 @@
 package controler;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -9,10 +10,9 @@ import model.Context;
 import model.Event;
 import view.EventPanel;
 
-import java.awt.Color;
-import java.awt.color.*;
-
 public class ActionSubscribeEvent extends AbstractAction{
+
+	private static final long serialVersionUID = 1L;
 
 	Event event;
 	

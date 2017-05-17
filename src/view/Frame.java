@@ -2,17 +2,13 @@ package view;
 
 import java.awt.Color;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import input_output.Reader;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Frame.
  */

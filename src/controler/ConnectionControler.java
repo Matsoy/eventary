@@ -2,7 +2,6 @@ package controler;
 
 import java.util.Observable;
 
-import database.UserDAO;
 import model.Context;
 import view.ConnectionPanel;
 import view.Frame;

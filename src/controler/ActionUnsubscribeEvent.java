@@ -12,6 +12,8 @@ import view.EventPanel;
 
 public class ActionUnsubscribeEvent extends AbstractAction{
 
+	private static final long serialVersionUID = 1L;
+
 	Event event;
 	
 	Context context;

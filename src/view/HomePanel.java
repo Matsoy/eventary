@@ -2,15 +2,17 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Event;
+import java.awt.GridLayout;
 import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class HomePanel.
  */
@@ -44,6 +46,8 @@ public class HomePanel extends JPanel{
 
 	/** The panel for the creation of a new event */
 	JPanel newEventPanel;
+
+	JScrollPane scrollMainPanel;
 	/**
 	 * Instantiates a new home panel.
 	 *
@@ -55,7 +59,9 @@ public class HomePanel extends JPanel{
 		// panel central
 		this.mainPanel = new JPanel();
 		this.mainPanel.setBackground(Color.WHITE);
-		this.add(this.mainPanel,BorderLayout.CENTER);
+		this.scrollMainPanel = new JScrollPane(this.mainPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		this.add(this.scrollMainPanel,BorderLayout.CENTER);
 		// sidebar de gauche
 		this.leftPanel = new JPanel();
 		this.leftPanel.setLayout(null);
@@ -82,21 +88,23 @@ public class HomePanel extends JPanel{
 	 */
 	public void displayEvents(ArrayList<model.Event> eventsList){
 		//JPanel panelEvent;
-		mainPanel.removeAll();
+		this.mainPanel.removeAll();
+		this.mainPanel.setLayout(new GridLayout(eventsList.size()+1, 1));
 		newEventPanel = new JPanel();
 		newEventPanel.setPreferredSize(new Dimension(800,160));
 		newEventPanel.add(new JLabel("New Event"));
-		ImageIcon icon = new ImageIcon("i.png");
-		newEventPanel.setBorder(BorderFactory.createMatteBorder(10,20,5,1, icon));
+		//		ImageIcon icon = new ImageIcon("i.png");
+		newEventPanel.setBorder(BorderFactory.createMatteBorder(30,30,30,30, Frame.colorEventary));
 		mainPanel.add(newEventPanel);
 		for (model.Event event : eventsList) {
 			JPanel panelEvent = new JPanel();
 			panelEvent.setPreferredSize(new Dimension(800,160));
 			panelEvent.add(new JLabel(event.getTitle()));
 			panelEvent.add(new JLabel(event.getStartDate().toString()));
+			panelEvent.setBorder(BorderFactory.createMatteBorder(10,0,10,0, Frame.colorEventary));
 			mainPanel.add(panelEvent);
 		}
-		SwingUtilities.updateComponentTreeUI(mainPanel);
+		SwingUtilities.updateComponentTreeUI(this);
 	}
 
 	/**

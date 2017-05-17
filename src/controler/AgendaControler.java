@@ -5,7 +5,6 @@ import java.util.Observer;
 
 import model.Context;
 import view.AgendaPanel;
-import view.ConnectionPanel;
 
 public class AgendaControler implements Observer{
 	
@@ -15,7 +14,7 @@ public class AgendaControler implements Observer{
 	/** The view. */
 	AgendaPanel agendaPanel;
 	
-	AgendaControler(AgendaPanel agendaPanel){
+	AgendaControler(AgendaPanel agendaPanel, Context context){
 		this.context = context;
 		this.agendaPanel = agendaPanel;
 	}

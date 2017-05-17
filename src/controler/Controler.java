@@ -41,7 +41,7 @@ public class Controler {
 		this.eventControler = new EventControler(this.frame.getEventPanel(), this.context);
 		
 		//page agenda
-		this.agendaControler = new AgendaControler(this.frame.getAgendaPanel());
+		this.agendaControler = new AgendaControler(this.frame.getAgendaPanel(), this.context);
 		
 	}
 
