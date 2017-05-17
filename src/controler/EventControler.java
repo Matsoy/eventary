@@ -16,8 +16,8 @@ public class EventControler implements java.util.Observer{
 	/** The view. */
 	EventPanel view;
 	
-	EventControler(EventPanel eventPanel, Event event, Context context){
-		this.event = event;
+	EventControler(EventPanel eventPanel, Context context){
+		this.event = context.getCurrentEvent();
 		this.context = context;
 		this.view = eventPanel;
 		this.event.addObserver(this);

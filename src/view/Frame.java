@@ -59,6 +59,10 @@ public class Frame extends JFrame{
 
 	/** The message panel. */
 	JPanel messagePanel;
+	
+	EventPanel eventPanel;
+	
+	AgendaPanel agendaPanel;
 
 	/**
 	 * Instantiates a new frame.
@@ -97,6 +101,14 @@ public class Frame extends JFrame{
 	 */
 	public HomePanel getHomePanel() {
 		return homePanel;
+	}
+	
+	public EventPanel getEventPanel() {
+		return eventPanel;
+	}
+
+	public AgendaPanel getAgendaPanel() {
+		return agendaPanel;
 	}
 
 

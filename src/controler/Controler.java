@@ -16,15 +16,13 @@ public class Controler {
 	
 	EventControler eventControler;
 	
+	AgendaControler agendaControler;
+	
 	/** The frame. */
 	Frame frame;
 	
 	/** The context. */
 	Context context;	
-
-	
-	
-	ActionQuit actionQuit;
 
 	/**
 	 * Instantiates a new controler.
@@ -39,12 +37,11 @@ public class Controler {
 		//page d'accueil
 		this.homeControler = new HomeControler(this.frame.getHomePanel(), this.context);
 		
-		this.actionQuit = new ActionQuit(this.context, this.frame.getHomePanel());
-		this.frame.getHomePanel().getQuitButton().setAction(this.actionQuit);
-		
 		//page d'un event
-		//this.eventControler = new EventControler(this.frame.getEventPanel(), this.context);
+		this.eventControler = new EventControler(this.frame.getEventPanel(), this.context);
 		
+		//page agenda
+		this.agendaControler = new AgendaControler(this.frame.getAgendaPanel());
 		
 	}
 
