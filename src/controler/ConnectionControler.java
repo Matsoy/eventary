@@ -2,6 +2,7 @@ package controler;
 
 import java.util.Observable;
 
+import database.UserDAO;
 import model.Context;
 import view.ConnectionPanel;
 import view.Frame;
@@ -37,7 +38,10 @@ public class ConnectionControler implements java.util.Observer{
 		// TODO Auto-generated method stub
 		System.out.println("dans update de ConnectionControler");
 		if(this.model.getAuthentificated()){
+			// on passe à la page d'accueil
 			view.setHomePanel();
+			// affichage de tous les événements
+			view.displayEvents(UserDAO.findAll());
 			System.out.println("Connecté");
 		}else{
 			view.displayError("Connexion Failed : error in login or password",Frame.colorEventaryError);
