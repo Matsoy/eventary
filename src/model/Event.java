@@ -390,11 +390,12 @@ public class Event extends Observable{
 		}
 	}
 
-	public void removeParticipant(User participant){
+	public boolean removeParticipant(User participant){
 		ParticipationDAO.delete(participant.getLogin(), this.id);
 		WaitingDAO.delete(participant.getLogin(), this.id);
 		this.setListeParticipants(ParticipationDAO.participationsInAnEvent(this.id));
 		this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
+		return true;
 	}
 
 	@Override
