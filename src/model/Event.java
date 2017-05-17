@@ -392,12 +392,8 @@ public class Event extends Observable{
 
 	public void removeParticipant(User participant){
 		ParticipationDAO.delete(participant.getLogin(), this.id);
-		this.setListeParticipants(ParticipationDAO.participationsInAnEvent(this.id));
-		this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
-	}
-
-	public void removePendingParticipant(User participant){
 		WaitingDAO.delete(participant.getLogin(), this.id);
+		this.setListeParticipants(ParticipationDAO.participationsInAnEvent(this.id));
 		this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
 	}
 
