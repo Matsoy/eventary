@@ -1,13 +1,17 @@
 package view;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Event;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class HomePanel.
  */
@@ -16,7 +20,10 @@ public class HomePanel extends JPanel{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
+	/** The Constant widthMenuButton. */
 	static final int widthMenuButton = 200;
+	
+	/** The Constant heightMenuButton. */
 	static final int heightMenuButton = 30;
 	
 	/** The main panel. */
@@ -72,7 +79,18 @@ public class HomePanel extends JPanel{
 		this.add(this.leftPanel,BorderLayout.WEST);
 	}
 	
+	
+	/**
+	 * Affiche la liste des evenements de l'utilisateur courant
+	 * ACTUELLEMENT affiche tous les evenements dans la BDD
+	 *
+	 * @param eventsList the events list
+	 */
 	public void displayEvents(ArrayList<model.Event> eventsList){
+		System.out.println("dans displayEvents");
+		for (model.Event event : eventsList) {
+			System.out.println(event);
+		}
 		JPanel panelEvent;
 		mainPanel.removeAll();
 		for (model.Event event : eventsList) {
@@ -84,6 +102,11 @@ public class HomePanel extends JPanel{
 		mainPanel.repaint();
 	}
 	
+	/**
+	 * Gets the my events button.
+	 *
+	 * @return the my events button
+	 */
 	public JButton getMyEventsButton(){
 		return myEventsButton;
 	}

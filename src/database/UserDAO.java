@@ -48,13 +48,13 @@ public class UserDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM USER;";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.add(new User()); //ajout du User à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getString(1), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7)); //initialisaton de les paramètres du retour de la requête
+					ret.add(new User()); //ajout du User ï¿½ l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getString(1), result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7), OrganizationDAO.assoInWhichUserIsMember(result.getString(1)), OrganizationDAO.dptInWhichUserIsMember(result.getString(1))); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}
@@ -92,7 +92,7 @@ public class UserDAO{
 
 			if (result.next() ) {
 				do {
-					ret.init(login_user, result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+					ret.init(login_user, result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7), null, null);
 				} 
 				while (result.next());
 			}
@@ -105,11 +105,11 @@ public class UserDAO{
 	}
 
 	/**
-	 * Vérifie si l'utilisateur ayant le login/mdp existe.
+	 * Vï¿½rifie si l'utilisateur ayant le login/mdp existe.
 	 *
 	 * @param login_user login de l'User a retrouver
 	 * @param passwd_user passwd de l'User a retrouver
-	 * @return l'utilisateur connecté, null sinon
+	 * @return l'utilisateur connectï¿½, null sinon
 	 */
 	public static User connect(String login_user, String passwd_user) {
 		Statement stat = null;
@@ -132,7 +132,7 @@ public class UserDAO{
 			//Si le resultat est bon, prends la premiere ligne
 			if (result.next() ) {
 				do {
-					ret.init(login_user, result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7));
+					ret.init(login_user, result.getBoolean(3), result.getString(4), result.getString(5), result.getString(6), result.getInt(7), OrganizationDAO.assoInWhichUserIsMember(login_user), OrganizationDAO.dptInWhichUserIsMember(login_user));
 				} 
 				while (result.next());
 			}
