@@ -35,7 +35,10 @@ public class ActionQuit extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("dans actionperformed de ActionQuit");
+		// reset de l'utilisateur courant
+		this.model.setCurrentEvent(null);
+		this.model.setAuthentificated(false);
+		// retour au panel de connexion
 		this.view.setConnectionPanel();
 	}
 
