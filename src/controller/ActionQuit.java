@@ -39,7 +39,7 @@ public class ActionQuit extends AbstractAction {
 		this.model.setCurrentEvent(null);
 		this.model.setAuthentificated(false);
 		// retour au panel de connexion
-		this.view.setConnectionPanel();
+		this.view.getFrame().setConnectionPanel();
 	}
 
 }

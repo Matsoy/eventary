@@ -2,6 +2,8 @@ package controller;
 
 import java.util.Observable;
 
+import javax.swing.SwingUtilities;
+
 import database.EventDAO;
 import model.Context;
 import view.ConnectionPanel;
@@ -46,6 +48,9 @@ public class ConnectionController implements java.util.Observer{
 			// on passe à la page d'accueil
 			view.setHomePanel(EventDAO.findAll());
 			System.out.println("Connecté");
+			this.view.getFrame().getHomePanel().setContainerCentral(this.view.getFrame().getAllEventsPanel());
+			this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll());
+			SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 		}else{
 			view.displayError("Connexion Failed : error in login or password",Frame.colorEventaryError);
 			System.out.println("Pas connecté");

@@ -47,14 +47,18 @@ public class Frame extends JFrame{
 	/** The Constant colorEventaryError. */
 	public static final Color colorEventaryError = new Color(214,56,45);
 
+	// ####################### Les panels
 	/** The connection panel. */
 	ConnectionPanel connectionPanel;
 
 	/** The home panel. */
 	HomePanel homePanel;
 
-	/** The main panel. */
-	JPanel mainPanel;
+	/** The home panel. */
+	AllEventsPanel allEventsPanel;
+	
+	/** The home panel. */
+	MyEventsPanel myEventsPanel;
 
 	/** The message panel. */
 	JPanel messagePanel;
@@ -69,8 +73,11 @@ public class Frame extends JFrame{
 	 * Instantiates a new frame.
 	 */
 	public Frame(){
+		// initialisation des differents panels
 		this.connectionPanel = new ConnectionPanel(this);
 		this.homePanel = new HomePanel(this);
+		this.allEventsPanel = new AllEventsPanel(this);
+		this.myEventsPanel = new MyEventsPanel(this);
 
 		this.setTitle("Eventary");
 		this.setResizable(false);
@@ -122,6 +129,23 @@ public class Frame extends JFrame{
 		return agendaPanel;
 	}
 
+	/**
+	 * Gets the all events panel.
+	 *
+	 * @return the all events panel
+	 */
+	public AllEventsPanel getAllEventsPanel() {
+		return allEventsPanel;
+	}
+
+	/**
+	 * Gets the my events panel.
+	 *
+	 * @return the my events panel
+	 */
+	public MyEventsPanel getMyEventsPanel() {
+		return myEventsPanel;
+	}
 
 	/**
 	 * Sets the message panel.
@@ -141,7 +165,6 @@ public class Frame extends JFrame{
 		connectionPanel.setBounds(0,0,widthScreen,heightScreen);
 		this.getContentPane().add(connectionPanel);
 		SwingUtilities.updateComponentTreeUI(this);
-		repaint();
 	}
 
 	/**
@@ -155,8 +178,6 @@ public class Frame extends JFrame{
 		setMessagePanel();
 		homePanel.setBounds(0,0,widthScreen,heightScreen);
 		this.getContentPane().add(homePanel);
-		homePanel.displayAllEvents(events);
-		SwingUtilities.updateComponentTreeUI(this);
 	}
 
 	/**

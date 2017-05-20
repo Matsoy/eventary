@@ -17,6 +17,7 @@ public class HomeController implements java.util.Observer{
 	HomePanel view;
 	
 	ActionDisplayMyEvents actionDisplayMyEvents;
+	ActionDisplayAllEvents actionDisplayAllEvents;
 	ActionQuit actionQuit;
 
 	/**
@@ -29,8 +30,16 @@ public class HomeController implements java.util.Observer{
 		this.model = model;
 		this.view = homePanel;
 		this.model.addObserver(this);
+		
+		// clic Tous les evenements
+		this.actionDisplayAllEvents = new ActionDisplayAllEvents(this.model, this.view);
+		this.view.getAllEventsButton().setAction(this.actionDisplayAllEvents);
+
+		// clic Mes evenements
 		this.actionDisplayMyEvents = new ActionDisplayMyEvents(this.model, this.view);
 		this.view.getMyEventsButton().setAction(this.actionDisplayMyEvents);
+		
+		// clic Quitter
 		this.actionQuit = new ActionQuit(this.model, this.view);
 		this.view.getQuitButton().setAction(this.actionQuit);
 	}
@@ -40,7 +49,7 @@ public class HomeController implements java.util.Observer{
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-
+		System.out.println("dans update de HomeController");
 	}
 
 }

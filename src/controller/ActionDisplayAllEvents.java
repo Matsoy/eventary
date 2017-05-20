@@ -6,17 +6,15 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.SwingUtilities;
 
-import database.ParticipationDAO;
-import database.WaitingDAO;
+import database.EventDAO;
 import model.Context;
 import view.HomePanel;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ActionDisplayMyEvents.
  */
-public class ActionDisplayMyEvents extends AbstractAction {
+public class ActionDisplayAllEvents extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -34,10 +32,10 @@ public class ActionDisplayMyEvents extends AbstractAction {
 	 * @param model the model
 	 * @param view the view
 	 */
-	ActionDisplayMyEvents(Context model, HomePanel view){
+	ActionDisplayAllEvents(Context model, HomePanel view){
 		this.model = model;
 		this.view = view;
-		this.putValue(Action.NAME, "Mes evenements");
+		this.putValue(Action.NAME, "Tous les evenements");
 	}
 
 	/* (non-Javadoc)
@@ -45,9 +43,9 @@ public class ActionDisplayMyEvents extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("actionPerformed de ActionDisplayMyEvents");
-		this.view.setContainerCentral(this.view.getFrame().getMyEventsPanel());
-		this.view.getFrame().getMyEventsPanel().displayMyEvents(ParticipationDAO.participationsInAnEvent(model.getCurrentUser().getLogin()), WaitingDAO.waitingEvents(model.getCurrentUser().getLogin()));
+		System.out.println("actionPerformed de ActionDisplayAllEvents");
+		this.view.setContainerCentral(this.view.getFrame().getAllEventsPanel());
+		this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll());
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 	}
 

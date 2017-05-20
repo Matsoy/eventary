@@ -114,6 +114,10 @@ public class ConnectionPanel extends JPanel {
 	public String getPassword(){
 		return this.password.getText();
 	}
+	
+	public Frame getFrame() {
+		return this.frame;
+	}
 
 	/**
 	 * Sets the home panel.
