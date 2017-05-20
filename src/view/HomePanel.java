@@ -66,16 +66,16 @@ public class HomePanel extends JPanel{
 		ImageIcon profilImage = new ImageIcon("nerd.png");
 		this.leftPanel.add(new JLabel(profilImage));
 		// Tous les evenements
-		allEventsButton = new EventaryMenuButton("Tous les evenements");
+		allEventsButton = new EventaryMenuButton();
 		allEventsButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),10,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(allEventsButton);
 		// Mes evenements
-		myEventsButton = new EventaryMenuButton("Mes evenements");
+		myEventsButton = new EventaryMenuButton();
 		myEventsButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),50,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(myEventsButton);
 		// Creer un evenement
-		createEventButton = new EventaryMenuButton("Creer un evenement");
-		createEventButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),50,widthMenuButton,heightMenuButton);
+		createEventButton = new EventaryMenuButton();
+		createEventButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),90,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(createEventButton);
 		// Quitter
 		quitButton = new EventaryButton("Quitter");
@@ -134,6 +134,10 @@ public class HomePanel extends JPanel{
 	public JButton getMyEventsButton() {
 		return myEventsButton;
 	}
+	
+	public JButton getCreateEventButton() {
+		return createEventButton;
+	}
 
 	/**
 	 * Gets the quit button.
@@ -154,6 +158,5 @@ public class HomePanel extends JPanel{
 		this.containerCentral = new JScrollPane(newContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.add(this.containerCentral, BorderLayout.CENTER);
-
 	}
 }

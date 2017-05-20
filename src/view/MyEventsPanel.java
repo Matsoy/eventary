@@ -60,23 +60,14 @@ public class MyEventsPanel extends JPanel{
 		 */
 		gc.fill = GridBagConstraints.HORIZONTAL;
 		/* weightx définit le nombre de cases en ordonnée */
-		gc.weighty = participationsInAnEvent.size() + waitingsEvent.size() + 3;
+		gc.weighty = participationsInAnEvent.size() + waitingsEvent.size() + 2;
 		/* pour dire qu'on ajoute un composant en position (i, j), on définit gridx=i et gridy=j */
 		gc.gridx = 0;
 		gc.gridy = 0;
 		/* insets définir la marge entre les composant new Insets(margeSupérieure, margeGauche, margeInférieur, margeDroite) */
 		gc.insets = new Insets(5, 5, 5, 5);
 
-		// panneau de creation d'un event
-		newEventPanel = new JPanel();
-		newEventPanel.setPreferredSize(new Dimension(800,20));
-		newEventPanel.setBackground(new Color(102, 255, 102));
-		newEventPanel.add(new JLabel("Creer un evenement"));
-		//		ImageIcon icon = new ImageIcon("i.png");
-		this.add(newEventPanel, gc);
-
 		// mes participations
-		gc.gridy++;
 		JPanel ParticipationsPanel = new JPanel();
 		ParticipationsPanel.setBackground(Frame.colorEventary);
 		ParticipationsPanel.setPreferredSize(new Dimension(800,20));

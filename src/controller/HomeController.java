@@ -18,6 +18,7 @@ public class HomeController implements java.util.Observer{
 	
 	ActionDisplayMyEvents actionDisplayMyEvents;
 	ActionDisplayAllEvents actionDisplayAllEvents;
+	ActionCreateEvent actionCreateEvent;
 	ActionQuit actionQuit;
 
 	/**
@@ -38,6 +39,10 @@ public class HomeController implements java.util.Observer{
 		// clic Mes evenements
 		this.actionDisplayMyEvents = new ActionDisplayMyEvents(this.model, this.view);
 		this.view.getMyEventsButton().setAction(this.actionDisplayMyEvents);
+		
+		// clic Creer un evenement
+		this.actionCreateEvent = new ActionCreateEvent(this.model, this.view);
+		this.view.getCreateEventButton().setAction(this.actionCreateEvent);
 		
 		// clic Quitter
 		this.actionQuit = new ActionQuit(this.model, this.view);

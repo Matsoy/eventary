@@ -11,7 +11,6 @@ import javax.swing.SwingUtilities;
 import input_output.Reader;
 import model.Event;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Frame.
  */
@@ -60,6 +59,9 @@ public class Frame extends JFrame{
 	/** The home panel. */
 	MyEventsPanel myEventsPanel;
 
+	/** The create event panel. */
+	CreateEventPanel createEventPanel;
+
 	/** The message panel. */
 	JPanel messagePanel;
 	
@@ -78,6 +80,8 @@ public class Frame extends JFrame{
 		this.homePanel = new HomePanel(this);
 		this.allEventsPanel = new AllEventsPanel(this);
 		this.myEventsPanel = new MyEventsPanel(this);
+		this.createEventPanel = new CreateEventPanel(this);
+		
 
 		this.setTitle("Eventary");
 		this.setResizable(false);
@@ -146,6 +150,15 @@ public class Frame extends JFrame{
 	public MyEventsPanel getMyEventsPanel() {
 		return myEventsPanel;
 	}
+	
+	/**
+	 * Gets the creates the event panel.
+	 *
+	 * @return the creates the event panel
+	 */
+	public CreateEventPanel getCreateEventPanel() {
+		return createEventPanel;
+	}
 
 	/**
 	 * Sets the message panel.
@@ -176,7 +189,7 @@ public class Frame extends JFrame{
 		// on enleve le ConnectionPanel
 		this.getContentPane().removeAll();
 		setMessagePanel();
-		homePanel.setBounds(0,0,widthScreen,heightScreen);
+		homePanel.setBounds(0,0,widthScreen,heightScreen-27);
 		this.getContentPane().add(homePanel);
 	}
 

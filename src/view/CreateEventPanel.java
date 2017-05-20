@@ -4,17 +4,13 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-/**
- * The Class HomePanel.
- */
-public class AllEventsPanel extends JPanel{
+public class CreateEventPanel extends JPanel{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
@@ -52,17 +48,17 @@ public class AllEventsPanel extends JPanel{
 	 *
 	 * @param frame the frame
 	 */
-	AllEventsPanel(Frame frame){
+	CreateEventPanel(Frame frame){
 		this.frame = frame;
 	}
 
 
 	/**
-	 * Affiche la liste de tous les evenements.
+	 * Affiche le formulaire de creation d'un evenement
 	 *
 	 * @param events the events
 	 */
-	public void displayAllEvents(ArrayList<model.Event> events){
+	public void displayForm(){
 		this.removeAll();
 		this.setBackground(Color.WHITE);
 		this.setLayout(new GridBagLayout());
@@ -78,7 +74,7 @@ public class AllEventsPanel extends JPanel{
 		 */
 		gc.fill = GridBagConstraints.HORIZONTAL;
 		/* weightx définit le nombre de cases en ordonnée */
-		gc.weighty = events.size();
+		gc.weighty = 1;
 		/* pour dire qu'on ajoute un composant en position (i, j), on définit gridx=i et gridy=j */
 		gc.gridx = 0;
 		gc.gridy = 0;
@@ -90,24 +86,7 @@ public class AllEventsPanel extends JPanel{
 		JPanel eventsPanel = new JPanel();
 		eventsPanel.setBackground(Frame.colorEventary);
 		eventsPanel.setPreferredSize(new Dimension(800,20));
-		eventsPanel.add(new JLabel("Les evenements"));
+		eventsPanel.add(new JLabel("Creer un evenement"));
 		this.add(eventsPanel, gc);
-
-		// parcours de la liste des Event
-		for (model.Event event : events) {
-			gc.gridy++;
-			JPanel panelEvent = new JPanel();
-			panelEvent.setPreferredSize(new Dimension(800,160));
-			panelEvent.add(new JLabel(event.getTitle()));
-			panelEvent.add(new JLabel(event.getStartDate().toString()));
-			this.add(panelEvent, gc);
-		}
-	}
-
-	/**
-	 * Sets the connection panel.
-	 */
-	public void setConnectionPanel(){
-		this.frame.setConnectionPanel();
 	}
 }

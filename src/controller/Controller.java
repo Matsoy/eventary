@@ -36,13 +36,6 @@ public class Controller {
 		
 		//page d'accueil
 		this.homeControler = new HomeController(this.frame.getHomePanel(), this.context);
-		
-		//page d'un event
-		this.eventControler = new EventController(this.frame.getEventPanel(), this.context);
-		
-		//page agenda
-		this.agendaControler = new AgendaController(this.frame.getAgendaPanel(), this.context);
-		
 	}
 
 }
