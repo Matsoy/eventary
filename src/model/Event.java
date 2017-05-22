@@ -98,7 +98,13 @@ public class Event extends Observable{
 		this.listeParticipants = listeParticipants;
 		this.listeAttente = listeAttente;
 	}
-
+	
+	//Return True si événement bien créé et False si problème à la création
+	public static boolean createEvent(String title, String description, Date startDate, Date endDate, 
+			int maxNbParticipant, User organizer, Organization organization, Room room, String address){
+		return EventDAO.insert(title, description, startDate, endDate, maxNbParticipant, organizer, organization, room, address);
+	}
+	
 	/**
 	 * Gets the id.
 	 *

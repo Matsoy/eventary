@@ -70,6 +70,8 @@ public class Frame extends JFrame{
 	
 	/** The agenda panel. */
 	AgendaPanel agendaPanel;
+	
+	NotificationsPanel notifPanel;
 
 	/**
 	 * Instantiates a new frame.
@@ -81,7 +83,7 @@ public class Frame extends JFrame{
 		this.allEventsPanel = new AllEventsPanel(this);
 		this.myEventsPanel = new MyEventsPanel(this);
 		this.createEventPanel = new CreateEventPanel(this);
-		
+		this.notifPanel = new NotificationsPanel(this);
 
 		this.setTitle("Eventary");
 		this.setResizable(false);
@@ -158,6 +160,10 @@ public class Frame extends JFrame{
 	 */
 	public CreateEventPanel getCreateEventPanel() {
 		return createEventPanel;
+	}
+	
+	public NotificationsPanel getNotifPanel() {
+		return notifPanel;
 	}
 
 	/**

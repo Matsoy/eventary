@@ -42,6 +42,8 @@ public class HomePanel extends JPanel{
 
 	/** The create event button. */
 	JButton createEventButton;
+	
+	JButton notifButton;
 
 	/** The Quit button. */
 	JButton quitButton;
@@ -77,6 +79,10 @@ public class HomePanel extends JPanel{
 		createEventButton = new EventaryMenuButton();
 		createEventButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),90,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(createEventButton);
+		// Notifications
+		notifButton = new EventaryMenuButton();
+		notifButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),130,widthMenuButton,heightMenuButton);
+		this.leftPanel.add(notifButton);
 		// Quitter
 		quitButton = new EventaryButton("Quitter");
 		quitButton.setBounds((int) (Frame.sidebarWidth/2 - Frame.widthButton/2),(int) (Frame.heightScreen*.87),Frame.widthButton,Frame.heightButton);
@@ -137,6 +143,10 @@ public class HomePanel extends JPanel{
 	
 	public JButton getCreateEventButton() {
 		return createEventButton;
+	}
+	
+	public JButton getNotifButton() {
+		return notifButton;
 	}
 
 	/**
