@@ -5,6 +5,6 @@ ScreenWidth: 1200
 ScreenHeight: 700
 TextWidth: 150
 TextHeight: 25
-ButtonWidth: 95
+ButtonWidth: 120
 ButtonHeight: 25
 SidebarWidth: 360

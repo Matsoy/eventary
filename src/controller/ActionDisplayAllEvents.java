@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -11,6 +14,7 @@ import model.Context;
 import view.HomePanel;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ActionDisplayMyEvents.
  */
@@ -38,12 +42,12 @@ public class ActionDisplayAllEvents extends AbstractAction {
 		this.putValue(Action.NAME, "Tous les evenements");
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("actionPerformed de ActionDisplayAllEvents");
 		this.view.setContainerCentral(this.view.getFrame().getAllEventsPanel());
 		this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll());
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());

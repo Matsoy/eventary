@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package database;
 
 import java.sql.Connection;
@@ -9,6 +12,7 @@ import java.util.ArrayList;
 import model.Association;
 import model.User;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class OrgaMemberDAO.
  *
@@ -16,7 +20,7 @@ import model.User;
  * 
  * File: OrgaMemberDAO.java
  * 
- * Classe pour les objets Dao de représentant l'appartenance d'un User à une organisation
+ * Classe pour les objets Dao de reprï¿½sentant l'appartenance d'un User ï¿½ une organisation
  */
 
 public class OrgaMemberDAO{
@@ -30,7 +34,7 @@ public class OrgaMemberDAO{
 	}
 
 	/**
-	 * Renvoie la liste des User membre d'une Association
+	 * Renvoie la liste des User membre d'une Association.
 	 *
 	 * @param orga_id id de l'organisation
 	 * @return the array list
@@ -73,8 +77,10 @@ public class OrgaMemberDAO{
 	 *
 	 * @param user_login le login du User
 	 * @param association_id id du Association
+	 * @return true, if successful
 	 */
-	public static void insert(String user_login, int association_id) {
+	public static boolean insert(String user_login, int association_id) {
+		boolean ret = false;
 		Statement stat = null;
 		String query = "";
 
@@ -87,10 +93,13 @@ public class OrgaMemberDAO{
 
 			//Execute la requÃªte
 			stat.executeQuery(query);
+			ret = true;
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+		
+		return ret;
 	}
 
 
@@ -99,8 +108,10 @@ public class OrgaMemberDAO{
 	 *
 	 * @param user_login le login du User
 	 * @param association_id id du Association
+	 * @return true, if successful
 	 */
-	public static void delete(String user_login, int association_id) {
+	public static boolean delete(String user_login, int association_id) {
+		boolean ret = false;
 		Statement stat = null;
 		String query = "";
 
@@ -109,13 +120,16 @@ public class OrgaMemberDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			//Preparation de la requete
-			query = "DELETE FROM ASSO_MEMBER WHERE association_id = " + association_id + "AND user_login = '" + user_login + "';";
+			query = "DELETE FROM ASSO_MEMBER WHERE association_id = " + association_id + "AND UPPER(user_login) = UPPER('" + user_login + "');";
 
 			//Execute la requÃªte
 			stat.executeQuery(query);
+			ret = true;
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+		
+		return ret;
 	}
 }

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -9,6 +12,7 @@ import model.Context;
 import view.HomePanel;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ActionQuit.
  */
@@ -24,11 +28,18 @@ public class ActionQuit extends AbstractAction {
 	HomePanel view;
 
 
+	/**
+	 * Instantiates a new action quit.
+	 *
+	 * @param model the model
+	 * @param view the view
+	 */
 	ActionQuit(Context model, HomePanel view){
 		this.model = model;
 		this.view = view;
 		this.putValue(Action.NAME, "Quitter");
 	}
+	
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -9,6 +12,7 @@ import javax.swing.SwingUtilities;
 import model.Context;
 import view.HomePanel;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ActionCreateEvent.
  */
@@ -36,12 +40,12 @@ public class ActionCreateEvent extends AbstractAction {
 		this.putValue(Action.NAME, "Creer un evenement");
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("actionPerformed de ActionCreateEvent");
 		this.view.setContainerCentral(this.view.getFrame().getCreateEventPanel());
 		this.view.getFrame().getCreateEventPanel().displayForm();
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());

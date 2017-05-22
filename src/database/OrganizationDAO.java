@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package database;
 
 import java.sql.Connection;
@@ -10,6 +13,7 @@ import model.Association;
 import model.Department;
 import model.Organization;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class OrganizationDAO.
  *
@@ -30,7 +34,7 @@ public class OrganizationDAO{
 	}
 
 	/**
-	 * Pour retrouver tous les tuples des associations
+	 * Pour retrouver tous les tuples des associations.
 	 *
 	 * @return the result set
 	 */
@@ -48,13 +52,13 @@ public class OrganizationDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM ORGANIZATION	WHERE type_orga = 'asso';";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.add(new Association()); //ajout du Association à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramètres du retour de la requête
+					ret.add(new Association()); //ajout du Association ï¿½ l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}
@@ -68,7 +72,7 @@ public class OrganizationDAO{
 
 
 	/**
-	 * Pour retrouver tous les tuples des departements
+	 * Pour retrouver tous les tuples des departements.
 	 *
 	 * @return the result set
 	 */
@@ -86,13 +90,13 @@ public class OrganizationDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM ORGANIZATION	WHERE type_orga = 'dpt';";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.add(new Department()); //ajout du Department à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramètres du retour de la requête
+					ret.add(new Department()); //ajout du Department ï¿½ l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}
@@ -106,8 +110,9 @@ public class OrganizationDAO{
 
 
 	/**
-	 * Pour retrouver l'association recherchee
+	 * Pour retrouver l'association recherchee.
 	 *
+	 * @param id_asso the id asso
 	 * @return the result set
 	 */
 	public static Association findAsso(int id_asso) {
@@ -124,12 +129,12 @@ public class OrganizationDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM ORGANIZATION	WHERE id = "+ id_asso +" AND type_orga = 'asso';";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramètres du retour de la requête
+					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}
@@ -143,8 +148,9 @@ public class OrganizationDAO{
 
 
 	/**
-	 * Pour retrouver le departement recherche
+	 * Pour retrouver le departement recherche.
 	 *
+	 * @param id_dpt the id dpt
 	 * @return the result set
 	 */
 	public static Department findDpt(int id_dpt) {
@@ -161,12 +167,12 @@ public class OrganizationDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM ORGANIZATION	WHERE id = "+ id_dpt +" AND type_orga = 'dpt';";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramètres du retour de la requête
+					ret.init(result.getInt(1), result.getString(2), UserDAO.find(result.getString(3)), OrgaMemberDAO.find(result.getInt(1))); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}
@@ -180,8 +186,9 @@ public class OrganizationDAO{
 
 
 	/**
-	 * Pour retrouver les liste des associations dans lesquelles un User est membre
+	 * Pour retrouver les liste des associations dans lesquelles un User est membre.
 	 *
+	 * @param user_login the user login
 	 * @return the result set
 	 */
 	public static ArrayList<Association> assoInWhichUserIsMember(String user_login) {
@@ -197,7 +204,7 @@ public class OrganizationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT orga_id FROM ORGA_MEMBER WHERE user_login = '" + user_login + "';";
+			query = "SELECT orga_id FROM ORGA_MEMBER WHERE UPPER(user_login) = UPPER('" + user_login + "');";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -220,8 +227,9 @@ public class OrganizationDAO{
 	
 	
 	/**
-	 * Pour retrouver les liste des departements dans lesquelles un User est membre
+	 * Pour retrouver les liste des departements dans lesquelles un User est membre.
 	 *
+	 * @param user_login the user login
 	 * @return the result set
 	 */
 	public static ArrayList<Department> dptInWhichUserIsMember(String user_login) {
@@ -237,7 +245,7 @@ public class OrganizationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT orga_id FROM ORGA_MEMBER WHERE user_login = '" + user_login + "';";
+			query = "SELECT orga_id FROM ORGA_MEMBER WHERE UPPER(user_login) = UPPER('" + user_login + "');";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -260,9 +268,9 @@ public class OrganizationDAO{
 
 
 	/**
-	 * Retourne le type d'organisation ("asso" pour une association, "dpt" pour un departement)
+	 * Retourne le type d'organisation ("asso" pour une association, "dpt" pour un departement).
 	 *
-	 * @param id_orga l'id de l'organisation 
+	 * @param id_orga l'id de l'organisation
 	 * @return the result set
 	 */
 	public static String getOrganizationType(int id_orga) {
@@ -279,7 +287,7 @@ public class OrganizationDAO{
 			//Preparation de la requete
 			query = "SELECT type_orga FROM ORGANIZATION	WHERE id = "+ id_orga +";";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
@@ -329,7 +337,7 @@ public class OrganizationDAO{
 	/**
 	 * Permet de supprimer un tuple.
 	 *
-	 * @param id_association id du tuple a supprimer
+	 * @param id_orga the id orga
 	 */
 	public static void delete(int id_orga) {
 		Statement stat = null;

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controller;
 
 import java.util.Observable;
@@ -9,6 +12,7 @@ import model.Context;
 import view.ConnectionPanel;
 import view.Frame;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ConnectionControler.
  */
@@ -22,6 +26,7 @@ public class ConnectionController implements java.util.Observer{
 	
 	/** The action connection. */
 	ActionConnection actionConnection;
+	
 
 	/**
 	 * Instantiates a new connection controler.
@@ -36,24 +41,24 @@ public class ConnectionController implements java.util.Observer{
 		this.actionConnection = new ActionConnection(this.model, this.view);
 		this.view.getBouton().setAction(this.actionConnection);
 	}
+	
 
 	/* (non-Javadoc)
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		System.out.println("dans update de ConnectionControler");
+		// si l'utilisateur est authentifié, on passe à la page d'accueil
 		if(this.model.getAuthentificated()){
-			// on passe à la page d'accueil
-			view.setHomePanel(EventDAO.findAll());
-			System.out.println("Connecté");
+			view.getFrame().setHomePanel(EventDAO.findAll());
 			this.view.getFrame().getHomePanel().setContainerCentral(this.view.getFrame().getAllEventsPanel());
 			this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll());
 			SwingUtilities.updateComponentTreeUI(this.view.getFrame());
-		}else{
-			view.displayError("Connexion Failed : error in login or password",Frame.colorEventaryError);
-			System.out.println("Pas connecté");
+		}
+		
+		// si il y a un mauvais login/mdp, on affaiche un message d'erreur
+		else{
+			view.getFrame().displayMessage("Connexion Failed : error in login or password",Frame.colorEventaryError);
 		}
 	}
 

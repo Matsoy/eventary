@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -10,6 +13,7 @@ import model.Context;
 import view.ConnectionPanel;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ActionConnection.
  */
@@ -24,6 +28,7 @@ public class ActionConnection extends AbstractAction {
 	/** The view. */
 	ConnectionPanel view;
 	
+	
 	/**
 	 * Instantiates a new action connection.
 	 *
@@ -35,6 +40,7 @@ public class ActionConnection extends AbstractAction {
 		this.view = view;
 		this.putValue(Action.NAME, "Se connecter");
 	}
+	
 	
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 
 import java.awt.Color;
@@ -11,6 +14,7 @@ import javax.swing.SwingUtilities;
 import input_output.Reader;
 import model.Event;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Frame.
  */
@@ -46,7 +50,6 @@ public class Frame extends JFrame{
 	/** The Constant colorEventaryError. */
 	public static final Color colorEventaryError = new Color(214,56,45);
 
-	// ####################### Les panels
 	/** The connection panel. */
 	ConnectionPanel connectionPanel;
 
@@ -71,8 +74,13 @@ public class Frame extends JFrame{
 	/** The agenda panel. */
 	AgendaPanel agendaPanel;
 	
+	/** The display event panel. */
+	EventPanel displayEventPanel;
+	
+	/** The notif panel. */
 	NotificationsPanel notifPanel;
 
+	
 	/**
 	 * Instantiates a new frame.
 	 */
@@ -84,6 +92,7 @@ public class Frame extends JFrame{
 		this.myEventsPanel = new MyEventsPanel(this);
 		this.createEventPanel = new CreateEventPanel(this);
 		this.notifPanel = new NotificationsPanel(this);
+		this.displayEventPanel = new EventPanel(this);
 
 		this.setTitle("Eventary");
 		this.setResizable(false);
@@ -98,6 +107,7 @@ public class Frame extends JFrame{
 		setConnectionPanel();
 		this.setVisible(true);
 	}
+	
 
 	/**
 	 * Gets the connection panel.
@@ -107,6 +117,7 @@ public class Frame extends JFrame{
 	public ConnectionPanel getConnectionPanel() {
 		return connectionPanel;
 	}
+	
 
 	/**
 	 * Gets the home panel.
@@ -117,6 +128,7 @@ public class Frame extends JFrame{
 		return homePanel;
 	}
 	
+	
 	/**
 	 * Gets the event panel.
 	 *
@@ -125,6 +137,7 @@ public class Frame extends JFrame{
 	public EventPanel getEventPanel() {
 		return eventPanel;
 	}
+	
 
 	/**
 	 * Gets the agenda panel.
@@ -134,6 +147,7 @@ public class Frame extends JFrame{
 	public AgendaPanel getAgendaPanel() {
 		return agendaPanel;
 	}
+	
 
 	/**
 	 * Gets the all events panel.
@@ -143,6 +157,7 @@ public class Frame extends JFrame{
 	public AllEventsPanel getAllEventsPanel() {
 		return allEventsPanel;
 	}
+	
 
 	/**
 	 * Gets the my events panel.
@@ -153,6 +168,7 @@ public class Frame extends JFrame{
 		return myEventsPanel;
 	}
 	
+	
 	/**
 	 * Gets the creates the event panel.
 	 *
@@ -162,10 +178,27 @@ public class Frame extends JFrame{
 		return createEventPanel;
 	}
 	
+	
+	/**
+	 * Gets the notif panel.
+	 *
+	 * @return the notif panel
+	 */
 	public NotificationsPanel getNotifPanel() {
 		return notifPanel;
 	}
+	
+	
+	/**
+	 * Gets the display event panel.
+	 *
+	 * @return the display event panel
+	 */
+	public EventPanel getDisplayEventPanel() {
+		return displayEventPanel;
+	}
 
+	
 	/**
 	 * Sets the message panel.
 	 */
@@ -185,6 +218,7 @@ public class Frame extends JFrame{
 		this.getContentPane().add(connectionPanel);
 		SwingUtilities.updateComponentTreeUI(this);
 	}
+	
 
 	/**
 	 * Sets the home panel.
@@ -198,6 +232,7 @@ public class Frame extends JFrame{
 		homePanel.setBounds(0,0,widthScreen,heightScreen-27);
 		this.getContentPane().add(homePanel);
 	}
+	
 
 	/**
 	 * Display error.
@@ -206,14 +241,14 @@ public class Frame extends JFrame{
 	 * @param color the color
 	 */
 	public void displayMessage(String str, Color color) {
-		System.out.println("dans displayMEssage");
 		// panel qui contiendra le message d'erreur
 		this.messagePanel.removeAll();
 		this.messagePanel.setBackground(color);
-		//this.labelMessage.setBounds(20,15,Frame.widthScreen,10);
 		messagePanel.add(new JLabel(str));
+		
 		// message d'erreur invisible par défaut
 		this.messagePanel.setVisible(true);
+		
 		// rafraichissement de la JFrame
 		SwingUtilities.updateComponentTreeUI(this);
 	}

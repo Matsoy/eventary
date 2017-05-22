@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package database;
 
 import java.sql.Connection;
@@ -8,6 +11,7 @@ import java.util.ArrayList;
 
 import model.Building;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BuildingDAO.
  *
@@ -46,13 +50,13 @@ public class BuildingDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM BUILDING;";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.add(new Building()); //ajout du Building à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), SiteDAO.find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
+					ret.add(new Building()); //ajout du Building ï¿½ l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), SiteDAO.find(result.getInt(2)), result.getString(3)); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}
@@ -124,13 +128,13 @@ public class BuildingDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM BUILDING WHERE site_id = "+ site_id +";";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.add(new Building()); //ajout du Building à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), SiteDAO.find(result.getInt(2)), result.getString(3)); //initialisaton de les paramètres du retour de la requête
+					ret.add(new Building()); //ajout du Building ï¿½ l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), SiteDAO.find(result.getInt(2)), result.getString(3)); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}

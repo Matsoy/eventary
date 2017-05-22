@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package model;
 
 import java.util.ArrayList;
@@ -9,6 +12,7 @@ import database.EventDAO;
 import database.ParticipationDAO;
 import database.WaitingDAO;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Event.
  */
@@ -53,7 +57,10 @@ public class Event extends Observable{
 	/** The address. */
 	String address;
 
+	/** The liste participants. */
 	List<User> listeParticipants = new ArrayList<User>();
+	
+	/** The liste attente. */
 	List<User> listeAttente = new ArrayList<User>();
 
 	/**
@@ -78,6 +85,8 @@ public class Event extends Observable{
 	 * @param organization the organization
 	 * @param room the room
 	 * @param address the address
+	 * @param listeParticipants the liste participants
+	 * @param listeAttente the liste attente
 	 */
 	public void init(int id, String title, String description, Date createDate, Date startDate, Date endDate,
 			Date modifDate, Date cancelDate, int maxNbParticipant, User organizer, Organization organization, Room room,
@@ -99,6 +108,20 @@ public class Event extends Observable{
 		this.listeAttente = listeAttente;
 	}
 	
+	/**
+	 * Creates the event.
+	 *
+	 * @param title the title
+	 * @param description the description
+	 * @param startDate the start date
+	 * @param endDate the end date
+	 * @param maxNbParticipant the max nb participant
+	 * @param organizer the organizer
+	 * @param organization the organization
+	 * @param room the room
+	 * @param address the address
+	 * @return true, if successful
+	 */
 	//Return True si événement bien créé et False si problème à la création
 	public static boolean createEvent(String title, String description, Date startDate, Date endDate, 
 			int maxNbParticipant, User organizer, Organization organization, Room room, String address){
@@ -339,26 +362,52 @@ public class Event extends Observable{
 		this.address = address;
 	}
 
+	/**
+	 * Gets the liste participants.
+	 *
+	 * @return the liste participants
+	 */
 	public List<User> getListeParticipants() {
 		return listeParticipants;
 	}
 
+	/**
+	 * Sets the liste participants.
+	 *
+	 * @param listeParticipants the new liste participants
+	 */
 	public void setListeParticipants(List<User> listeParticipants) {
 		this.listeParticipants = listeParticipants;
 		this.setChanged();
 		this.notifyObservers();
 	}
 
+	/**
+	 * Gets the liste attente.
+	 *
+	 * @return the liste attente
+	 */
 	public List<User> getListeAttente() {
 		return listeAttente;
 	}
 
+	/**
+	 * Sets the liste attente.
+	 *
+	 * @param listeAttente the new liste attente
+	 */
 	public void setListeAttente(List<User> listeAttente) {
 		this.listeAttente = listeAttente;
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
+	/**
+	 * Removes the event.
+	 *
+	 * @param remover the remover
+	 * @param eventToDelete the event to delete
+	 */
 	public static void removeEvent(User remover, Event eventToDelete){	//Prévoir qu'un membre d'orga peut supprimer un event
 		if(canRemove(remover, eventToDelete)){
 			EventDAO.delete(eventToDelete.getId());
@@ -369,6 +418,13 @@ public class Event extends Observable{
 		}
 	}
 	
+	/**
+	 * Can remove.
+	 *
+	 * @param remover the remover
+	 * @param eventToDelete the event to delete
+	 * @return true, if successful
+	 */
 	public static boolean canRemove(User remover, Event eventToDelete){
 		if(remover == eventToDelete.getOrganizer()){
 			return true;
@@ -381,6 +437,12 @@ public class Event extends Observable{
 		}
 	}
 	
+	/**
+	 * Adds the participant.
+	 *
+	 * @param newParticipant the new participant
+	 * @return true, if successful
+	 */
 	public boolean addParticipant(User newParticipant){
 		// Si il y a encore de la place, on ajoute l'utilisateur en tant que participant
 		if(this.listeParticipants.size() < this.maxNbParticipant){
@@ -396,6 +458,12 @@ public class Event extends Observable{
 		}
 	}
 
+	/**
+	 * Removes the participant.
+	 *
+	 * @param participant the participant
+	 * @return true, if successful
+	 */
 	public boolean removeParticipant(User participant){
 		ParticipationDAO.delete(participant.getLogin(), this.id);
 		WaitingDAO.delete(participant.getLogin(), this.id);
@@ -404,6 +472,9 @@ public class Event extends Observable{
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", title=" + title + ", description=" + description + ", createDate=" + createDate

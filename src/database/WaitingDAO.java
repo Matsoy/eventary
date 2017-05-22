@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package database;
 
 import java.sql.Connection;
@@ -9,6 +12,7 @@ import java.util.ArrayList;
 import model.Event;
 import model.User;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class WaitingDAO.
  *
@@ -29,7 +33,7 @@ public class WaitingDAO{
 	}
 
 	/**
-	 * Renvoie la liste des User participant à un Event (sur liste d'attente) tri�e de celui qui attend depuis le + longtemps � celui qui attend depuis le moins longtemps
+	 * Renvoie la liste des User participant à un Event (sur liste d'attente) tri�e de celui qui attend depuis le + longtemps � celui qui attend depuis le moins longtemps.
 	 *
 	 * @param id_event id du Event
 	 * @return the array list
@@ -65,12 +69,12 @@ public class WaitingDAO{
 
 		return ret;
 	}
-	
-	
+
+
 	/**
-	 * Renvoie la liste des Event auxquels attend un User
+	 * Renvoie la liste des Event auxquels attend un User.
 	 *
-	 * @param id_event id du Event
+	 * @param user_login the user login
 	 * @return the array list
 	 */
 	public static ArrayList<Event> waitingEvents(String user_login) {
@@ -86,7 +90,7 @@ public class WaitingDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM WAITING WHERE user_login = '" + user_login + "' ORDER BY datetime(waiting_date) ASC;";
+			query = "SELECT * FROM WAITING WHERE UPPER(user_login) = UPPER('" + user_login + "') ORDER BY datetime(waiting_date) ASC;";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -137,8 +141,10 @@ public class WaitingDAO{
 	 *
 	 * @param user_login le login du User
 	 * @param event_id l'id du Event
+	 * @return true, if successful
 	 */
-	public static void delete(String user_login, int event_id) {
+	public static boolean delete(String user_login, int event_id) {
+		boolean ret = false;
 		Statement stat = null;
 		String query = "";
 
@@ -154,19 +160,21 @@ public class WaitingDAO{
 			// sinon, on supprime la participation du User choisi pour l'Event choisi
 			else{
 				//Preparation de la requete
-				query = "DELETE FROM WAITING WHERE event_id = " + event_id + "AND user_login = '" + user_login + "';";
+				query = "DELETE FROM WAITING WHERE event_id = " + event_id + "AND UPPER(user_login) = UPPER('" + user_login + "');";
 			}
 
 			//Execute la requête
 			stat.executeQuery(query);
+			ret = true;
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+		return false;
 	}
 
 	/**
-	 * Renvoie le premier qui est sur la liste d'attente d'un �v�nement
+	 * Renvoie le premier qui est sur la liste d'attente d'un �v�nement.
 	 *
 	 * @param event_id l'id du Event
 	 * @return user_login the user login
@@ -181,7 +189,7 @@ public class WaitingDAO{
 			Connection con = SQLiteConnection.getInstance().getConnection();
 
 			query = "SELECT * FROM WAITING WHERE event_id = " + event_id + " ORDER  BY datetime(waiting_date) ASC LIMIT 1;";
-			
+
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
 
@@ -195,7 +203,7 @@ public class WaitingDAO{
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
-		
+
 		return ret;
 	}
 }

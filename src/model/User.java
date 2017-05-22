@@ -1,9 +1,13 @@
+/*
+ * 
+ */
 package model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class User.
  */
@@ -27,8 +31,10 @@ public class User extends Observable {
 	/** The year. */
 	int year;
 	
+	/** The liste asso. */
 	List<Association> listeAsso = new ArrayList<Association>();
 	
+	/** The liste dpt. */
 	List<Department> listeDpt = new ArrayList<Department>();
 	
 	/**
@@ -46,6 +52,8 @@ public class User extends Observable {
 	 * @param lName the l name
 	 * @param branch the branch
 	 * @param year the year
+	 * @param listeAsso the liste asso
+	 * @param listeDpt the liste dpt
 	 */
 	public void init(String login, Boolean moderator, String fName, String lName, String branch, int year, 
 			List<Association> listeAsso, List<Department> listeDpt) {
@@ -168,22 +176,48 @@ public class User extends Observable {
 		this.year = year;
 	}
 	
+	/**
+	 * Gets the liste asso.
+	 *
+	 * @return the liste asso
+	 */
 	public List<Association> getListeAsso() {
 		return listeAsso;
 	}
 
+	/**
+	 * Sets the liste asso.
+	 *
+	 * @param listeAsso the new liste asso
+	 */
 	public void setListeAsso(List<Association> listeAsso) {
 		this.listeAsso = listeAsso;
 	}
 
+	/**
+	 * Gets the liste dpt.
+	 *
+	 * @return the liste dpt
+	 */
 	public List<Department> getListeDpt() {
 		return listeDpt;
 	}
 
+	/**
+	 * Sets the liste dpt.
+	 *
+	 * @param listeDpt the new liste dpt
+	 */
 	public void setListeDpt(List<Department> listeDpt) {
 		this.listeDpt = listeDpt;
 	}
 	
+	/**
+	 * Checks if is in asso.
+	 *
+	 * @param association the association
+	 * @return true, if is in asso
+	 */
 	public boolean isInAsso(Organization association){
 		for(Association asso : listeAsso){
 			if(asso.equals(association)){

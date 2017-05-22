@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package test;
 
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import model.School;
 import model.Site;
 import model.User;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DaoTest.
  */

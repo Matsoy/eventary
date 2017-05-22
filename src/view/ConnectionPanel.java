@@ -1,16 +1,15 @@
+/*
+ * 
+ */
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-import model.Event;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -38,10 +37,8 @@ public class ConnectionPanel extends JPanel {
 	
 	/** The frame. */
 	Frame frame;
-	
-	/** The label error. */
-	JLabel labelError;
 
+	
 	/**
 	 * Instantiates a new connection panel.
 	 *
@@ -57,7 +54,6 @@ public class ConnectionPanel extends JPanel {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(null);
 		mainPanel.setBackground(Frame.colorEventary);
-
 		
 		this.login = new JTextField("E168011W");
 		this.login.setHorizontalAlignment(JTextField.CENTER);
@@ -84,9 +80,9 @@ public class ConnectionPanel extends JPanel {
 		
 		// ajout du pannel principal au centre du JPanel ConnectionPanel
 		this.add(mainPanel, BorderLayout.CENTER);
-		
 	}
 
+	
 	/**
 	 * Gets the bouton.
 	 *
@@ -96,6 +92,7 @@ public class ConnectionPanel extends JPanel {
 		return this.bouton;
 	}
 
+	
 	/**
 	 * Gets the login.
 	 *
@@ -105,6 +102,7 @@ public class ConnectionPanel extends JPanel {
 		return this.login.getText();
 	}
 
+	
 	/**
 	 * Gets the password.
 	 *
@@ -115,28 +113,13 @@ public class ConnectionPanel extends JPanel {
 		return this.password.getText();
 	}
 	
+	
+	/**
+	 * Gets the frame.
+	 *
+	 * @return the frame
+	 */
 	public Frame getFrame() {
 		return this.frame;
-	}
-
-	/**
-	 * Sets the home panel.
-	 *
-	 * @param events la liste des evenements
-	 */
-	public void setHomePanel(ArrayList<Event> events) {
-		System.out.println("setHomePanel de ConnectionPanel");
-		// TODO Auto-generated method stub
-		this.frame.setHomePanel(events);	
-	}
-
-	/**
-	 * Display error.
-	 *
-	 * @param str the str
-	 * @param color the color
-	 */
-	public void displayError(String str, Color color) {
-		this.frame.displayMessage(str, color);
 	}
 }

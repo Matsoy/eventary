@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package input_output;
 
 import java.io.BufferedReader;
@@ -5,8 +8,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Reader.
+ */
 public class Reader {
 
+	/**
+	 * Read integer.
+	 *
+	 * @param S the s
+	 * @return the int
+	 */
 	public static int readInteger(String S){	//On passe la chaine à reconnaitre dans le fichier pour m'extraction de données
 		int entier = 0;
 		String currentLine = "";	// ligne courante
@@ -35,6 +48,12 @@ public class Reader {
 		return entier;
 	}
 
+	/**
+	 * Read logs.
+	 *
+	 * @param S the s
+	 * @return the array list
+	 */
 	public static ArrayList<String> readLogs(String S){
 		ArrayList<String> listeUsers = new ArrayList<String>();
 		String currentLine = "";	// ligne courante
@@ -65,6 +84,11 @@ public class Reader {
 		return listeUsers;
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config
 		readLogs("moderatorLogins");
 	}

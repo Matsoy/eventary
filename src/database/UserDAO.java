@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package database;
 
 import java.security.MessageDigest;
@@ -10,6 +13,7 @@ import java.util.ArrayList;
 
 import model.User;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UserDAO.
  *
@@ -85,7 +89,7 @@ public class UserDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM USER WHERE login = '" + login_user + "';";
+			query = "SELECT * FROM USER WHERE UPPER(login) = UPPER('" + login_user + "');";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
@@ -199,7 +203,7 @@ public class UserDAO{
 			ParticipationDAO.delete(login_user, -1);
 
 			//Preparation de la requete
-			query = "DELETE FROM USER WHERE login = '" + login_user + "';";
+			query = "DELETE FROM USER WHERE UPPER(login) = UPPER('" + login_user + "');";
 
 			//Execute la requête
 			stat.executeQuery(query);

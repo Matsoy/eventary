@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package view;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,24 +12,20 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controller.DisplayEventListener;
+
+// TODO: Auto-generated Javadoc
 /**
  * The Class HomePanel.
  */
 public class MyEventsPanel extends JPanel{
+	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The Constant widthMenuButton. */
-	static final int widthMenuButton = 200;
-
-	/** The Constant heightMenuButton. */
-	static final int heightMenuButton = 30;
-
 	/** The frame. */
 	Frame frame;
-
-	/**  The panel for the creation of a new event. */
-	JPanel newEventPanel;
+	
 	
 	/**
 	 * Instantiates a new home panel.
@@ -51,19 +50,25 @@ public class MyEventsPanel extends JPanel{
 
 		// parametrage des contraintes du GridBagLayout
 		GridBagConstraints gc = new GridBagConstraints();
+		
 		/* insets définir la marge entre les composant new Insets(margeSupérieure, margeGauche, margeInférieur, margeDroite) */
 		gc.ipady = gc.anchor = GridBagConstraints.NORTH;
+		
 		/* weightx définit le nombre de cases en abscisse */
 		gc.weightx = 1;
+		
 		/* le parametre fill sert à définir comment le composant sera rempli GridBagConstraints.BOTH permet d'occuper tout l'espace disponible
 		 * horizontalement et verticalement GridBagConstraints.HORIZONTAL maximise horizontalement GridBagConstraints.VERTICAL maximise verticalement
 		 */
 		gc.fill = GridBagConstraints.HORIZONTAL;
+		
 		/* weightx définit le nombre de cases en ordonnée */
 		gc.weighty = participationsInAnEvent.size() + waitingsEvent.size() + 2;
+		
 		/* pour dire qu'on ajoute un composant en position (i, j), on définit gridx=i et gridy=j */
 		gc.gridx = 0;
 		gc.gridy = 0;
+		
 		/* insets définir la marge entre les composant new Insets(margeSupérieure, margeGauche, margeInférieur, margeDroite) */
 		gc.insets = new Insets(5, 5, 5, 5);
 
@@ -77,10 +82,11 @@ public class MyEventsPanel extends JPanel{
 		// parcours de la liste des Event auxquels l'utilisateur participe
 		for (model.Event event : participationsInAnEvent) {
 			gc.gridy++;
-			JPanel panelEvent = new JPanel();
+			JPanel panelEvent = new EventItemPanel(this.frame, event);	
 			panelEvent.setPreferredSize(new Dimension(800,160));
 			panelEvent.add(new JLabel(event.getTitle()));
 			panelEvent.add(new JLabel(event.getStartDate().toString()));
+			panelEvent.addMouseListener(new DisplayEventListener());
 			this.add(panelEvent, gc);
 		}
 
@@ -95,18 +101,9 @@ public class MyEventsPanel extends JPanel{
 		// parcours de la liste des Event auxquels l'utilisateur est sur liste d'attente
 		for (model.Event event : waitingsEvent) {
 			gc.gridy++;
-			JPanel panelEvent = new JPanel();
-			panelEvent.setPreferredSize(new Dimension(800,160));
-			panelEvent.add(new JLabel(event.getTitle()));
-			panelEvent.add(new JLabel(event.getStartDate().toString()));
+			JPanel panelEvent = new EventItemPanel(this.frame, event);		
+			panelEvent.addMouseListener(new DisplayEventListener());
 			this.add(panelEvent, gc);
 		}
-	}
-
-	/**
-	 * Sets the connection panel.
-	 */
-	public void setConnectionPanel(){
-		this.frame.setConnectionPanel();
 	}
 }

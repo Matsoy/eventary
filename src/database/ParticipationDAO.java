@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package database;
 
 import java.sql.Connection;
@@ -9,13 +12,14 @@ import java.util.ArrayList;
 import model.Event;
 import model.User;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ParticipationDAO.
  *
  * @author Mathieu Soyer
- * 
+ *
  * File: ParticipationDAO.java
- * 
+ *
  * Classe pour les objets Dao de repr�sentant la participation d'un User � un Event
  */
 
@@ -27,8 +31,8 @@ public class ParticipationDAO{
 	public ParticipationDAO() {
 
 	}
-	
-	
+
+
 	/**
 	 * Renvoie la liste des User participant à un Event.
 	 *
@@ -55,8 +59,8 @@ public class ParticipationDAO{
 
 			if (result.next() ) {
 				do {
-					ret.add(UserDAO.find(result.getString(2))); //ajout du User à l'ArrayList			
-				} 
+					ret.add(UserDAO.find(result.getString(2))); //ajout du User à l'ArrayList
+				}
 				while (result.next());
 			}
 		}
@@ -66,8 +70,8 @@ public class ParticipationDAO{
 
 		return ret;
 	}
-	
-	
+
+
 	/**
 	 * Renvoie la liste des Event auxquels participe un User.
 	 *
@@ -87,15 +91,15 @@ public class ParticipationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM PARTICIPATION WHERE user_login = '" + user_login + "';";
+			query = "SELECT * FROM PARTICIPATION WHERE UPPER(user_login) = UPPER('" + user_login + "');";
 
 			//Retourne l'execution de la requete sous la forme d'un objet ResultSet
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.add(EventDAO.find(result.getInt(1))); //ajout du Event à l'ArrayList			
-				} 
+					ret.add(EventDAO.find(result.getInt(1))); //ajout du Event à l'ArrayList
+				}
 				while (result.next());
 			}
 		}
@@ -112,8 +116,10 @@ public class ParticipationDAO{
 	 *
 	 * @param user_login le login du User
 	 * @param event_id l'id du Event
+	 * @return true, if successful
 	 */
-	public static void insert(String user_login, int event_id) {
+	public static boolean insert(String user_login, int event_id) {
+		boolean ret = false;
 		Statement stat = null;
 		String query = "";
 
@@ -126,10 +132,12 @@ public class ParticipationDAO{
 
 			//Execute la requête
 			stat.executeQuery(query);
+			ret = true;
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+		return ret;
 	}
 
 
@@ -138,8 +146,10 @@ public class ParticipationDAO{
 	 *
 	 * @param user_login le login du User
 	 * @param event_id l'id du Event
+	 * @return true, if successful
 	 */
-	public static void delete(String user_login, int event_id) {
+	public static boolean delete(String user_login, int event_id) {
+		boolean ret = false;
 		Statement stat = null;
 		String query = "";
 
@@ -154,7 +164,7 @@ public class ParticipationDAO{
 			}
 			else{
 				//Preparation de la requete
-				query = "DELETE FROM PARTICIPATION WHERE user_login = '" + user_login + "' and event_id = " + event_id + ";";
+				query = "DELETE FROM PARTICIPATION WHERE UPPER(user_login) = UPPER('" + user_login + "') and event_id = " + event_id + ";";
 				// r�cup�ration du premier User sur liste d'attente
 				String firstWaitingLogin = WaitingDAO.getFirstWaiting(event_id);
 				// s'il y a un User en attente
@@ -168,9 +178,11 @@ public class ParticipationDAO{
 
 			//Execute la requête
 			stat.executeQuery(query);
+			ret = true;
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+		return ret;
 	}
 }

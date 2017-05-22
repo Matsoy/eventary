@@ -1,9 +1,13 @@
+/*
+ * 
+ */
 package model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Organization.
  */
@@ -15,9 +19,10 @@ public abstract class Organization extends Observable{
 	/** The name. */
 	String name;
 	
-	/** Le reponsable de l'organisation */
+	/**  Le reponsable de l'organisation. */
 	User inCharge;
 	
+	/** The liste membres. */
 	List<User> listeMembres = new ArrayList<User>();
 	
 	/**
@@ -25,6 +30,8 @@ public abstract class Organization extends Observable{
 	 *
 	 * @param id the id
 	 * @param name the name
+	 * @param inCharge the in charge
+	 * @param listeMembres the liste membres
 	 */
 	public void init(int id, String name, User inCharge, List<User> listeMembres) {
 		this.id = id;
@@ -81,22 +88,35 @@ public abstract class Organization extends Observable{
 	/**
 	 * Sets the in charge.
 	 *
-	 * @param id the new in charge
+	 * @param inCharge the new in charge
 	 */
 	public void setInCharge(User inCharge) {
 		this.inCharge = inCharge;
 	}
 	
+	/**
+	 * Gets the liste membres.
+	 *
+	 * @return the liste membres
+	 */
 	public List<User> getListeMembres() {
 		return listeMembres;
 	}
 
+	/**
+	 * Sets the liste membres.
+	 *
+	 * @param listeMembres the new liste membres
+	 */
 	public void setListeMembres(List<User> listeMembres) {
 		this.listeMembres = listeMembres;
 		this.setChanged();
 		this.notifyObservers();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Organization [id=" + id + ", name=" + name + ", inCharge=" + inCharge + ", listeMembres=" + listeMembres

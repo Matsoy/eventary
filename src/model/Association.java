@@ -1,7 +1,11 @@
+/*
+ * 
+ */
 package model;
 
 import database.OrgaMemberDAO;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Association.
  */
@@ -13,6 +17,11 @@ public class Association extends Organization {
 	public Association() {
 	}
 	
+	/**
+	 * Adds the member.
+	 *
+	 * @param nouveauMembre the nouveau membre
+	 */
 	public void addMember(User nouveauMembre){
 		OrgaMemberDAO.insert(nouveauMembre.getLogin(), this.id);
 		this.setListeMembres(OrgaMemberDAO.find(this.id));

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package database;
 
 import java.sql.Connection;
@@ -9,6 +12,7 @@ import java.util.ArrayList;
 import model.Building;
 import model.Room;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class RoomDAO.
  *
@@ -46,13 +50,13 @@ public class RoomDAO{
 
 			//Preparation de la requete
 			query = "SELECT * FROM ROOM;";
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.add(new Room()); //ajout du Room à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), BuildingDAO.find(result.getInt(2)), result.getInt(3), result.getString(4)); //initialisaton de les paramètres du retour de la requête
+					ret.add(new Room()); //ajout du Room ï¿½ l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), BuildingDAO.find(result.getInt(2)), result.getInt(3), result.getString(4)); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}
@@ -123,13 +127,13 @@ public class RoomDAO{
 			//Preparation de la requete
 			query = "SELECT * FROM ROOM WHERE building_id = "+ building_id +";";
 
-			//Le resultat de la requête
+			//Le resultat de la requï¿½te
 			ResultSet result = stat.executeQuery(query);
 
 			if (result.next() ) {
 				do {
-					ret.add(new Room()); //ajout du Room à l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), BuildingDAO.find(result.getInt(2)), result.getInt(3), result.getString(4)); //initialisaton de les paramètres du retour de la requête
+					ret.add(new Room()); //ajout du Room ï¿½ l'ArrayList. Appel du constructeur vide
+					ret.get(ret.size()-1).init(result.getInt(1), BuildingDAO.find(result.getInt(2)), result.getInt(3), result.getString(4)); //initialisaton de les paramï¿½tres du retour de la requï¿½te
 				} 
 				while (result.next());
 			}

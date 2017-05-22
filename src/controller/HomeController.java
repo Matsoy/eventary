@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controller;
 
 import java.util.Observable;
@@ -5,6 +8,7 @@ import java.util.Observable;
 import model.Context;
 import view.HomePanel;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class HomeControler.
  */
@@ -16,12 +20,22 @@ public class HomeController implements java.util.Observer{
 	/** The view. */
 	HomePanel view;
 	
+	/** The action display my events. */
 	ActionDisplayMyEvents actionDisplayMyEvents;
+	
+	/** The action display all events. */
 	ActionDisplayAllEvents actionDisplayAllEvents;
+	
+	/** The action create event. */
 	ActionCreateEvent actionCreateEvent;
+	
+	/** The action notif. */
 	ActionNotifications actionNotif;
+	
+	/** The action quit. */
 	ActionQuit actionQuit;
 
+	
 	/**
 	 * Instantiates a new home controler.
 	 *
@@ -54,12 +68,12 @@ public class HomeController implements java.util.Observer{
 		this.view.getQuitButton().setAction(this.actionQuit);
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("dans update de HomeController");
 	}
 
 }

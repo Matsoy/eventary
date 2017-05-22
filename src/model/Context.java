@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package model;
 
 import java.util.Observable;
@@ -6,6 +9,7 @@ import database.EventDAO;
 import database.UserDAO;
 import input_output.Reader;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Context.
  */
@@ -20,6 +24,7 @@ public class Context extends Observable{
 	/** The temps avant suppression. */
 	int tempsAvantSuppression;
 	
+	/** The current event. */
 	Event currentEvent;
 	
 	/**
@@ -90,10 +95,20 @@ public class Context extends Observable{
 		this.tempsAvantSuppression = tempsAvantSuppression;
 	}
 	
+	/**
+	 * Gets the current event.
+	 *
+	 * @return the current event
+	 */
 	public Event getCurrentEvent() {
 		return currentEvent;
 	}
 
+	/**
+	 * Sets the current event.
+	 *
+	 * @param currentEvent the new current event
+	 */
 	public void setCurrentEvent(Event currentEvent) {
 		this.currentEvent = currentEvent;
 		this.setChanged();
@@ -116,10 +131,18 @@ public class Context extends Observable{
 		}
 	}
 	
+	/**
+	 * Display event.
+	 *
+	 * @param eventId the event id
+	 */
 	public void displayEvent(int eventId){
 		setCurrentEvent(EventDAO.find(eventId));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Context [currentUser=" + currentUser + ", authentificated=" + authentificated

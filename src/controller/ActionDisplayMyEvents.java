@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -40,12 +43,12 @@ public class ActionDisplayMyEvents extends AbstractAction {
 		this.putValue(Action.NAME, "Mes evenements");
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("actionPerformed de ActionDisplayMyEvents");
 		this.view.setContainerCentral(this.view.getFrame().getMyEventsPanel());
 		this.view.getFrame().getMyEventsPanel().displayMyEvents(ParticipationDAO.participationsInAnEvent(model.getCurrentUser().getLogin()), WaitingDAO.waitingEvents(model.getCurrentUser().getLogin()));
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());

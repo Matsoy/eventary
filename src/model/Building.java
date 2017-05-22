@@ -1,9 +1,13 @@
+/*
+ * 
+ */
 package model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Building.
  */
@@ -18,6 +22,7 @@ public class Building extends Observable{
 	/** The name. */
 	String name;
 	
+	/** The liste salles. */
 	List<Room> listeSalles = new ArrayList<Room>();
 
 	/**
@@ -69,7 +74,7 @@ public class Building extends Observable{
 	/**
 	 * Sets the site.
 	 *
-	 * @param site_id the new site id
+	 * @param site the new site
 	 */
 	public void setSite(Site site) {
 		this.site = site;
@@ -93,10 +98,20 @@ public class Building extends Observable{
 		this.name = name;
 	}
 	
+	/**
+	 * Gets the liste salles.
+	 *
+	 * @return the liste salles
+	 */
 	public List<Room> getListeSalles() {
 		return listeSalles;
 	}
 
+	/**
+	 * Sets the liste salles.
+	 *
+	 * @param listeSalles the new liste salles
+	 */
 	public void setListeSalles(List<Room> listeSalles) {
 		this.listeSalles = listeSalles;
 	}

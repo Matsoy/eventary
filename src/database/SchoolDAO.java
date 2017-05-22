@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package database;
 
 import java.sql.Connection;
@@ -8,6 +11,7 @@ import java.util.ArrayList;
 
 import model.School;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class SchoolDAO.
  *
@@ -46,13 +50,13 @@ public class SchoolDAO{
             //Preparation de la requete
             query = "SELECT * FROM SCHOOL;";
 
-            //Le resultat de la requête
+            //Le resultat de la requï¿½te
             ResultSet result = stat.executeQuery(query);
             
 			if (result.next() ) {
 				do {
-                    ret.add(new School()); //ajout du School à l'ArrayList. Appel du constructeur vide
-                    ret.get(ret.size()-1).init(result.getInt(1), result.getString(2)); //initialisaton de les paramètres du retour de la requête		
+                    ret.add(new School()); //ajout du School ï¿½ l'ArrayList. Appel du constructeur vide
+                    ret.get(ret.size()-1).init(result.getInt(1), result.getString(2)); //initialisaton de les paramï¿½tres du retour de la requï¿½te		
 				} 
 				while (result.next());
 			}

@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package database;
 
 import java.sql.Connection;
@@ -13,6 +16,7 @@ import model.Organization;
 import model.Room;
 import model.User;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EventDAO.
  *
@@ -25,6 +29,7 @@ import model.User;
 
 public class EventDAO{
 
+	/** The parser. */
 	private static java.text.SimpleDateFormat parser = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	/**
@@ -169,7 +174,16 @@ public class EventDAO{
 	/**
 	 * Methode qui permet d'inserer un tuple.
 	 *
-	 * @param tuple Objet de type Event a inserer
+	 * @param title the title
+	 * @param description the description
+	 * @param startDate the start date
+	 * @param endDate the end date
+	 * @param maxNbParticipant the max nb participant
+	 * @param organizer the organizer
+	 * @param organization the organization
+	 * @param room the room
+	 * @param address the address
+	 * @return true, if successful
 	 */
 	public static boolean insert(String title, String description, Date startDate, Date endDate, int maxNbParticipant, User organizer, Organization organization, Room room, String address) {
 		boolean ret = false;
@@ -197,7 +211,8 @@ public class EventDAO{
 					datesStr[i] = "datetime('" + parser.format(dates[i]) + "')";
 				}
 				else{
-					throw new IllegalArgumentException(dates[i] +"== null");
+					if(i==0) throw new IllegalArgumentException("startDate == null");
+					throw new IllegalArgumentException("endDate == null");
 				}
 			}
 
@@ -228,8 +243,10 @@ public class EventDAO{
 	 * Permet de supprimer un tuple.
 	 *
 	 * @param id_event id du tuple a supprimer
+	 * @return true, if successful
 	 */
-	public static void delete(int id_event) {
+	public static boolean delete(int id_event) {
+		boolean ret = false;
 		Statement stat = null;
 		String query = "";
 
@@ -245,10 +262,12 @@ public class EventDAO{
 
 			//Execute la requête
 			stat.executeQuery(query);
-
+			ret = true;
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+		
+		return ret;
 	}
 }
