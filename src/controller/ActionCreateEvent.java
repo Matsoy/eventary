@@ -37,7 +37,7 @@ public class ActionCreateEvent extends AbstractAction {
 	ActionCreateEvent(Context model, HomePanel view){
 		this.model = model;
 		this.view = view;
-		this.putValue(Action.NAME, "Creer un evenement");
+		this.putValue(Action.NAME, "Créer un événement");
 	}
 
 	

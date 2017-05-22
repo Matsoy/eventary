@@ -39,7 +39,7 @@ public class ActionDisplayAllEvents extends AbstractAction {
 	ActionDisplayAllEvents(Context model, HomePanel view){
 		this.model = model;
 		this.view = view;
-		this.putValue(Action.NAME, "Tous les evenements");
+		this.putValue(Action.NAME, "Tous les événements");
 	}
 
 	

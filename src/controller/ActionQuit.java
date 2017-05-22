@@ -37,7 +37,7 @@ public class ActionQuit extends AbstractAction {
 	ActionQuit(Context model, HomePanel view){
 		this.model = model;
 		this.view = view;
-		this.putValue(Action.NAME, "Quitter");
+		this.putValue(Action.NAME, "Se déconnecter");
 	}
 	
 

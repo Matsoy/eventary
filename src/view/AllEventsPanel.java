@@ -82,7 +82,7 @@ public class AllEventsPanel extends JPanel{
 		JPanel eventsPanel = new JPanel();
 		eventsPanel.setBackground(Frame.colorEventary);
 		eventsPanel.setPreferredSize(new Dimension(800,20));
-		eventsPanel.add(new JLabel("Les evenements"));
+		eventsPanel.add(new JLabel("Les événements"));
 		this.add(eventsPanel, gc);
 
 		// parcours de la liste des Event

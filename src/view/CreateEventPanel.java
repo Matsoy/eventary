@@ -77,7 +77,7 @@ public class CreateEventPanel extends JPanel{
 		JPanel eventsPanel = new JPanel();
 		eventsPanel.setBackground(Frame.colorEventary);
 		eventsPanel.setPreferredSize(new Dimension(800,20));
-		eventsPanel.add(new JLabel("Creer un evenement"));
+		eventsPanel.add(new JLabel("Creer un événement"));
 		this.add(eventsPanel, gc);
 	}
 }

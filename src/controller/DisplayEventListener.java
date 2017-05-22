@@ -8,11 +8,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.SwingUtilities;
 
-import database.ParticipationDAO;
-import database.WaitingDAO;
-import model.Event;
 import view.EventItemPanel;
-import view.HomePanel;
 
 // TODO: Auto-generated Javadoc
 /**
