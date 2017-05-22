@@ -171,7 +171,8 @@ public class EventDAO{
 	 *
 	 * @param tuple Objet de type Event a inserer
 	 */
-	public static void insert(String title, String description, Date startDate, Date endDate, int maxNbParticipant, User organizer, Organization organization, Room room, String address) {
+	public static boolean insert(String title, String description, Date startDate, Date endDate, int maxNbParticipant, User organizer, Organization organization, Room room, String address) {
+		boolean ret = false;
 		Statement stat = null;
 		String query = "";
 
@@ -190,29 +191,36 @@ public class EventDAO{
 		dates[0] = startDate;
 		dates[1] = endDate;
 
-		for (int i = 0; i < dates.length; i++) {
-			if(dates[i] != null){
-				datesStr[i] = "datetime('" + parser.format(dates[i]) + "')";
-			}
-			else{
-				System.out.println("ERREUR: "+dates[i] +"== null");
-			}
-		}
-
 		try {
-			//Recuperation de la connexion
-			Connection con = SQLiteConnection.getInstance().getConnection();
+			for (int i = 0; i < dates.length; i++) {
+				if(dates[i] != null){
+					datesStr[i] = "datetime('" + parser.format(dates[i]) + "')";
+				}
+				else{
+					throw new IllegalArgumentException(dates[i] +"== null");
+				}
+			}
 
-			//Preparation de la requete
-			query = "INSERT INTO EVENT (title, descr, startDate, endDate, maxNbParticipant, organizer, orga_id, room_id, address)"
-					+ " VALUES("+ title +"','"+ description +"',"+ dates[0] +","+ dates[1] +","+ maxNbParticipant +","+ organizer_login +","+ room_id +",'"+ address +"');";
+			try {
+				//Recuperation de la connexion
+				Connection con = SQLiteConnection.getInstance().getConnection();
 
-			//Execute la requête
-			stat.executeQuery(query);
+				//Preparation de la requete
+				query = "INSERT INTO EVENT (title, descr, startDate, endDate, maxNbParticipant, organizer, orga_id, room_id, address)"
+						+ " VALUES("+ title +"','"+ description +"',"+ dates[0] +","+ dates[1] +","+ maxNbParticipant +","+ organizer_login +","+ room_id +",'"+ address +"');";
+
+				//Execute la requête
+				stat.executeQuery(query);
+
+				ret = true;
+			}
+			catch(SQLException e) {
+				System.out.println("ERREUR: " + e.getMessage()); 
+			}
+		} catch (Exception e) {
+			// TODO: // TODO: handle exceptionhandle exception
 		}
-		catch(SQLException e) {
-			System.out.println("ERREUR: " + e.getMessage());
-		}
+		return ret;
 	}
 
 
