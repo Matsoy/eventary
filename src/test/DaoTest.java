@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import database.BuildingDAO;
 import database.EventDAO;
+import database.NotificationDAO;
 import database.OrgaMemberDAO;
 import database.OrganizationDAO;
 import database.ParticipationDAO;
@@ -182,6 +183,17 @@ public class DaoTest {
 		waitings1 = WaitingDAO.waitingsForAnEvent(1);
 		for(User w: waitings1){
 			System.out.println(w.toString());
+		}
+		
+		
+		System.out.println("\n\t########################################");
+		System.out.println("\t########## test de NotificationDAO");
+		System.out.println("\t########################################");
+		System.out.println("\n\t##### test de find");
+		ArrayList<String> notifs = new ArrayList<String>();
+		notifs = NotificationDAO.find("E168011W");
+		for(String n: notifs){
+			System.out.println(n);
 		}
 
 

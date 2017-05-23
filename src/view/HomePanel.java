@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
+import controller.ChooseProfileImageListener;
 import model.User;
 
 // TODO: Auto-generated Javadoc
@@ -223,6 +224,8 @@ public class HomePanel extends JPanel{
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		this.profilePanel.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2)-5,8,210,230);
 		this.leftPanel.add(profilePanel);
+		
+		profilePanel.addMouseListener(new ChooseProfileImageListener());
 
 		// rafraichissement de la JFrame
 		SwingUtilities.updateComponentTreeUI(this);
