@@ -39,6 +39,9 @@ function runscripts {
     printf "%s" "     participation"
     $(sqlite3 eventary.db < creation/participation.sql)
     printf "\n"
+    printf "%s" "     notification"
+    $(sqlite3 eventary.db < creation/notification.sql)
+    printf "\n"
 
     printf "%s" ""
     printf "\n"
@@ -79,6 +82,9 @@ function runscripts {
     printf "\n"
     printf "%s" "     participation"
     $(sqlite3 eventary.db < insertion/participations.sql)
+    printf "\n"
+    printf "%s" "     notification"
+    $(sqlite3 eventary.db < insertion/notifications.sql)
     printf "\n"
 
     printf "%s" ""
