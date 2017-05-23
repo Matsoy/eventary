@@ -3,9 +3,12 @@
  */
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -244,8 +247,12 @@ public class Frame extends JFrame{
 		// panel qui contiendra le message d'erreur
 		this.messagePanel.removeAll();
 		this.messagePanel.setBackground(color);
-		messagePanel.add(new JLabel(str));
-		
+		this.messagePanel.setLayout(new BorderLayout());
+		JLabel imgLabel = new JLabel(new ImageIcon(new ImageIcon("img/notification.png").getImage().getScaledInstance(25, 25, Image.SCALE_DEFAULT)));	
+		messagePanel.add(imgLabel, BorderLayout.WEST);
+		JLabel messLabel = new JLabel(str);
+		messLabel.setHorizontalAlignment(JLabel.CENTER);
+		messagePanel.add(messLabel, BorderLayout.CENTER);
 		// message d'erreur invisible par défaut
 		this.messagePanel.setVisible(true);
 		
