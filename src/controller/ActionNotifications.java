@@ -9,6 +9,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.SwingUtilities;
 
+import database.NotificationDAO;
 import model.Context;
 import view.HomePanel;
 
@@ -16,7 +17,7 @@ import view.HomePanel;
 /**
  * The Class ActionNotifications.
  */
-public class ActionNotifications extends AbstractAction {
+class ActionNotifications extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -26,7 +27,6 @@ public class ActionNotifications extends AbstractAction {
 
 	/** The view. */
 	HomePanel view;
-	
 	
 	/**
 	 * Instantiates a new action notifications.
@@ -47,8 +47,7 @@ public class ActionNotifications extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		this.view.setContainerCentral(this.view.getFrame().getNotifPanel());
-		this.view.getFrame().getNotifPanel().displayNotif();
+		this.view.getFrame().getNotifPanel().displayNotif(NotificationDAO.find(model.getCurrentUser().getLogin()));
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 	}
-
 }

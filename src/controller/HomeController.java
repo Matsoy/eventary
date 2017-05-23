@@ -32,6 +32,8 @@ public class HomeController implements java.util.Observer{
 	/** The action notif. */
 	ActionNotifications actionNotif;
 	
+	ActionClear actionClear;
+	
 	/** The action quit. */
 	ActionQuit actionQuit;
 
@@ -62,6 +64,10 @@ public class HomeController implements java.util.Observer{
 		// clic Notifications
 		this.actionNotif = new ActionNotifications(this.model, this.view);
 		this.view.getNotifButton().setAction(this.actionNotif);
+		
+		// clic Supprimer Notifications dans Notifications
+		this.actionClear = new ActionClear(this.model, this.view);
+		this.view.getFrame().getNotifPanel().getClearButton().setAction(actionClear);
 		
 		// clic Quitter
 		this.actionQuit = new ActionQuit(this.model, this.view);

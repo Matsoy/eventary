@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import database.NotificationDAO;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class User.
@@ -37,6 +39,8 @@ public class User extends Observable {
 	/** The liste dpt. */
 	List<Department> listeDpt = new ArrayList<Department>();
 	
+	List<String> listeNotif = new ArrayList<String>();
+	
 	/**
 	 * Instantiates a new user.
 	 */
@@ -56,7 +60,7 @@ public class User extends Observable {
 	 * @param listeDpt the liste dpt
 	 */
 	public void init(String login, Boolean moderator, String fName, String lName, String branch, int year, 
-			List<Association> listeAsso, List<Department> listeDpt) {
+			List<Association> listeAsso, List<Department> listeDpt/*, List<String> listeNotif*/) {
 		this.login = login;
 		this.moderator = moderator;
 		this.fName = fName;
@@ -65,6 +69,7 @@ public class User extends Observable {
 		this.year = year;
 		this.listeAsso = listeAsso;
 		this.listeDpt = listeDpt;
+		this.listeNotif = listeNotif;
 	}
 
 	
@@ -212,6 +217,14 @@ public class User extends Observable {
 		this.listeDpt = listeDpt;
 	}
 	
+	public List<String> getListeNotif() {
+		return listeNotif;
+	}
+
+	public void setListeNotif(List<String> listeNotif) {
+		this.listeNotif = listeNotif;
+	}
+
 	/**
 	 * Checks if is in asso.
 	 *
@@ -225,6 +238,13 @@ public class User extends Observable {
 			}
 		}
 		return false;
+	}
+	
+	// Méthode qui vide la lise des notifications de l'utilisateur
+	public void removeNotifications(){	
+		NotificationDAO.delete(this.login);
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	/* (non-Javadoc)

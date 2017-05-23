@@ -117,12 +117,17 @@ public class NotificationDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "DELETE FROM NOTIFICATION WHERE UPPER(user_login) = UPPER('" + user_login + "');";
+			
+			System.out.println(query);
 
 			//Execute la requête
-			stat.executeQuery(query);
+			ResultSet result = stat.executeQuery(query);
 			ret = true;
 		}
 		catch(SQLException e) {

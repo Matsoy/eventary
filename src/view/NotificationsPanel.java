@@ -8,7 +8,9 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,6 +26,7 @@ public class NotificationsPanel extends JPanel {
 	/** The frame. */
 	Frame frame;
 
+	JButton clearButton;
 
 	/**
 	 * Instantiates a new notifications panel.
@@ -32,14 +35,17 @@ public class NotificationsPanel extends JPanel {
 	 */
 	public NotificationsPanel(Frame frame){
 		this.frame = frame;
+		this.clearButton = new EventaryButton();
 	}
 
-
+	public JButton getClearButton() {
+		return clearButton;
+	}
 
 	/**
 	 * Display notif.
 	 */
-	public void displayNotif() {
+	public void displayNotif(List<String> listeNotif) {
 		this.removeAll();
 		this.setBackground(Color.WHITE);
 		this.setLayout(new GridBagLayout());
@@ -51,7 +57,7 @@ public class NotificationsPanel extends JPanel {
 		gc.ipady = gc.anchor = GridBagConstraints.NORTH;
 
 		/* weightx définit le nombre de cases en abscisse */
-		gc.weightx = 1;
+		gc.weightx = 2;
 
 		/* le parametre fill sert à définir comment le composant sera rempli GridBagConstraints.BOTH permet d'occuper tout l'espace disponible
 		 * horizontalement et verticalement GridBagConstraints.HORIZONTAL maximise horizontalement GridBagConstraints.VERTICAL maximise verticalement
@@ -68,12 +74,26 @@ public class NotificationsPanel extends JPanel {
 		/* insets définir la marge entre les composant new Insets(margeSupérieure, margeGauche, margeInférieur, margeDroite) */
 		gc.insets = new Insets(5, 5, 5, 5);
 
-		// mes participations
+		// mes notifications
 		gc.gridy++;
-		JPanel eventsPanel = new JPanel();
-		eventsPanel.setBackground(Frame.colorEventary);
-		eventsPanel.setPreferredSize(new Dimension(800,20));
-		eventsPanel.add(new JLabel("Mes Notifications"));
-		this.add(eventsPanel, gc);
+		JPanel notifPanel = new JPanel();
+		notifPanel.setBackground(Frame.colorEventary);
+		notifPanel.setPreferredSize(new Dimension(800,20));
+		notifPanel.add(new JLabel("Mes Notifications"));
+
+		// clear Button
+		this.clearButton.setPreferredSize(new Dimension(200,20));
+		notifPanel.add(clearButton);
+		this.add(notifPanel, gc);
+
+		// parcours de la liste des Notif
+		for (String notif : listeNotif) {
+			System.out.println("dans for pour afficher notif");
+			gc.gridy++;
+			JPanel panelNotif = new JPanel();
+			this.setPreferredSize(new Dimension(800,160));
+			this.add(new JLabel(notif));
+			this.add(panelNotif, gc);
+		}
 	}
 }
