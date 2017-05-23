@@ -53,6 +53,7 @@ public class ConnectionController implements java.util.Observer{
 			view.getFrame().setHomePanel(EventDAO.findAll());
 			this.view.getFrame().getHomePanel().setContainerCentral(this.view.getFrame().getAllEventsPanel());
 			this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll());
+			this.view.getFrame().getHomePanel().displayProfile(this.model.getCurrentUser());
 			SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 		}
 		

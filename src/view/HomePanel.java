@@ -6,19 +6,24 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+
+import model.User;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class HomePanel.
  */
 public class HomePanel extends JPanel{
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
@@ -48,7 +53,7 @@ public class HomePanel extends JPanel{
 
 	/** The create event button. */
 	JButton createEventButton;
-	
+
 	/** The notif button. */
 	JButton notifButton;
 
@@ -58,7 +63,11 @@ public class HomePanel extends JPanel{
 	/** The scroll main panel. */
 	JScrollPane scrollMainPanel;
 
-	
+	/** The profile panel. */
+	JPanel profilePanel;
+
+
+
 	/**
 	 * Instantiates a new home panel.
 	 *
@@ -75,27 +84,31 @@ public class HomePanel extends JPanel{
 		this.leftPanel.setPreferredSize(new Dimension(Frame.sidebarWidth, Frame.heightScreen));
 		ImageIcon profilImage = new ImageIcon("nerd.png");
 		this.leftPanel.add(new JLabel(profilImage));
-		
+
+		// panel du profil utilisateur
+		this.profilePanel = new JPanel();
+		this.profilePanel.setBackground(Frame.colorEventary);
+
 		// Tous les evenements
 		allEventsButton = new EventaryMenuButton();
-		allEventsButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),10,widthMenuButton,heightMenuButton);
+		allEventsButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),250,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(allEventsButton);
-		
+
 		// Mes evenements
 		myEventsButton = new EventaryMenuButton();
-		myEventsButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),50,widthMenuButton,heightMenuButton);
+		myEventsButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),290,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(myEventsButton);
-		
+
 		// Creer un evenement
 		createEventButton = new EventaryMenuButton();
-		createEventButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),90,widthMenuButton,heightMenuButton);
+		createEventButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),330,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(createEventButton);
-		
+
 		// Notifications
 		notifButton = new EventaryMenuButton();
-		notifButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),130,widthMenuButton,heightMenuButton);
+		notifButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),370,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(notifButton);
-		
+
 		// Quitter
 		quitButton = new EventaryMenuButton(new Color(255, 85, 50));
 		quitButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),(int) (Frame.heightScreen*.90),widthMenuButton,heightMenuButton);
@@ -104,16 +117,16 @@ public class HomePanel extends JPanel{
 		// #################### composant central
 		// container central
 		this.containerCentral = new Container();
-		
+
 		// on place la container dans une scroll bar 
 		this.scrollMainPanel = new JScrollPane(this.containerCentral, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
+
 		// placement de la sidebar et du composant central dans l'interface
 		this.add(this.leftPanel,BorderLayout.WEST);	
 		this.add(this.scrollMainPanel,BorderLayout.CENTER);
 	}
-	
+
 
 	/**
 	 * Gets the all events button.
@@ -123,7 +136,7 @@ public class HomePanel extends JPanel{
 	public JButton getAllEventsButton() {
 		return allEventsButton;
 	}
-	
+
 
 	/**
 	 * Gets the my events button.
@@ -133,8 +146,8 @@ public class HomePanel extends JPanel{
 	public JButton getMyEventsButton() {
 		return myEventsButton;
 	}
-	
-	
+
+
 	/**
 	 * Gets the creates the event button.
 	 *
@@ -143,8 +156,8 @@ public class HomePanel extends JPanel{
 	public JButton getCreateEventButton() {
 		return createEventButton;
 	}
-	
-	
+
+
 	/**
 	 * Gets the notif button.
 	 *
@@ -153,7 +166,7 @@ public class HomePanel extends JPanel{
 	public JButton getNotifButton() {
 		return notifButton;
 	}
-	
+
 
 	/**
 	 * Gets the quit button.
@@ -163,8 +176,8 @@ public class HomePanel extends JPanel{
 	public JButton getQuitButton() {
 		return quitButton;
 	}
-	
-	
+
+
 	/**
 	 * Gets the frame.
 	 *
@@ -173,7 +186,7 @@ public class HomePanel extends JPanel{
 	public Frame getFrame() {
 		return this.frame;
 	}
-	
+
 
 	/**
 	 * Sets the container central.
@@ -183,12 +196,35 @@ public class HomePanel extends JPanel{
 	public void setContainerCentral(Container newContainer){
 		// suppresion du contenu du containerCentral actuel
 		this.remove(((BorderLayout) this.getLayout()).getLayoutComponent(BorderLayout.CENTER));
-		
+
 		// on place newContainer dans une scrollbar
 		this.containerCentral = new JScrollPane(newContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		
+
 		// et on ajoute cette scrollbar au container central
 		this.add(this.containerCentral, BorderLayout.CENTER);
+	}
+
+
+	/**
+	 * Display profile.
+	 *
+	 * @param user the user
+	 */
+	public void displayProfile(User user){
+		this.profilePanel.removeAll();
+		this.profilePanel.setLayout(new BorderLayout());
+
+		JLabel profileLabel = new JLabel(new ImageIcon(new ImageIcon("img/profile.png").getImage().getScaledInstance(180, 180, Image.SCALE_DEFAULT)));
+		JLabel nameLabel = new JLabel(user.getfName()+" "+user.getlName());
+		nameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+		this.profilePanel.add(profileLabel, BorderLayout.CENTER);
+		this.profilePanel.add(nameLabel, BorderLayout.NORTH);
+		nameLabel.setHorizontalAlignment(JLabel.CENTER);
+		this.profilePanel.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2)-5,8,210,230);
+		this.leftPanel.add(profilePanel);
+
+		// rafraichissement de la JFrame
+		SwingUtilities.updateComponentTreeUI(this);
 	}
 }
