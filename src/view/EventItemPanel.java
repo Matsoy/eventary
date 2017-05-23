@@ -4,6 +4,9 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,8 +40,19 @@ public class EventItemPanel extends JPanel{
 		this.frame = frame;
 		this.event = event;
 		this.setPreferredSize(new Dimension(800,160));
-		this.add(new JLabel(event.getTitle()));
-		this.add(new JLabel(event.getStartDate().toString()));
+		this.setLayout(null);
+		
+		int y = 5;
+		
+		JLabel titre = new JLabel(event.getTitle());
+		titre.setFont(new Font("Bebas", Font.PLAIN, 40));
+		titre.setBounds(5,y,800,y += 40);
+		this.add(titre);
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE dd MMM yyyy - kk:mm", Locale.getDefault());
+		JLabel startingDate = new JLabel(dateFormat.format(event.getStartDate()));
+		startingDate.setBounds(5,y,800,y);
+		this.add(startingDate);
 	}
 
 	
