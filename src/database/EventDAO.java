@@ -225,7 +225,7 @@ public class EventDAO{
 						+ " VALUES("+ title +"','"+ description +"',"+ dates[0] +","+ dates[1] +","+ maxNbParticipant +","+ organizer_login +","+ room_id +",'"+ address +"');";
 
 				//Execute la requête
-				stat.executeQuery(query);
+				stat.executeUpdate(query);
 
 				ret = true;
 			}
@@ -261,7 +261,7 @@ public class EventDAO{
 			query = "DELETE FROM EVENT WHERE id = " + id_event + ";";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 			ret = true;
 		}
 		catch(SQLException e) {

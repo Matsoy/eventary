@@ -169,7 +169,7 @@ public class BuildingDAO{
 			query = "INSERT INTO BUILDING VALUES("+ id +","+ site_id +",'"+ name +"');";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
@@ -194,7 +194,7 @@ public class BuildingDAO{
 			query = "DELETE FROM BUILDING WHERE id = " + id_building + ";";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());

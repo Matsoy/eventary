@@ -91,7 +91,7 @@ public class NotificationDAO{
 			query = "INSERT INTO NOTIFICATION (user_login, message) VALUES('"+ user_login +"','"+ message +"');";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 			ret = true;
 		}
 		catch(SQLException e) {
@@ -127,7 +127,7 @@ public class NotificationDAO{
 			System.out.println(query);
 
 			//Execute la requête
-			ResultSet result = stat.executeQuery(query);
+			stat.executeUpdate(query);
 			ret = true;
 		}
 		catch(SQLException e) {

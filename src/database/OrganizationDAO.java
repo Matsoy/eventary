@@ -326,7 +326,7 @@ public class OrganizationDAO{
 			query = "INSERT INTO ORGANIZATION VALUES("+ id +",'"+ name +"');";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
@@ -351,7 +351,7 @@ public class OrganizationDAO{
 			query = "DELETE FROM ORGANIZATION WHERE id = " + id_orga + ";";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());

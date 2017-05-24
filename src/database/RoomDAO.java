@@ -168,7 +168,7 @@ public class RoomDAO{
 			query = "INSERT INTO ROOM VALUES("+ id +","+ nbPlaces +",'"+ name +"');";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
@@ -193,7 +193,7 @@ public class RoomDAO{
 			query = "DELETE FROM ROOM WHERE id = " + id_room + ";";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());

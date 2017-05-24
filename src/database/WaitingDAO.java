@@ -128,7 +128,7 @@ public class WaitingDAO{
 			query = "INSERT INTO WAITING VALUES('"+ user_login +"',"+ event_id +");";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
@@ -164,7 +164,7 @@ public class WaitingDAO{
 			}
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 			ret = true;
 		}
 		catch(SQLException e) {

@@ -178,7 +178,7 @@ public class UserDAO{
 			query = "INSERT INTO USER VALUES('"+ login +"','"+ passwd +"',"+ moderator +",'"+ fName +"','"+ lName +"','"+ branch +"',"+ year +");";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
@@ -206,7 +206,7 @@ public class UserDAO{
 			query = "DELETE FROM USER WHERE UPPER(login) = UPPER('" + login_user + "');";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());

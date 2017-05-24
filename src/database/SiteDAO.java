@@ -169,7 +169,7 @@ public class SiteDAO{
             query = "INSERT INTO SITE VALUES("+ id +","+ school_id +",'"+ name +"');";
 
             //Execute la requête
-            stat.executeQuery(query);
+            stat.executeUpdate(query);
         }
         catch(SQLException e) {
             System.out.println("ERREUR: " + e.getMessage());
@@ -194,7 +194,7 @@ public class SiteDAO{
             query = "DELETE FROM SITE WHERE id = " + id_site + ";";
 
             //Execute la requête
-            stat.executeQuery(query);
+            stat.executeUpdate(query);
         }
         catch(SQLException e) {
             System.out.println("ERREUR: " + e.getMessage());

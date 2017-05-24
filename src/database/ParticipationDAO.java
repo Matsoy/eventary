@@ -131,7 +131,7 @@ public class ParticipationDAO{
 			query = "INSERT INTO PARTICIPATION VALUES('"+ user_login +"',"+ event_id +");";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 			ret = true;
 		}
 		catch(SQLException e) {
@@ -177,7 +177,7 @@ public class ParticipationDAO{
 			}
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 			ret = true;
 		}
 		catch(SQLException e) {

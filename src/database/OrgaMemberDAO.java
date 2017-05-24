@@ -92,7 +92,7 @@ public class OrgaMemberDAO{
 			query = "INSERT INTO ASSO_MEMBER VALUES("+ association_id +",'"+ user_login +"');";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 			ret = true;
 		}
 		catch(SQLException e) {
@@ -123,7 +123,7 @@ public class OrgaMemberDAO{
 			query = "DELETE FROM ASSO_MEMBER WHERE association_id = " + association_id + "AND UPPER(user_login) = UPPER('" + user_login + "');";
 
 			//Execute la requête
-			stat.executeQuery(query);
+			stat.executeUpdate(query);
 			ret = true;
 		}
 		catch(SQLException e) {
