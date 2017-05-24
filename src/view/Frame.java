@@ -6,6 +6,8 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -13,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import input_output.Reader;
 import model.Event;
@@ -61,7 +64,7 @@ public class Frame extends JFrame{
 
 	/** The home panel. */
 	AllEventsPanel allEventsPanel;
-	
+
 	/** The home panel. */
 	MyEventsPanel myEventsPanel;
 
@@ -70,20 +73,20 @@ public class Frame extends JFrame{
 
 	/** The message panel. */
 	JPanel messagePanel;
-	
+
 	/** The event panel. */
 	EventPanel eventPanel;
-	
+
 	/** The agenda panel. */
 	AgendaPanel agendaPanel;
-	
+
 	/** The display event panel. */
 	EventPanel displayEventPanel;
-	
+
 	/** The notif panel. */
 	NotificationsPanel notifPanel;
 
-	
+
 	/**
 	 * Instantiates a new frame.
 	 */
@@ -106,11 +109,11 @@ public class Frame extends JFrame{
 
 		this.messagePanel = new JPanel();
 		this.messagePanel.setBounds(0,0,Frame.widthScreen,25);
-		
+
 		setConnectionPanel();
 		this.setVisible(true);
 	}
-	
+
 
 	/**
 	 * Gets the connection panel.
@@ -120,7 +123,7 @@ public class Frame extends JFrame{
 	public ConnectionPanel getConnectionPanel() {
 		return connectionPanel;
 	}
-	
+
 
 	/**
 	 * Gets the home panel.
@@ -130,8 +133,8 @@ public class Frame extends JFrame{
 	public HomePanel getHomePanel() {
 		return homePanel;
 	}
-	
-	
+
+
 	/**
 	 * Gets the event panel.
 	 *
@@ -140,7 +143,7 @@ public class Frame extends JFrame{
 	public EventPanel getEventPanel() {
 		return eventPanel;
 	}
-	
+
 
 	/**
 	 * Gets the agenda panel.
@@ -150,7 +153,7 @@ public class Frame extends JFrame{
 	public AgendaPanel getAgendaPanel() {
 		return agendaPanel;
 	}
-	
+
 
 	/**
 	 * Gets the all events panel.
@@ -160,7 +163,7 @@ public class Frame extends JFrame{
 	public AllEventsPanel getAllEventsPanel() {
 		return allEventsPanel;
 	}
-	
+
 
 	/**
 	 * Gets the my events panel.
@@ -170,8 +173,8 @@ public class Frame extends JFrame{
 	public MyEventsPanel getMyEventsPanel() {
 		return myEventsPanel;
 	}
-	
-	
+
+
 	/**
 	 * Gets the creates the event panel.
 	 *
@@ -180,8 +183,8 @@ public class Frame extends JFrame{
 	public CreateEventPanel getCreateEventPanel() {
 		return createEventPanel;
 	}
-	
-	
+
+
 	/**
 	 * Gets the notif panel.
 	 *
@@ -190,8 +193,8 @@ public class Frame extends JFrame{
 	public NotificationsPanel getNotifPanel() {
 		return notifPanel;
 	}
-	
-	
+
+
 	/**
 	 * Gets the display event panel.
 	 *
@@ -201,7 +204,7 @@ public class Frame extends JFrame{
 		return displayEventPanel;
 	}
 
-	
+
 	/**
 	 * Sets the message panel.
 	 */
@@ -221,7 +224,7 @@ public class Frame extends JFrame{
 		this.getContentPane().add(connectionPanel);
 		SwingUtilities.updateComponentTreeUI(this);
 	}
-	
+
 
 	/**
 	 * Sets the home panel.
@@ -235,7 +238,7 @@ public class Frame extends JFrame{
 		homePanel.setBounds(0,0,widthScreen,heightScreen-27);
 		this.getContentPane().add(homePanel);
 	}
-	
+
 
 	/**
 	 * Display error.
@@ -255,7 +258,16 @@ public class Frame extends JFrame{
 		messagePanel.add(messLabel, BorderLayout.CENTER);
 		// message d'erreur invisible par défaut
 		this.messagePanel.setVisible(true);
-		
+
+		// afficher le messae pendant qq secondes
+		int delay = 5000; //milliseconds
+		ActionListener taskPerformer = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				messagePanel.setVisible(false);
+			}
+		};
+		new Timer(delay, taskPerformer).start();
+
 		// rafraichissement de la JFrame
 		SwingUtilities.updateComponentTreeUI(this);
 	}

@@ -6,8 +6,18 @@ package controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
+
+import model.User;
+import view.EventItemPanel;
+import view.Frame;
+import view.HomePanel;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -17,21 +27,25 @@ import javax.swing.JFileChooser;
  */
 public class ChooseProfileImageListener implements MouseListener {	
 
+	private User user;
+	private HomePanel view;
+
+	public ChooseProfileImageListener(HomePanel view, User user){
+		super();
+		this.user = user;
+		this.view = view;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("clic sur la photo de profil");
-		//		((EventItemPanel)e.getSource()).getFrame().getHomePanel().setContainerCentral(((EventItemPanel)e.getSource()).getFrame().getDisplayEventPanel());
-		//		((EventItemPanel)e.getSource()).getFrame().getDisplayEventPanel().displayEvent(((EventItemPanel)e.getComponent()).getEvent());
-		//		SwingUtilities.updateComponentTreeUI(((EventItemPanel)e.getSource()).getFrame());
-
 		//la fenêtre de dialogue
 		JFileChooser dialogue = new JFileChooser(".");
-		File fichier=null;
+		File fichier = null;
 		String path = null;
+		String lextension = null;
 
 		//fait apparaître la fenêtre (modale) de dialogue permettant de sélectionner un fichier. 
 		//A la fermeture, renvoie APPROVE_OPTION ou bien CANCEL_OPTION.
@@ -42,22 +56,37 @@ public class ChooseProfileImageListener implements MouseListener {
 			path = fichier.getAbsolutePath();
 		}
 		if(path!=null){
-			System.out.println("Image chargée: "+path);
-			String leNom;
-			int inf = path.lastIndexOf("\\");
-			int sup = path.lastIndexOf(".");
-			if (inf > -1 && sup > -1) {
-				leNom = path.substring(inf+1,sup);
+			int pos = path.lastIndexOf(".");
+			if (pos > -1) {
+				lextension = path.substring(pos);
 			}
 			else{
-				leNom=path;
+				lextension=path;
 			}
-			System.out.println(leNom);
-		}
-		System.out.println(System.getProperty("user.dir"));
-		//		System.out.println(System.getProperty(fichier.getName()));
-		//		File dest =new File(System.getProperty("user.dir"), fichier.getName());
 
+			// on check le type du fichier
+			String mimetype= new MimetypesFileTypeMap().getContentType(fichier);
+			String type = mimetype.split("/")[0];
+			
+			// si le fichier est bien une image
+			if(type.equals("image")){
+				try {
+					Files.copy(fichier.toPath(), (new File(System.getProperty("user.dir")+"/img/"+user.getLogin()+lextension)).toPath(), StandardCopyOption.REPLACE_EXISTING);
+					((EventItemPanel)e.getSource()).getFrame().getHomePanel().displayProfile(user, "/img/"+user.getLogin()+lextension);
+					SwingUtilities.updateComponentTreeUI(((EventItemPanel)e.getSource()).getFrame());
+
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+				}
+			}
+			
+			// si le fichier sélectionné n'est pas une image
+			else {
+				view.getFrame().displayMessage("Le fichier sélectionné n'est pas une image",Frame.colorEventaryError);
+			}
+
+
+		}
 
 	}
 

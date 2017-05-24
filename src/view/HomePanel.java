@@ -212,11 +212,11 @@ public class HomePanel extends JPanel{
 	 *
 	 * @param user the user
 	 */
-	public void displayProfile(User user){
+	public void displayProfile(User user, String profileImagePath){
 		this.profilePanel.removeAll();
 		this.profilePanel.setLayout(new BorderLayout());
 
-		JLabel profileLabel = new JLabel(new ImageIcon(new ImageIcon("img/profile.png").getImage().getScaledInstance(180, 180, Image.SCALE_DEFAULT)));
+		JLabel profileLabel = new JLabel(new ImageIcon(new ImageIcon(profileImagePath).getImage().getScaledInstance(180, 180, Image.SCALE_DEFAULT)));
 		JLabel nameLabel = new JLabel(user.getfName()+" "+user.getlName());
 		nameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 		this.profilePanel.add(profileLabel, BorderLayout.CENTER);
@@ -225,7 +225,7 @@ public class HomePanel extends JPanel{
 		this.profilePanel.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2)-5,8,210,230);
 		this.leftPanel.add(profilePanel);
 		
-		profilePanel.addMouseListener(new ChooseProfileImageListener());
+		profilePanel.addMouseListener(new ChooseProfileImageListener(this, user));
 
 		// rafraichissement de la JFrame
 		SwingUtilities.updateComponentTreeUI(this);
