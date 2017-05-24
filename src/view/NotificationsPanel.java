@@ -57,7 +57,7 @@ public class NotificationsPanel extends JPanel {
 		gc.ipady = gc.anchor = GridBagConstraints.NORTH;
 
 		/* weightx définit le nombre de cases en abscisse */
-		gc.weightx = 2;
+		gc.weightx = 1;
 
 		/* le parametre fill sert à définir comment le composant sera rempli GridBagConstraints.BOTH permet d'occuper tout l'espace disponible
 		 * horizontalement et verticalement GridBagConstraints.HORIZONTAL maximise horizontalement GridBagConstraints.VERTICAL maximise verticalement
@@ -65,7 +65,7 @@ public class NotificationsPanel extends JPanel {
 		gc.fill = GridBagConstraints.HORIZONTAL;
 
 		/* weightx définit le nombre de cases en ordonnée */
-		gc.weighty = 1;
+		gc.weighty = listeNotif.size() + 1;
 
 		/* pour dire qu'on ajoute un composant en position (i, j), on définit gridx=i et gridy=j */
 		gc.gridx = 0;
@@ -75,12 +75,11 @@ public class NotificationsPanel extends JPanel {
 		gc.insets = new Insets(5, 5, 5, 5);
 
 		// mes notifications
-		gc.gridy++;
 		JPanel notifPanel = new JPanel();
 		notifPanel.setBackground(Frame.colorEventary);
 		notifPanel.setPreferredSize(new Dimension(800,20));
 		notifPanel.add(new JLabel("Mes Notifications"));
-
+		
 		// clear Button
 		this.clearButton.setPreferredSize(new Dimension(200,20));
 		notifPanel.add(clearButton);
@@ -88,11 +87,10 @@ public class NotificationsPanel extends JPanel {
 
 		// parcours de la liste des Notif
 		for (String notif : listeNotif) {
-			System.out.println("dans for pour afficher notif");
 			gc.gridy++;
 			JPanel panelNotif = new JPanel();
-			this.setPreferredSize(new Dimension(800,160));
-			this.add(new JLabel(notif));
+			panelNotif.setPreferredSize(new Dimension(800,160));
+			panelNotif.add(new JLabel(notif));
 			this.add(panelNotif, gc);
 		}
 	}

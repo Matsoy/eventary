@@ -124,7 +124,7 @@ public class Context extends Observable{
 	 */
 	public void connexion(String login, String passwd){
 		setCurrentUser(UserDAO.connect(login, passwd));
-		if(null == this.currentUser){	// Si les logs ne sont pas bon, on r�cup�re un user null
+		if(null == this.currentUser){	// Si les logs ne sont pas bon, on récupère un user null
 			setAuthentificated(false);
 		}else{
 			setAuthentificated(true);

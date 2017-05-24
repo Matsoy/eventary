@@ -243,8 +243,7 @@ public class User extends Observable {
 	// Méthode qui vide la lise des notifications de l'utilisateur
 	public void removeNotifications(){	
 		NotificationDAO.delete(this.login);
-		this.setChanged();
-		this.notifyObservers();
+		this.setListeNotif(NotificationDAO.find(this.login));
 	}
 	
 	/* (non-Javadoc)
