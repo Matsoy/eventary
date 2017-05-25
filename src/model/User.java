@@ -6,6 +6,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Scanner;
 
 import database.NotificationDAO;
 
@@ -60,7 +61,7 @@ public class User extends Observable {
 	 * @param listeDpt the liste dpt
 	 */
 	public void init(String login, Boolean moderator, String fName, String lName, String branch, int year, 
-			List<Association> listeAsso, List<Department> listeDpt/*, List<String> listeNotif*/) {
+			List<Association> listeAsso, List<Department> listeDpt) {
 		this.login = login;
 		this.moderator = moderator;
 		this.fName = fName;
@@ -69,7 +70,6 @@ public class User extends Observable {
 		this.year = year;
 		this.listeAsso = listeAsso;
 		this.listeDpt = listeDpt;
-		this.listeNotif = listeNotif;
 	}
 
 	
@@ -240,10 +240,38 @@ public class User extends Observable {
 		return false;
 	}
 	
+	// Méthode qui ajoute une notification dans la liste des notifs
+	public void addNotification(String notif) {
+		NotificationDAO.insert(this.login, notif);
+		//this.setListeNotif(listeNotif);
+	}
+	
 	// Méthode qui vide la lise des notifications de l'utilisateur
 	public void removeNotifications(){	
 		NotificationDAO.delete(this.login);
 		this.setListeNotif(NotificationDAO.find(this.login));
+	}
+	
+	//Méthode qui retourne le message d'un modérateur lorsqu'il supprime un événement
+	public String message(){
+		if(this.moderator == true){
+			System.out.println("test modo ok");
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Saisir un message pour expliquer la suppression");
+			String mes = sc.nextLine();
+			System.out.println("Vous avez saisi : " + mes);
+			sc.close();
+			
+			if(mes.equals("")){
+				System.out.println("message vide");
+				return ", sans laisser de message";
+			} else {
+				return ", en laissant le message : " + mes;
+			}
+		} else {
+			System.out.println("test modo fail");
+			return null;
+		}
 	}
 	
 	/* (non-Javadoc)

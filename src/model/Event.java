@@ -406,14 +406,24 @@ public class Event extends Observable{
 	 * Removes the event.
 	 *
 	 * @param remover the remover
-	 * @param eventToDelete the event to delete
 	 */
-	public static void removeEvent(User remover, Event eventToDelete){	//Prévoir qu'un membre d'orga peut supprimer un event
-		if(canRemove(remover, eventToDelete)){
-			EventDAO.delete(eventToDelete.getId());
-			if(remover.getModerator() == true){	//Si c'est un modérateur qui supprime l'événement
+	public void removeEvent(User remover){
+		if(canRemove(remover)){	//Si l'evenement peut être supprimé par l'utilisateur
+			// On notifie les participants et ceux en liste d'attente
+			for(User participant : listeParticipants) {
+				participant.addNotification("L'événement \" " + this.id + " \", auquel vous participiez, a été supprimé");
+			}
+			
+			for(User attente : listeAttente){
+				attente.addNotification("L'événement \" " + this.id + " \", auquel vous etiez en liste d'attente, a été supprimé");
+			}
+			
+			EventDAO.delete(this.getId());
+			
+			if(remover.getModerator() == true && remover.equals(this.organizer) == false){	//Si c'est un modérateur qui supprime l'événement
+				//alors il peut laisser un message à l'organisateur
 				//à modifier pour que notifie un message à l'organisateur
-				System.out.println("Suppression de l'event par le modérateur " + remover.getLogin());
+				this.organizer.addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement" + remover.message());
 			}
 		}
 	}
@@ -422,13 +432,12 @@ public class Event extends Observable{
 	 * Can remove.
 	 *
 	 * @param remover the remover
-	 * @param eventToDelete the event to delete
 	 * @return true, if successful
 	 */
-	public static boolean canRemove(User remover, Event eventToDelete){
-		if(remover == eventToDelete.getOrganizer()){
+	public boolean canRemove(User remover){
+		if(remover == this.getOrganizer()){
 			return true;
-		}else if(remover.isInAsso(eventToDelete.getOrganization()) == true){
+		}else if(remover.isInAsso(this.getOrganization()) == true){
 			return true;
 		}else if(remover.getModerator() == true){
 			return true;
