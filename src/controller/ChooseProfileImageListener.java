@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.swing.JFileChooser;
@@ -41,6 +43,13 @@ public class ChooseProfileImageListener implements MouseListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		// liste des extensions autorisées
+		List<String> ImageExtensions = new ArrayList<String>();
+		ImageExtensions.add("PNG");
+		ImageExtensions.add("JPG");
+		ImageExtensions.add("JPEG");
+		ImageExtensions.add("GIF");
+		
 		//la fenêtre de dialogue
 		JFileChooser dialogue = new JFileChooser(".");
 		File fichier = null;
@@ -58,22 +67,39 @@ public class ChooseProfileImageListener implements MouseListener {
 		if(path!=null){
 			int pos = path.lastIndexOf(".");
 			if (pos > -1) {
-				lextension = path.substring(pos);
+				lextension = path.substring(pos+1);
 			}
 			else{
 				lextension=path;
 			}
+			lextension = lextension.toUpperCase();
 
-			// on check le type du fichier
-			String mimetype= new MimetypesFileTypeMap().getContentType(fichier);
-			String type = mimetype.split("/")[0];
-			
-			// si le fichier est bien une image
-			if(type.equals("image")){
+			// si le fichier est bien une image (i.e. l'extension est dans la liste des extesions autorisées)
+			if(ImageExtensions.contains(lextension)){
 				try {
-					Files.copy(fichier.toPath(), (new File(System.getProperty("user.dir")+"/img/"+user.getLogin()+lextension)).toPath(), StandardCopyOption.REPLACE_EXISTING);
-					((EventItemPanel)e.getSource()).getFrame().getHomePanel().displayProfile(user, "/img/"+user.getLogin()+lextension);
-					SwingUtilities.updateComponentTreeUI(((EventItemPanel)e.getSource()).getFrame());
+					// suppression de la précédente image de l'utilisateur (s'il en avait une)
+					File directoryPath = new File(System.getProperty("user.dir")+"/img");
+					File [] filesList = directoryPath.listFiles();
+					// parcours des fichiers de Eventary/img/
+					for (int i = 0; i < filesList.length; i++){
+						if (filesList[i].isFile()){ //this line weeds out other directories/folders
+							String tmp = "";
+							int pos2 = filesList[i].getName().lastIndexOf(".");
+							if (pos2 > -1) {
+								tmp = filesList[i].getName().substring(0, pos2);
+
+								if (tmp.equals(user.getLogin())) { // si on trouve l'ancienne photo de l'utilisateur
+									filesList[i].delete(); //suppression de l'image
+									break;
+								}
+							}
+						}
+					}
+										
+					// copie de l'image sélectionnée dans img/
+					Files.copy(fichier.toPath(), (new File(System.getProperty("user.dir")+"/img/"+user.getLogin()+"."+lextension)).toPath(), StandardCopyOption.REPLACE_EXISTING);
+					view.displayProfile(user, "img/"+user.getLogin()+"."+lextension);
+					SwingUtilities.updateComponentTreeUI(view.getFrame());
 
 				} catch (IOException ioe) {
 					ioe.printStackTrace();
@@ -82,7 +108,7 @@ public class ChooseProfileImageListener implements MouseListener {
 			
 			// si le fichier sélectionné n'est pas une image
 			else {
-				view.getFrame().displayMessage("Le fichier sélectionné n'est pas une image",Frame.colorEventaryError);
+				view.getFrame().displayMessage("Le fichier sélectionné n'est pas de type gif, png, jpeg ou jpeg",Frame.colorEventaryError);
 			}
 
 
