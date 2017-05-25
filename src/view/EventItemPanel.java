@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -44,8 +45,15 @@ public class EventItemPanel extends JPanel{
 		
 		int y = 5;
 		
-		JLabel titre = new JLabel(event.getTitle());
-		titre.setFont(new Font("Bebas", Font.PLAIN, 40));
+		String stringEventTitle = event.getTitle();
+		JLabel titre = new JLabel(stringEventTitle);
+		
+		
+		if (stringEventTitle.length()<=45){
+			titre.setFont(new Font("Impact", Font.PLAIN, 40));
+		} else {
+			titre.setFont(new Font("Impact", Font.PLAIN, 30));
+		}
 		titre.setBounds(5,y,800,y += 40);
 		this.add(titre);
 		
@@ -53,6 +61,11 @@ public class EventItemPanel extends JPanel{
 		JLabel startingDate = new JLabel(dateFormat.format(event.getStartDate()));
 		startingDate.setBounds(5,y,800,y);
 		this.add(startingDate);
+		
+		EventaryButton participateButton = new EventaryButton();
+		participateButton.setName("Participer");
+		participateButton.setBounds(5,145,100,20);
+		this.add(participateButton);
 	}
 
 	
