@@ -75,6 +75,9 @@ public class HomeController implements java.util.Observer{
 		this.actionOrga = new ActionOrganisations(this.model, this.view);
 		this.view.getOrgaButton().setAction(actionOrga);
 		
+		// clic s'inscrire
+		ActionSubscribeEvent actionInscrire = new ActionSubscribeEvent(this.view.getFrame().getEventPanel(), this.model);
+		
 		// clic Quitter
 		this.actionQuit = new ActionQuit(this.model, this.view);
 		this.view.getQuitButton().setAction(this.actionQuit);

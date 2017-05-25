@@ -62,7 +62,7 @@ public class EventItemPanel extends JPanel{
 		startingDate.setBounds(5,y,800,y);
 		this.add(startingDate);
 		
-		EventaryButton participateButton = new EventaryButton("Participer");
+		EventaryButton participateButton = new EventaryButton();
 		participateButton.setBounds(5,145,100,20);
 		this.add(participateButton);
 	}
