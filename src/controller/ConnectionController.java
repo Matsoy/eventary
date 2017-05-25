@@ -85,7 +85,7 @@ public class ConnectionController implements java.util.Observer{
 
 		// si il y a un mauvais login/mdp, on affaiche un message d'erreur
 		else{
-			view.getFrame().displayMessage("Connexion Failed : error in login or password",Frame.colorEventaryError);
+			view.getFrame().displayMessage("Echec de connexion: le login et le password ne correspondent pas",Frame.colorEventaryError);
 		}
 	}
 

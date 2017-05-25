@@ -8,6 +8,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -224,6 +225,11 @@ public class HomePanel extends JPanel{
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		this.profilePanel.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2)-5,8,210,230);
 		this.leftPanel.add(profilePanel);
+		
+		// suppression des MouseListener anciennement appliqués sur le panel profilePanel
+	    for( MouseListener listener : profilePanel.getMouseListeners() ) {
+	    	profilePanel.removeMouseListener( listener );
+	    }
 		
 		profilePanel.addMouseListener(new ChooseProfileImageListener(this, user));
 

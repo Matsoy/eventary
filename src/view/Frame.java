@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -258,15 +260,20 @@ public class Frame extends JFrame{
 		messagePanel.add(messLabel, BorderLayout.CENTER);
 		// message d'erreur invisible par défaut
 		this.messagePanel.setVisible(true);
-
-		// afficher le messae pendant qq secondes
-		int delay = 5000; //milliseconds
-		ActionListener taskPerformer = new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
+		this.messagePanel.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				messagePanel.setVisible(false);
 			}
-		};
-		new Timer(delay, taskPerformer).start();
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+		});
 
 		// rafraichissement de la JFrame
 		SwingUtilities.updateComponentTreeUI(this);
