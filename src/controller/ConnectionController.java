@@ -76,7 +76,7 @@ public class ConnectionController implements java.util.Observer{
 			}
 			// si pas d'img, alors img par defaut
 			if(profilePath == null){
-				profilePath = directoryPath + "profile.png";
+				profilePath = "default_profile.png";
 			}
 
 			this.view.getFrame().getHomePanel().displayProfile(this.model.getCurrentUser(), "img/"+profilePath);
