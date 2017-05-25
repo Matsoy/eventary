@@ -58,7 +58,9 @@ public class HomePanel extends JPanel{
 
 	/** The notif button. */
 	JButton notifButton;
-
+	
+	JButton orgaButton;
+	
 	/** The Quit button. */
 	JButton quitButton;
 
@@ -110,7 +112,12 @@ public class HomePanel extends JPanel{
 		notifButton = new EventaryMenuButton();
 		notifButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),370,widthMenuButton,heightMenuButton);
 		this.leftPanel.add(notifButton);
-
+		
+		// Mes organisations
+		orgaButton = new EventaryMenuButton();
+		orgaButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),410,widthMenuButton,heightMenuButton);
+		this.leftPanel.add(orgaButton);
+		
 		// Quitter
 		quitButton = new EventaryMenuButton(new Color(255, 85, 50));
 		quitButton.setBounds((int) (Frame.sidebarWidth/2 - widthMenuButton/2),(int) (Frame.heightScreen*.90),widthMenuButton,heightMenuButton);
@@ -167,6 +174,11 @@ public class HomePanel extends JPanel{
 	 */
 	public JButton getNotifButton() {
 		return notifButton;
+	}
+
+
+	public JButton getOrgaButton() {
+		return orgaButton;
 	}
 
 

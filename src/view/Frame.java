@@ -87,6 +87,8 @@ public class Frame extends JFrame{
 
 	/** The notif panel. */
 	NotificationsPanel notifPanel;
+	
+	OrganisationsPanel orgaPanel;
 
 
 	/**
@@ -101,6 +103,7 @@ public class Frame extends JFrame{
 		this.createEventPanel = new CreateEventPanel(this);
 		this.notifPanel = new NotificationsPanel(this);
 		this.displayEventPanel = new EventPanel(this);
+		this.orgaPanel = new OrganisationsPanel(this);
 
 		this.setTitle("Eventary");
 		this.setResizable(false);
@@ -204,6 +207,11 @@ public class Frame extends JFrame{
 	 */
 	public EventPanel getDisplayEventPanel() {
 		return displayEventPanel;
+	}
+
+	
+	public OrganisationsPanel getOrgaPanel() {
+		return orgaPanel;
 	}
 
 

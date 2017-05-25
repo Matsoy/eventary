@@ -68,7 +68,6 @@ public class NotificationsPanel extends JPanel {
 		gc.weighty = listeNotif.size() + 1;
 
 		/* pour dire qu'on ajoute un composant en position (i, j), on définit gridx=i et gridy=j */
-		gc.gridx = 0;
 		gc.gridy = 0;
 
 		/* insets définir la marge entre les composant new Insets(margeSupérieure, margeGauche, margeInférieur, margeDroite) */
