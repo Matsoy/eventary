@@ -117,6 +117,7 @@ public class Room extends Observable {
 		this.name = name;
 	}
 
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -124,5 +125,7 @@ public class Room extends Observable {
 	public String toString() {
 		return "Room [id=" + id + ", building=" + building + ", nbPlaces=" + nbPlaces + ", name=" + name + "]";
 	}
+
+
 
 }

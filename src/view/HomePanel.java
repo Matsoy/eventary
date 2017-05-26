@@ -229,9 +229,9 @@ public class HomePanel extends JPanel{
 		this.profilePanel.removeAll();
 		this.profilePanel.setLayout(new BorderLayout());
 
-		JLabel profileLabel = new JLabel(new ImageIcon(new ImageIcon(profileImagePath).getImage().getScaledInstance(180, 180, Image.SCALE_DEFAULT)));
+		JLabel profileLabel = new JLabel(new ImageIcon(new ImageIcon(profileImagePath).getImage().getScaledInstance(180, 180, Image.SCALE_SMOOTH)));
 		JLabel nameLabel = new JLabel(user.getfName()+" "+user.getlName());
-		nameLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+		nameLabel.setFont(new Font("Impact", Font.PLAIN, 22));
 		this.profilePanel.add(profileLabel, BorderLayout.CENTER);
 		this.profilePanel.add(nameLabel, BorderLayout.NORTH);
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);

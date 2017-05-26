@@ -61,7 +61,7 @@ public class User extends Observable {
 	 * @param listeDpt the liste dpt
 	 */
 	public void init(String login, Boolean moderator, String fName, String lName, String branch, int year, 
-			List<Association> listeAsso, List<Department> listeDpt) {
+			ArrayList<Association> listeAsso, ArrayList<Department> listeDpt) {
 		this.login = login;
 		this.moderator = moderator;
 		this.fName = fName;

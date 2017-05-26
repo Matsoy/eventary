@@ -3,8 +3,6 @@
  */
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 // TODO: Auto-generated Javadoc
@@ -18,9 +16,6 @@ public class School extends Observable {
 	
 	/** The name. */
 	String name;
-	
-	/** The liste sites. */
-	List<Site> listeSites = new ArrayList<Site>();
 	
 	/**
 	 * Instantiates a new school.
@@ -75,23 +70,6 @@ public class School extends Observable {
 		this.name = name;
 	}
 	
-	/**
-	 * Gets the liste sites.
-	 *
-	 * @return the liste sites
-	 */
-	public List<Site> getListeSites() {
-		return listeSites;
-	}
-
-	/**
-	 * Sets the liste sites.
-	 *
-	 * @param listeSites the new liste sites
-	 */
-	public void setListeSites(List<Site> listeSites) {
-		this.listeSites = listeSites;
-	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -100,6 +78,8 @@ public class School extends Observable {
 	public String toString() {
 		return "School [id=" + id + ", name=" + name + "]";
 	}
+
+
 
 
 }

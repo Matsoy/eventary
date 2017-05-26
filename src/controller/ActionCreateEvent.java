@@ -4,12 +4,17 @@
 package controller;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.SwingUtilities;
 
+import database.SchoolDAO;
+import model.Association;
 import model.Context;
+import model.Department;
+import model.School;
 import view.HomePanel;
 
 // TODO: Auto-generated Javadoc
@@ -47,7 +52,7 @@ public class ActionCreateEvent extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.view.setContainerCentral(this.view.getFrame().getCreateEventPanel());
-		this.view.getFrame().getCreateEventPanel().displayForm();
+		this.view.getFrame().getCreateEventPanel().displayForm((ArrayList<Association>)model.getCurrentUser().getListeAsso(), (ArrayList<Department>)model.getCurrentUser().getListeDpt(), (ArrayList<School>)SchoolDAO.findAll());
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 	}
 
