@@ -53,21 +53,38 @@ public class CreateEventPanel extends JPanel{
 	/** The frame. */
 	Frame frame;
 
+	/** The school box model. */
 	DefaultComboBoxModel<String> schoolBoxModel;
 
+	/** The site box model. */
 	DefaultComboBoxModel<String> siteBoxModel;
 
+	/** The building box model. */
 	DefaultComboBoxModel<String> buildingBoxModel;
 
+	/** The room box model. */
 	DefaultComboBoxModel<String> roomBoxModel;
+		
+	/** The asso box model. */
+	DefaultComboBoxModel<String> assoBoxModel;
 
+	/** The schools. */
 	ArrayList<School> schools;
 
+	/** The sites. */
 	ArrayList<Site> sites;
 
+	/** The buildings. */
 	ArrayList<Building> buildings;
 
+	/** The rooms. */
 	ArrayList<Room> rooms;
+	
+	/** The assos. */
+	ArrayList<Association> assos;
+	
+	/** The dpts. */
+	ArrayList<Department> dpts;
 
 	/**
 	 * Instantiates a new home panel.
@@ -81,8 +98,12 @@ public class CreateEventPanel extends JPanel{
 
 	/**
 	 * Affiche le formulaire de creation d'un evenement.
+	 *
+	 * @param assosList the assos list
+	 * @param dptsList the dpts list
+	 * @param schoolsList the schools list
 	 */
-	public void displayForm(ArrayList<Association> assos, ArrayList<Department> dpts, ArrayList<School> schoolsList){
+	public void displayForm(ArrayList<Association> assosList, ArrayList<Department> dptsList, ArrayList<School> schoolsList){
 		this.removeAll();
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -91,10 +112,15 @@ public class CreateEventPanel extends JPanel{
 		this.sites = new ArrayList<Site>();
 		this.buildings = new ArrayList<Building>();
 		this.rooms = new ArrayList<Room>();
+		this.assos = assosList;
+		this.dpts = dptsList;
 
 		JTextField titreField = new JTextField(60);
+		
 		JTextField dateDebutField = new JTextField(20);
+		
 		JTextField dateFinField = new JTextField(20);
+		
 		ButtonGroup lieuGroup = new ButtonGroup();
 		JRadioButton addressButton = new JRadioButton("Adresse extérieure");
 		addressButton.setSelected(true);
@@ -121,10 +147,26 @@ public class CreateEventPanel extends JPanel{
 		roomBoxModel.addElement("< Salle >");
 		roomBox.setModel(roomBoxModel);
 		JTextField lieuField = new JTextField(31);
-		JTextField organisateurField = new JTextField();
+		
+		ButtonGroup organisateurGroup = new ButtonGroup();
+		JRadioButton meButton = new JRadioButton("Moi");
+		meButton.setSelected(true);
+		JRadioButton dptButton = new JRadioButton("Le département: "+dpts.get(0).getName());
+		JRadioButton assoButton = new JRadioButton("Une association");
+		JComboBox<String> assoBox = new EventaryComboBox<String>();
+		assoBoxModel = new DefaultComboBoxModel<String>();
+		assoBoxModel.addElement("< Association >");
+		for (int i = 0; i < assos.size(); i++) {
+			System.out.println(assos.get(i).getName());
+			assoBoxModel.addElement(assos.get(i).getName());
+		}
+		assoBox.setModel(assoBoxModel);
+		organisateurGroup.add(meButton);
+		organisateurGroup.add(dptButton);
+		organisateurGroup.add(assoButton);
+		
 		JTextArea descField = new JTextArea(5, 60);
 		JScrollPane descScroll = new JScrollPane(descField);
-
 
 		this.add(Box.createRigidArea(new Dimension(0,5)));
 
@@ -353,20 +395,68 @@ public class CreateEventPanel extends JPanel{
 		// ######################################## organisateur
 		JPanel organisateurPan = new JPanel();
 		organisateurPan.setBackground(Color.WHITE);
-		organisateurPan.setMaximumSize(new Dimension(800,60));
+		organisateurPan.setMaximumSize(new Dimension(800,80));
 		organisateurPan.setLayout(new BoxLayout(organisateurPan, BoxLayout.X_AXIS));
 		this.add(organisateurPan);
 
 		newPan = new JPanel();
 		newPan.setBackground(Frame.colorEventary);
-		newPan.setMaximumSize(new Dimension(100,60));
+		newPan.setMaximumSize(new Dimension(100,80));
 		newPan.add(new JLabel("Organisateur"));
 		organisateurPan.add(newPan);
 
-		newPan = new JPanel();
-		newPan.setMaximumSize(new Dimension(700,60));
-		newPan.add(organisateurField);
+		newPan = new JPanel(new BorderLayout());
+		newPan.setMaximumSize(new Dimension(700,80));
 		organisateurPan.add(newPan);
+
+
+
+		JPanel cardPanel_orga, jp1_orga, jp2_orga, buttonPanel_orga, uselessPanel_orga;
+		CardLayout cardLayout_orga = new CardLayout();
+
+		cardPanel_orga = new JPanel();
+		buttonPanel_orga = new JPanel();
+		uselessPanel_orga = new JPanel();
+
+		cardPanel_orga.setLayout(cardLayout_orga);
+		jp1_orga = new JPanel();
+		jp2_orga = new JPanel();
+		jp2_orga.add(assoBox);
+		// quand sélection d'une association
+		assoBox.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if ((e.getStateChange() == ItemEvent.SELECTED)) {
+					System.out.println("asso sélectionnée");
+				}
+			}
+		});
+		cardPanel_orga.add(jp1_orga, "1");
+		cardPanel_orga.add(jp2_orga, "2");
+		meButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				cardLayout_orga.show(cardPanel_orga, "1");
+			}
+		});
+		dptButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				cardLayout_orga.show(cardPanel_orga, "1");
+			}
+		});
+		assoButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				cardLayout_orga.show(cardPanel_orga, "2");
+			}
+		});
+		buttonPanel_orga.add(meButton);
+		buttonPanel_orga.add(dptButton);
+		buttonPanel_orga.add(assoButton);
+		newPan.add(cardPanel_orga, BorderLayout.CENTER);
+		newPan.add(buttonPanel_orga, BorderLayout.NORTH);
+		newPan.add(uselessPanel_orga, BorderLayout.SOUTH);
 
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
