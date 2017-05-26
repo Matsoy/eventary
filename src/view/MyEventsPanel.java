@@ -4,11 +4,10 @@
 package view;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.util.ArrayList;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -46,64 +45,41 @@ public class MyEventsPanel extends JPanel{
 	public void displayMyEvents(ArrayList<model.Event> participationsInAnEvent, ArrayList<model.Event> waitingsEvent){
 		this.removeAll();
 		this.setBackground(Color.WHITE);
-		this.setLayout(new GridBagLayout());
-
-		// parametrage des contraintes du GridBagLayout
-		GridBagConstraints gc = new GridBagConstraints();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		/* insets définir la marge entre les composant new Insets(margeSupérieure, margeGauche, margeInférieur, margeDroite) */
-		gc.ipady = gc.anchor = GridBagConstraints.NORTH;
-		
-		/* weightx définit le nombre de cases en abscisse */
-		gc.weightx = 1;
-		
-		/* le parametre fill sert à définir comment le composant sera rempli GridBagConstraints.BOTH permet d'occuper tout l'espace disponible
-		 * horizontalement et verticalement GridBagConstraints.HORIZONTAL maximise horizontalement GridBagConstraints.VERTICAL maximise verticalement
-		 */
-		gc.fill = GridBagConstraints.HORIZONTAL;
-		
-		/* weightx définit le nombre de cases en ordonnée */
-		gc.weighty = participationsInAnEvent.size() + waitingsEvent.size() + 2;
-		
-		/* pour dire qu'on ajoute un composant en position (i, j), on définit gridx=i et gridy=j */
-		gc.gridx = 0;
-		gc.gridy = 0;
-		
-		/* insets définir la marge entre les composant new Insets(margeSupérieure, margeGauche, margeInférieur, margeDroite) */
-		gc.insets = new Insets(5, 5, 5, 5);
+		this.add(Box.createRigidArea(new Dimension(0,5)));
 
 		// mes participations
 		JPanel ParticipationsPanel = new JPanel();
 		ParticipationsPanel.setBackground(Frame.colorEventary);
-		ParticipationsPanel.setPreferredSize(new Dimension(800,20));
+		ParticipationsPanel.setMaximumSize(new Dimension(800,30));
 		ParticipationsPanel.add(new JLabel("Mes participations"));
-		this.add(ParticipationsPanel, gc);
+		this.add(ParticipationsPanel);
+		this.add(Box.createRigidArea(new Dimension(0,10)));
 
 		// parcours de la liste des Event auxquels l'utilisateur participe
 		for (model.Event event : participationsInAnEvent) {
-			gc.gridy++;
 			JPanel panelEvent = new EventItemPanel(this.frame, event);	
-			panelEvent.setPreferredSize(new Dimension(800,160));
-			panelEvent.add(new JLabel(event.getTitle()));
-			panelEvent.add(new JLabel(event.getStartDate().toString()));
 			panelEvent.addMouseListener(new DisplayEventListener());
-			this.add(panelEvent, gc);
+			this.add(panelEvent);
+			this.add(Box.createRigidArea(new Dimension(0,10)));
 		}
-
+		
 		// sur liste d'attente
-		gc.gridy++;
+		this.add(Box.createRigidArea(new Dimension(0,30)));
 		JPanel waitingPanel = new JPanel();
 		waitingPanel.setBackground(Frame.colorEventary);
-		waitingPanel.setPreferredSize(new Dimension(800,20));
+		waitingPanel.setMaximumSize(new Dimension(800,30));
 		waitingPanel.add(new JLabel("Sur liste d'attente"));
-		this.add(waitingPanel, gc);
+		this.add(waitingPanel);
+		this.add(Box.createRigidArea(new Dimension(0,10)));
 
 		// parcours de la liste des Event auxquels l'utilisateur est sur liste d'attente
 		for (model.Event event : waitingsEvent) {
-			gc.gridy++;
 			JPanel panelEvent = new EventItemPanel(this.frame, event);		
 			panelEvent.addMouseListener(new DisplayEventListener());
-			this.add(panelEvent, gc);
+			this.add(panelEvent);
+			this.add(Box.createRigidArea(new Dimension(0,10)));
 		}
 	}
 }

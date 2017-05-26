@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
@@ -8,6 +9,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class OrganisationsPanel extends JPanel{
 
@@ -39,12 +41,14 @@ public class OrganisationsPanel extends JPanel{
 		
 		for(model.Association asso : listeAsso) {
 			JPanel panelAsso = new JPanel();
+			panelAsso.setMinimumSize(new Dimension(800,50));
 			panelAsso.setMaximumSize(new Dimension(800,50));
 			panelAsso.add(new JLabel(asso.getName()));
 			this.add(panelAsso);
 			this.add(Box.createRigidArea(new Dimension(0,10)));
 		}
 		
+		this.add(Box.createRigidArea(new Dimension(0,30)));
 		JPanel dptPanel = new JPanel();
 		dptPanel.setBackground(Frame.colorEventary);
 		dptPanel.setMaximumSize(new Dimension(800,30));
@@ -59,7 +63,5 @@ public class OrganisationsPanel extends JPanel{
 			this.add(panelDpt);
 			this.add(Box.createRigidArea(new Dimension(0,10)));
 		}
-		
 	}
-	
 }

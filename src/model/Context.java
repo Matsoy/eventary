@@ -53,8 +53,6 @@ public class Context extends Observable{
 	 */
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
-		this.setChanged();
-		this.notifyObservers();
 	}
 
 	/**
