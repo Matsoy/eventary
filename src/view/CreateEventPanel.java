@@ -52,21 +52,21 @@ public class CreateEventPanel extends JPanel{
 
 	/** The frame. */
 	Frame frame;
-	
+
 	DefaultComboBoxModel<String> schoolBoxModel;
-	
+
 	DefaultComboBoxModel<String> siteBoxModel;
-	
+
 	DefaultComboBoxModel<String> buildingBoxModel;
-	
+
 	DefaultComboBoxModel<String> roomBoxModel;
-	
+
 	ArrayList<School> schools;
-	
+
 	ArrayList<Site> sites;
-	
+
 	ArrayList<Building> buildings;
-	
+
 	ArrayList<Room> rooms;
 
 	/**
@@ -86,7 +86,7 @@ public class CreateEventPanel extends JPanel{
 		this.removeAll();
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
+
 		this.schools = schoolsList;
 		this.sites = new ArrayList<Site>();
 		this.buildings = new ArrayList<Building>();
@@ -101,22 +101,22 @@ public class CreateEventPanel extends JPanel{
 		JRadioButton schoolButton = new JRadioButton("Dans une école");
 		lieuGroup.add(addressButton);
 		lieuGroup.add(schoolButton);
-		JComboBox<String> schoolBox = new JComboBox<String>();
+		JComboBox<String> schoolBox = new EventaryComboBox<String>();
 		schoolBoxModel = new DefaultComboBoxModel<String>();
 		schoolBoxModel.addElement("< Ecole >");
 		for (int i = 0; i < schools.size(); i++) {
 			schoolBoxModel.addElement(schools.get(i).getName());
 		}
 		schoolBox.setModel(schoolBoxModel);
-		JComboBox<String> siteBox = new JComboBox<String>();
+		JComboBox<String> siteBox = new EventaryComboBox<String>();
 		siteBoxModel = new DefaultComboBoxModel<String>();
 		siteBoxModel.addElement("< Site >");
 		siteBox.setModel(siteBoxModel);
-		JComboBox<String> buildingBox = new JComboBox<String>();
+		JComboBox<String> buildingBox = new EventaryComboBox<String>();
 		buildingBoxModel = new DefaultComboBoxModel<String>();
 		buildingBoxModel.addElement("< Bâtiment >");
 		buildingBox.setModel(buildingBoxModel);
-		JComboBox<String> roomBox = new JComboBox<String>();
+		JComboBox<String> roomBox = new EventaryComboBox<String>();
 		roomBoxModel = new DefaultComboBoxModel<String>();
 		roomBoxModel.addElement("< Salle >");
 		roomBox.setModel(roomBoxModel);
@@ -135,7 +135,7 @@ public class CreateEventPanel extends JPanel{
 		this.add(newPan);
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
-		// titre
+		// ######################################## titre
 		JPanel titrePan = new JPanel();
 		titrePan.setBackground(Color.WHITE);
 		titrePan.setMaximumSize(new Dimension(800,30));
@@ -155,7 +155,7 @@ public class CreateEventPanel extends JPanel{
 
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
-		// Date de début
+		// ######################################## Date de début
 		JPanel dateDebutPan = new JPanel();
 		dateDebutPan.setBackground(Color.WHITE);
 		dateDebutPan.setMaximumSize(new Dimension(800,30));
@@ -184,7 +184,7 @@ public class CreateEventPanel extends JPanel{
 
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
-		// date de fin
+		// ######################################## date de fin
 		JPanel dateFinPan = new JPanel();
 		dateFinPan.setBackground(Color.WHITE);
 		dateFinPan.setMaximumSize(new Dimension(800,30));
@@ -213,21 +213,21 @@ public class CreateEventPanel extends JPanel{
 
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
-		// lieu
+		// ######################################## lieu
 		JPanel lieuPan = new JPanel();
 		lieuPan.setBackground(Color.WHITE);
-		lieuPan.setMaximumSize(new Dimension(800,100));
+		lieuPan.setMaximumSize(new Dimension(800,80));
 		lieuPan.setLayout(new BoxLayout(lieuPan, BoxLayout.X_AXIS));
 		this.add(lieuPan);
 
 		newPan = new JPanel();
 		newPan.setBackground(Frame.colorEventary);
-		newPan.setMaximumSize(new Dimension(100,100));
+		newPan.setMaximumSize(new Dimension(100,80));
 		newPan.add(new JLabel("Lieu"));
 		lieuPan.add(newPan);
 
 		newPan = new JPanel(new BorderLayout());
-		newPan.setMaximumSize(new Dimension(700,100));
+		newPan.setMaximumSize(new Dimension(700,80));
 		lieuPan.add(newPan);
 
 
@@ -238,7 +238,7 @@ public class CreateEventPanel extends JPanel{
 		cardPanel = new JPanel();
 		buttonPanel = new JPanel();
 		uselessPanel = new JPanel();
-		
+
 		cardPanel.setLayout(cardLayout);
 		jp1 = new JPanel();
 		jp2 = new JPanel();
@@ -262,11 +262,11 @@ public class CreateEventPanel extends JPanel{
 					siteBoxModel.addElement("< Site >");
 					siteBox.setModel(siteBoxModel);		
 				}
-				
+
 				buildingBoxModel = new DefaultComboBoxModel<String>();
 				buildingBoxModel.addElement("< Bâtiment >");
 				buildingBox.setModel(buildingBoxModel);
-				
+
 				roomBoxModel = new DefaultComboBoxModel<String>();
 				roomBoxModel.addElement("< Salle >");
 				roomBox.setModel(roomBoxModel);
@@ -291,7 +291,7 @@ public class CreateEventPanel extends JPanel{
 					buildingBoxModel.addElement("< Bâtiment >");
 					buildingBox.setModel(buildingBoxModel);
 				}
-				
+
 				roomBoxModel = new DefaultComboBoxModel<String>();
 				roomBoxModel.addElement("< Salle >");
 				roomBox.setModel(roomBoxModel);
@@ -350,27 +350,27 @@ public class CreateEventPanel extends JPanel{
 
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
-		// organisateur
+		// ######################################## organisateur
 		JPanel organisateurPan = new JPanel();
 		organisateurPan.setBackground(Color.WHITE);
-		organisateurPan.setMaximumSize(new Dimension(800,30));
+		organisateurPan.setMaximumSize(new Dimension(800,60));
 		organisateurPan.setLayout(new BoxLayout(organisateurPan, BoxLayout.X_AXIS));
 		this.add(organisateurPan);
 
 		newPan = new JPanel();
 		newPan.setBackground(Frame.colorEventary);
-		newPan.setMaximumSize(new Dimension(100,30));
+		newPan.setMaximumSize(new Dimension(100,60));
 		newPan.add(new JLabel("Organisateur"));
 		organisateurPan.add(newPan);
 
 		newPan = new JPanel();
-		newPan.setMaximumSize(new Dimension(700,30));
+		newPan.setMaximumSize(new Dimension(700,60));
 		newPan.add(organisateurField);
 		organisateurPan.add(newPan);
 
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
-		// description
+		// ######################################## description
 		JPanel descPan = new JPanel();
 		descPan.setBackground(Color.WHITE);
 		descPan.setMaximumSize(new Dimension(800,95));
