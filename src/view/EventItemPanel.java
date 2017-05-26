@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 

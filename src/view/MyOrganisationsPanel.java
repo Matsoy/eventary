@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
@@ -9,9 +8,10 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
-public class OrganisationsPanel extends JPanel{
+import controller.DisplayOrgaListener;
+
+public class MyOrganisationsPanel extends JPanel{
 
 	/**
 	 * 
@@ -21,11 +21,11 @@ public class OrganisationsPanel extends JPanel{
 	/** The frame. */
 	Frame frame;
 	
-	public OrganisationsPanel(Frame frame) {
+	public MyOrganisationsPanel(Frame frame) {
 		this.frame = frame;
 	}
 	
-	public void displayOrganisations(List<model.Association> listeAsso, List<model.Department> listeDpt) {
+	public void displayMyOrganisations(List<model.Association> listeAsso, List<model.Department> listeDpt) {
 		this.removeAll();
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -40,10 +40,8 @@ public class OrganisationsPanel extends JPanel{
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 		
 		for(model.Association asso : listeAsso) {
-			JPanel panelAsso = new JPanel();
-			panelAsso.setMinimumSize(new Dimension(800,50));
-			panelAsso.setMaximumSize(new Dimension(800,50));
-			panelAsso.add(new JLabel(asso.getName()));
+			JPanel panelAsso = new OrgaItemPanel(this.frame,asso);
+			panelAsso.addMouseListener(new DisplayOrgaListener());
 			this.add(panelAsso);
 			this.add(Box.createRigidArea(new Dimension(0,10)));
 		}
@@ -57,9 +55,8 @@ public class OrganisationsPanel extends JPanel{
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
 		for(model.Department dept : listeDpt) {
-			JPanel panelDpt = new JPanel();
-			panelDpt.setMaximumSize(new Dimension(800,50));
-			panelDpt.add(new JLabel(dept.getName()));
+			JPanel panelDpt = new OrgaItemPanel(this.frame,dept);
+			panelDpt.addMouseListener(new DisplayOrgaListener());
 			this.add(panelDpt);
 			this.add(Box.createRigidArea(new Dimension(0,10)));
 		}

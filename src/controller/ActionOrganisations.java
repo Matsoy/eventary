@@ -28,8 +28,8 @@ public class ActionOrganisations extends AbstractAction{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		this.view.setContainerCentral(this.view.getFrame().getOrgaPanel());
-		this.view.getFrame().getOrgaPanel().displayOrganisations(model.getCurrentUser().getListeAsso(), model.getCurrentUser().getListeDpt());
+		this.view.setContainerCentral(this.view.getFrame().getMyOrgaPanel());
+		this.view.getFrame().getMyOrgaPanel().displayMyOrganisations(model.getCurrentUser().getListeAsso(), model.getCurrentUser().getListeDpt());
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 	}
 

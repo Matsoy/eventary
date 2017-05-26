@@ -6,8 +6,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
+
 
 import input_output.Reader;
 import model.Event;
@@ -88,7 +87,9 @@ public class Frame extends JFrame{
 	/** The notif panel. */
 	NotificationsPanel notifPanel;
 	
-	OrganisationsPanel orgaPanel;
+	MyOrganisationsPanel myOrgaPanel;
+	
+	OrgaPanel orgaPanel;
 
 
 	/**
@@ -103,7 +104,8 @@ public class Frame extends JFrame{
 		this.createEventPanel = new CreateEventPanel(this);
 		this.notifPanel = new NotificationsPanel(this);
 		this.displayEventPanel = new EventPanel(this);
-		this.orgaPanel = new OrganisationsPanel(this);
+		this.myOrgaPanel = new MyOrganisationsPanel(this);
+		this.orgaPanel = new OrgaPanel(this);
 
 		this.setTitle("Eventary");
 		this.setResizable(false);
@@ -210,10 +212,13 @@ public class Frame extends JFrame{
 	}
 
 	
-	public OrganisationsPanel getOrgaPanel() {
+	public MyOrganisationsPanel getMyOrgaPanel() {
+		return myOrgaPanel;
+	}
+	
+	public OrgaPanel getOrgaPanel() {
 		return orgaPanel;
 	}
-
 
 	/**
 	 * Sets the message panel.
