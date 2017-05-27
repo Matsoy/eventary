@@ -1,9 +1,6 @@
 package controller;
 
 import java.awt.event.ActionEvent;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.SwingUtilities;

@@ -12,12 +12,10 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.activation.MimetypesFileTypeMap;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 
 import model.User;
-import view.EventItemPanel;
 import view.Frame;
 import view.HomePanel;
 

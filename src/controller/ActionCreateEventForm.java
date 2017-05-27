@@ -31,6 +31,11 @@ import view.Frame;
  */
 public class ActionCreateEventForm extends AbstractAction{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The view. */
 	CreateEventPanel view;
 
