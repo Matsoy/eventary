@@ -4,6 +4,8 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -58,7 +60,16 @@ public class ConnectionPanel extends JPanel {
 		this.login = new JTextField("E168011W");
 		this.login.setHorizontalAlignment(JTextField.CENTER);
 		this.login.setBounds((int) (Frame.widthScreen/2 - Frame.widthText/2),(int) ((Frame.heightScreen/2 - Frame.heightText/2)-20), Frame.widthText, Frame.heightText);
-		mainPanel.add(login);
+		mainPanel.add(this.login);
+		this.login.addKeyListener(new KeyAdapter() { // tout transformer en majuscules
+			  public void keyTyped(KeyEvent e) {
+			    char keyChar = e.getKeyChar();
+			    if (Character.isLowerCase(keyChar)) {
+			      e.setKeyChar(Character.toUpperCase(keyChar));
+			    }
+			  }
+
+			});
 
 		this.labelLogin = new JLabel("Login : ");
 		this.labelLogin.setBounds((int) (Frame.widthScreen/2 - Frame.widthText*.9),(int) ((Frame.heightScreen/2 - Frame.heightText/2)-20), Frame.widthText, Frame.heightText);

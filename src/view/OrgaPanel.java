@@ -2,8 +2,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.Box;
@@ -37,19 +35,19 @@ public class OrgaPanel extends JPanel {
 
 	/** The organisation name. */
 	JLabel organisationName;
-	
+
 	/** The inscription pan. */
 	JPanel inscriptionPan;
-	
+
 	/** The login box model. */
 	DefaultComboBoxModel<String> loginBoxModel;
-	
+
 	/** The login box. */
 	JComboBox<String> loginBox;
-	
+
 	/** The valider. */
 	JButton valider;
-	
+
 	/** The liste pan. */
 	JPanel listePan;
 
@@ -105,14 +103,14 @@ public class OrgaPanel extends JPanel {
 		this.inscriptionPan.add(this.valider);
 
 		this.add(Box.createRigidArea(new Dimension(0,10)));
-		
+
 		// Pour la liste des membres
 		JPanel listeTitrePan = new JPanel();
 		listeTitrePan.setBackground(Frame.colorEventary);
 		listeTitrePan.setMaximumSize(new Dimension(800,30));
 		listeTitrePan.add(new JLabel("Liste des Membres"));
 		this.add(listeTitrePan);
-		
+
 		this.listePan = new JPanel();
 		this.listePan.setMaximumSize(new Dimension(800,500));
 		this.listePan.setLayout(new BoxLayout(this.listePan, BoxLayout.Y_AXIS));
@@ -120,7 +118,7 @@ public class OrgaPanel extends JPanel {
 
 	}
 
-	
+
 	/**
 	 * Adapt orga.
 	 *
@@ -137,7 +135,7 @@ public class OrgaPanel extends JPanel {
 		if(OrganizationDAO.getOrganizationType(orga.getId()).equals("asso")){
 			this.inscriptionPan.setVisible(true);
 			this.loginBoxModel.removeAllElements();
-			this.loginBoxModel.addElement("< login >");
+			this.loginBoxModel.addElement("");
 			for(int i = 0; i < listeEtu.size(); i++){
 				if(listeEtu.get(i).isInAsso(this.organisation) == false){
 					loginBoxModel.addElement(listeEtu.get(i).getLogin());
@@ -147,7 +145,7 @@ public class OrgaPanel extends JPanel {
 		} else {
 			this.inscriptionPan.setVisible(false);
 		}
-		
+
 		// Pour la liste des membres
 		this.listePan.removeAll();
 		for(User membre : this.organisation.getListeMembres()){
@@ -156,7 +154,7 @@ public class OrgaPanel extends JPanel {
 			membrePan.add(new JLabel(membre.getfName() + " " + membre.getlName() + " - " + membre.getLogin()));
 			this.listePan.add(membrePan);
 		}
-		
+
 	}
 
 	/**
@@ -197,5 +195,5 @@ public class OrgaPanel extends JPanel {
 	public JComboBox<String> getLoginBox() {
 		return loginBox;
 	}
-	
+
 }

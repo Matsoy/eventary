@@ -49,8 +49,8 @@ public class ActionAjouterMembre extends AbstractAction {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent action) {
-		this.login = this.view.getLoginBox().getSelectedItem().toString();
-		if((!this.login.equals("< login >")) && (UserDAO.find(this.login) != null)){	// Si login valide
+		this.login = this.view.getLoginBox().getSelectedItem().toString().toUpperCase();
+		if(UserDAO.find(this.login).getLogin() != null){	// Si login valide
 			if(UserDAO.find(this.login).isInAsso(this.view.getOrganisation()) == false) {	// Si l'etu n'est pas dans l'asso
 				try {
 					// ajout du membre en BDD

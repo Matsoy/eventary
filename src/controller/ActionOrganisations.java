@@ -33,7 +33,7 @@ public class ActionOrganisations extends AbstractAction{
 	public ActionOrganisations(Context model, HomePanel view) {
 		this.model = model;
 		this.view = view;
-		this.putValue(Action.NAME, "Mes Organisations");
+		this.putValue(Action.NAME, "Mes organisations");
 	}
 
 	/* (non-Javadoc)
