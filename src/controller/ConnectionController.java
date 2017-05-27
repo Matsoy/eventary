@@ -9,6 +9,7 @@ import java.util.Observable;
 import javax.swing.SwingUtilities;
 
 import database.EventDAO;
+import database.SiteDAO;
 import model.Context;
 import view.ConnectionPanel;
 import view.Frame;
@@ -53,7 +54,7 @@ public class ConnectionController implements java.util.Observer{
 		if(this.model.getAuthentificated()){
 			view.getFrame().setHomePanel(EventDAO.findAll());
 			this.view.getFrame().getHomePanel().setContainerCentral(this.view.getFrame().getAllEventsPanel());
-			this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll());
+			this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll(), SiteDAO.findAll());
 
 			// selection de l'image de profil de l'utilisateur
 			File directoryPath = new File(System.getProperty("user.dir")+"/img");

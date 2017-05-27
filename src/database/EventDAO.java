@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import model.Building;
 import model.Event;
 import model.Organization;
 import model.Room;
@@ -101,6 +102,30 @@ public class EventDAO{
 			System.out.println("ERREUR findAll: " + e.getMessage());
 		}
 
+		return ret;
+	}
+
+
+
+	public static boolean isInSite(Event event, int site_id) {
+		boolean ret = false;
+
+		// liste des salles du site
+		ArrayList<Room> rooms= new ArrayList<Room>();
+		for (Building b : BuildingDAO.findSiteBuildings(site_id)) {
+			for (Room r : RoomDAO.findBuildingRooms(b.getId())) {
+				rooms.add(r);
+			}
+		}
+		
+		// parcours des salles pour check
+		for (Room r : rooms) {
+			if (r.getId() == event.getRoom().getId()) {
+				ret = true;
+				break;
+			}
+		}
+		
 		return ret;
 	}
 
@@ -240,7 +265,7 @@ public class EventDAO{
 			try {
 				//Recuperation de la connexion
 				Connection con = SQLiteConnection.getInstance().getConnection();
-				
+
 				//Preparation de la requete en ligne
 				stat = con.createStatement();
 
@@ -272,7 +297,7 @@ public class EventDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
-			
+
 			//Preparation de la requete en ligne
 			stat = con.createStatement();
 

@@ -34,6 +34,7 @@ public class NotificationsPanel extends JPanel {
 	 * @param frame the frame
 	 */
 	public NotificationsPanel(Frame frame){
+		super();
 		this.frame = frame;
 		this.clearButton = new EventaryButton();
 	}
@@ -62,7 +63,7 @@ public class NotificationsPanel extends JPanel {
 		JPanel notifPanel = new JPanel();
 		notifPanel.setBackground(Frame.colorEventary);
 		notifPanel.setMaximumSize(new Dimension(800,30));
-		if(listeNotif.size() == 1) {
+		if(listeNotif.size() < 2) {
 			notifPanel.add(new JLabel(listeNotif.size() + " Notification"));
 		} else {
 			notifPanel.add(new JLabel(listeNotif.size() + " Notifications"));

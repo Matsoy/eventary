@@ -9,7 +9,9 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.SwingUtilities;
 
+import database.EventDAO;
 import database.ParticipationDAO;
+import database.SiteDAO;
 import database.WaitingDAO;
 import model.Context;
 import view.HomePanel;
@@ -50,7 +52,7 @@ public class ActionDisplayMyEvents extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.view.setContainerCentral(this.view.getFrame().getMyEventsPanel());
-		this.view.getFrame().getMyEventsPanel().displayMyEvents(ParticipationDAO.participationsInAnEvent(model.getCurrentUser().getLogin()), WaitingDAO.waitingEvents(model.getCurrentUser().getLogin()));
+		this.view.getFrame().getMyEventsPanel().displayMyEvents(ParticipationDAO.participationsInAnEvent(model.getCurrentUser().getLogin()), WaitingDAO.waitingEvents(model.getCurrentUser().getLogin()), SiteDAO.findAll());
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 	}
 
