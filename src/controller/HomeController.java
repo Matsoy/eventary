@@ -32,10 +32,13 @@ public class HomeController implements java.util.Observer{
 	/** The action notif. */
 	ActionNotifications actionNotif;
 
+	/** The action clear. */
 	ActionClear actionClear;
 
+	/** The action orga. */
 	ActionOrganisations actionOrga;
 	
+	/** The action ajout membre. */
 	ActionAjouterMembre actionAjoutMembre;
 
 	/** The action quit. */

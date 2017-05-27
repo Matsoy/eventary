@@ -18,8 +18,10 @@ public class ActionDisplayEvent extends AbstractAction{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
+	/** The model. */
 	Context model;
 	
+	/** The view. */
 	EventPanel view;
 
 	

@@ -59,6 +59,7 @@ public class HomePanel extends JPanel{
 	/** The notif button. */
 	JButton notifButton;
 	
+	/** The orga button. */
 	JButton orgaButton;
 	
 	/** The Quit button. */
@@ -177,6 +178,11 @@ public class HomePanel extends JPanel{
 	}
 
 
+	/**
+	 * Gets the orga button.
+	 *
+	 * @return the orga button
+	 */
 	public JButton getOrgaButton() {
 		return orgaButton;
 	}
@@ -224,6 +230,7 @@ public class HomePanel extends JPanel{
 	 * Display profile.
 	 *
 	 * @param user the user
+	 * @param profileImagePath the profile image path
 	 */
 	public void displayProfile(User user, String profileImagePath){
 		this.profilePanel.removeAll();

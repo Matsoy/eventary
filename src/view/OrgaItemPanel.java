@@ -9,6 +9,10 @@ import javax.swing.JPanel;
 
 import model.Organization;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OrgaItemPanel.
+ */
 public class OrgaItemPanel extends JPanel{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -24,7 +28,7 @@ public class OrgaItemPanel extends JPanel{
 	 * Instantiates a new event item panel.
 	 *
 	 * @param frame the frame
-	 * @param event the event
+	 * @param orga the orga
 	 */
 	public OrgaItemPanel(Frame frame, Organization orga){
 		super();
@@ -52,6 +56,11 @@ public class OrgaItemPanel extends JPanel{
 		return frame;
 	}
 
+	/**
+	 * Gets the organisation.
+	 *
+	 * @return the organisation
+	 */
 	public Organization getOrganisation() {
 		return organisation;
 	}

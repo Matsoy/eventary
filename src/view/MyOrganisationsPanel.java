@@ -11,20 +11,33 @@ import javax.swing.JPanel;
 
 import controller.DisplayOrgaListener;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MyOrganisationsPanel.
+ */
 public class MyOrganisationsPanel extends JPanel{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
 	/** The frame. */
 	Frame frame;
 	
+	/**
+	 * Instantiates a new my organisations panel.
+	 *
+	 * @param frame the frame
+	 */
 	public MyOrganisationsPanel(Frame frame) {
 		this.frame = frame;
 	}
 	
+	/**
+	 * Display my organisations.
+	 *
+	 * @param listeAsso the liste asso
+	 * @param listeDpt the liste dpt
+	 */
 	public void displayMyOrganisations(List<model.Association> listeAsso, List<model.Department> listeDpt) {
 		this.removeAll();
 		this.setBackground(Color.WHITE);

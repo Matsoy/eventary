@@ -41,6 +41,7 @@ public class User extends Observable {
 	/** The liste dpt. */
 	List<Department> listeDpt = new ArrayList<Department>();
 	
+	/** The liste notif. */
 	List<String> listeNotif = new ArrayList<String>();
 	
 	/**
@@ -218,10 +219,20 @@ public class User extends Observable {
 		this.listeDpt = listeDpt;
 	}
 	
+	/**
+	 * Gets the liste notif.
+	 *
+	 * @return the liste notif
+	 */
 	public List<String> getListeNotif() {
 		return listeNotif;
 	}
 
+	/**
+	 * Sets the liste notif.
+	 *
+	 * @param listeNotif the new liste notif
+	 */
 	public void setListeNotif(List<String> listeNotif) {
 		this.listeNotif = listeNotif;
 	}
@@ -242,22 +253,33 @@ public class User extends Observable {
 		return false;
 	}
 	
+	/**
+	 * Adds the notification.
+	 *
+	 * @param notif the notif
+	 */
 	// Méthode qui ajoute une notification dans la liste des notifs
 	public void addNotification(String notif) {
 		NotificationDAO.insert(this.login, notif);
-		//this.setListeNotif(listeNotif);
 	}
 	
+	/**
+	 * Removes the notifications.
+	 */
 	// Méthode qui vide la lise des notifications de l'utilisateur
 	public void removeNotifications(){	
 		NotificationDAO.delete(this.login);
 		this.setListeNotif(NotificationDAO.find(this.login));
 	}
 	
+	/**
+	 * Message.
+	 *
+	 * @return the string
+	 */
 	//Méthode qui retourne le message d'un modérateur lorsqu'il supprime un événement
 	public String message(){
 		if(this.moderator == true){
-			System.out.println("test modo ok");
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Saisir un message pour expliquer la suppression");
 			String mes = sc.nextLine();
@@ -271,7 +293,6 @@ public class User extends Observable {
 				return ", en laissant le message : " + mes;
 			}
 		} else {
-			System.out.println("test modo fail");
 			return null;
 		}
 	}

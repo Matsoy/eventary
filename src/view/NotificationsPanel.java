@@ -25,6 +25,7 @@ public class NotificationsPanel extends JPanel {
 	/** The frame. */
 	Frame frame;
 
+	/** The clear button. */
 	JButton clearButton;
 
 	/**
@@ -37,12 +38,19 @@ public class NotificationsPanel extends JPanel {
 		this.clearButton = new EventaryButton();
 	}
 
+	/**
+	 * Gets the clear button.
+	 *
+	 * @return the clear button
+	 */
 	public JButton getClearButton() {
 		return clearButton;
 	}
 
 	/**
 	 * Display notif.
+	 *
+	 * @param listeNotif the liste notif
 	 */
 	public void displayNotif(List<String> listeNotif) {
 		this.removeAll();

@@ -87,8 +87,10 @@ public class Frame extends JFrame{
 	/** The notif panel. */
 	NotificationsPanel notifPanel;
 	
+	/** The my orga panel. */
 	MyOrganisationsPanel myOrgaPanel;
 	
+	/** The orga panel. */
 	OrgaPanel orgaPanel;
 
 
@@ -212,10 +214,20 @@ public class Frame extends JFrame{
 	}
 
 	
+	/**
+	 * Gets the my orga panel.
+	 *
+	 * @return the my orga panel
+	 */
 	public MyOrganisationsPanel getMyOrgaPanel() {
 		return myOrgaPanel;
 	}
 	
+	/**
+	 * Gets the orga panel.
+	 *
+	 * @return the orga panel
+	 */
 	public OrgaPanel getOrgaPanel() {
 		return orgaPanel;
 	}

@@ -18,6 +18,10 @@ import database.OrganizationDAO;
 import model.Organization;
 import model.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OrgaPanel.
+ */
 public class OrgaPanel extends JPanel {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -28,18 +32,25 @@ public class OrgaPanel extends JPanel {
 	/** The event. */
 	Organization organisation;
 
+	/** The orga name panel. */
 	JPanel orgaNamePanel;
 
+	/** The organisation name. */
 	JLabel organisationName;
 	
+	/** The inscription pan. */
 	JPanel inscriptionPan;
 	
+	/** The login box model. */
 	DefaultComboBoxModel<String> loginBoxModel;
 	
+	/** The login box. */
 	JComboBox<String> loginBox;
 	
+	/** The valider. */
 	JButton valider;
 	
+	/** The liste pan. */
 	JPanel listePan;
 
 	/**
@@ -110,6 +121,12 @@ public class OrgaPanel extends JPanel {
 	}
 
 	
+	/**
+	 * Adapt orga.
+	 *
+	 * @param orga the orga
+	 * @param listeEtu the liste etu
+	 */
 	public void adaptOrga(Organization orga, List<User> listeEtu){
 		this.organisation = orga;
 
@@ -120,7 +137,7 @@ public class OrgaPanel extends JPanel {
 		if(OrganizationDAO.getOrganizationType(orga.getId()).equals("asso")){
 			this.inscriptionPan.setVisible(true);
 			this.loginBoxModel.removeAllElements();
-			this.loginBoxModel.addElement("");
+			this.loginBoxModel.addElement("< login >");
 			for(int i = 0; i < listeEtu.size(); i++){
 				if(listeEtu.get(i).isInAsso(this.organisation) == false){
 					loginBoxModel.addElement(listeEtu.get(i).getLogin());
@@ -152,16 +169,31 @@ public class OrgaPanel extends JPanel {
 	}
 
 
+	/**
+	 * Gets the organisation.
+	 *
+	 * @return the organisation
+	 */
 	public Organization getOrganisation() {
 		return organisation;
 	}
 
 
+	/**
+	 * Gets the valider.
+	 *
+	 * @return the valider
+	 */
 	public JButton getValider() {
 		return valider;
 	}
 
 
+	/**
+	 * Gets the login box.
+	 *
+	 * @return the login box
+	 */
 	public JComboBox<String> getLoginBox() {
 		return loginBox;
 	}

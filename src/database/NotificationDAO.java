@@ -91,10 +91,12 @@ public class NotificationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "INSERT INTO NOTIFICATION (user_login, message) VALUES('"+ user_login +"','"+ message +"');";
-
+			query = "INSERT INTO NOTIFICATION (user_login, message) "
+					+ "VALUES('"+ user_login +"',\""+ message +"\");";
+			
 			//Execute la requête
 			stat.executeUpdate(query);
+			
 			ret = true;
 		}
 		catch(SQLException e) {
@@ -127,8 +129,6 @@ public class NotificationDAO{
 			//Preparation de la requete
 			query = "DELETE FROM NOTIFICATION WHERE UPPER(user_login) = UPPER('" + user_login + "');";
 			
-			System.out.println(query);
-
 			//Execute la requête
 			stat.executeUpdate(query);
 			ret = true;

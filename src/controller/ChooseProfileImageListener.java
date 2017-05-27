@@ -29,9 +29,18 @@ import view.HomePanel;
  */
 public class ChooseProfileImageListener implements MouseListener {	
 
+	/** The user. */
 	private User user;
+	
+	/** The view. */
 	private HomePanel view;
 
+	/**
+	 * Instantiates a new choose profile image listener.
+	 *
+	 * @param view the view
+	 * @param user the user
+	 */
 	public ChooseProfileImageListener(HomePanel view, User user){
 		super();
 		this.user = user;

@@ -27,7 +27,7 @@ public class Association extends Organization {
 		this.setListeMembres(OrgaMemberDAO.find(this.id));
 		// Pour chaque membre de la liste, on notifie
 		for(User membre : listeMembres){
-			membre.addNotification(nouveauMembre.fName+nouveauMembre.lName+" a été ajouté dans l'association "+this.name);
+			membre.addNotification(nouveauMembre.fName+" "+nouveauMembre.lName+" a été ajouté dans l'association "+this.name);
 		}
 	}
 }
