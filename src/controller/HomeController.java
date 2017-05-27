@@ -63,6 +63,10 @@ public class HomeController implements java.util.Observer{
 		this.actionCreateEvent = new ActionCreateEvent(this.model, this.view);
 		this.view.getCreateEventButton().setAction(this.actionCreateEvent);
 		
+		// validation du formulaire de création d'un événement
+		ActionCreateEventForm actionCreateEventForm = new ActionCreateEventForm(this.model, this.view.getFrame().getCreateEventPanel());
+		this.view.getFrame().getCreateEventPanel().getCreateEventButton().setAction(actionCreateEventForm);
+		
 		// clic Notifications
 		this.actionNotif = new ActionNotifications(this.model, this.view);
 		this.view.getNotifButton().setAction(this.actionNotif);

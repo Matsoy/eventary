@@ -184,27 +184,46 @@ public class EventDAO{
 	 * @param room the room
 	 * @param address the address
 	 * @return true, if successful
-	 */
+	 */	
 	public static boolean insert(String title, String description, Date startDate, Date endDate, int maxNbParticipant, User organizer, Organization organization, Room room, String address) {
+		System.out.println("dans EventDAO.insert");
+		System.out.println(title);
+		System.out.println(description);
+		System.out.println(startDate);
+		System.out.println(endDate);
+		System.out.println(maxNbParticipant);
+		System.out.println(organizer);
+		System.out.println(organization);
+		System.out.println(room);
+		System.out.println(address);
+
 		boolean ret = false;
 		Statement stat = null;
-		String query = "";
+		String query = "INSERT INTO EVENT (title, descr, organizer,";
+		String values = " VALUES (\""+ title +"\",\""+ description +"\",'"+organizer.getLogin()+"',";
 
-		String organizer_login = null;
-		if (organizer != null) {
-			organizer_login = organizer.getLogin();		
+		if (organization != null) {
+			query+=" orga_id,";
+			values+=organization.getId()+",";
 		}
 
-		int room_id = 0;
 		if (room != null) {
-			room_id = room.getId();	
+			query+=" room_id,";
+			values+=room.getId()+",";
+			query+=" maxNbParticipant,";
+			values+=room.getNbPlaces()+",";
+		}
+		else {
+			query+=" maxNbParticipant,";
+			values+=maxNbParticipant+",";
+			query+=" address,";
+			values+="'"+address+"',";
 		}
 
 		String[] datesStr = new String[2];
 		Date[] dates = new Date[2];
 		dates[0] = startDate;
 		dates[1] = endDate;
-
 		try {
 			for (int i = 0; i < dates.length; i++) {
 				if(dates[i] != null){
@@ -215,25 +234,25 @@ public class EventDAO{
 					throw new IllegalArgumentException("endDate == null");
 				}
 			}
+			query+=" startDate, endDate)";
+			values+=datesStr[0]+","+datesStr[1]+");";
 
 			try {
 				//Recuperation de la connexion
 				Connection con = SQLiteConnection.getInstance().getConnection();
-
-				//Preparation de la requete
-				query = "INSERT INTO EVENT (title, descr, startDate, endDate, maxNbParticipant, organizer, orga_id, room_id, address)"
-						+ " VALUES("+ title +"','"+ description +"',"+ dates[0] +","+ dates[1] +","+ maxNbParticipant +","+ organizer_login +","+ room_id +",'"+ address +"');";
+				
+				//Preparation de la requete en ligne
+				stat = con.createStatement();
 
 				//Execute la requête
-				stat.executeUpdate(query);
-
+				stat.executeUpdate(query + values);
 				ret = true;
 			}
 			catch(SQLException e) {
 				System.out.println("ERREUR: " + e.getMessage()); 
 			}
-		} catch (Exception e) {
-			// TODO: // TODO: handle exceptionhandle exception
+		} catch (IllegalArgumentException ex) {
+			System.out.println("ERREUR: " + ex.getMessage()); 
 		}
 		return ret;
 	}
@@ -267,7 +286,7 @@ public class EventDAO{
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
-		
+
 		return ret;
 	}
 }

@@ -16,6 +16,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -64,7 +65,7 @@ public class CreateEventPanel extends JPanel{
 
 	/** The room box model. */
 	DefaultComboBoxModel<String> roomBoxModel;
-		
+
 	/** The asso box model. */
 	DefaultComboBoxModel<String> assoBoxModel;
 
@@ -79,12 +80,46 @@ public class CreateEventPanel extends JPanel{
 
 	/** The rooms. */
 	ArrayList<Room> rooms;
-	
+
 	/** The assos. */
 	ArrayList<Association> assos;
-	
+
 	/** The dpts. */
 	ArrayList<Department> dpts;
+
+	/** The create event button. */
+	JButton createEventButton;
+
+	/** The titre field. */
+	JTextField titreField;
+
+	/** The date debut field. */
+	JTextField dateDebutField;
+
+	/** The date fin field. */
+	JTextField dateFinField;
+
+	/** The lieu group. */
+	ButtonGroup lieuGroup;
+
+	/** The lieu field. */
+	JTextField lieuField;
+
+	/** The room box. */
+	JComboBox<String> roomBox;
+
+	/** The nb participants field. */
+	JTextField nbParticipantsField;
+
+	/** The organisateur group. */
+	ButtonGroup organisateurGroup;
+
+	/** The desc field. */
+	JTextArea descField;
+
+	/** The asso box. */
+	JComboBox<String> assoBox;
+
 
 	/**
 	 * Instantiates a new home panel.
@@ -93,6 +128,172 @@ public class CreateEventPanel extends JPanel{
 	 */
 	CreateEventPanel(Frame frame){
 		this.frame = frame;
+		this.createEventButton = new EventaryButton(new Color(135, 233, 144)); 
+	}
+
+
+
+	/**
+	 * Gets the frame.
+	 *
+	 * @return the frame
+	 */
+	public Frame getFrame() {
+		return frame;
+	}
+
+
+
+	/**
+	 * Gets the titre field.
+	 *
+	 * @return the titre field
+	 */
+	public JTextField getTitreField() {
+		return titreField;
+	}
+
+
+
+	/**
+	 * Gets the date debut field.
+	 *
+	 * @return the date debut field
+	 */
+	public JTextField getDateDebutField() {
+		return dateDebutField;
+	}
+
+
+
+	/**
+	 * Gets the date fin field.
+	 *
+	 * @return the date fin field
+	 */
+	public JTextField getDateFinField() {
+		return dateFinField;
+	}
+
+
+
+	/**
+	 * Gets the lieu group.
+	 *
+	 * @return the lieu group
+	 */
+	public ButtonGroup getLieuGroup() {
+		return lieuGroup;
+	}
+
+
+
+	/**
+	 * Gets the lieu field.
+	 *
+	 * @return the lieu field
+	 */
+	public JTextField getLieuField() {
+		return lieuField;
+	}
+
+
+
+	/**
+	 * Gets the room box.
+	 *
+	 * @return the room box
+	 */
+	public JComboBox<String> getRoomBox() {
+		return roomBox;
+	}
+
+
+
+	/**
+	 * Gets the nb participants field.
+	 *
+	 * @return the nb participants field
+	 */
+	public JTextField getNbParticipantsField() {
+		return nbParticipantsField;
+	}
+
+
+
+	/**
+	 * Gets the organisateur group.
+	 *
+	 * @return the organisateur group
+	 */
+	public ButtonGroup getOrganisateurGroup() {
+		return organisateurGroup;
+	}
+
+
+
+	/**
+	 * Gets the desc field.
+	 *
+	 * @return the desc field
+	 */
+	public JTextArea getDescField() {
+		return descField;
+	}
+
+
+
+	/**
+	 * Gets the rooms.
+	 *
+	 * @return the rooms
+	 */
+	public ArrayList<Room> getRooms() {
+		return rooms;
+	}
+
+
+
+	/**
+	 * Gets the assos.
+	 *
+	 * @return the assos
+	 */
+	public ArrayList<Association> getAssos() {
+		return assos;
+	}
+
+
+
+	/**
+	 * Gets the dpts.
+	 *
+	 * @return the dpts
+	 */
+	public ArrayList<Department> getDpts() {
+		return dpts;
+	}
+
+
+
+	/**
+	 * Gets the asso box.
+	 *
+	 * @return the asso box
+	 */
+	public JComboBox<String> getAssoBox() {
+		return assoBox;
+	}
+
+
+
+	/**
+	 * Gets the creates the event button.
+	 *
+	 * @return the creates the event button
+	 */
+	public JButton getCreateEventButton() {
+		return createEventButton;
 	}
 
 
@@ -108,6 +309,7 @@ public class CreateEventPanel extends JPanel{
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+		this.createEventButton.setPreferredSize(new Dimension(widthMenuButton, heightMenuButton));
 		this.schools = schoolsList;
 		this.sites = new ArrayList<Site>();
 		this.buildings = new ArrayList<Building>();
@@ -115,13 +317,13 @@ public class CreateEventPanel extends JPanel{
 		this.assos = assosList;
 		this.dpts = dptsList;
 
-		JTextField titreField = new JTextField(60);
-		
-		JTextField dateDebutField = new JTextField(20);
-		
-		JTextField dateFinField = new JTextField(20);
-		
-		ButtonGroup lieuGroup = new ButtonGroup();
+		this.titreField = new JTextField(60);
+
+		this.dateDebutField = new JTextField(20);
+
+		this.dateFinField = new JTextField(20);
+
+		this.lieuGroup = new ButtonGroup();
 		JRadioButton addressButton = new JRadioButton("Adresse extérieure");
 		addressButton.setSelected(true);
 		JRadioButton schoolButton = new JRadioButton("Dans une école");
@@ -142,30 +344,31 @@ public class CreateEventPanel extends JPanel{
 		buildingBoxModel = new DefaultComboBoxModel<String>();
 		buildingBoxModel.addElement("< Bâtiment >");
 		buildingBox.setModel(buildingBoxModel);
-		JComboBox<String> roomBox = new EventaryComboBox<String>();
+		this.roomBox = new EventaryComboBox<String>();
 		roomBoxModel = new DefaultComboBoxModel<String>();
 		roomBoxModel.addElement("< Salle >");
 		roomBox.setModel(roomBoxModel);
-		JTextField lieuField = new JTextField(31);
-		
-		ButtonGroup organisateurGroup = new ButtonGroup();
+		this.lieuField = new JTextField(31);
+
+		this.nbParticipantsField = new JTextField(5);
+
+		this.organisateurGroup = new ButtonGroup();
 		JRadioButton meButton = new JRadioButton("Moi");
 		meButton.setSelected(true);
 		JRadioButton dptButton = new JRadioButton("Le département: "+dpts.get(0).getName());
 		JRadioButton assoButton = new JRadioButton("Une association");
-		JComboBox<String> assoBox = new EventaryComboBox<String>();
+		this.assoBox = new EventaryComboBox<String>();
 		assoBoxModel = new DefaultComboBoxModel<String>();
 		assoBoxModel.addElement("< Association >");
 		for (int i = 0; i < assos.size(); i++) {
-			System.out.println(assos.get(i).getName());
 			assoBoxModel.addElement(assos.get(i).getName());
 		}
 		assoBox.setModel(assoBoxModel);
 		organisateurGroup.add(meButton);
 		organisateurGroup.add(dptButton);
 		organisateurGroup.add(assoButton);
-		
-		JTextArea descField = new JTextArea(5, 60);
+
+		descField = new JTextArea(5, 60);
 		JScrollPane descScroll = new JScrollPane(descField);
 
 		this.add(Box.createRigidArea(new Dimension(0,5)));
@@ -175,7 +378,7 @@ public class CreateEventPanel extends JPanel{
 		newPan.setMaximumSize(new Dimension(800,30));
 		newPan.add(new JLabel("Créer un événement"));
 		this.add(newPan);
-		this.add(Box.createRigidArea(new Dimension(0,10)));
+		this.add(Box.createRigidArea(new Dimension(0,20)));
 
 		// ######################################## titre
 		JPanel titrePan = new JPanel();
@@ -195,7 +398,7 @@ public class CreateEventPanel extends JPanel{
 		newPan.add(titreField);
 		titrePan.add(newPan);
 
-		this.add(Box.createRigidArea(new Dimension(0,10)));
+		this.add(Box.createRigidArea(new Dimension(0,20)));
 
 		// ######################################## Date de début
 		JPanel dateDebutPan = new JPanel();
@@ -224,7 +427,7 @@ public class CreateEventPanel extends JPanel{
 		newPan.setMaximumSize(new Dimension(320,30));
 		dateDebutPan.add(newPan);
 
-		this.add(Box.createRigidArea(new Dimension(0,10)));
+		this.add(Box.createRigidArea(new Dimension(0,20)));
 
 		// ######################################## date de fin
 		JPanel dateFinPan = new JPanel();
@@ -253,7 +456,7 @@ public class CreateEventPanel extends JPanel{
 		newPan.setMaximumSize(new Dimension(320,30));
 		dateFinPan.add(newPan);
 
-		this.add(Box.createRigidArea(new Dimension(0,10)));
+		this.add(Box.createRigidArea(new Dimension(0,20)));
 
 		// ######################################## lieu
 		JPanel lieuPan = new JPanel();
@@ -288,6 +491,7 @@ public class CreateEventPanel extends JPanel{
 		jp2.add(schoolBox);
 		// quand sélection d'une école
 		schoolBox.addItemListener(new ItemListener() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if ((e.getStateChange() == ItemEvent.SELECTED) && (schoolBox.getSelectedIndex() > 0)) {
@@ -302,7 +506,8 @@ public class CreateEventPanel extends JPanel{
 				else {
 					siteBoxModel = new DefaultComboBoxModel<String>();
 					siteBoxModel.addElement("< Site >");
-					siteBox.setModel(siteBoxModel);		
+					siteBox.setModel(siteBoxModel);	
+					nbParticipantsField.enable();
 				}
 
 				buildingBoxModel = new DefaultComboBoxModel<String>();
@@ -317,6 +522,7 @@ public class CreateEventPanel extends JPanel{
 		jp2.add(siteBox);
 		// quand sélection d'un site
 		siteBox.addItemListener(new ItemListener() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if ((e.getStateChange() == ItemEvent.SELECTED) && (siteBox.getSelectedIndex() > 0)) {
@@ -332,16 +538,19 @@ public class CreateEventPanel extends JPanel{
 					buildingBoxModel = new DefaultComboBoxModel<String>();
 					buildingBoxModel.addElement("< Bâtiment >");
 					buildingBox.setModel(buildingBoxModel);
+					nbParticipantsField.enable();
 				}
 
 				roomBoxModel = new DefaultComboBoxModel<String>();
 				roomBoxModel.addElement("< Salle >");
 				roomBox.setModel(roomBoxModel);
+
 			}
 		});
 		jp2.add(buildingBox);
 		// quand sélection d'un bâtiment
 		buildingBox.addItemListener(new ItemListener() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if ((e.getStateChange() == ItemEvent.SELECTED) && (buildingBox.getSelectedIndex() > 0)) {
@@ -357,16 +566,19 @@ public class CreateEventPanel extends JPanel{
 					roomBoxModel = new DefaultComboBoxModel<String>();
 					roomBoxModel.addElement("< Salle >");
 					roomBox.setModel(roomBoxModel);
+					nbParticipantsField.enable();
 				}
 			}
 		});
 		jp2.add(roomBox);
 		// quand sélection d'une salle
 		roomBox.addItemListener(new ItemListener() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if ((e.getStateChange() == ItemEvent.SELECTED) && (roomBox.getSelectedIndex() > 0)) {
-					System.out.println("Salle sélectionnée = "+e.getItem());
+					nbParticipantsField.setText( String.valueOf(rooms.get(roomBox.getSelectedIndex()-1).getNbPlaces()));
+					nbParticipantsField.disable();
 				}
 			}
 		});
@@ -390,7 +602,31 @@ public class CreateEventPanel extends JPanel{
 		newPan.add(buttonPanel, BorderLayout.NORTH);
 		newPan.add(uselessPanel, BorderLayout.SOUTH);
 
-		this.add(Box.createRigidArea(new Dimension(0,10)));
+		this.add(Box.createRigidArea(new Dimension(0,20)));
+
+		// ######################################## nb de participants maximum
+		JPanel nbParticipantsMAxPan = new JPanel();
+		nbParticipantsMAxPan.setBackground(Color.WHITE);
+		nbParticipantsMAxPan.setMaximumSize(new Dimension(800,30));
+		nbParticipantsMAxPan.setLayout(new BoxLayout(nbParticipantsMAxPan, BoxLayout.X_AXIS));
+		this.add(nbParticipantsMAxPan);
+
+		newPan = new JPanel();
+		newPan.setBackground(Frame.colorEventary);
+		newPan.setMaximumSize(new Dimension(100,30));
+		newPan.add(new JLabel("Nb participants"));
+		nbParticipantsMAxPan.add(newPan);
+
+		newPan = new JPanel();
+		newPan.setMaximumSize(new Dimension(100,30));
+		newPan.add(nbParticipantsField);
+		nbParticipantsMAxPan.add(newPan);
+
+		newPan = new JPanel();
+		newPan.setMaximumSize(new Dimension(600,30));
+		nbParticipantsMAxPan.add(newPan);
+
+		this.add(Box.createRigidArea(new Dimension(0,20)));
 
 		// ######################################## organisateur
 		JPanel organisateurPan = new JPanel();
@@ -422,15 +658,7 @@ public class CreateEventPanel extends JPanel{
 		jp1_orga = new JPanel();
 		jp2_orga = new JPanel();
 		jp2_orga.add(assoBox);
-		// quand sélection d'une association
-		assoBox.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if ((e.getStateChange() == ItemEvent.SELECTED)) {
-					System.out.println("asso sélectionnée");
-				}
-			}
-		});
+
 		cardPanel_orga.add(jp1_orga, "1");
 		cardPanel_orga.add(jp2_orga, "2");
 		meButton.addActionListener(new ActionListener() {
@@ -458,7 +686,7 @@ public class CreateEventPanel extends JPanel{
 		newPan.add(buttonPanel_orga, BorderLayout.NORTH);
 		newPan.add(uselessPanel_orga, BorderLayout.SOUTH);
 
-		this.add(Box.createRigidArea(new Dimension(0,10)));
+		this.add(Box.createRigidArea(new Dimension(0,20)));
 
 		// ######################################## description
 		JPanel descPan = new JPanel();
@@ -478,7 +706,9 @@ public class CreateEventPanel extends JPanel{
 		newPan.add(descScroll);
 		descPan.add(newPan);
 
-		this.add(Box.createRigidArea(new Dimension(0,10)));
+		this.add(Box.createRigidArea(new Dimension(0,20)));
+
+		this.add(createEventButton);
 
 	}
 }
