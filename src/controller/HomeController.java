@@ -39,7 +39,7 @@ public class HomeController implements java.util.Observer{
 	ActionOrganisations actionOrga;
 	
 	/** The action ajout membre. */
-	ActionAjouterMembre actionAjoutMembre;
+	ActionAddMember actionAjoutMembre;
 
 	/** The action quit. */
 	ActionQuit actionQuit;
@@ -85,7 +85,7 @@ public class HomeController implements java.util.Observer{
 		this.view.getOrgaButton().setAction(actionOrga);
 
 		// clic Valider pour ajouter un membre dans une organisation
-		this.actionAjoutMembre = new ActionAjouterMembre(this.model, this.view.getFrame().getOrgaPanel());
+		this.actionAjoutMembre = new ActionAddMember(this.model, this.view.getFrame().getOrgaPanel());
 		this.view.getFrame().getOrgaPanel().getValider().setAction(actionAjoutMembre);
 
 		// clic s'inscrire

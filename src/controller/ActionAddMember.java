@@ -14,11 +14,12 @@ import model.Context;
 import model.User;
 import view.OrgaPanel;
 
+
 // TODO: Auto-generated Javadoc
 /**
- * The Class ActionAjouterMembre.
+ * The Class ActionAddMember.
  */
-public class ActionAjouterMembre extends AbstractAction {
+public class ActionAddMember extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -38,7 +39,7 @@ public class ActionAjouterMembre extends AbstractAction {
 	 * @param model the model
 	 * @param view the view
 	 */
-	public ActionAjouterMembre(Context model, OrgaPanel view) {
+	public ActionAddMember(Context model, OrgaPanel view) {
 		this.model = model;
 		this.view = view;
 		this.putValue(Action.NAME, "Valider Inscription");

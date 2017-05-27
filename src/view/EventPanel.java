@@ -39,26 +39,52 @@ public class EventPanel extends JPanel{
 	/** The event. */
 	Event event;
 
+	/** The event title. */
 	JLabel eventTitle;
 
+	/** The panel suppression. */
 	JPanel panelSuppression;
 
+	/** The suppression event. */
 	JButton suppressionEvent;
 
+	/** The infos pan. */
 	JPanel infosPan;
+
+	/** The infos titre. */
 	JLabel infosTitre;
+
+	/** The infos date. */
 	JLabel infosDate;
+
+	/** The infos desc. */
 	JLabel infosDesc;
+
+	/** The infos adresse. */
 	JLabel infosAdresse;
+
+	/** The date format. */
 	SimpleDateFormat dateFormat;
 
+	/** The inscription pan. */
 	JPanel inscriptionPan;
+
+	/** The desinscription pan. */
 	JPanel desinscriptionPan;
+
+	/** The inscription. */
 	JButton inscription;
+
+	/** The desinscription. */
 	JButton desinscription;
 
-	JLabel listeTitrePanLabel;
-	JPanel listePan;
+	JLabel participantsListLabel;
+
+	JLabel waitingsListLabel;
+
+	JPanel participantsListPanel;
+
+	JPanel waitingsListPanel;
 
 
 	/**
@@ -70,6 +96,16 @@ public class EventPanel extends JPanel{
 		super();
 		this.frame = frame;
 
+	}
+
+
+	/**
+	 * Adapt event.
+	 *
+	 * @param event the event
+	 * @param context the context
+	 */
+	public void adaptEvent(Event event, Context context){
 		this.removeAll();
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -157,20 +193,36 @@ public class EventPanel extends JPanel{
 		JPanel listeTitrePan = new JPanel();
 		listeTitrePan.setBackground(Frame.colorEventary);
 		listeTitrePan.setMaximumSize(new Dimension(800,30));
-		this.listeTitrePanLabel = new JLabel("");
-		listeTitrePan.add(this.listeTitrePanLabel);
+		this.participantsListLabel = new JLabel("");
+		listeTitrePan.add(this.participantsListLabel);
 		this.add(listeTitrePan);
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
 		// Liste des participants
-		this.listePan = new JPanel();
-		this.listePan.setMaximumSize(new Dimension(800,300));
-		this.listePan.setLayout(new BoxLayout(this.listePan, BoxLayout.Y_AXIS));
-		this.add(this.listePan);
-	}
+		this.participantsListPanel = new JPanel();
+		this.participantsListPanel.setMaximumSize(new Dimension(800,300));
+		this.participantsListPanel.setLayout(new BoxLayout(this.participantsListPanel, BoxLayout.Y_AXIS));
+		this.add(this.participantsListPanel);
 
+		// Liste des users sur liset d'attente
+		JPanel listeWTitrePan = new JPanel();
+		listeWTitrePan.setBackground(Frame.colorEventary);
+		listeWTitrePan.setMaximumSize(new Dimension(800,30));
+		this.waitingsListLabel = new JLabel("");
+		listeWTitrePan.add(this.waitingsListLabel);
+		this.add(listeWTitrePan);
+		this.add(Box.createRigidArea(new Dimension(0,10)));
 
-	public void adaptEvent(Event event, Context context){
+		// Liste des users en attente
+		this.waitingsListPanel = new JPanel();
+		this.waitingsListPanel.setMaximumSize(new Dimension(800,300));
+		this.waitingsListPanel.setLayout(new BoxLayout(this.waitingsListPanel, BoxLayout.Y_AXIS));
+		this.add(this.waitingsListPanel);
+
+		// ################################################################################################################################
+		// personnalisation du panel pour l'event
+		// ################################################################################################################################
+
 		this.event = event;
 
 		// Rendre visible ou non le bouton supprimer selon le currentUser
@@ -179,7 +231,7 @@ public class EventPanel extends JPanel{
 		} else {
 			this.panelSuppression.setVisible(false);
 		}
-		
+
 		//Rendre visible l'inscription ou la desinscription selon le currentUser
 		// Changer, faire en sorte d'appeler une fonction du model
 		boolean trouve = false;
@@ -230,28 +282,39 @@ public class EventPanel extends JPanel{
 		//Rendre visible l'inscription ou la desinscription selon le currentUser
 		// Changer, faire en sorte d'appeler une fonction du model
 
-		String participant;
-		if(this.event.getListeParticipants().size() == 1) {
-			participant = " Participant     -     ";
-		} else {
-			participant = " Participants     -     ";
-		}
-		this.listeTitrePanLabel.setText("Liste des Participants     -     " + this.event.getListeParticipants().size() 
-				+participant+ this.event.getListeAttente().size() + " en Attente");
 
-		// Pour la liste des membres
-		if(this.event.getListeParticipants().size() == 0){
-			this.listePan.setVisible(false);
-		} else {
-			this.listePan.setVisible(true);
-			this.listePan.removeAll();
-			for(User participantUser : this.event.getListeParticipants()){
-				JPanel participantPan = new JPanel();
-				participantPan.setMaximumSize(new Dimension(800,25));
-				participantPan.add(new JLabel(participantUser.getfName() + " " + participantUser.getlName() + " - " + participantUser.getLogin()));
-				this.listePan.add(participantPan);
-			}
+		this.participantsListLabel.setText("Liste des Participants (" + this.event.getListeParticipants().size() + " sur "+this.event.getMaxNbParticipant()+")");
+
+		if (this.event.getListeParticipants().size() == 0) {
+			JPanel participantPan = new JPanel();
+			participantPan.setMaximumSize(new Dimension(800,25));
+			participantPan.add(new JLabel(""));
+			this.participantsListPanel.add(participantPan);
 		}
+		
+		for(User participantUser : this.event.getListeParticipants()){
+			JPanel participantPan = new JPanel();
+			participantPan.setMaximumSize(new Dimension(800,25));
+			participantPan.add(new JLabel(participantUser.getfName() + " " + participantUser.getlName() + " - " + participantUser.getLogin()));
+			this.participantsListPanel.add(participantPan);
+		}
+
+		this.waitingsListLabel.setText("Liste d'attente (" + this.event.getListeAttente().size()+")");
+
+		if (this.event.getListeAttente().size() == 0) {
+			JPanel waitingPan = new JPanel();
+			waitingPan.setMaximumSize(new Dimension(800,25));
+			waitingPan.add(new JLabel(""));
+			this.waitingsListPanel.add(waitingPan);
+		}
+		
+		for(User waitingUser : this.event.getListeAttente()){
+			JPanel waitingPan = new JPanel();
+			waitingPan.setMaximumSize(new Dimension(800,25));
+			waitingPan.add(new JLabel(waitingUser.getfName() + " " + waitingUser.getlName() + " - " + waitingUser.getLogin()));
+			this.waitingsListPanel.add(waitingPan);
+		}
+
 	}
 
 
