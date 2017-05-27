@@ -61,23 +61,33 @@ public class ActionCreateEventForm extends AbstractAction{
 	public void actionPerformed(ActionEvent e) {
 
 		try {
+
 			// parser String -> java.util.Date
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
 			// titre
-			String eventName = this.view.getTitreField().getText();
+			String eventName = this.view.getTitreField().getText().replaceAll("\"","'");
 
 			// desc
-			String description = this.view.getDescField().getText();
+			String description = this.view.getDescField().getText().replaceAll("\"","'");
 
 			// date de debut
 			String startDate = this.view.getDateDebutField().getText()+":00";
+			//			String[] StringStartDateSplit1 = startDate.split("/");
+			//			if (Integer.parseInt(StringStartDateSplit1[0]) < 1 && Integer.parseInt(StringStartDateSplit1[0]) > 31) {
+			//				
+			//			}
+			//			if (Integer.parseInt(StringStartDateSplit1[1]) < 1 && Integer.parseInt(StringStartDateSplit1[1]) > 12) {
+			//				
+			//			}
+
+
 			Date parsedStartDate = formatter.parse(startDate);
 
 			// date de fin
 			String endDate = this.view.getDateFinField().getText()+":00";
 			Date parsedEndDate = formatter.parse(endDate);
-			
+
 			// nb de participants max
 			int maxParticipant = Integer.parseInt(this.view.getNbParticipantsField().getText());
 
@@ -89,7 +99,7 @@ public class ActionCreateEventForm extends AbstractAction{
 				room = this.view.getRooms().get((this.view.getRoomBox().getSelectedIndex())-1);
 			}
 			else { // si à une adresse extérieure
-				address = this.view.getLieuField().getText();
+				address = this.view.getLieuField().getText().replaceAll("\"","'");
 			}
 
 			// organisateur

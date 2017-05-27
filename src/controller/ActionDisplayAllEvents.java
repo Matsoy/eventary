@@ -50,7 +50,7 @@ public class ActionDisplayAllEvents extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.view.setContainerCentral(this.view.getFrame().getAllEventsPanel());
-		this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll(), SiteDAO.findAll());
+		this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll(), this.model, SiteDAO.findAll());
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 	}
 

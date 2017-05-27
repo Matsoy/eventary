@@ -52,7 +52,7 @@ public class ActionDisplayMyEvents extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.view.setContainerCentral(this.view.getFrame().getMyEventsPanel());
-		this.view.getFrame().getMyEventsPanel().displayMyEvents(ParticipationDAO.participationsInAnEvent(model.getCurrentUser().getLogin()), WaitingDAO.waitingEvents(model.getCurrentUser().getLogin()), SiteDAO.findAll());
+		this.view.getFrame().getMyEventsPanel().displayMyEvents(ParticipationDAO.participationsInAnEvent(model.getCurrentUser().getLogin()), WaitingDAO.waitingEvents(model.getCurrentUser().getLogin()), this.model, SiteDAO.findAll());
 		SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 	}
 

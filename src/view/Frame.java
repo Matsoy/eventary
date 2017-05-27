@@ -78,12 +78,6 @@ public class Frame extends JFrame{
 	/** The event panel. */
 	EventPanel eventPanel;
 
-	/** The agenda panel. */
-	AgendaPanel agendaPanel;
-
-	/** The display event panel. */
-	EventPanel displayEventPanel;
-
 	/** The notif panel. */
 	NotificationsPanel notifPanel;
 	
@@ -105,7 +99,7 @@ public class Frame extends JFrame{
 		this.myEventsPanel = new MyEventsPanel(this);
 		this.createEventPanel = new CreateEventPanel(this);
 		this.notifPanel = new NotificationsPanel(this);
-		this.displayEventPanel = new EventPanel(this);
+		this.eventPanel = new EventPanel(this);
 		this.myOrgaPanel = new MyOrganisationsPanel(this);
 		this.orgaPanel = new OrgaPanel(this);
 
@@ -152,17 +146,7 @@ public class Frame extends JFrame{
 	public EventPanel getEventPanel() {
 		return eventPanel;
 	}
-
-
-	/**
-	 * Gets the agenda panel.
-	 *
-	 * @return the agenda panel
-	 */
-	public AgendaPanel getAgendaPanel() {
-		return agendaPanel;
-	}
-
+	
 
 	/**
 	 * Gets the all events panel.
@@ -201,16 +185,6 @@ public class Frame extends JFrame{
 	 */
 	public NotificationsPanel getNotifPanel() {
 		return notifPanel;
-	}
-
-
-	/**
-	 * Gets the display event panel.
-	 *
-	 * @return the display event panel
-	 */
-	public EventPanel getDisplayEventPanel() {
-		return displayEventPanel;
 	}
 
 	

@@ -59,7 +59,7 @@ public class Event extends Observable{
 
 	/** The liste participants. */
 	List<User> listeParticipants = new ArrayList<User>();
-	
+
 	/** The liste attente. */
 	List<User> listeAttente = new ArrayList<User>();
 
@@ -107,7 +107,7 @@ public class Event extends Observable{
 		this.listeParticipants = listeParticipants;
 		this.listeAttente = listeAttente;
 	}
-	
+
 	/**
 	 * Creates the event.
 	 *
@@ -127,7 +127,7 @@ public class Event extends Observable{
 			int maxNbParticipant, User organizer, Organization organization, Room room, String address){
 		return EventDAO.insert(title, description, startDate, endDate, maxNbParticipant, organizer, organization, room, address);
 	}
-	
+
 	/**
 	 * Gets the id.
 	 *
@@ -307,7 +307,7 @@ public class Event extends Observable{
 	public void setOrganizer(User organizer) {
 		this.organizer = organizer;
 	}
-	
+
 	/**
 	 * Gets the organization.
 	 *
@@ -401,7 +401,7 @@ public class Event extends Observable{
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
+
 	/**
 	 * Removes the event.
 	 *
@@ -413,13 +413,13 @@ public class Event extends Observable{
 			for(User participant : listeParticipants) {
 				participant.addNotification("L'événement \" " + this.id + " \", auquel vous participiez, a été supprimé");
 			}
-			
+
 			for(User attente : listeAttente){
 				attente.addNotification("L'événement \" " + this.id + " \", auquel vous etiez en liste d'attente, a été supprimé");
 			}
-			
+
 			EventDAO.delete(this.getId());
-			
+
 			if(remover.getModerator() == true && remover.equals(this.organizer) == false){	//Si c'est un modérateur qui supprime l'événement
 				//alors il peut laisser un message à l'organisateur
 				//à modifier pour que notifie un message à l'organisateur
@@ -427,7 +427,7 @@ public class Event extends Observable{
 			}
 		}
 	}
-	
+
 	/**
 	 * Can remove.
 	 *
@@ -435,17 +435,17 @@ public class Event extends Observable{
 	 * @return true, if successful
 	 */
 	public boolean canRemove(User remover){
-		if(remover == this.getOrganizer()){
+		if(remover == this.organizer){
 			return true;
-		}else if(remover.isInAsso(this.getOrganization()) == true){
-			return true;
+		}else if(this.organization != null){
+			return remover.isInAsso(this.organization);
 		}else if(remover.getModerator() == true){
 			return true;
 		}else{
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Adds the participant.
 	 *

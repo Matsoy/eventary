@@ -19,6 +19,7 @@ import javax.swing.SwingUtilities;
 
 import controller.DisplayEventListener;
 import database.EventDAO;
+import model.Context;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -61,7 +62,7 @@ public class AllEventsPanel extends JPanel{
 	 * @param events the events
 	 * @param sites the sites
 	 */
-	public void displayAllEvents(ArrayList<model.Event> events, ArrayList<model.Site> sites){
+	public void displayAllEvents(ArrayList<model.Event> events,  Context model, ArrayList<model.Site> sites){
 		this.removeAll();
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -104,7 +105,7 @@ public class AllEventsPanel extends JPanel{
 					for (model.Event event : events) {
 						if(EventDAO.isInSite(event, sites.get(filterBox.getSelectedIndex()-1).getId())){
 							JPanel panelEvent = new EventItemPanel(frame, event);	
-							panelEvent.addMouseListener(new DisplayEventListener());
+							panelEvent.addMouseListener(new DisplayEventListener(model));
 							frame.getAllEventsPanel().add(panelEvent);
 							frame.getAllEventsPanel().add(Box.createRigidArea(new Dimension(0,10)));
 						}
@@ -123,7 +124,7 @@ public class AllEventsPanel extends JPanel{
 					// parcours de la liste des Event
 					for (model.Event event : events) {
 						JPanel panelEvent = new EventItemPanel(frame, event);	
-						panelEvent.addMouseListener(new DisplayEventListener());
+						panelEvent.addMouseListener(new DisplayEventListener(model));
 						frame.getAllEventsPanel().add(panelEvent);
 						frame.getAllEventsPanel().add(Box.createRigidArea(new Dimension(0,10)));
 					}
@@ -136,7 +137,7 @@ public class AllEventsPanel extends JPanel{
 		// parcours de la liste des Event
 		for (model.Event event : events) {
 			JPanel panelEvent = new EventItemPanel(this.frame, event);	
-			panelEvent.addMouseListener(new DisplayEventListener());
+			panelEvent.addMouseListener(new DisplayEventListener(model));
 			this.add(panelEvent);
 			this.add(Box.createRigidArea(new Dimension(0,10)));
 		}

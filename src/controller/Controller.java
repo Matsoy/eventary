@@ -18,12 +18,6 @@ public class Controller {
 	/** The home controler. */
 	HomeController homeControler;
 	
-	/** The event controler. */
-	EventController eventControler;
-	
-	/** The agenda controler. */
-	AgendaController agendaControler;
-	
 	/** The frame. */
 	Frame frame;
 	

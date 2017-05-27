@@ -19,6 +19,7 @@ import javax.swing.SwingUtilities;
 
 import controller.DisplayEventListener;
 import database.EventDAO;
+import model.Context;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -57,7 +58,7 @@ public class MyEventsPanel extends JPanel{
 	 * @param waitingsEvent the waitings event
 	 * @param sites the sites
 	 */
-	public void displayMyEvents(ArrayList<model.Event> participationsInAnEvent, ArrayList<model.Event> waitingsEvent, ArrayList<model.Site> sites){
+	public void displayMyEvents(ArrayList<model.Event> participationsInAnEvent, ArrayList<model.Event> waitingsEvent, Context model, ArrayList<model.Site> sites){
 		this.removeAll();
 		this.setBackground(Color.WHITE);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -100,7 +101,7 @@ public class MyEventsPanel extends JPanel{
 					for (model.Event event : participationsInAnEvent) {
 						if(EventDAO.isInSite(event, sites.get(filterBox.getSelectedIndex()-1).getId())){
 							JPanel panelEvent = new EventItemPanel(frame, event);	
-							panelEvent.addMouseListener(new DisplayEventListener());
+							panelEvent.addMouseListener(new DisplayEventListener(model));
 							frame.getMyEventsPanel().add(panelEvent);
 							frame.getMyEventsPanel().add(Box.createRigidArea(new Dimension(0,10)));
 						}
@@ -119,7 +120,7 @@ public class MyEventsPanel extends JPanel{
 					for (model.Event event : waitingsEvent) {
 						if(EventDAO.isInSite(event, sites.get(filterBox.getSelectedIndex()-1).getId())){
 							JPanel panelEvent = new EventItemPanel(frame, event);	
-							panelEvent.addMouseListener(new DisplayEventListener());
+							panelEvent.addMouseListener(new DisplayEventListener(model));
 							frame.getMyEventsPanel().add(panelEvent);
 							frame.getMyEventsPanel().add(Box.createRigidArea(new Dimension(0,10)));
 						}
@@ -138,7 +139,7 @@ public class MyEventsPanel extends JPanel{
 					// parcours de la liste des Event auxquels l'utilisateur participe
 					for (model.Event event : participationsInAnEvent) {
 						JPanel panelEvent = new EventItemPanel(frame, event);	
-						panelEvent.addMouseListener(new DisplayEventListener());
+						panelEvent.addMouseListener(new DisplayEventListener(model));
 						frame.getMyEventsPanel().add(panelEvent);
 						frame.getMyEventsPanel().add(Box.createRigidArea(new Dimension(0,10)));
 					}
@@ -155,7 +156,7 @@ public class MyEventsPanel extends JPanel{
 					// parcours de la liste des Event auxquels l'utilisateur est sur liste d'attente
 					for (model.Event event : waitingsEvent) {
 						JPanel panelEvent = new EventItemPanel(frame, event);		
-						panelEvent.addMouseListener(new DisplayEventListener());
+						panelEvent.addMouseListener(new DisplayEventListener(model));
 						frame.getMyEventsPanel().add(panelEvent);
 						frame.getMyEventsPanel().add(Box.createRigidArea(new Dimension(0,10)));
 					}
@@ -168,7 +169,7 @@ public class MyEventsPanel extends JPanel{
 		// parcours de la liste des Event auxquels l'utilisateur participe
 		for (model.Event event : participationsInAnEvent) {
 			JPanel panelEvent = new EventItemPanel(this.frame, event);	
-			panelEvent.addMouseListener(new DisplayEventListener());
+			panelEvent.addMouseListener(new DisplayEventListener(model));
 			this.add(panelEvent);
 			this.add(Box.createRigidArea(new Dimension(0,10)));
 		}
@@ -185,7 +186,7 @@ public class MyEventsPanel extends JPanel{
 		// parcours de la liste des Event auxquels l'utilisateur est sur liste d'attente
 		for (model.Event event : waitingsEvent) {
 			JPanel panelEvent = new EventItemPanel(this.frame, event);		
-			panelEvent.addMouseListener(new DisplayEventListener());
+			panelEvent.addMouseListener(new DisplayEventListener(model));
 			this.add(panelEvent);
 			this.add(Box.createRigidArea(new Dimension(0,10)));
 		}
