@@ -57,7 +57,7 @@ public class EventDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "SELECT * FROM EVENT;";
+			query = "SELECT * FROM EVENT ORDER BY datetime(startDate) ASC;";
 
 			//Le resultat de la requ�te
 			ResultSet result = stat.executeQuery(query);
