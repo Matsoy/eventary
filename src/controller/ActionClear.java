@@ -26,7 +26,6 @@ public class ActionClear extends AbstractAction {
 		this.model = model;
 		this.view = view;
 		this.putValue(Action.NAME, "Supprimer Notifications");
-		//this.model.getCurrentUser().addObserver(this);;
 	}
 
 	@Override

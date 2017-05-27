@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.Box;
@@ -12,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import database.OrganizationDAO;
 import model.Organization;
 import model.User;
 
@@ -29,7 +32,13 @@ public class OrgaPanel extends JPanel {
 
 	JLabel organisationName;
 	
+	JPanel inscriptionPan;
+	
 	DefaultComboBoxModel<String> loginBoxModel;
+	
+	JComboBox<String> loginBox;
+	
+	JButton valider;
 	
 	JPanel listePan;
 
@@ -57,32 +66,32 @@ public class OrgaPanel extends JPanel {
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 
 		// Pour l'ajout d'un nouveau membre
-		JPanel inscriptionPan = new JPanel();
-		inscriptionPan.setBackground(Color.WHITE);
-		inscriptionPan.setMaximumSize(new Dimension(800,30));
-		inscriptionPan.setLayout(new BoxLayout(inscriptionPan, BoxLayout.X_AXIS));
-		this.add(inscriptionPan);
+		this.inscriptionPan = new JPanel();
+		this.inscriptionPan.setBackground(Color.WHITE);
+		this.inscriptionPan.setMaximumSize(new Dimension(800,30));
+		this.inscriptionPan.setLayout(new BoxLayout(inscriptionPan, BoxLayout.X_AXIS));
+		this.add(this.inscriptionPan);
 
 		JPanel inscriptionTitrePan = new JPanel();
 		inscriptionTitrePan.setBackground(Frame.colorEventary);
-		inscriptionTitrePan.setMaximumSize(new Dimension(250,30));
+		inscriptionTitrePan.setMaximumSize(new Dimension(200,30));
 		inscriptionTitrePan.add(new JLabel("Ajouter un nouveau membre"));
 		inscriptionPan.add(inscriptionTitrePan);
 
 		JPanel inscriptionBoxPan = new JPanel();
-		inscriptionBoxPan.setMaximumSize(new Dimension(300,30));
-		JComboBox<String> loginBox = new EventaryComboBox<String>();
+		inscriptionBoxPan.setMaximumSize(new Dimension(450,30));
+		inscriptionBoxPan.setBackground(Color.WHITE);
+		inscriptionBoxPan.add(new JLabel("Saisir Numéro Etudiant       "));
+		this.loginBox = new EventaryComboBox<String>();
 		this.loginBoxModel = new DefaultComboBoxModel<String>();
-		this.loginBoxModel.addElement("<Login Etudiant>");
-		loginBox.setModel(loginBoxModel);
-		loginBox.setEditable(true);
-		inscriptionBoxPan.add(loginBox);
+		this.loginBox.setEditable(true);
+		inscriptionBoxPan.add(this.loginBox);
 		inscriptionPan.add(inscriptionBoxPan);
 
-		JButton valider = new JButton();
-		valider.setMaximumSize(new Dimension(250,30));
-		valider.setBackground(new Color(10,189,22));
-		inscriptionPan.add(valider);
+		this.valider = new JButton();
+		this.valider.setMaximumSize(new Dimension(150,30));
+		this.valider.setBackground(new Color(139,233,120));
+		this.inscriptionPan.add(this.valider);
 
 		this.add(Box.createRigidArea(new Dimension(0,10)));
 		
@@ -94,10 +103,13 @@ public class OrgaPanel extends JPanel {
 		this.add(listeTitrePan);
 		
 		this.listePan = new JPanel();
-		this.add(listePan);
+		this.listePan.setMaximumSize(new Dimension(800,500));
+		this.listePan.setLayout(new BoxLayout(this.listePan, BoxLayout.Y_AXIS));
+		this.add(this.listePan);
 
 	}
 
+	
 	public void adaptOrga(Organization orga, List<User> listeEtu){
 		this.organisation = orga;
 
@@ -105,21 +117,29 @@ public class OrgaPanel extends JPanel {
 		this.organisationName.setText(this.organisation.getName());
 
 		// Pour le comboBox
-		this.loginBoxModel.removeAllElements();
-		this.loginBoxModel.addElement("<Login Etudiant>");
-		int i = 0;
-		while(i < 5 && i < listeEtu.size()){
-			if(listeEtu.get(i).isInAsso(this.organisation) == false){
-				System.out.println(listeEtu.get(i).isInAsso(this.organisation));
-				loginBoxModel.addElement(listeEtu.get(i).getLogin());
-				i++;
+		if(OrganizationDAO.getOrganizationType(orga.getId()).equals("asso")){
+			this.inscriptionPan.setVisible(true);
+			this.loginBoxModel.removeAllElements();
+			this.loginBoxModel.addElement("");
+			for(int i = 0; i < listeEtu.size(); i++){
+				if(listeEtu.get(i).isInAsso(this.organisation) == false){
+					loginBoxModel.addElement(listeEtu.get(i).getLogin());
+				}
 			}
+			this.loginBox.setModel(loginBoxModel);
+		} else {
+			this.inscriptionPan.setVisible(false);
 		}
 		
 		// Pour la liste des membres
+		this.listePan.removeAll();
 		for(User membre : this.organisation.getListeMembres()){
-				this.listePan.add(new JLabel(membre.getfName() + membre.getlName() + " - " + membre.getLogin()));
+			JPanel membrePan = new JPanel();
+			membrePan.setMaximumSize(new Dimension(800,25));
+			membrePan.add(new JLabel(membre.getfName() + " " + membre.getlName() + " - " + membre.getLogin()));
+			this.listePan.add(membrePan);
 		}
+		
 	}
 
 	/**
@@ -129,5 +149,21 @@ public class OrgaPanel extends JPanel {
 	 */
 	public Frame getFrame() {
 		return frame;
-	}	
+	}
+
+
+	public Organization getOrganisation() {
+		return organisation;
+	}
+
+
+	public JButton getValider() {
+		return valider;
+	}
+
+
+	public JComboBox<String> getLoginBox() {
+		return loginBox;
+	}
+	
 }

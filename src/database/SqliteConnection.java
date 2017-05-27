@@ -25,7 +25,7 @@ class SQLiteConnection {
 		String path = System.getProperty("user.dir");
 		path+="/database/eventary.db";
 		this.dsn = "jdbc:sqlite:"+path;
-		System.out.println("BDD: "+ this.dsn);
+		//System.out.println("BDD: "+ this.dsn);
 		// encoding UTF8
 		SQLiteConfig config = new SQLiteConfig();
 		config.setEncoding(SQLiteConfig.Encoding.UTF8);

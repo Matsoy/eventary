@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Scanner;
 
 import database.NotificationDAO;
+import database.OrganizationDAO;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -232,8 +233,9 @@ public class User extends Observable {
 	 * @return true, if is in asso
 	 */
 	public boolean isInAsso(Organization association){
-		for(Association asso : listeAsso){
-			if(asso.equals(association)){
+		List<User> listeMembreAsso = OrganizationDAO.findAsso(association.getId()).getListeMembres();
+		for(User membre : listeMembreAsso){
+			if(membre.getLogin().equalsIgnoreCase(this.login)){
 				return true;
 			}
 		}
