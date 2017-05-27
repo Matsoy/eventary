@@ -123,6 +123,9 @@ public class WaitingDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "INSERT INTO WAITING VALUES('"+ user_login +"',"+ event_id +");";
@@ -151,6 +154,9 @@ public class WaitingDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			// pas de User désigné -> suppression de toutes les participations � cet Event (sur liste d'attente)
 			if (user_login == null || user_login.isEmpty()) {
@@ -187,6 +193,9 @@ public class WaitingDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			query = "SELECT * FROM WAITING WHERE event_id = " + event_id + " ORDER  BY datetime(waiting_date) ASC LIMIT 1;";
 

@@ -321,6 +321,9 @@ public class OrganizationDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "INSERT INTO ORGANIZATION VALUES("+ id +",'"+ name +"');";

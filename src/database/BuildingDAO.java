@@ -164,6 +164,9 @@ public class BuildingDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "INSERT INTO BUILDING VALUES("+ id +","+ site_id +",'"+ name +"');";
@@ -189,6 +192,9 @@ public class BuildingDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "DELETE FROM BUILDING WHERE id = " + id_building + ";";

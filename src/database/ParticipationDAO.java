@@ -126,6 +126,9 @@ public class ParticipationDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "INSERT INTO PARTICIPATION VALUES('"+ user_login +"',"+ event_id +");";
@@ -156,6 +159,9 @@ public class ParticipationDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			// pas de User désigné -> suppression de toutes les participations pour cet Event
 			if (user_login.equals("") || user_login.isEmpty()) {

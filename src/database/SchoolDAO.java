@@ -123,6 +123,9 @@ public class SchoolDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "INSERT INTO SITE VALUES("+ id +",'"+ name +"');";
@@ -148,6 +151,9 @@ public class SchoolDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "DELETE FROM SCHOOL WHERE id = " + id_school + ";";

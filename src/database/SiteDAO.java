@@ -164,6 +164,9 @@ public class SiteDAO{
         try {
             //Recuperation de la connexion
             Connection con = SQLiteConnection.getInstance().getConnection();
+            
+          //Preparation de la requete en ligne
+			stat = con.createStatement();
 
             //Preparation de la requete
             query = "INSERT INTO SITE VALUES("+ id +","+ school_id +",'"+ name +"');";
@@ -189,6 +192,9 @@ public class SiteDAO{
         try {
             //Recuperation de la connexion
             Connection con = SQLiteConnection.getInstance().getConnection();
+            
+          //Preparation de la requete en ligne
+			stat = con.createStatement();
 
             //Preparation de la requete
             query = "DELETE FROM SITE WHERE id = " + id_site + ";";

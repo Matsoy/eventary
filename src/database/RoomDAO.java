@@ -163,6 +163,9 @@ public class RoomDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "INSERT INTO ROOM VALUES("+ id +","+ nbPlaces +",'"+ name +"');";
@@ -188,6 +191,9 @@ public class RoomDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "DELETE FROM ROOM WHERE id = " + id_room + ";";

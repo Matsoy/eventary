@@ -86,6 +86,9 @@ public class NotificationDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "INSERT INTO NOTIFICATION (user_login, message) VALUES('"+ user_login +"','"+ message +"');";

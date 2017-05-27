@@ -87,6 +87,9 @@ public class OrgaMemberDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "INSERT INTO ASSO_MEMBER VALUES("+ association_id +",'"+ user_login +"');";
@@ -118,6 +121,9 @@ public class OrgaMemberDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//Preparation de la requete
 			query = "DELETE FROM ASSO_MEMBER WHERE association_id = " + association_id + "AND UPPER(user_login) = UPPER('" + user_login + "');";

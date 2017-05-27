@@ -272,6 +272,9 @@ public class EventDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
+			
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
 
 			//suppression de toutes les participations � cet Event
 			ParticipationDAO.delete("", id_event);
