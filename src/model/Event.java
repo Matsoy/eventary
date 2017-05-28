@@ -378,6 +378,7 @@ public class Event extends Observable{
 	 */
 	public void setListeParticipants(List<User> listeParticipants) {
 		this.listeParticipants = listeParticipants;
+		System.out.println("liste principale set set set");
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -397,6 +398,7 @@ public class Event extends Observable{
 	 * @param listeAttente the new liste attente
 	 */
 	public void setListeAttente(List<User> listeAttente) {
+		System.out.println("liste attente set set set");
 		this.listeAttente = listeAttente;
 		this.setChanged();
 		this.notifyObservers();
@@ -474,10 +476,34 @@ public class Event extends Observable{
 	 * @return true, if successful
 	 */
 	public boolean removeParticipant(User participant){
-		ParticipationDAO.delete(participant.getLogin(), this.id);
-		WaitingDAO.delete(participant.getLogin(), this.id);
-		this.setListeParticipants(ParticipationDAO.eventParticipants(this.id));
-		this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
+		boolean trouve = false;
+		int positionInListe = 0;
+
+		for(User user : this.getListeParticipants()){
+			if(participant.getLogin().equals(user.getLogin())){
+				trouve = true;
+				positionInListe = this.getListeParticipants().indexOf(user);
+			}
+		}
+
+		if(trouve == true){
+			List<User> newListe = this.getListeParticipants();
+			newListe.remove(positionInListe);
+			ParticipationDAO.delete(participant.getLogin(), this.id);
+			this.setListeParticipants(newListe);
+		} else {
+			for(User user : this.getListeAttente()) {
+				if(participant.getLogin().equals(user.getLogin())) {
+					trouve = true;
+					positionInListe = this.getListeAttente().indexOf(user);
+				}
+			}
+			List<User> newListe = this.getListeAttente();
+			newListe.remove(positionInListe);
+			WaitingDAO.delete(participant.getLogin(), this.id);
+			this.setListeAttente(newListe);
+		}
+
 		return true;
 	}
 
