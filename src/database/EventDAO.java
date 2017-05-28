@@ -43,9 +43,10 @@ public class EventDAO{
 	/**
 	 * Pour retrouver tous les tuples.
 	 *
+	 * @param timeBeforeDeletion the time before deletion
 	 * @return the result set
 	 */
-	public static ArrayList<Event> findAll() {
+	public static ArrayList<Event> findAll(int timeBeforeDeletion) {
 		Statement stat = null;
 		String query = "";
 		ArrayList<Event> ret = new ArrayList<Event>();
@@ -57,45 +58,48 @@ public class EventDAO{
 			//Preparation de la requete en ligne
 			stat = con.createStatement();
 
-			//Preparation de la requete
-			query = "SELECT * FROM EVENT ORDER BY datetime(startDate) ASC;";
+			if (EventDAO.deleteObsoleteEvent(timeBeforeDeletion)) {	// suppression des event obsoletes	
 
-			//Le resultat de la requ�te
-			ResultSet result = stat.executeQuery(query);
+				//Preparation de la requete
+				query = "SELECT * FROM EVENT ORDER BY datetime(startDate) ASC;";
 
-			if (result.next() ) {
-				do {
-					String[] datesStr = new String[5];
-					Date[] dates = new Date[5];
-					for (int i = 0; i < datesStr.length; i++) {
-						datesStr[i] = result.getString(4+i);
-					}
+				//Le resultat de la requ�te
+				ResultSet result = stat.executeQuery(query);
 
-					for (int i = 0; i < datesStr.length; i++) {
-						if(datesStr[i] != null){
-							try {
-								dates[i] = parser.parse(datesStr[i]);
-							} catch (ParseException e) {
-								e.printStackTrace();
+				if (result.next() ) {
+					do {
+						String[] datesStr = new String[5];
+						Date[] dates = new Date[5];
+						for (int i = 0; i < datesStr.length; i++) {
+							datesStr[i] = result.getString(4+i);
+						}
+
+						for (int i = 0; i < datesStr.length; i++) {
+							if(datesStr[i] != null){
+								try {
+									dates[i] = parser.parse(datesStr[i]);
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+							}
+							else{
+								dates[i] = null;
 							}
 						}
-						else{
-							dates[i] = null;
+						String orga_type = OrganizationDAO.getOrganizationType(result.getInt(11)); //recuperation type de l'orga de l'evenement ("asso" pour une association, "dpt" pour un departement)
+						Organization organization = null;
+						if (orga_type!= null && orga_type.equals("asso")) {
+							organization = OrganizationDAO.findAsso(result.getInt(11));
+						} 
+						else if (orga_type!= null && orga_type.equals("dpt")){
+							organization = OrganizationDAO.findDpt(result.getInt(11));
 						}
-					}
-					String orga_type = OrganizationDAO.getOrganizationType(result.getInt(11)); //recuperation type de l'orga de l'evenement ("asso" pour une association, "dpt" pour un departement)
-					Organization organization = null;
-					if (orga_type!= null && orga_type.equals("asso")) {
-						organization = OrganizationDAO.findAsso(result.getInt(11));
-					} 
-					else if (orga_type!= null && orga_type.equals("dpt")){
-						organization = OrganizationDAO.findDpt(result.getInt(11));
-					}
 
-					ret.add(new Event()); //ajout du Event � l'ArrayList. Appel du constructeur vide
-					ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), organization, RoomDAO.find(result.getInt(12)), result.getString(13), ParticipationDAO.eventParticipants(result.getInt(1)), WaitingDAO.waitingsForAnEvent(result.getInt(1))); //initialisaton de les param�tres du retour de la requ�te
-				} 
-				while (result.next());
+						ret.add(new Event()); //ajout du Event � l'ArrayList. Appel du constructeur vide
+						ret.get(ret.size()-1).init(result.getInt(1), result.getString(2), result.getString(3), dates[0], dates[1], dates[2], dates[3], dates[4], result.getInt(9), UserDAO.find(result.getString(10)), organization, RoomDAO.find(result.getInt(12)), result.getString(13), ParticipationDAO.eventParticipants(result.getInt(1)), WaitingDAO.waitingsForAnEvent(result.getInt(1))); //initialisaton de les param�tres du retour de la requ�te
+					} 
+					while (result.next());
+				}
 			}
 		}
 		catch (SQLException e) {
@@ -107,6 +111,13 @@ public class EventDAO{
 
 
 
+	/**
+	 * Checks if is in site.
+	 *
+	 * @param event the event
+	 * @param site_id the site id
+	 * @return true, if is in site
+	 */
 	public static boolean isInSite(Event event, int site_id) {
 		boolean ret = false;
 
@@ -117,7 +128,7 @@ public class EventDAO{
 				rooms.add(r);
 			}
 		}
-		
+
 		// parcours des salles pour check
 		for (Room r : rooms) {
 			if (r.getId() == event.getRoom().getId()) {
@@ -125,7 +136,7 @@ public class EventDAO{
 				break;
 			}
 		}
-		
+
 		return ret;
 	}
 
@@ -211,17 +222,6 @@ public class EventDAO{
 	 * @return true, if successful
 	 */	
 	public static boolean insert(String title, String description, Date startDate, Date endDate, int maxNbParticipant, User organizer, Organization organization, Room room, String address) {
-		System.out.println("dans EventDAO.insert");
-		System.out.println(title);
-		System.out.println(description);
-		System.out.println(startDate);
-		System.out.println(endDate);
-		System.out.println(maxNbParticipant);
-		System.out.println(organizer);
-		System.out.println(organization);
-		System.out.println(room);
-		System.out.println(address);
-
 		boolean ret = false;
 		Statement stat = null;
 		String query = "INSERT INTO EVENT (title, descr, organizer,";
@@ -303,12 +303,58 @@ public class EventDAO{
 
 			//suppression de toutes les participations � cet Event
 			ParticipationDAO.delete("", id_event);
+			
+			//suppression de toutes les participations � cet Event
+			WaitingDAO.delete("", id_event);
 
 			//Preparation de la requete
 			query = "DELETE FROM EVENT WHERE id = " + id_event + ";";
 
 			//Execute la requête
 			stat.executeUpdate(query);
+			ret = true;
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
+
+
+
+	/**
+	 * Delete obsolete event.
+	 *
+	 * @param timeBeforeDeletion the time before deletion (in minutes)
+	 * @return true, if successful
+	 */
+	public static boolean deleteObsoleteEvent(int timeBeforeDeletion) {
+		boolean ret = false;
+		Statement stat = null;
+		String query = "";
+
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//Preparation de la requete
+			query = "SELECT id FROM EVENT WHERE endDate <= datetime('now','localtime', '-"+timeBeforeDeletion+" minutes');";
+
+			//Le resultat de la requ�te
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					//supression complete de l'event
+					EventDAO.delete(result.getInt(1));
+				} 
+				while (result.next());
+			}
+
 			ret = true;
 		}
 		catch(SQLException e) {

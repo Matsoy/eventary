@@ -115,7 +115,7 @@ public class DaoTest {
 		System.out.println("\t########################################");
 		System.out.println("\n\t##### test de findAll");
 		ArrayList<Event> events = new ArrayList<Event>();
-		events = EventDAO.findAll();
+		events = EventDAO.findAll(2);
 		for(Event e: events){
 			System.out.println(e.toString());
 		}

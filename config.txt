@@ -1,4 +1,4 @@
-DurationBeforeDeletion: 120
+DurationBeforeDeletion: 3
 moderatorLogins: admin, E168011W
 
 ScreenWidth: 1200

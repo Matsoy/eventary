@@ -52,9 +52,9 @@ public class ConnectionController implements java.util.Observer{
 	public void update(Observable o, Object arg) {
 		// si l'utilisateur est authentifié, on passe à la page d'accueil
 		if(this.model.getAuthentificated()){
-			view.getFrame().setHomePanel(EventDAO.findAll());
+			view.getFrame().setHomePanel(EventDAO.findAll(model.getTempsAvantSuppression()));
 			this.view.getFrame().getHomePanel().setContainerCentral(this.view.getFrame().getAllEventsPanel());
-			this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll(), this.model, SiteDAO.findAll());
+			this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll(model.getTempsAvantSuppression()), this.model, SiteDAO.findAll());
 
 			// selection de l'image de profil de l'utilisateur
 			File directoryPath = new File(System.getProperty("user.dir")+"/img");
