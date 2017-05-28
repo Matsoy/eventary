@@ -128,7 +128,7 @@ public class WaitingDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "INSERT INTO WAITING VALUES('"+ user_login +"',"+ event_id +");";
+			query = "INSERT INTO WAITING (user_login, event_id) VALUES('"+ user_login +"',"+ event_id +");";
 
 			//Execute la requête
 			stat.executeUpdate(query);

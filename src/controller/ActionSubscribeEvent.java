@@ -22,9 +22,6 @@ public class ActionSubscribeEvent extends AbstractAction{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The event. */
-	Event event;
-
 	/** The context. */
 	Context context;
 
@@ -39,7 +36,7 @@ public class ActionSubscribeEvent extends AbstractAction{
 	 * @param context the context
 	 */
 	ActionSubscribeEvent(EventPanel view, Context context){
-		this.event = context.getCurrentEvent();
+		this.context = context;
 		this.view = view;
 		this.putValue(Action.NAME, "S'inscrire");
 	}
@@ -51,17 +48,16 @@ public class ActionSubscribeEvent extends AbstractAction{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//récupération de l'événement courant
-		this.event = context.getCurrentEvent();
+		Event event = this.view.getEvent();
 		
-		//si il reste de la place dans l'evenement
-		if(event.addParticipant(context.getCurrentUser())){
-			view.getFrame().displayMessage("Vous êtes maintenant inscrit à l'événément", Color.GREEN);
-		}
+		this.view.removeAll();
 		
-		// sinon, l'utilisateur est sur liste d'attente
-		else{
-			view.getFrame().displayMessage("Vous êtes maintenant sur la liste d'attente de l'événément", Color.YELLOW);
+		if(event.addParticipant(context.getCurrentUser())){	//si il reste de la place dans l'evenement
+			this.view.getFrame().getEventPanel().adaptEvent(event, this.context);
+			view.getFrame().displayMessage("Vous êtes maintenant inscrit à l'événément"+event.getTitle(), new Color(139,233,120));
+		}else{	// Sinon, utilisateur en liste d'attente
+			this.view.getFrame().getEventPanel().adaptEvent(event, this.context);
+			view.getFrame().displayMessage("Vous êtes maintenant sur la liste d'attente à l'événément"+event.getTitle(), new Color(227,237,82));
 		}
 	}
-
 }

@@ -39,8 +39,8 @@ public class ActionUnsubscribeEvent extends AbstractAction{
 	 * @param context the context
 	 */
 	ActionUnsubscribeEvent(EventPanel view, Context context){
-		this.event = context.getCurrentEvent();
 		this.view = view;
+		this.context = context;
 		this.putValue(Action.NAME, "Se désinscrire");
 	}
 	
@@ -51,16 +51,12 @@ public class ActionUnsubscribeEvent extends AbstractAction{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// récupération de l'evenement courant
-		this.event = context.getCurrentEvent();
+		Event event = this.view.getEvent();
 		
-		// si l'utilisateur est supprimé de la liste principale
 		if(event.removeParticipant(context.getCurrentUser())){
-			view.getFrame().displayMessage("Vous êtes maintenant désinscrit de l'evenement", Color.GREEN);
-		}
-		
-		// sinon, il est supprimé de la liste d'attente
-		else{
-			view.getFrame().displayMessage("Vous n'êtes plus sur la liste d'attente de l'evenement", Color.YELLOW);
+			this.view.removeAll();
+			this.view.getFrame().getEventPanel().adaptEvent(event, this.context);
+			view.getFrame().displayMessage("Vous êtes maintenant désinscrit de l'événement "+event.getTitle(), new Color(139,233,120));
 		}
 	}
 

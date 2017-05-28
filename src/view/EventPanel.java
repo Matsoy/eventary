@@ -95,7 +95,31 @@ public class EventPanel extends JPanel{
 	EventPanel(Frame frame){
 		super();
 		this.frame = frame;
+		
+		this.suppressionEvent = new JButton();
+		this.inscription = new JButton();
+		this.desinscription = new JButton();
 
+	}
+	
+
+	public Event getEvent() {
+		return event;
+	}
+
+
+	public JButton getSuppressionEvent() {
+		return suppressionEvent;
+	}
+
+
+	public JButton getInscription() {
+		return inscription;
+	}
+
+
+	public JButton getDesinscription() {
+		return desinscription;
 	}
 
 
@@ -125,9 +149,8 @@ public class EventPanel extends JPanel{
 		this.panelSuppression.setMaximumSize(new Dimension(800,30));
 		this.panelSuppression.setLayout(new BoxLayout(panelSuppression, BoxLayout.X_AXIS));
 
-		this.suppressionEvent = new JButton();
 		this.suppressionEvent.setMaximumSize(new Dimension(800,30));
-		this.suppressionEvent.setBackground(new Color(253,46,46));
+		this.suppressionEvent.setBackground(new Color(253,58,58));
 		this.panelSuppression.add(suppressionEvent);
 		this.add(this.panelSuppression);
 
@@ -172,7 +195,7 @@ public class EventPanel extends JPanel{
 		this.inscriptionPan = new JPanel();
 		this.inscriptionPan.setMaximumSize(new Dimension(800,30));
 		this.inscriptionPan.setLayout(new BoxLayout(inscriptionPan, BoxLayout.X_AXIS));
-		this.inscription = new JButton();
+
 		this.inscription.setBackground(new Color(139,233,120));
 		this.inscription.setMaximumSize(new Dimension(800,30));
 		this.inscriptionPan.add(this.inscription);
@@ -181,8 +204,8 @@ public class EventPanel extends JPanel{
 		this.desinscriptionPan = new JPanel();
 		this.desinscriptionPan.setMaximumSize(new Dimension(800,30));
 		this.desinscriptionPan.setLayout(new BoxLayout(desinscriptionPan, BoxLayout.X_AXIS));
-		this.desinscription = new JButton();
-		this.desinscription.setBackground(new Color(253,46,46));
+		
+		this.desinscription.setBackground(new Color(253,58,58));
 		this.desinscription.setMaximumSize(new Dimension(800,30));
 		this.desinscriptionPan.add(this.desinscription);
 		this.add(this.desinscriptionPan);
@@ -243,7 +266,7 @@ public class EventPanel extends JPanel{
 				this.desinscriptionPan.setVisible(true);
 			}
 		}
-		System.out.println(trouve);
+
 		if(trouve == false) {
 			for(User atta : this.event.getListeAttente()){
 				if(atta.getLogin().equals(context.getCurrentUser().getLogin())){

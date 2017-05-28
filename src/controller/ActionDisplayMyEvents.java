@@ -9,7 +9,6 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.SwingUtilities;
 
-import database.EventDAO;
 import database.ParticipationDAO;
 import database.SiteDAO;
 import database.WaitingDAO;

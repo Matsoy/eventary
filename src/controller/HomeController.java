@@ -37,12 +37,18 @@ public class HomeController implements java.util.Observer{
 
 	/** The action orga. */
 	ActionOrganisations actionOrga;
-	
+
 	/** The action ajout membre. */
 	ActionAddMember actionAjoutMembre;
 
 	/** The action quit. */
 	ActionQuit actionQuit;
+	
+	ActionSubscribeEvent actionInscrire;
+	
+	ActionUnsubscribeEvent actionDesinscrire;
+	
+	ActionRemoveEvent actionSuppression;
 
 
 	/**
@@ -90,6 +96,15 @@ public class HomeController implements java.util.Observer{
 
 		// clic s'inscrire
 		ActionSubscribeEvent actionInscrire = new ActionSubscribeEvent(this.view.getFrame().getEventPanel(), this.model);
+		this.view.getFrame().getEventPanel().getInscription().setAction(actionInscrire);
+
+		// clic se desinscrire
+		ActionUnsubscribeEvent actionDesinscrire = new ActionUnsubscribeEvent(this.view.getFrame().getEventPanel(), this.model);
+		this.view.getFrame().getEventPanel().getDesinscription().setAction(actionDesinscrire);
+
+		// clic supprimer cet Evenement
+		ActionRemoveEvent actionSuppression = new ActionRemoveEvent(this.model, this.view.getFrame().getEventPanel());
+		this.view.getFrame().getEventPanel().getSuppressionEvent().setAction(actionSuppression);
 
 		// clic Quitter
 		this.actionQuit = new ActionQuit(this.model, this.view);
