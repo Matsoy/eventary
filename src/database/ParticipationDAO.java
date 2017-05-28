@@ -119,6 +119,7 @@ public class ParticipationDAO{
 	 * @return true, if successful
 	 */
 	public static boolean insert(String user_login, int event_id) {
+		System.out.println("dans ParticipationDAO.insert");
 		boolean ret = false;
 		Statement stat = null;
 		String query = "";
@@ -140,6 +141,7 @@ public class ParticipationDAO{
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+		System.out.println("ret = "+ret);
 		return ret;
 	}
 
@@ -152,6 +154,7 @@ public class ParticipationDAO{
 	 * @return true, if successful
 	 */
 	public static boolean delete(String user_login, int event_id) {
+		System.out.println("dans ParticipationDAO.delete");
 		boolean ret = false;
 		Statement stat = null;
 		String query = "";
@@ -165,30 +168,36 @@ public class ParticipationDAO{
 
 			// pas de User désigné -> suppression de toutes les participations pour cet Event
 			if (user_login.equals("") || user_login.isEmpty()) {
+				System.out.println("if");
 				//Preparation de la requete
 				query = "DELETE FROM PARTICIPATION WHERE event_id = " + event_id + ";";
+				//Execute la requête
+				stat.executeUpdate(query);
 			}
 			else{
+				System.out.println("else");
 				//Preparation de la requete
 				query = "DELETE FROM PARTICIPATION WHERE UPPER(user_login) = UPPER('" + user_login + "') and event_id = " + event_id + ";";
+				//Execute la requête
+				stat.executeUpdate(query);
 				// r�cup�ration du premier User sur liste d'attente
 				String firstWaitingLogin = WaitingDAO.getFirstWaiting(event_id);
 				// s'il y a un User en attente
-				if (firstWaitingLogin.equals("") || firstWaitingLogin.isEmpty()) {
+				if (!(firstWaitingLogin.equals("") || firstWaitingLogin.isEmpty())) {
+					System.out.println("un user prend sa place");
 					// on le supprime de la liste d'attente
 					WaitingDAO.delete(firstWaitingLogin, event_id);
 					//et on le rajoute � la liste des participants
-					insert(firstWaitingLogin, event_id);
+					ParticipationDAO.insert(firstWaitingLogin, event_id);
 				}
 			}
 
-			//Execute la requête
-			stat.executeUpdate(query);
 			ret = true;
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+		System.out.println("ret = "+ret);
 		return ret;
 	}
 }

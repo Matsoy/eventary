@@ -378,7 +378,7 @@ public class Event extends Observable{
 	 */
 	public void setListeParticipants(List<User> listeParticipants) {
 		this.listeParticipants = listeParticipants;
-		System.out.println("liste principale set set set");
+		System.out.println("setListeParticipants");
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -398,7 +398,7 @@ public class Event extends Observable{
 	 * @param listeAttente the new liste attente
 	 */
 	public void setListeAttente(List<User> listeAttente) {
-		System.out.println("liste attente set set set");
+		System.out.println("setListeAttente");
 		this.listeAttente = listeAttente;
 		this.setChanged();
 		this.notifyObservers();
@@ -477,32 +477,27 @@ public class Event extends Observable{
 	 */
 	public boolean removeParticipant(User participant){
 		boolean trouve = false;
-		int positionInListe = 0;
 
-		for(User user : this.getListeParticipants()){
-			if(participant.getLogin().equals(user.getLogin())){
+		for(User user : this.getListeParticipants()){ //parcours de la liste pricipale
+			if(participant.getLogin().equals(user.getLogin())){ // si l'utilisateur est sur liste pricipale
+				ParticipationDAO.delete(participant.getLogin(), this.id);
 				trouve = true;
-				positionInListe = this.getListeParticipants().indexOf(user);
+				break;
 			}
 		}
-
-		if(trouve == true){
-			List<User> newListe = this.getListeParticipants();
-			newListe.remove(positionInListe);
-			ParticipationDAO.delete(participant.getLogin(), this.id);
-			this.setListeParticipants(newListe);
-		} else {
-			for(User user : this.getListeAttente()) {
-				if(participant.getLogin().equals(user.getLogin())) {
-					trouve = true;
-					positionInListe = this.getListeAttente().indexOf(user);
+		
+		if (!trouve) { // si l'utilisateur n'est pas sur la liste principale, parcours de la liste d'attente
+			for(User user : this.getListeAttente()){
+				if(participant.getLogin().equals(user.getLogin())){ // si l'utilisateur est sur liste d'attente
+					WaitingDAO.delete(participant.getLogin(), this.id);
+					break;
 				}
 			}
-			List<User> newListe = this.getListeAttente();
-			newListe.remove(positionInListe);
-			WaitingDAO.delete(participant.getLogin(), this.id);
-			this.setListeAttente(newListe);
 		}
+		
+		//maj des listes des participations
+		this.setListeParticipants(ParticipationDAO.eventParticipants(this.id));
+		this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
 
 		return true;
 	}

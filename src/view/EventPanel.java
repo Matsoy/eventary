@@ -258,10 +258,11 @@ public class EventPanel extends JPanel{
 		//Rendre visible l'inscription ou la desinscription selon le currentUser
 		// Changer, faire en sorte d'appeler une fonction du model
 		boolean trouve = false;
-		System.out.println("null pointer ?????????????????????");
-		System.out.println(event.getListeParticipants().size());
+		System.out.println("getListeParticipants : "+event.getListeParticipants().size());
 		
 		for(User particip : this.event.getListeParticipants()){
+			System.out.println("particip");
+			System.out.println(particip);
 			if(particip.getLogin().equals(context.getCurrentUser().getLogin())){
 				trouve = true;
 				this.eventTitle.setText(this.event.getTitle() + "    -    Vous Participez");
@@ -269,9 +270,11 @@ public class EventPanel extends JPanel{
 				this.desinscriptionPan.setVisible(true);
 			}
 		}
-		System.out.println(this.event.getListeAttente().size());
+		System.out.println("getListeAttente : "+this.event.getListeAttente().size());
 		if(trouve == false) {
 			for(User atta : this.event.getListeAttente()){
+				System.out.println("atta");
+				System.out.println(atta);
 				if(atta.getLogin().equals(context.getCurrentUser().getLogin())){
 					trouve = true;
 					this.eventTitle.setText(this.event.getTitle() + "    -    Vous etes en Attente");

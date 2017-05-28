@@ -116,14 +116,16 @@ public class WaitingDAO{
 	 * @param user_login le login du User
 	 * @param event_id l'id du Event
 	 */
-	public static void insert(String user_login, int event_id) {
+	public static boolean insert(String user_login, int event_id) {
+		System.out.println("dans Waiting.insert");
+		boolean ret = false;
 		Statement stat = null;
 		String query = "";
 
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
-			
+
 			//Preparation de la requete en ligne
 			stat = con.createStatement();
 
@@ -132,10 +134,14 @@ public class WaitingDAO{
 
 			//Execute la requête
 			stat.executeUpdate(query);
+			
+			ret = true;
 		}
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
+		System.out.println("ret = "+ret);
+		return ret;
 	}
 
 
@@ -147,6 +153,8 @@ public class WaitingDAO{
 	 * @return true, if successful
 	 */
 	public static boolean delete(String user_login, int event_id) {
+		System.out.println("dans Waiting.delete");
+
 		boolean ret = false;
 		Statement stat = null;
 		String query = "";
@@ -154,7 +162,7 @@ public class WaitingDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
-			
+
 			//Preparation de la requete en ligne
 			stat = con.createStatement();
 
@@ -176,7 +184,9 @@ public class WaitingDAO{
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
-		return false;
+		
+		System.out.println("ret = "+ret);
+		return ret;
 	}
 
 	/**
@@ -193,7 +203,7 @@ public class WaitingDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
-			
+
 			//Preparation de la requete en ligne
 			stat = con.createStatement();
 

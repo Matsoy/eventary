@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.SwingUtilities;
 
 import model.Context;
 import model.Event;
@@ -53,11 +54,14 @@ public class ActionUnsubscribeEvent extends AbstractAction{
 		// récupération de l'evenement courant
 		Event event = this.view.getEvent();
 		
+		this.view.getFrame().getHomePanel().setContainerCentral(this.view.getFrame().getEventPanel());
+		
 		if(event.removeParticipant(context.getCurrentUser())){
-			this.view.removeAll();
 			this.view.getFrame().getEventPanel().adaptEvent(event, this.context);
 			view.getFrame().displayMessage("Vous êtes maintenant désinscrit de l'événement "+event.getTitle(), new Color(139,233,120));
 		}
+		
+		SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 	}
 
 }
