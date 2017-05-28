@@ -131,7 +131,7 @@ public class ParticipationDAO{
 			stat = con.createStatement();
 
 			//Preparation de la requete
-			query = "INSERT INTO PARTICIPATION VALUES('"+ user_login +"',"+ event_id +");";
+			query = "INSERT INTO PARTICIPATION VALUES("+ event_id +",'"+ user_login +"');";
 
 			//Execute la requête
 			stat.executeUpdate(query);
