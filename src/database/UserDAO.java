@@ -173,7 +173,7 @@ public class UserDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
-			
+
 			//Preparation de la requete en ligne
 			stat = con.createStatement();
 
@@ -201,7 +201,7 @@ public class UserDAO{
 		try {
 			//Recuperation de la connexion
 			Connection con = SQLiteConnection.getInstance().getConnection();
-			
+
 			//Preparation de la requete en ligne
 			stat = con.createStatement();
 
@@ -218,6 +218,63 @@ public class UserDAO{
 			System.out.println("ERREUR: " + e.getMessage());
 		}
 	}
+
+
+
+	/**
+	 * Update moderators.
+	 *
+	 * @param modoLogins the modo logins
+	 * @return true, if successful
+	 */
+	public static boolean updateModerators(ArrayList<String> modoLogins) {
+		boolean ret = false;
+		Statement stat = null;
+		String query = "";
+
+		try {
+			//Recuperation de la connexion
+			Connection con = SQLiteConnection.getInstance().getConnection();
+
+			//Preparation de la requete en ligne
+			stat = con.createStatement();
+
+			//recup des modo
+			//Preparation de la requete
+			query = "SELECT login FROM USER WHERE moderator = 1";
+
+			//Le resultat de la requ�te
+			ResultSet result = stat.executeQuery(query);
+
+			if (result.next() ) {
+				do {
+					// si le user n'est pas dans la list donnée. Si le user parcouru ne doit plus etre modo
+					if (!modoLogins.contains(result.getString(1))) {
+						query = "UPDATE USER SET moderator = 0 WHERE UPPER(login) = UPPER('"+ result.getString(1) +"');";
+						stat.executeUpdate(query);
+					}
+					// si le user est dans la liste, donc pas de changement a faire. On le supp de la liste
+					else {
+						modoLogins.remove(result.getString(1));
+					}
+				} 
+				while (result.next());
+			}
+
+			//il ne reste plus que les nouveaux modo
+			for (String login : modoLogins) {
+				query = "UPDATE USER SET moderator = 1 WHERE UPPER(login) = UPPER('"+ login +"');";
+				stat.executeUpdate(query);
+			}
+			ret = true;
+		}
+		catch(SQLException e) {
+			System.out.println("ERREUR: " + e.getMessage());
+		}
+
+		return ret;
+	}
+
 
 	/**
 	 * Generate hash.
