@@ -166,7 +166,7 @@ public class WaitingDAO{
 			// sinon, on supprime la participation du User choisi pour l'Event choisi
 			else{
 				//Preparation de la requete
-				query = "DELETE FROM WAITING WHERE event_id = " + event_id + "AND UPPER(user_login) = UPPER('" + user_login + "');";
+				query = "DELETE FROM WAITING WHERE event_id = " + event_id + " AND UPPER(user_login) = UPPER('" + user_login + "');";
 			}
 
 			//Execute la requête
