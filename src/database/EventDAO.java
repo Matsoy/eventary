@@ -300,18 +300,19 @@ public class EventDAO{
 
 			//Preparation de la requete en ligne
 			stat = con.createStatement();
-
+						
 			//suppression de toutes les participations � cet Event
 			ParticipationDAO.delete("", id_event);
-			
+						
 			//suppression de toutes les participations � cet Event
 			WaitingDAO.delete("", id_event);
-
+						
 			//Preparation de la requete
 			query = "DELETE FROM EVENT WHERE id = " + id_event + ";";
 
 			//Execute la requête
 			stat.executeUpdate(query);
+						
 			ret = true;
 		}
 		catch(SQLException e) {

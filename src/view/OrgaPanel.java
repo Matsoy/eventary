@@ -137,7 +137,7 @@ public class OrgaPanel extends JPanel {
 			this.loginBoxModel.removeAllElements();
 			this.loginBoxModel.addElement("");
 			for(int i = 0; i < listeEtu.size(); i++){
-				if(listeEtu.get(i).isInAsso(this.organisation) == false){
+				if(listeEtu.get(i).isInOrga(this.organisation) == false){
 					loginBoxModel.addElement(listeEtu.get(i).getLogin());
 				}
 			}

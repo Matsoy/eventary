@@ -378,7 +378,6 @@ public class Event extends Observable{
 	 */
 	public void setListeParticipants(List<User> listeParticipants) {
 		this.listeParticipants = listeParticipants;
-		System.out.println("setListeParticipants");
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -398,7 +397,6 @@ public class Event extends Observable{
 	 * @param listeAttente the new liste attente
 	 */
 	public void setListeAttente(List<User> listeAttente) {
-		System.out.println("setListeAttente");
 		this.listeAttente = listeAttente;
 		this.setChanged();
 		this.notifyObservers();
@@ -413,19 +411,28 @@ public class Event extends Observable{
 		if(canRemove(remover)){	//Si l'evenement peut être supprimé par l'utilisateur
 			// On notifie les participants et ceux en liste d'attente
 			for(User participant : listeParticipants) {
-				participant.addNotification("L'événement \" " + this.id + " \", auquel vous participiez, a été supprimé");
+				participant.addNotification("L'événement \" " + this.title + " \", auquel vous participiez, a été supprimé");
 			}
 
 			for(User attente : listeAttente){
-				attente.addNotification("L'événement \" " + this.id + " \", auquel vous etiez en liste d'attente, a été supprimé");
+				attente.addNotification("L'événement \" " + this.title + " \", auquel vous etiez en liste d'attente, a été supprimé");
 			}
 
 			EventDAO.delete(this.getId());
 
-			if(remover.getModerator() == true && remover.equals(this.organizer) == false){	//Si c'est un modérateur qui supprime l'événement
+			if(remover.getModerator() == true && remover.getLogin() != this.organizer.getLogin()){	//Si c'est un modérateur qui supprime l'événement
 				//alors il peut laisser un message à l'organisateur
 				//à modifier pour que notifie un message à l'organisateur
-				this.organizer.addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement" + remover.message());
+
+				if (this.getOrganization() == null) {// si event au nom d'un utilisateur et qu'il est l'organisateur
+					if(remover == this.organizer){
+						this.organizer.addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement '"+ this.getTitle() +"' :" + remover.message());
+					}
+				}
+				else { // event au nom d'une orga, on l'envoi aussi au membre organizateur et au reponsable de l'orga
+					this.organizer.addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement '"+ this.getTitle() +"' :" + remover.message());
+					this.organization.getInCharge().addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement '"+ this.getTitle() +"' :" + remover.message());
+				}
 			}
 		}
 	}
@@ -437,15 +444,24 @@ public class Event extends Observable{
 	 * @return true, if successful
 	 */
 	public boolean canRemove(User remover){
-		if(remover == this.organizer){
-			return true;
-		}else if(this.organization != null){
-			return remover.isInAsso(this.organization);
-		}else if(remover.getModerator() == true){
-			return true;
-		}else{
-			return false;
+		boolean ret = false;
+
+		// si event au nom d'un utilisateur et qu'il est l'organisateur
+		if (this.getOrganization() == null) {
+			if(remover == this.organizer){
+				ret = true;
+			}
 		}
+		// si modérateur
+		else if (remover.getModerator()){ 
+			ret = true;
+		}
+		// si membre de l'orga qui organise l'event
+		else if (remover.isInOrga(this.getOrganization())) {
+			ret = true;
+		}
+
+		return ret;
 	}
 
 	/**
@@ -485,7 +501,7 @@ public class Event extends Observable{
 				break;
 			}
 		}
-		
+
 		if (!trouve) { // si l'utilisateur n'est pas sur la liste principale, parcours de la liste d'attente
 			for(User user : this.getListeAttente()){
 				if(participant.getLogin().equals(user.getLogin())){ // si l'utilisateur est sur liste d'attente
@@ -494,7 +510,7 @@ public class Event extends Observable{
 				}
 			}
 		}
-		
+
 		//maj des listes des participations
 		this.setListeParticipants(ParticipationDAO.eventParticipants(this.id));
 		this.setListeAttente(WaitingDAO.waitingsForAnEvent(this.id));
@@ -502,6 +518,11 @@ public class Event extends Observable{
 		return true;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

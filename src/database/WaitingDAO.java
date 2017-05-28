@@ -115,9 +115,9 @@ public class WaitingDAO{
 	 *
 	 * @param user_login le login du User
 	 * @param event_id l'id du Event
+	 * @return true, if successful
 	 */
 	public static boolean insert(String user_login, int event_id) {
-		System.out.println("dans Waiting.insert");
 		boolean ret = false;
 		Statement stat = null;
 		String query = "";
@@ -140,7 +140,6 @@ public class WaitingDAO{
 		catch(SQLException e) {
 			System.out.println("ERREUR: " + e.getMessage());
 		}
-		System.out.println("ret = "+ret);
 		return ret;
 	}
 
@@ -153,7 +152,6 @@ public class WaitingDAO{
 	 * @return true, if successful
 	 */
 	public static boolean delete(String user_login, int event_id) {
-		System.out.println("dans Waiting.delete");
 
 		boolean ret = false;
 		Statement stat = null;
@@ -185,7 +183,6 @@ public class WaitingDAO{
 			System.out.println("ERREUR: " + e.getMessage());
 		}
 		
-		System.out.println("ret = "+ret);
 		return ret;
 	}
 

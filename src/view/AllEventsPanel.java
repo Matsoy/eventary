@@ -60,6 +60,7 @@ public class AllEventsPanel extends JPanel{
 	 * Affiche la liste de tous les evenements.
 	 *
 	 * @param events the events
+	 * @param model the model
 	 * @param sites the sites
 	 */
 	public void displayAllEvents(ArrayList<model.Event> events,  Context model, ArrayList<model.Site> sites){

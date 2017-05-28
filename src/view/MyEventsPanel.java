@@ -56,6 +56,7 @@ public class MyEventsPanel extends JPanel{
 	 *
 	 * @param participationsInAnEvent the participations in an event
 	 * @param waitingsEvent the waitings event
+	 * @param model the model
 	 * @param sites the sites
 	 */
 	public void displayMyEvents(ArrayList<model.Event> participationsInAnEvent, ArrayList<model.Event> waitingsEvent, Context model, ArrayList<model.Site> sites){

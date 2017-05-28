@@ -63,6 +63,9 @@ public class EventPanel extends JPanel{
 	/** The infos adresse. */
 	JLabel infosAdresse;
 
+	/** The infos organizer. */
+	JLabel infosOrganizer;
+
 	/** The date format. */
 	SimpleDateFormat dateFormat;
 
@@ -78,12 +81,16 @@ public class EventPanel extends JPanel{
 	/** The desinscription. */
 	JButton desinscription;
 
+	/** The participants list label. */
 	JLabel participantsListLabel;
 
+	/** The waitings list label. */
 	JLabel waitingsListLabel;
 
+	/** The participants list panel. */
 	JPanel participantsListPanel;
 
+	/** The waitings list panel. */
 	JPanel waitingsListPanel;
 
 
@@ -95,29 +102,49 @@ public class EventPanel extends JPanel{
 	EventPanel(Frame frame){
 		super();
 		this.frame = frame;
-		
+
 		this.suppressionEvent = new JButton();
 		this.inscription = new JButton();
 		this.desinscription = new JButton();
 
 	}
-	
 
+
+	/**
+	 * Gets the event.
+	 *
+	 * @return the event
+	 */
 	public Event getEvent() {
 		return event;
 	}
 
 
+	/**
+	 * Gets the suppression event.
+	 *
+	 * @return the suppression event
+	 */
 	public JButton getSuppressionEvent() {
 		return suppressionEvent;
 	}
 
 
+	/**
+	 * Gets the inscription.
+	 *
+	 * @return the inscription
+	 */
 	public JButton getInscription() {
 		return inscription;
 	}
 
 
+	/**
+	 * Gets the desinscription.
+	 *
+	 * @return the desinscription
+	 */
 	public JButton getDesinscription() {
 		return desinscription;
 	}
@@ -164,6 +191,7 @@ public class EventPanel extends JPanel{
 		this.infosTitre = new JLabel("");
 		this.infosDate = new JLabel("");
 		this.infosAdresse = new JLabel("");
+		this.infosOrganizer = new JLabel("");
 		this.infosDesc = new JLabel("");
 
 		JPanel infosPanTitre = new JPanel();
@@ -178,6 +206,10 @@ public class EventPanel extends JPanel{
 		infosPanAdresse.setMaximumSize(new Dimension(800,30));
 		infosPanAdresse.add(this.infosAdresse);
 
+		JPanel infosPanOrganizer = new JPanel();
+		infosPanOrganizer.setMaximumSize(new Dimension(800,30));
+		infosPanOrganizer.add(this.infosOrganizer);
+
 		JPanel infosPanDesc = new JPanel();
 		infosPanDesc.setMaximumSize(new Dimension(800,100));
 		infosPanDesc.add(this.infosDesc);
@@ -186,6 +218,7 @@ public class EventPanel extends JPanel{
 		this.dateFormat = new SimpleDateFormat("EEEE dd MMM yyyy - kk:mm", Locale.getDefault());
 		this.infosPan.add(infosPanDate);
 		this.infosPan.add(infosPanAdresse);
+		this.infosPan.add(infosPanOrganizer);
 		this.infosPan.add(infosPanDesc);
 
 		this.add(this.infosPan);
@@ -204,7 +237,7 @@ public class EventPanel extends JPanel{
 		this.desinscriptionPan = new JPanel();
 		this.desinscriptionPan.setMaximumSize(new Dimension(800,30));
 		this.desinscriptionPan.setLayout(new BoxLayout(desinscriptionPan, BoxLayout.X_AXIS));
-		
+
 		this.desinscription.setBackground(new Color(253,58,58));
 		this.desinscription.setMaximumSize(new Dimension(800,30));
 		this.desinscriptionPan.add(this.desinscription);
@@ -258,11 +291,8 @@ public class EventPanel extends JPanel{
 		//Rendre visible l'inscription ou la desinscription selon le currentUser
 		// Changer, faire en sorte d'appeler une fonction du model
 		boolean trouve = false;
-		System.out.println("getListeParticipants : "+event.getListeParticipants().size());
-		
+
 		for(User particip : this.event.getListeParticipants()){
-			System.out.println("particip");
-			System.out.println(particip);
 			if(particip.getLogin().equals(context.getCurrentUser().getLogin())){
 				trouve = true;
 				this.eventTitle.setText(this.event.getTitle() + "    -    Vous Participez");
@@ -270,11 +300,8 @@ public class EventPanel extends JPanel{
 				this.desinscriptionPan.setVisible(true);
 			}
 		}
-		System.out.println("getListeAttente : "+this.event.getListeAttente().size());
 		if(trouve == false) {
 			for(User atta : this.event.getListeAttente()){
-				System.out.println("atta");
-				System.out.println(atta);
 				if(atta.getLogin().equals(context.getCurrentUser().getLogin())){
 					trouve = true;
 					this.eventTitle.setText(this.event.getTitle() + "    -    Vous etes en Attente");
@@ -304,9 +331,18 @@ public class EventPanel extends JPanel{
 			String batiment = this.event.getRoom().getBuilding().getName();
 			String site = this.event.getRoom().getBuilding().getSite().getName();
 			String ecole = this.event.getRoom().getBuilding().getSite().getSchool().getName();
-			this.infosAdresse.setText("Salle : "+room+"     Bâtiment : "+batiment+"     Campus : "+site+"     Ecole : "+ecole);
+			this.infosAdresse.setText("Salle : "+room+"     Bâtiment : "+batiment+"     Site : "+site+"     Ecole : "+ecole);
 		}
 		this.infosDesc.setText(this.event.getDescription());
+		// si event au nom d'un utilisateur
+		if (this.event.getOrganization() == null) {
+			this.infosOrganizer.setText("Organisateur : "+this.event.getOrganizer().getfName() + " " + this.event.getOrganizer().getlName() + " - " + this.event.getOrganizer().getLogin());
+		}
+		else { // si event au nom d'une orga
+			this.infosOrganizer.setText("Organisateur : "+this.event.getOrganization().getName() + " - Pour plus d'informations, merci de contacter "+this.event.getOrganization().getInCharge().getfName() + " " + this.event.getOrganization().getInCharge().getlName() + " - " + this.event.getOrganization().getInCharge().getLogin());
+			infosPanOrganizer.add(infosOrganizer);
+		}
+
 
 		//Rendre visible l'inscription ou la desinscription selon le currentUser
 		// Changer, faire en sorte d'appeler une fonction du model
@@ -320,7 +356,7 @@ public class EventPanel extends JPanel{
 			participantPan.add(new JLabel(""));
 			this.participantsListPanel.add(participantPan);
 		}
-		
+
 		for(User participantUser : this.event.getListeParticipants()){
 			JPanel participantPan = new JPanel();
 			participantPan.setMaximumSize(new Dimension(800,25));
@@ -336,7 +372,7 @@ public class EventPanel extends JPanel{
 			waitingPan.add(new JLabel(""));
 			this.waitingsListPanel.add(waitingPan);
 		}
-		
+
 		for(User waitingUser : this.event.getListeAttente()){
 			JPanel waitingPan = new JPanel();
 			waitingPan.setMaximumSize(new Dimension(800,25));

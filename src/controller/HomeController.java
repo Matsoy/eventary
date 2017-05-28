@@ -44,10 +44,13 @@ public class HomeController implements java.util.Observer{
 	/** The action quit. */
 	ActionQuit actionQuit;
 	
+	/** The action inscrire. */
 	ActionSubscribeEvent actionInscrire;
 	
+	/** The action desinscrire. */
 	ActionUnsubscribeEvent actionDesinscrire;
 	
+	/** The action suppression. */
 	ActionRemoveEvent actionSuppression;
 
 

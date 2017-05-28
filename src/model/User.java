@@ -16,34 +16,34 @@ import database.OrgaMemberDAO;
  * The Class User.
  */
 public class User extends Observable {
-	
+
 	/** The login. */
 	String login;
-	
+
 	/** The moderator. */
 	boolean moderator;
-	
+
 	/** The name. */
 	String fName;
-	
+
 	/** The l name. */
 	String lName;
-	
+
 	/** The branch. */
 	String branch;
-	
+
 	/** The year. */
 	int year;
-	
+
 	/** The liste asso. */
 	List<Association> listeAsso = new ArrayList<Association>();
-	
+
 	/** The liste dpt. */
 	List<Department> listeDpt = new ArrayList<Department>();
-	
+
 	/** The liste notif. */
 	List<String> listeNotif = new ArrayList<String>();
-	
+
 	/**
 	 * Instantiates a new user.
 	 */
@@ -74,7 +74,7 @@ public class User extends Observable {
 		this.listeDpt = listeDpt;
 	}
 
-	
+
 	/**
 	 * Gets the login.
 	 *
@@ -182,7 +182,7 @@ public class User extends Observable {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	
+
 	/**
 	 * Gets the liste asso.
 	 *
@@ -218,7 +218,7 @@ public class User extends Observable {
 	public void setListeDpt(List<Department> listeDpt) {
 		this.listeDpt = listeDpt;
 	}
-	
+
 	/**
 	 * Gets the liste notif.
 	 *
@@ -237,22 +237,23 @@ public class User extends Observable {
 		this.listeNotif = listeNotif;
 	}
 
+
 	/**
-	 * Checks if is in asso.
+	 * Checks if is in orga.
 	 *
-	 * @param association the association
-	 * @return true, if is in asso
+	 * @param orga the orga
+	 * @return true, if is in orga
 	 */
-	public boolean isInAsso(Organization association){
-		List<User> listeMembreAsso = OrgaMemberDAO.find(association.getId());
-		for(User membre : listeMembreAsso){
+	public boolean isInOrga(Organization orga){
+		List<User> listeMembreOrga = OrgaMemberDAO.find(orga.getId());
+		for(User membre : listeMembreOrga){
 			if(membre.getLogin().equalsIgnoreCase(this.login)){
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Adds the notification.
 	 *
@@ -262,7 +263,7 @@ public class User extends Observable {
 	public void addNotification(String notif) {
 		NotificationDAO.insert(this.login, notif);
 	}
-	
+
 	/**
 	 * Removes the notifications.
 	 */
@@ -271,7 +272,7 @@ public class User extends Observable {
 		NotificationDAO.delete(this.login);
 		this.setListeNotif(NotificationDAO.find(this.login));
 	}
-	
+
 	/**
 	 * Message.
 	 *
@@ -285,7 +286,7 @@ public class User extends Observable {
 			String mes = sc.nextLine();
 			System.out.println("Vous avez saisi : " + mes);
 			sc.close();
-			
+
 			if(mes.equals("")){
 				System.out.println("message vide");
 				return ", sans laisser de message";
@@ -296,7 +297,7 @@ public class User extends Observable {
 			return null;
 		}
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

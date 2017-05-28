@@ -92,7 +92,7 @@ public class NotificationDAO{
 
 			//Preparation de la requete
 			query = "INSERT INTO NOTIFICATION (user_login, message) "
-					+ "VALUES('"+ user_login +"',\""+ message +"\");";
+					+ "VALUES('"+ user_login +"',\""+ message.replaceAll("\"","'") +"\");";
 			
 			//Execute la requête
 			stat.executeUpdate(query);

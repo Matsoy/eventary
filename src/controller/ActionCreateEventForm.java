@@ -31,9 +31,7 @@ import view.Frame;
  */
 public class ActionCreateEventForm extends AbstractAction{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The view. */

@@ -19,8 +19,14 @@ import view.EventItemPanel;
  */
 public class DisplayEventListener implements MouseListener {	
 	
+	/** The model. */
 	Context model;
 	
+	/**
+	 * Instantiates a new display event listener.
+	 *
+	 * @param model the model
+	 */
 	public DisplayEventListener(Context model) {
 		this.model = model;
 	}

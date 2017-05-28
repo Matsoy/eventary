@@ -5,33 +5,51 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.SwingUtilities;
 
+import database.EventDAO;
+import database.SiteDAO;
 import model.Context;
 import model.Event;
 import view.EventPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ActionRemoveEvent.
+ */
 public class ActionRemoveEvent extends AbstractAction {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
+	/** The model. */
 	Context model;
 	
+	/** The view. */
 	EventPanel view;
 	
+	/**
+	 * Instantiates a new action remove event.
+	 *
+	 * @param model the model
+	 * @param view the view
+	 */
 	public ActionRemoveEvent(Context model, EventPanel view) {
 		this.model = model;
 		this.view = view;
 		this.putValue(Action.NAME, "Supprimer cet Evenement");
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		Event removedEvent = this.view.getEvent();
-		//removedEvent.removeEvent(this.model.getCurrentUser());
-		this.view.getFrame().displayMessage("L'Evenement "+removedEvent.getTitle()+" a bien ete supprime", new Color(139,233,120));
+		this.view.getEvent().removeEvent(this.model.getCurrentUser()); // supp de l'event
+		this.view.getFrame().getHomePanel().setContainerCentral(this.view.getFrame().getAllEventsPanel()); // retour page d'accueil avec la liste de tous les events
+		this.view.getFrame().getAllEventsPanel().displayAllEvents(EventDAO.findAll(model.getTempsAvantSuppression()), this.model, SiteDAO.findAll());
+		this.view.getFrame().displayMessage("L'Evenement "+this.view.getEvent().getTitle()+" a bien ete supprimé", new Color(139,233,120)); // message de confirmation de suppression
+		SwingUtilities.updateComponentTreeUI(this.view.getFrame());
 	}
 
 }

@@ -48,8 +48,6 @@ public class ActionSubscribeEvent extends AbstractAction{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("__________________");
-		System.out.println("actionperformed");
 		//récupération de l'événement courant
 		Event event = this.view.getEvent();
 
