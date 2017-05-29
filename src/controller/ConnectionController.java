@@ -10,6 +10,8 @@ import javax.swing.SwingUtilities;
 
 import database.EventDAO;
 import database.SiteDAO;
+import database.UserDAO;
+import input_output.Reader;
 import model.Context;
 import view.ConnectionPanel;
 import view.Frame;
@@ -50,6 +52,7 @@ public class ConnectionController implements java.util.Observer{
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
+		UserDAO.updateModerators(Reader.readLogs("moderatorLogins"));
 		// si l'utilisateur est authentifié, on passe à la page d'accueil
 		if(this.model.getAuthentificated()){
 			view.getFrame().setHomePanel(EventDAO.findAll(model.getTempsAvantSuppression()));

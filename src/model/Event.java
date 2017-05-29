@@ -446,15 +446,15 @@ public class Event extends Observable{
 	public boolean canRemove(User remover){
 		boolean ret = false;
 
+		// si modérateur
+		if (remover.getModerator()){ 
+			ret = true;
+		}
 		// si event au nom d'un utilisateur et qu'il est l'organisateur
-		if (this.getOrganization() == null) {
+		else  if (this.getOrganization() == null) {
 			if(remover == this.organizer){
 				ret = true;
 			}
-		}
-		// si modérateur
-		else if (remover.getModerator()){ 
-			ret = true;
 		}
 		// si membre de l'orga qui organise l'event
 		else if (remover.isInOrga(this.getOrganization())) {

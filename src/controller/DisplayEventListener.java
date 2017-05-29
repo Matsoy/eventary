@@ -8,6 +8,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.SwingUtilities;
 
+import database.UserDAO;
+import input_output.Reader;
 import model.Context;
 import view.EventItemPanel;
 
@@ -36,6 +38,7 @@ public class DisplayEventListener implements MouseListener {
 	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		UserDAO.updateModerators(Reader.readLogs("moderatorLogins"));
 		((EventItemPanel)e.getSource()).getFrame().getHomePanel().setContainerCentral(((EventItemPanel)e.getSource()).getFrame().getEventPanel());
 		((EventItemPanel)e.getSource()).getFrame().getEventPanel().adaptEvent(((EventItemPanel)e.getComponent()).getEvent(), this.model);
 		SwingUtilities.updateComponentTreeUI(((EventItemPanel)e.getSource()).getFrame());

@@ -73,7 +73,6 @@ public class Reader {
 					splitLine = currentLine.split(",");
 					for(String str : splitLine){
 						listeUsers.add(str);
-						System.out.println(str);
 					}
 				}
 			}
