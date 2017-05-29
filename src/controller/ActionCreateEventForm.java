@@ -61,7 +61,7 @@ public class ActionCreateEventForm extends AbstractAction{
 		try {
 
 			// parser String -> java.util.Date
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 			// titre
 			String eventName = this.view.getTitreField().getText().replaceAll("\"","'");
@@ -71,13 +71,6 @@ public class ActionCreateEventForm extends AbstractAction{
 
 			// date de debut
 			String startDate = this.view.getDateDebutField().getText()+":00";
-			//			String[] StringStartDateSplit1 = startDate.split("/");
-			//			if (Integer.parseInt(StringStartDateSplit1[0]) < 1 && Integer.parseInt(StringStartDateSplit1[0]) > 31) {
-			//				
-			//			}
-			//			if (Integer.parseInt(StringStartDateSplit1[1]) < 1 && Integer.parseInt(StringStartDateSplit1[1]) > 12) {
-			//				
-			//			}
 
 
 			Date parsedStartDate = formatter.parse(startDate);
