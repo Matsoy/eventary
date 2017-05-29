@@ -493,7 +493,12 @@ public class Event extends Observable{
 	 */
 	public boolean removeParticipant(User participant){
 		boolean trouve = false;
-
+		
+		// On notifie le premier de la liste d'attente car il va passer en liste principale
+		if(this.listeAttente.size() > 0) {
+			this.listeAttente.get(0).addNotification("Vous êtes maintenant en liste Principale pour l'événement "+this.getTitle());
+		}
+		
 		for(User user : this.getListeParticipants()){ //parcours de la liste pricipale
 			if(participant.getLogin().equals(user.getLogin())){ // si l'utilisateur est sur liste pricipale
 				ParticipationDAO.delete(participant.getLogin(), this.id);
