@@ -407,7 +407,8 @@ public class Event extends Observable{
 	 *
 	 * @param remover the remover
 	 */
-	public void removeEvent(User remover){
+	public void removeEvent(User remover, String modoMessage){
+		System.out.println(modoMessage);
 		if(canRemove(remover)){	//Si l'evenement peut être supprimé par l'utilisateur
 			// On notifie les participants et ceux en liste d'attente
 			for(User participant : listeParticipants) {
@@ -426,12 +427,12 @@ public class Event extends Observable{
 
 				if (this.getOrganization() == null) {// si event au nom d'un utilisateur et qu'il est l'organisateur
 					if(remover == this.organizer){
-						this.organizer.addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement '"+ this.getTitle() +"' :" + remover.message());
+						this.organizer.addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement '"+ this.getTitle() +"' :" + remover.message() + ".   " + modoMessage);
 					}
 				}
 				else { // event au nom d'une orga, on l'envoi aussi au membre organizateur et au reponsable de l'orga
-					this.organizer.addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement '"+ this.getTitle() +"' :" + remover.message());
-					this.organization.getInCharge().addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement '"+ this.getTitle() +"' :" + remover.message());
+					this.organizer.addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement '"+ this.getTitle() +"' :" + remover.message() + ".   " + modoMessage);
+					this.organization.getInCharge().addNotification("Le modérateur " + remover.getLogin() + " a supprimé votre événement '"+ this.getTitle() +"' :" + remover.message() + ".   " + modoMessage);
 				}
 			}
 		}

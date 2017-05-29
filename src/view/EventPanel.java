@@ -13,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import model.Context;
 import model.Event;
@@ -93,6 +94,9 @@ public class EventPanel extends JPanel{
 	/** The waitings list panel. */
 	JPanel waitingsListPanel;
 
+	/** The supp message field. */
+	JTextField suppMessageField;
+
 
 	/**
 	 * Instantiates a new home panel.
@@ -117,6 +121,15 @@ public class EventPanel extends JPanel{
 	 */
 	public Event getEvent() {
 		return event;
+	}
+
+	/**
+	 * Gets the mess supp.
+	 *
+	 * @return the mess supp
+	 */
+	public JTextField getMessSupp(){
+		return this.suppMessageField;
 	}
 
 
@@ -281,8 +294,17 @@ public class EventPanel extends JPanel{
 
 		this.event = event;
 
+		suppMessageField = new JTextField("");
+		JLabel labelSupp = new JLabel("  Votre message :  ");
 		// Rendre visible ou non le bouton supprimer selon le currentUser
 		if(this.event.canRemove(context.getCurrentUser())){
+			if (context.getCurrentUser().getModerator()) { // si modérateur, alors il peut laisser un message 
+				JPanel suppMessagePanel = new JPanel();
+				suppMessagePanel.setMaximumSize(new Dimension(800,210));
+				
+				panelSuppression.add(labelSupp);	
+				panelSuppression.add(this.suppMessageField);	
+			}
 			this.panelSuppression.setVisible(true);
 		} else {
 			this.panelSuppression.setVisible(false);
