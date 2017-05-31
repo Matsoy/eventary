@@ -406,6 +406,7 @@ public class Event extends Observable{
 	 * Removes the event.
 	 *
 	 * @param remover the remover
+	 * @param modoMessage the modo message
 	 */
 	public void removeEvent(User remover, String modoMessage){
 		System.out.println(modoMessage);
