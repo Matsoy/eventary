@@ -57,7 +57,7 @@ public class MyEventsPanel extends JPanel{
 
 
 	/**
-	 * Affiche la liste des evenements de l'utilisateur courant.
+	 * Affiche la liste des evenements auxquels participe l'utilisateur courant (liste principale et liste d'attente)
 	 *
 	 * @param participationsInAnEvent the participations in an event
 	 * @param waitingsEvent the waitings event

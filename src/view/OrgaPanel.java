@@ -124,10 +124,10 @@ public class OrgaPanel extends JPanel {
 
 
 	/**
-	 * Adapt orga.
+	 * Adapte le panel à l'Organization cliquée
 	 *
 	 * @param orga the orga
-	 * @param listeEtu the liste etu
+	 * @param listeEtu la liste des membres de l'Organization
 	 */
 	public void adaptOrga(Organization orga, List<User> listeEtu){
 		this.organisation = orga;

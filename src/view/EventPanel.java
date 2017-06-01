@@ -181,7 +181,7 @@ public class EventPanel extends JPanel{
 
 
 	/**
-	 * Adapt event.
+	 * Adapte le panel à l'Event et au Context
 	 *
 	 * @param event the event
 	 * @param context the context

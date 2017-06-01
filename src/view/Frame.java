@@ -244,7 +244,7 @@ public class Frame extends JFrame{
 
 
 	/**
-	 * Display error.
+	 * Affiche un bandeau de couleur avec un message en haut de la Frame
 	 *
 	 * @param str the str
 	 * @param color the color

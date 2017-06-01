@@ -29,15 +29,11 @@ public class EventaryButton extends JButton{
 		this.setForeground(Color.BLACK);
 		this.setFocusPainted(false);
 		this.setFont(new Font("Arial", Font.BOLD, 12));
-		//this.setBorderPainted(false);
-		//Enleve les bordures des boutons
-		//this.setRolloverEnabled(false);
-		//Enleve l'effet hoover
 	}
 	
 	
 	/**
-	 * Instantiates a new eventary button.
+	 * Instantiates a new eventary button with a background color
 	 *
 	 * @param color the color
 	 */
@@ -47,10 +43,6 @@ public class EventaryButton extends JButton{
 		this.setForeground(Color.BLACK);
 		this.setFocusPainted(false);
 		this.setFont(new Font("Arial", Font.BOLD, 12));
-		//this.setBorderPainted(false);
-		//Enleve les bordures des boutons
-		//this.setRolloverEnabled(false);
-		//Enleve l'effet hoover
 	}
 
 }

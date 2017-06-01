@@ -36,10 +36,10 @@ public class MyOrganisationsPanel extends JPanel{
 	}
 	
 	/**
-	 * Display my organisations.
+	 * Afffiche les organisations dont l'utilisateur courant est membre
 	 *
-	 * @param listeAsso the liste asso
-	 * @param listeDpt the liste dpt
+	 * @param listeAsso la liste des Association dont il est membre
+	 * @param listeDpt la liste des Department dont il est membre
 	 */
 	public void displayMyOrganisations(List<model.Association> listeAsso, List<model.Department> listeDpt) {
 		this.removeAll();

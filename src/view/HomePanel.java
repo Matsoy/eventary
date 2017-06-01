@@ -221,7 +221,7 @@ public class HomePanel extends JPanel{
 
 
 	/**
-	 * Sets the container central.
+	 * Assigne un nouveau Container au container à droite de la sidebar, pour modifier l'interface
 	 *
 	 * @param newContainer the new container central
 	 */
@@ -239,7 +239,7 @@ public class HomePanel extends JPanel{
 
 
 	/**
-	 * Display profile.
+	 * Affiche l'image de profil de l'utilisateur courant
 	 *
 	 * @param user the user
 	 * @param profileImagePath the profile image path

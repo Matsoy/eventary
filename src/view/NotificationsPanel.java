@@ -57,9 +57,9 @@ public class NotificationsPanel extends JPanel {
 	}
 
 	/**
-	 * Display notif.
+	 * Affiche les notifications
 	 *
-	 * @param listeNotif the liste notif
+	 * @param listeNotif la liste des messages des notifications
 	 */
 	public void displayNotif(List<String> listeNotif) {
 		this.removeAll();
