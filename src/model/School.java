@@ -24,7 +24,8 @@ public class School extends Observable {
 	}
 	
 	/**
-	 * Inits the.
+	 * Inits the School.
+	 * Méthode appelée par les DAO.
 	 *
 	 * @param id the id
 	 * @param name the name

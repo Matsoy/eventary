@@ -15,6 +15,8 @@ import database.WaitingDAO;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Event.
+ * Cette classe contient les méthodes qui sont liées à la gestion
+ * d'un événement : inscription/desinscription et annulation. 
  */
 public class Event extends Observable{
 
@@ -70,7 +72,8 @@ public class Event extends Observable{
 	}
 
 	/**
-	 * Inits the.
+	 * Inits the Event.
+	 * Méthode appelée par les DAO.
 	 *
 	 * @param id the id
 	 * @param title the title
@@ -404,12 +407,16 @@ public class Event extends Observable{
 
 	/**
 	 * Removes the event.
-	 *
+	 * 
+	 * Cette méthode va s'occuper de la gestion pour la suppression d'un événement.
+	 * Elle va notamment notifier les participants et les personnes en liste d'attente
+	 * Appeler les DAO nécessaires pour enlever l'événement de la BDD
+	 * Cette méthode va aussi notifier l'organisateur si un modérateur supprime son événement
+	 * 
 	 * @param remover the remover
 	 * @param modoMessage the modo message
 	 */
 	public void removeEvent(User remover, String modoMessage){
-		System.out.println(modoMessage);
 		if(canRemove(remover)){	//Si l'evenement peut être supprimé par l'utilisateur
 			// On notifie les participants et ceux en liste d'attente
 			for(User participant : listeParticipants) {
@@ -441,7 +448,9 @@ public class Event extends Observable{
 
 	/**
 	 * Can remove.
-	 *
+	 * Cette méthode va permettre de savoir si l'utilisateur passé en paramètre
+	 * peut supprimé l'événement (this).
+	 * 
 	 * @param remover the remover
 	 * @return true, if successful
 	 */
@@ -468,6 +477,9 @@ public class Event extends Observable{
 
 	/**
 	 * Adds the participant.
+	 * Cette méthode s'occupe de la gestion pour l'inscription de l'utilisateur passé en paramètre
+	 * Un contrôle des places restantes en liste principale permettra d'appeler le bon DAO
+	 * pour que l'utilisateur soit inscrit en liste principale ou en liste d'attente.
 	 *
 	 * @param newParticipant the new participant
 	 * @return true, if successful
@@ -489,6 +501,9 @@ public class Event extends Observable{
 
 	/**
 	 * Removes the participant.
+	 * Cette méthode permettra de gérer la desinscription de l'utilisateur passé en paramètre.
+	 * En plus d'appeler le bon DAO pour la desincription du participant, elle va aussi faire
+	 * en sorte de faire monter le premier de la liste d'attente en liste principal si nécessaire.
 	 *
 	 * @param participant the participant
 	 * @return true, if successful

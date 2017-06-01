@@ -14,6 +14,9 @@ import database.OrgaMemberDAO;
 // TODO: Auto-generated Javadoc
 /**
  * The Class User.
+ * Cette classe contient les méthodes liées à un utilisateur :
+ * gestion de ces notifications, et ajout d'un message si l'utilisateur est modérateur
+ * (dans le cadre de la suppresion d'un événement).
  */
 public class User extends Observable {
 
@@ -240,7 +243,7 @@ public class User extends Observable {
 
 	/**
 	 * Checks if is in orga.
-	 *
+	 * 
 	 * @param orga the orga
 	 * @return true, if is in orga
 	 */
@@ -275,6 +278,8 @@ public class User extends Observable {
 
 	/**
 	 * Message.
+	 * Méthode qui permet au modérateur de laisser un message
+	 * lorsqu'il annule un événement
 	 *
 	 * @return the string
 	 */

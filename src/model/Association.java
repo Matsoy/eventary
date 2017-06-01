@@ -7,7 +7,9 @@ import database.OrgaMemberDAO;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Association.
+ * The Class Association.	
+ * Cette classe se distingue de la classe département car elle contient
+ * une méthode pour ajouter des membres dans l'association.
  */
 public class Association extends Organization {
 	
@@ -19,7 +21,10 @@ public class Association extends Organization {
 	
 	/**
 	 * Adds the member.
-	 *
+	 * Cette méthode va permettre l'ajout de l'utilisateur passé en paramètre
+	 * dans l'association (this), et va s'occuper de notifier les autres membres 
+	 * de l'association de cet ajout.
+	 * 
 	 * @param nouveauMembre the nouveau membre
 	 */
 	public void addMember(User nouveauMembre){

@@ -29,7 +29,8 @@ public class Site extends Observable{
 	
 	
 	/**
-	 * Inits the.
+	 * Inits the Site.
+	 * Méthode appelée par les DAO.
 	 *
 	 * @param id the id
 	 * @param school the school

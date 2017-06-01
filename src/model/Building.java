@@ -28,7 +28,8 @@ public class Building extends Observable{
 	}
 	
 	/**
-	 * Inits the.
+	 * Inits the Building.
+	 * Méthode appelée par les DAO.
 	 *
 	 * @param id the id
 	 * @param site the site

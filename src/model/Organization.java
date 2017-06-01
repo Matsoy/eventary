@@ -10,6 +10,8 @@ import java.util.Observable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Organization.
+ * Organization est une classe abstraite car 2 classes 
+ * hériteront du type organization : Association et Département
  */
 public abstract class Organization extends Observable{
 	
@@ -26,7 +28,8 @@ public abstract class Organization extends Observable{
 	List<User> listeMembres = new ArrayList<User>();
 	
 	/**
-	 * Inits the.
+	 * Inits the Organization.
+	 * Méthode appelée par les DAO.
 	 *
 	 * @param id the id
 	 * @param name the name

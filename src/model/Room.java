@@ -31,7 +31,8 @@ public class Room extends Observable {
 	
 	
 	/**
-	 * Inits the.
+	 * Inits the Room.
+	 * Méthode appelée par les DAO.
 	 *
 	 * @param id the id
 	 * @param building the building

@@ -12,6 +12,8 @@ import input_output.Reader;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Context.
+ * Cette classe permet principalement de savoir quel utilisateur
+ * est connecté sur l'application.
  */
 public class Context extends Observable{
 
@@ -115,7 +117,10 @@ public class Context extends Observable{
 
 	/**
 	 * Connexion.
-	 *
+	 * Cette méthode va s'occuper d'appeler le bon DAO pour l'authentification
+	 * Cette méthode va aussi permettre au controller de savoir 
+	 * si l'authentification a réussi ou échoué.
+	 * 
 	 * @param login the login
 	 * @param passwd the passwd
 	 * @return true, if successful
@@ -131,7 +136,7 @@ public class Context extends Observable{
 	
 	/**
 	 * Display event.
-	 *
+	 * 
 	 * @param eventId the event id
 	 */
 	public void displayEvent(int eventId){
