@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class ActionAddMember extends AbstractAction {
 	String login;
 
 	/**
-	 * Instantiates a new action ajouter membre.
+	 * Instantiates a new action add member.
 	 *
 	 * @param model the model
 	 * @param view the view

@@ -14,6 +14,9 @@ import controller.DisplayOrgaListener;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MyOrganisationsPanel.
+ * 
+ * L’utilisateur peut voir la liste des organisations auxquelles il appartient. D’un côté ses associations, et de l’autre ses départements d’enseignement.
+ * Au clic sur sur une organisation de la liste, cela permet de faire apparaître l’interface qui détail une organisation.
  */
 public class MyOrganisationsPanel extends JPanel{
 

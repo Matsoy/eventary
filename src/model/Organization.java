@@ -11,7 +11,7 @@ import java.util.Observable;
 /**
  * The Class Organization.
  * Organization est une classe abstraite car 2 classes 
- * hériteront du type organization : Association et Département
+ * hériteront du type Organization : Association et Department
  */
 public abstract class Organization extends Observable{
 	

@@ -24,6 +24,11 @@ import model.Context;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HomePanel.
+ * 
+ * Les événements sont triés par date d’inscription à l’événement.
+ * Pour chaque événement, on peut voir son titre et sa date de début.
+ * Au clic sur la liste déroulante “< Filtrer par site >”, l’utilisateur peut filtrer la listes des événements par site (i.e. par campus).
+ * Au clic sur sur un événement de la liste, cela permet de faire apparaître l’interface qui détail un événement.
  */
 public class MyEventsPanel extends JPanel{
 

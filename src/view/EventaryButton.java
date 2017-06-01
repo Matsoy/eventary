@@ -11,6 +11,8 @@ import javax.swing.JButton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventaryButton.
+ * 
+ * JButton personnalisé pour les boutons de l'application
  */
 public class EventaryButton extends JButton{
 

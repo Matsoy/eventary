@@ -22,6 +22,23 @@ import model.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DisplayEventPanel.
+ * 
+ * Cet interface détaille les différentes informations de l’événement:
+ * <b>le titre<b>
+ * <b>les dates de début et de fin<b>
+ * <b>le lieu<b>
+ * soit les informations de la salle 
+ * soit l’adresse extérieure
+ * <b>l’organisateur<b>
+ * soit le nom de l’organisateur si l’événement a été créé au nom d’une personne
+ * soit le nom de l’organisation si l’événement a été créé au nom d’une organisation ainsi que la personne responsable
+ * <b>la description<b>
+ * On peut y voir la liste des participants et la liste d’attente.
+ * Si l’utilisateur n’est pas inscrit à l’événement, il peut alors s’y inscrire en cliquant sur le bouton “S’inscrire”. Si il est déjà inscrit, alors ce bouton d’inscription est remplacé par un bouton “Se désinscrire”
+ * Un bouton “Supprimer cet Evenement”, pour supprimer l’événement peut être disponible si:
+ * l’utilisateur est l’organisateur de l’événement
+ * l’événement est organisé au nom d’une organisation dont l’utilisateur est membre
+ * l’utilisateur est modérateur. Il peut d’ailleurs écrire un message qui sera envoyé sous forme de notification à l’organisateur de l’événement.
  */
 public class EventPanel extends JPanel{
 

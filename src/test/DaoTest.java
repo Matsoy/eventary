@@ -27,7 +27,7 @@ import model.User;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DaoTest.
+ * Test les DAO, classes qui font le lien entre le package model et le package database
  */
 public class DaoTest {
 

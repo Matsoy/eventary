@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.Association;
 import model.User;
 
 // TODO: Auto-generated Javadoc

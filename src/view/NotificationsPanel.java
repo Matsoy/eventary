@@ -16,6 +16,14 @@ import javax.swing.JPanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NotificationsPanel.
+ * 
+ * L’utilisateur reçoit des notifications si:
+ * une organisation auquel il appartient a un nouveau membre
+ * il est passé de la liste d’attente à la liste principale d’un événement
+ * un événement auquel il participait a été supprimé
+ * un événement dont il est l’organisateur a été supprimé par un modérateur
+ * un événement créé au nom d’une organisation dont il est membre a été supprimé
+ * Pour supprimer ses notifications, l’utilisateur peut cliquer sur le bouton “Supprimer notifications”
  */
 public class NotificationsPanel extends JPanel {
 

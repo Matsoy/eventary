@@ -24,6 +24,8 @@ import model.Event;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Frame.
+ * 
+ * La JFrame qui contiendra les différentes interfaces
  */
 public class Frame extends JFrame{
 

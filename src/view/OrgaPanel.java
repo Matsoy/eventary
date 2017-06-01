@@ -19,6 +19,10 @@ import model.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Class OrgaPanel.
+ * 
+ * L’utilisateur peut consulter la liste des membres de l’organisation
+ * Une liste déroulante pour ajouter un nouveau  est disponible quand l’organisation est une association.
+ * Pour cela, l’utilisateur saisie l’identifiant du nouveau membre dans la liste déroulante et clique sur le bouton “Valider Inscription”.
  */
 public class OrgaPanel extends JPanel {
 	/** The Constant serialVersionUID. */

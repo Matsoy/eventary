@@ -38,6 +38,23 @@ import model.Site;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CreateEventPanel.
+ * 
+ * L’interface est constituée d’un formulaire où doit être renseigné :
+ * <b>Le nom de l'événement</b>
+ * <b>Les dates de début de fin</b>
+ * <b>Une description</b>
+ * <b>Le lieu</b>
+ * Soit une adresse extérieure
+ * Soit une salle d’une école
+ * <b>Le nombre de participants maximum </b>
+ * si l’événement à lieu à une adresse extérieure
+ * sinon, si le l’événement a lieu dans une salle d’une école, alors le nombre maximum de participants est la capacité de la salle choisie 
+ * <b>L’organisateur</b>
+ * Soit au nom de l’utilisateur
+ * Soit au nom d’une association dont l’utilisateur est membre
+ * Soit au nom du département dont l’utilisateur est membre
+ * L’utilisateur valide le formulaire de création en cliquant sur le bouton “Valider”.
+ * Le formulaire de création d’un événement est alors vidé et l’événement créé devient alors visible par tout le monde.
  */
 public class CreateEventPanel extends JPanel{
 

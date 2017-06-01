@@ -16,6 +16,9 @@ import javax.swing.JTextField;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ConnectionPanel.
+ * 
+ * Pour se connecter, l’utilisateur doit saisir son identifiant étudiant et son mot de passe. 
+ * Ensuite, il n’a plus qu’à cliquer sur le bouton “Se connecter”
  */
 public class ConnectionPanel extends JPanel {
 	

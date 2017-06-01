@@ -15,10 +15,10 @@ import java.util.ArrayList;
 public class Reader {
 
 	/**
-	 * Read integer.
+	 * retourne l'entier correspondant à la chaîne à reconnaître
 	 *
-	 * @param S the s
-	 * @return the int
+	 * @param S le nom de la chaîne à reconnaître
+	 * @return l'entier
 	 */
 	public static int readInteger(String S){	//On passe la chaine à reconnaitre dans le fichier pour m'extraction de données
 		int entier = 0;
@@ -49,10 +49,10 @@ public class Reader {
 	}
 
 	/**
-	 * Read logs.
+	 * retourne la liste de String correspondant à la chaîne à reconnaître
 	 *
-	 * @param S the s
-	 * @return the array list
+	 * @param S le nom de la chaîne à reconnaître
+	 * @return la liste de String
 	 */
 	public static ArrayList<String> readLogs(String S){
 		ArrayList<String> listeUsers = new ArrayList<String>();

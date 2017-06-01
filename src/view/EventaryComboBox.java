@@ -5,6 +5,8 @@ import javax.swing.JComboBox;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventaryComboBox.
+ * 
+ * JComboBox personnalisée pour l'application
  *
  * @param <E> the element type
  */

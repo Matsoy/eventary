@@ -12,6 +12,9 @@ import model.Organization;
 // TODO: Auto-generated Javadoc
 /**
  * The Class OrgaItemPanel.
+ * 
+ * Panel qui représente une Organisation (nom de l'orga)
+ * Utilisé dans MyOrganizationsPanel
  */
 public class OrgaItemPanel extends JPanel{
 	/** The Constant serialVersionUID. */

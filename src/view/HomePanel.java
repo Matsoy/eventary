@@ -23,6 +23,18 @@ import model.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HomePanel.
+ * 
+ * La sidebar de gauche est composée 
+ * du nom de l’utilisateur
+ * de la photo de profil
+ * d’un bouton pour accéder à la liste de tous les événements
+ * d’un bouton pour accéder à la liste des événements auxquels l’utilisateur participe
+ * d’un bouton pour créer un événement
+ * d’un bouton pour accéder à la liste de ses notifications
+ * d’un bouton pour accéder à la liste des organisations auxquelles l’utilisateur appartient
+ * d’un bouton pour se déconnecter et revenir à l’interface de connexion
+ * Au clic sur la photo, un explorateur de fichiers apparaît. L’utilisateur peut sélectionner une nouvelle photo de profil.
+ * Au clic sur sur un événement de la liste, cela permet de faire apparaître l’interface qui détail un événement.
  */
 public class HomePanel extends JPanel{
 

@@ -16,6 +16,9 @@ import model.Event;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventItemPanel.
+ * 
+ * Panel qui représente un Event (titre et date de début)
+ * Utilisé dans AllEventsPanel et MyEventsPanel
  */
 public class EventItemPanel extends JPanel{
 
