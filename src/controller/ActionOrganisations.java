@@ -13,6 +13,8 @@ import view.HomePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionOrganisations.
+ * Cette action va permettre d'afficher le panel
+ * "Mes organisations", lorsque l'utilisateur connecté clic dessus.
  */
 public class ActionOrganisations extends AbstractAction{
 

@@ -15,6 +15,11 @@ import view.HomePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionQuit.
+ * Cette action va permettre à l'utilisateur courant de
+ * se déconnecter de l'application, et ainsi de retourner 
+ * sur la page de connexion, lorsque celui-ci clic dessus
+ * le bouton lié à cette action.
+ * Cela va donc aussi entrainer une mise à jour du model.
  */
 public class ActionQuit extends AbstractAction {
 

@@ -16,6 +16,10 @@ import view.ConnectionPanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionConnection.
+ * Cette action sert pour l'authentification de l'utilisateur.
+ * Lorsque l'utilisateur clic sur le bouton lié à cette action,
+ * cela va envoyer le login et le mot de passe haché au model
+ * pour voir si l'authentification est valide ou non.
  */
 public class ActionConnection extends AbstractAction {
 	

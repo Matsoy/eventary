@@ -13,15 +13,12 @@ import view.OrgaItemPanel;
 
 // TODO: Auto-generated Javadoc
 /**
- * The listener interface for receiving displayOrga events.
- * The class that is interested in processing a displayOrga
- * event implements this interface, and the object created
- * with that class is registered with a component using the
- * component's <code>addDisplayOrgaListener<code> method. When
- * the displayOrga event occurs, that object's appropriate
- * method is invoked.
- *
- * @see DisplayOrgaEvent
+ * The Class ActionDisplayOrga.
+ * Ce listener va être identique à la classe
+ * DisplayEventListener, mais pour les organisations.
+ * Grâce à ce listener, l'utilisateur va donc permettre
+ * d'afficher le panel détaillé de l'organisation
+ * sur lequel l'utilisateur connecté aura cliqué.
  */
 public class DisplayOrgaListener implements MouseListener {
 

@@ -19,6 +19,14 @@ import view.Frame;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ConnectionControler.
+ * Cette classe est un mini controller qui va mettre à jour la
+ * vue en fonction du résultat de l'authentification (échec
+ * ou réussite).
+ * En cas d'échec : on reste sur la même page, et on affiche un 
+ * bandeau d'erreur.
+ * En cas de réussite : on va sur la page d'accueil.
+ * En même temps, elle va lire les modérateurs renseignés dans 
+ * le fichier config.txt pour mettre à jour les modérateurs.
  */
 public class ConnectionController implements java.util.Observer{
 

@@ -20,6 +20,11 @@ import view.HomePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionCreateEvent.
+ * Cette action sert à afficher le formulaire de création
+ * d'un événement. 
+ * Lorsque l'utilisateur clic sur le bouton lié à cette action,
+ * cela affichera le formulaire de création d'un événement, tout en
+ * tenant compte de l'utilisateur connecté.
  */
 public class ActionCreateEvent extends AbstractAction {
 

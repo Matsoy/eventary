@@ -17,6 +17,12 @@ import view.EventPanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionSubscribeEvent.
+ * Cette action va permettre l'inscription de l'utilisateur 
+ * connecté à l'événement qu'il est en train de consulter,
+ * lorsqu'il clic sur le bouton lié à cette action.
+ * En plus de faire un appel au méthode du model pour l'inscription,
+ * elle va aussi s'occuper de mettre la vue à jour selon si l'utilisateur
+ * va en liste d'attente ou en liste principale.
  */
 public class ActionSubscribeEvent extends AbstractAction{
 

@@ -11,6 +11,9 @@ import view.HomePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HomeControler.
+ * Cette classe est un autre controller qui contient une instance de chaque
+ * action possible lorsqu'un utilisteur a réussi à se connecter. C'est aussi
+ * ici qu'on va lier les actions aux différents boutons de la vue.
  */
 public class HomeController implements java.util.Observer{
 

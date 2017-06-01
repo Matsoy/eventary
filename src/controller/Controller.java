@@ -9,6 +9,10 @@ import view.Frame;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Controler.
+ * Cette classe est notre controller général.
+ * C'est lui qui va se charger de créer le context,
+ * la fenêtre, et les deux mini controller.
+ * Ce controller est créé dans le lanceur.
  */
 public class Controller {
 	

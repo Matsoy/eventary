@@ -15,6 +15,12 @@ import view.EventPanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionRemoveEvent.
+ * Cette action va entrainer l'annulation (et donc la
+ * suppression) de l'événement consulté, lorsque l'utilisateur
+ * connecté clic dessu le bouton lié à cette action.
+ * Elle va donc entrainer une modification du model, et
+ * une mise à jour de la vue (pour rediriger l'utilisateur sur la
+ * page d'accueil).
  */
 public class ActionRemoveEvent extends AbstractAction {
 

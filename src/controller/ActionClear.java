@@ -12,6 +12,11 @@ import view.HomePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionClear.
+ * Cette action sert pour supprimer les notifications
+ * de l'uilisateur courant. 
+ * Lorsque celui-ci clique sur le bouton lié à cette action,
+ * cela va appeler la bonne méthode du model pour supprimer les
+ * notifications de la BDD, et mettra ainsi la vue à jour.
  */
 public class ActionClear extends AbstractAction {
 

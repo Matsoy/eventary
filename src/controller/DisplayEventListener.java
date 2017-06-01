@@ -16,6 +16,12 @@ import view.EventItemPanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionDisplayEvent.
+ * Ce listener va permettre d'afficher le panel des détails
+ * d'un événement, selon sur quel événement 
+ * l'utilisateur connecté a cliqué.
+ * On fait aussi une mise à jour des modérateurs,
+ * car cela peut impacter l'affichage des détails
+ * (bouton d'annulation/suppression).
  *
  * @see DisplayEventEvent
  */

@@ -22,6 +22,11 @@ import view.HomePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChooseProfileImageListener.
+ * Ce listener va permettre de changer l'image
+ * de profil d l'utilisateur connecté lorsqu'il cliquera
+ * sur son image de profil.
+ * De plus, cette action va effectuer un contrôle de la 
+ * nouvelle image sélectionnée pour voir si elle est valide.
  *
  * @see ChooseProfileImageListener
  */

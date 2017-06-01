@@ -19,6 +19,13 @@ import view.OrgaPanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionAddMember.
+ * Cette action sert pour l'ajout d'un membre dans
+ * une assosication.
+ * Lorsqu'il y aura un clic sur le bouton lié à l'action,
+ * cette action va permettre de voir si le membre a ajouter
+ * dans une l'association peut l'être ou non, puis elle mettra
+ * à jour le model et la vue en conséquence.
+ * 
  */
 public class ActionAddMember extends AbstractAction {
 

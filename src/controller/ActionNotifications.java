@@ -16,6 +16,8 @@ import view.HomePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionNotifications.
+ * Cette action va permettre d'afficher le panel
+ * "Mes notifications", lorsque l'utilisateur connecté clic dessus.
  */
 class ActionNotifications extends AbstractAction {
 

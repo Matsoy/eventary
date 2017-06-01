@@ -19,6 +19,9 @@ import view.HomePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionDisplayMyEvents.
+ * Cette action va permettre d'afficher le panel 
+ * "Mes événements", lorsque l'utilisateur clic dessus
+ * le bouton lié à cette action.
  */
 public class ActionDisplayMyEvents extends AbstractAction {
 

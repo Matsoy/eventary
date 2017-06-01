@@ -18,6 +18,9 @@ import view.HomePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionDisplayMyEvents.
+ * Cette action va permettre d'afficher le panel 
+ * "Tous les événements", lorsque l'utilisateut 
+ * connecté clic dessus le bouton lié à cette action.
  */
 public class ActionDisplayAllEvents extends AbstractAction {
 

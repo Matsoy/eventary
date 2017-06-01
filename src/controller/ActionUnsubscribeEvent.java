@@ -17,6 +17,11 @@ import view.EventPanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionUnsubscribeEvent.
+ * Cette action permet à l'utilisateur connecté de 
+ * se désinscrire de l'événement qu'il est en train de 
+ * consulter, lorsqu'il clic sur le bouton lié à cette action.
+ * Elle va aussi mettre la vue à jour en conséquence.
+ * 
  */
 public class ActionUnsubscribeEvent extends AbstractAction{
 

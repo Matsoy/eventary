@@ -28,6 +28,11 @@ import view.Frame;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionCreateEventForm.
+ * Cette action va permettre la vérification des différents
+ * champs du formulaire de la création d'un événement.
+ * Lorsque que l'utilisateur clic sur le bouton lié à cette action,
+ * il y a vérification des champs, et appel aux méthodes du model
+ * en conséquence, ainsi qu'une mise à jour de la vue.
  */
 public class ActionCreateEventForm extends AbstractAction{
 

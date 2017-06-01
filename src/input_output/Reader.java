@@ -11,11 +11,14 @@ import java.util.ArrayList;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Reader.
+ * Cette classe va contenir des méthodes pour aller lire
+ * des informations dans le fichier congit.txt
+ * 
  */
 public class Reader {
 
 	/**
-	 * retourne l'entier correspondant à la chaîne à reconnaître
+	 * Retourne l'entier correspondant à la chaîne à reconnaître
 	 *
 	 * @param S le nom de la chaîne à reconnaître
 	 * @return l'entier
@@ -82,14 +85,4 @@ public class Reader {
 		}
 		return listeUsers;
 	}
-
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(String[] args) {	// Servira à tester la lecture dans le fichier de config
-		readLogs("moderatorLogins");
-	}
-
 }
