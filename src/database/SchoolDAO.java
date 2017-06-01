@@ -34,7 +34,7 @@ public class SchoolDAO{
 	/**
 	 * Pour retrouver tous les tuples.
 	 *
-	 * @return the result set
+	 * @return la liste des School
 	 */
 	public static ArrayList<School> findAll() {
 		Statement stat = null;
@@ -72,7 +72,7 @@ public class SchoolDAO{
 	 * Permet de retrouver juste un tuple.
 	 *
 	 * @param id_school id du School a retrouver
-	 * @return the school
+	 * @return the School
 	 */
 	public static School find(int id_school) {
 		Statement stat = null;
@@ -110,7 +110,7 @@ public class SchoolDAO{
 	/**
 	 * Methode qui permet d'inserer un tuple.
 	 *
-	 * @param tuple Objet de type School a inserer
+	 * @param tuple a inserer
 	 */
 	public static void insert(School tuple) {
 		Statement stat = null;

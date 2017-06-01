@@ -37,7 +37,7 @@ public class ParticipationDAO{
 	 * Renvoie la liste des User participant à un Event.
 	 *
 	 * @param id_event id du Event
-	 * @return the array list
+	 * @return la liste des User
 	 */
 	public static ArrayList<User> eventParticipants(int id_event) {
 		Statement stat = null;
@@ -76,7 +76,7 @@ public class ParticipationDAO{
 	 * Renvoie la liste des Event auxquels participe un User.
 	 *
 	 * @param user_login the user login
-	 * @return the array list
+	 * @return la liste des Event
 	 */
 	public static ArrayList<Event> participationsInAnEvent(String user_login) {
 		Statement stat = null;

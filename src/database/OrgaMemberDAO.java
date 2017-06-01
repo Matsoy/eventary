@@ -37,7 +37,7 @@ public class OrgaMemberDAO{
 	 * Renvoie la liste des User membre d'une Association.
 	 *
 	 * @param orga_id id de l'organisation
-	 * @return the array list
+	 * @return la liste des User
 	 */
 	public static ArrayList<User> find(int orga_id) {
 		Statement stat = null;

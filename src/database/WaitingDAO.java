@@ -36,7 +36,7 @@ public class WaitingDAO{
 	 * Renvoie la liste des User participant à un Event (sur liste d'attente) tri�e de celui qui attend depuis le + longtemps � celui qui attend depuis le moins longtemps.
 	 *
 	 * @param id_event id du Event
-	 * @return the array list
+	 * @return la liste des User
 	 */
 	public static ArrayList<User> waitingsForAnEvent(int id_event) {
 		Statement stat = null;
@@ -75,7 +75,7 @@ public class WaitingDAO{
 	 * Renvoie la liste des Event auxquels attend un User.
 	 *
 	 * @param user_login the user login
-	 * @return the array list
+	 * @return la liste des Event
 	 */
 	public static ArrayList<Event> waitingEvents(String user_login) {
 		Statement stat = null;
@@ -187,7 +187,7 @@ public class WaitingDAO{
 	}
 
 	/**
-	 * Renvoie le premier qui est sur la liste d'attente d'un �v�nement.
+	 * Renvoie le login du premier User qui est sur la liste d'attente d'un Event.
 	 *
 	 * @param event_id l'id du Event
 	 * @return user_login the user login

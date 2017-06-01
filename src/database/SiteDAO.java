@@ -35,7 +35,7 @@ public class SiteDAO{
     /**
      * Pour retrouver tous les tuples.
      *
-     * @return the result set
+     * @return la liste des Site
      */
     public static ArrayList<Site> findAll() {
         Statement stat = null;
@@ -73,7 +73,7 @@ public class SiteDAO{
      * Permet de retrouver juste un tuple.
      *
      * @param id_site id du Site a retrouver
-     * @return the site
+     * @return the Site
      */
     public static Site find(int id_site) {
         Statement stat = null;
@@ -112,7 +112,7 @@ public class SiteDAO{
 	 * Pour retrouver les sites d'une ecole.
 	 *
 	 * @param school_id the school id
-	 * @return the result set
+	 * @return la liste des Site
 	 */
 	public static ArrayList<Site> findSchoolSites(int school_id) {
 		Statement stat = null;
@@ -150,7 +150,7 @@ public class SiteDAO{
     /**
      * Methode qui permet d'inserer un tuple.
      *
-     * @param tuple Objet de type Site a inserer
+     * @param tuple a inserer
      */
     public static void insert(Site tuple) {
         Statement stat = null;

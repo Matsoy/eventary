@@ -36,7 +36,7 @@ public class UserDAO{
 	/**
 	 * Pour retrouver tous les tuples.
 	 *
-	 * @return the result set
+	 * @return la liste des User
 	 */
 	public static ArrayList<User> findAll() {
 		Statement stat = null;
@@ -74,7 +74,7 @@ public class UserDAO{
 	 * Permet de retrouver juste un tuple.
 	 *
 	 * @param login_user login de l'User a retrouver
-	 * @return the user
+	 * @return the User
 	 */
 	public static User find(String login_user) {
 		Statement stat = null;
@@ -113,7 +113,7 @@ public class UserDAO{
 	 *
 	 * @param login_user login de l'User a retrouver
 	 * @param passwd_user passwd de l'User a retrouver
-	 * @return l'utilisateur connect�, null sinon
+	 * @return le User connect�, null sinon
 	 */
 	public static User connect(String login_user, String passwd_user) {
 		Statement stat = null;
@@ -277,7 +277,7 @@ public class UserDAO{
 
 
 	/**
-	 * Generate hash.
+	 * Retourne le mot de passe hashé (SHA-1)
 	 *
 	 * @param passwd the passwd
 	 * @return the string

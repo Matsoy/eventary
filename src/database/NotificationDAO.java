@@ -35,7 +35,7 @@ public class NotificationDAO{
 	 * Retourne la liste des notifications d'un utilisateur.
 	 *
 	 * @param user_login the user login
-	 * @return the array list
+	 * @return la liste des notifications (String)
 	 */
 	public static ArrayList<String> find(String user_login) {
 		Statement stat = null;

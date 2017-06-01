@@ -11,7 +11,7 @@ import org.sqlite.SQLiteConfig;
  * config
  * File: SQLiteConnection.java
  * 
- * Cette classe (type singleton) �tablit la connexion entre une application Java et une BDD SQLite.
+ * Cette classe (type singleton) etablit la connexion entre une application Java et une BDD SQLite.
  */
 class SQLiteConnection {
 	private String dsn;

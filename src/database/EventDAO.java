@@ -44,7 +44,7 @@ public class EventDAO{
 	 * Pour retrouver tous les tuples.
 	 *
 	 * @param timeBeforeDeletion the time before deletion
-	 * @return the result set
+	 * @return la liste des Event
 	 */
 	public static ArrayList<Event> findAll(int timeBeforeDeletion) {
 		Statement stat = null;
@@ -112,11 +112,11 @@ public class EventDAO{
 
 
 	/**
-	 * Checks if is in site.
+	 * Checks if Event is in site.
 	 *
 	 * @param event the event
 	 * @param site_id the site id
-	 * @return true, if is in site
+	 * @return true, if Event is in site
 	 */
 	public static boolean isInSite(Event event, int site_id) {
 		boolean ret = false;

@@ -35,7 +35,7 @@ public class RoomDAO{
 	/**
 	 * Pour retrouver tous les tuples.
 	 *
-	 * @return the result set
+	 * @return la liste des Room
 	 */
 	public static ArrayList<Room> findAll() {
 		Statement stat = null;
@@ -72,7 +72,7 @@ public class RoomDAO{
 	 * Permet de retrouver juste un tuple.
 	 *
 	 * @param id_room id de la Room a retrouver
-	 * @return the room
+	 * @return the Room
 	 */
 	public static Room find(int id_room) {
 		Statement stat = null;
@@ -111,7 +111,7 @@ public class RoomDAO{
 	 * Pour retrouver les salles d'un batiment.
 	 *
 	 * @param building_id the building id
-	 * @return the result set
+	 * @return la liste des Room
 	 */
 	public static ArrayList<Room> findBuildingRooms(int building_id) {
 		Statement stat = null;
@@ -149,7 +149,7 @@ public class RoomDAO{
 	/**
 	 * Methode qui permet d'inserer un tuple.
 	 *
-	 * @param tuple Objet de type Room a inserer
+	 * @param tuple a inserer
 	 */
 	public static void insert(Room tuple) {
 		Statement stat = null;

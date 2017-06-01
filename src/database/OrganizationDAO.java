@@ -36,7 +36,7 @@ public class OrganizationDAO{
 	/**
 	 * Pour retrouver tous les tuples des associations.
 	 *
-	 * @return the result set
+	 * @return la liste des Association
 	 */
 	public static ArrayList<Association> findAllAsso() {
 		Statement stat = null;
@@ -74,7 +74,7 @@ public class OrganizationDAO{
 	/**
 	 * Pour retrouver tous les tuples des departements.
 	 *
-	 * @return the result set
+	 * @return la liste des Department
 	 */
 	public static ArrayList<Department> findAllDpt() {
 		Statement stat = null;
@@ -151,7 +151,7 @@ public class OrganizationDAO{
 	 * Pour retrouver le departement recherche.
 	 *
 	 * @param id_dpt the id dpt
-	 * @return the result set
+	 * @return le Department
 	 */
 	public static Department findDpt(int id_dpt) {
 		Statement stat = null;
@@ -189,7 +189,7 @@ public class OrganizationDAO{
 	 * Pour retrouver les liste des associations dans lesquelles un User est membre.
 	 *
 	 * @param user_login the user login
-	 * @return the result set
+	 * @return l'Association
 	 */
 	public static ArrayList<Association> assoInWhichUserIsMember(String user_login) {
 		Statement stat = null;
@@ -230,7 +230,7 @@ public class OrganizationDAO{
 	 * Pour retrouver les liste des departements dans lesquelles un User est membre.
 	 *
 	 * @param user_login the user login
-	 * @return the result set
+	 * @return la liste des Department
 	 */
 	public static ArrayList<Department> dptInWhichUserIsMember(String user_login) {
 		Statement stat = null;
@@ -271,7 +271,7 @@ public class OrganizationDAO{
 	 * Retourne le type d'organisation ("asso" pour une association, "dpt" pour un departement).
 	 *
 	 * @param id_orga l'id de l'organisation
-	 * @return the result set
+	 * @return le type de l'Organization
 	 */
 	public static String getOrganizationType(int id_orga) {
 		Statement stat = null;
@@ -308,7 +308,7 @@ public class OrganizationDAO{
 	/**
 	 * Methode qui permet d'inserer un tuple.
 	 *
-	 * @param tuple Objet de type Association a inserer
+	 * @param tuple a inserer
 	 */
 	public static void insert(Organization tuple) {
 		Statement stat = null;

@@ -34,7 +34,7 @@ public class BuildingDAO{
 	/**
 	 * Pour retrouver tous les tuples.
 	 *
-	 * @return the result set
+	 * @return la liste des Building
 	 */
 	public static ArrayList<Building> findAll() {
 		Statement stat = null;
@@ -112,7 +112,7 @@ public class BuildingDAO{
 	 * Pour retrouver les batiments d'un site.
 	 *
 	 * @param site_id the site id
-	 * @return the result set
+	 * @return la liste des Building d'un Site
 	 */
 	public static ArrayList<Building> findSiteBuildings(int site_id) {
 		Statement stat = null;
@@ -150,7 +150,7 @@ public class BuildingDAO{
 	/**
 	 * Methode qui permet d'inserer un tuple.
 	 *
-	 * @param tuple Objet de type Building a inserer
+	 * @param tuple a inserer
 	 */
 	public static void insert(Building tuple) {
 		Statement stat = null;
@@ -183,7 +183,7 @@ public class BuildingDAO{
 	/**
 	 * Permet de supprimer un tuple.
 	 *
-	 * @param id_building id du tuple a supprimer
+	 * @param id_building id du Building a supprimer
 	 */
 	public static void delete(int id_building) {
 		Statement stat = null;
