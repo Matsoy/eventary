@@ -1,9 +1,9 @@
 # Eventary
 ------------
 
-Application permettant de voir et organiser des événements au sein d'écoles.
+Application permettant de voir et organiser des Ã©vÃ©nements au sein d'Ã©coles.
 
-## Noms des étudiants du groupe
+## Noms des Ã©tudiants du groupe
 ------------
 
 * Pierre Savatte
@@ -11,12 +11,7 @@ Application permettant de voir et organiser des événements au sein d'écoles.
 * Julien Triau
 * Mathieu Soyer
 
-## Nom et adresse e-mail de l’étudiant coordinateur du groupe
-------------
-
-* Neil Rittner: neil.rittner@etu.univ-nantes.fr
-
-## Répartition des tâches
+## RÃ©partition des tÃ¢ches
 ------------
 
 * **Model**: Neil Rittner
@@ -44,7 +39,7 @@ $ git branch -d nom_de_la_branche_a_supprimer
 $ git push origin :nom_de_la_branche_supprimee
 ```
 
-Créer une branche
+CrÃ©er une branche
 
 ``` sh
 $ git checkout -b nom_de_la_branche_a_creer
