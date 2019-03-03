@@ -2,6 +2,7 @@
 ------------
 
 Mini-projet de programmation dans le cadre d'un cours de Java et de modélisation.
+
 Application permettant de voir et organiser des événements au sein d'écoles.
 
 ## Noms des étudiants du groupe
